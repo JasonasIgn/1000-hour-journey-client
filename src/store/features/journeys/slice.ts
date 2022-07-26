@@ -24,6 +24,7 @@ export const counterSlice = createSlice({
       })
       .addCase(fetchJourneysList.fulfilled, (state, action) => {
         state.listLoadingState = "loaded";
+        state.list = action.payload;
       })
       .addCase(fetchJourneysList.rejected, (state) => {
         state.listLoadingState = "error";

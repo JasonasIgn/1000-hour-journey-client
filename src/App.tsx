@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import { JourneysView } from "./views/JourneysView";
 
-function App() {
+const App = () => {
   return (
     <Box>
-      <Routes>  
+      <Routes>
         <Route path="/" element={<JourneysView />} />
       </Routes>
     </Box>
   );
-}
+};
 
 export default App;

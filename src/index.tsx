@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
 import "./index.css";
 
@@ -10,11 +11,11 @@ const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ChakraProvider>
         <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+      </ChakraProvider>
+    </BrowserRouter>
+  </Provider>
 );
