@@ -1,1 +1,1 @@
-# 1000-hour-journey-
+# 1000-hour-journey-client
