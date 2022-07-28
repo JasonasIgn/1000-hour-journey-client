@@ -1,9 +1,16 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  FlexProps,
+  Heading,
+  Progress,
+  Text,
+} from "@chakra-ui/react";
 import { Journey } from "../../store/features/journeys/types";
 
 interface JourneysListItemProps {
   journey: Journey;
-  rootBoxProps?: BoxProps;
+  rootBoxProps?: FlexProps;
 }
 
 export const JourneysListItem: React.FC<JourneysListItemProps> = ({
@@ -11,7 +18,9 @@ export const JourneysListItem: React.FC<JourneysListItemProps> = ({
   rootBoxProps,
 }) => {
   return (
-    <Box
+    <Flex
+      flexDirection="column"
+      justifyContent="space-between"
       height={180}
       bg="#B8DBD9"
       borderRadius={28}
@@ -24,7 +33,11 @@ export const JourneysListItem: React.FC<JourneysListItemProps> = ({
       transition="transform 0.1s"
       {...rootBoxProps}
     >
-      {journey.id}
-    </Box>
+      <Box>
+        <Heading size="lg">{journey.title}</Heading>
+        <Text fontSize="sm">{journey.description}</Text>
+      </Box>
+      <Progress hasStripe value={journey.total_hours / 10} />
+    </Flex>
   );
 };
