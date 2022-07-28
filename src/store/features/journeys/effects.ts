@@ -20,7 +20,7 @@ export const createJourneyEffect = createAsyncThunk(
   async (data: AddJourneyFormData) => {
     try {
       const response = await axios.post(apiUrls.fetchJourneysList, data);
-      console.log(response);
+      return response.data;
     } catch (e) {
       console.log("error:", e);
     }

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "../../../types";
-import { fetchJourneysList } from "./effects";
+import { createJourneyEffect, fetchJourneysList } from "./effects";
 import { Journey } from "./types";
 
 export interface JourneysState {
@@ -28,6 +28,9 @@ export const counterSlice = createSlice({
       })
       .addCase(fetchJourneysList.rejected, (state) => {
         state.listLoadingState = "error";
+      })
+      .addCase(createJourneyEffect.fulfilled, (state, action) => {
+        state.list.unshift(action.payload);
       });
   },
 });
