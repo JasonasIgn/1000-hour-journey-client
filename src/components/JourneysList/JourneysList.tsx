@@ -14,7 +14,11 @@ export const JourneysList: React.FC<JourneysListProps> = ({
   return (
     <Box {...rootBoxProps}>
       {journeys.map((item) => (
-        <JourneysListItem journey={item} key={item.id} />
+        <JourneysListItem
+          journey={item}
+          key={item.id}
+          rootBoxProps={{ mb: 6 }}
+        />
       ))}
     </Box>
   );
