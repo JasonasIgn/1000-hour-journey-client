@@ -1,14 +1,18 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import { Journey } from "../../store/features/journeys/types";
 import { JourneysListItem } from "../JourneysListItem/JourneysListItem";
 
 interface JourneysListProps {
   journeys: Journey[];
+  rootBoxProps?: BoxProps;
 }
 
-export const JourneysList: React.FC<JourneysListProps> = ({ journeys }) => {
+export const JourneysList: React.FC<JourneysListProps> = ({
+  journeys,
+  rootBoxProps,
+}) => {
   return (
-    <Box>
+    <Box {...rootBoxProps}>
       {journeys.map((item) => (
         <JourneysListItem journey={item} />
       ))}

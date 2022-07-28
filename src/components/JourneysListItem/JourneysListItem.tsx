@@ -1,12 +1,25 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import { Journey } from "../../store/features/journeys/types";
 
 interface JourneysListItemProps {
   journey: Journey;
+  rootBoxProps?: BoxProps;
 }
 
 export const JourneysListItem: React.FC<JourneysListItemProps> = ({
   journey,
+  rootBoxProps,
 }) => {
-  return <Box>{journey.id}</Box>;
+  return (
+    <Box
+      height={180}
+      bg="#B8DBD9"
+      borderRadius={28}
+      border="2px solid #40798C"
+      padding={4}
+      {...rootBoxProps}
+    >
+      {journey.id}
+    </Box>
+  );
 };

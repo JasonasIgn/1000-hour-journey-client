@@ -23,7 +23,7 @@ export const JourneysView: React.FC = () => {
   return (
     <Container maxW="6xl" pt={10}>
       <Heading>Journeys</Heading>
-      <JourneysList journeys={list} />
+      <JourneysList journeys={list} rootBoxProps={{ marginTop: 10 }} />
     </Container>
   );
 };
