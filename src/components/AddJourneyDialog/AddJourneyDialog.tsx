@@ -9,8 +9,13 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { createJourneyEffect } from "../../store/features/journeys/effects";
+import { useAppDispatch } from "../../store/hooks";
 import { InputField } from "../InputField/InputField";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
+import { AddJourneyFormData } from "./types";
+import { addJourneyFormValidation } from "./validation";
 
 interface AddJourneyDialogProps {
   setOpen: (open: boolean) => void;
@@ -21,9 +26,20 @@ export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
   open,
   setOpen,
 }) => {
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = (data: any) => console.log(data);
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, formState } = useForm<AddJourneyFormData>({
+    resolver: yupResolver(addJourneyFormValidation),
+  });
+  const { isSubmitting, errors } = formState;
+  console.log(errors);
+  const onSubmit = async (data: any) => {
+    try {
+      await dispatch(createJourneyEffect(data));
+      setOpen(false);
+    } catch (e) {
+      console.error("Caught error", e);
+    }
+  };
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
       <ModalOverlay />
@@ -31,15 +47,24 @@ export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
         <ModalHeader>Create new journey</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <InputField label="Title" {...register("title")} marginBottom={5} />
-          <TextAreaField label="Description" {...register("description")} />
+          <InputField
+            label="Title"
+            {...register("title")}
+            errorMessage={errors.title?.message}
+            formControlProps={{ mb: 3 }}
+          />
+          <TextAreaField
+            label="Description"
+            {...register("description")}
+            errorMessage={errors.description?.message}
+          />
         </ModalBody>
 
         <ModalFooter>
           <Button mr={3} onClick={() => setOpen(false)}>
             Close
           </Button>
-          <Button variant="ghost" type="submit">
+          <Button variant="ghost" type="submit" disabled={isSubmitting}>
             Create
           </Button>
         </ModalFooter>

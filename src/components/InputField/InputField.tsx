@@ -1,6 +1,7 @@
 import { FC, forwardRef } from "react";
 import {
   FormControl,
+  FormControlProps,
   FormErrorMessage,
   FormLabel,
   Input,
@@ -11,15 +12,16 @@ interface InputFieldProps extends InputProps {
   value?: string;
   label?: string;
   errorMessage?: string;
+  formControlProps?: FormControlProps;
 }
 
 export const InputField: FC<InputFieldProps> = forwardRef(
-  ({ label, errorMessage, ...rest }, ref) => {
+  ({ label, errorMessage, formControlProps, ...rest }, ref) => {
     return (
-      <FormControl isInvalid={Boolean(errorMessage)}>
+      <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
         <Input {...rest} ref={ref as any} />
-        {!errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
+        {errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
       </FormControl>
     );
   }
