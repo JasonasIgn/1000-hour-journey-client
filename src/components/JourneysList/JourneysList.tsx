@@ -14,7 +14,7 @@ export const JourneysList: React.FC<JourneysListProps> = ({
   return (
     <Box {...rootBoxProps}>
       {journeys.map((item) => (
-        <JourneysListItem journey={item} />
+        <JourneysListItem journey={item} key={item.id} />
       ))}
     </Box>
   );
