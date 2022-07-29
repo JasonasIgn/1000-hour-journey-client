@@ -7,10 +7,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Journey } from "../../store/features/journeys/types";
+import { JourneyListItem } from "../../store/features/journeys/types";
 
 interface JourneysListItemProps {
-  journey: Journey;
+  journey: JourneyListItem;
   rootBoxProps?: FlexProps;
 }
 

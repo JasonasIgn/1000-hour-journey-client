@@ -26,3 +26,18 @@ export const createJourneyEffect = createAsyncThunk(
     }
   }
 );
+
+export const fetchJourneyEffect = createAsyncThunk(
+  "journeys/fetchJourney",
+  async (data: { id: number | string }) => {
+    const { id } = data;
+    try {
+      const response = await axios.get(
+        apiUrls.fetchJourney.replace("{id}", id.toString())
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);

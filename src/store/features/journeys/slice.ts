@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "../../../types";
-import { createJourneyEffect, fetchJourneysListEffect } from "./effects";
-import { Journey } from "./types";
+import {
+  createJourneyEffect,
+  fetchJourneyEffect,
+  fetchJourneysListEffect,
+} from "./effects";
+import { Journey, JourneyListItem } from "./types";
 
 export interface JourneysState {
-  list: Journey[];
+  list: JourneyListItem[];
   listLoadingState: LoadingState;
+  journey?: Journey;
 }
 
 const initialState: JourneysState = {
@@ -31,6 +36,9 @@ export const counterSlice = createSlice({
       })
       .addCase(createJourneyEffect.fulfilled, (state, action) => {
         state.list.unshift(action.payload);
+      })
+      .addCase(fetchJourneyEffect.fulfilled, (state, action) => {
+        state.journey = action.payload;
       });
   },
 });
