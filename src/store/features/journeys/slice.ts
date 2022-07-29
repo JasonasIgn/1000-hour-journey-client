@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "../../../types";
-import { createJourneyEffect, fetchJourneysList } from "./effects";
+import { createJourneyEffect, fetchJourneysListEffect } from "./effects";
 import { Journey } from "./types";
 
 export interface JourneysState {
@@ -19,14 +19,14 @@ export const counterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchJourneysList.pending, (state) => {
+      .addCase(fetchJourneysListEffect.pending, (state) => {
         state.listLoadingState = "loading";
       })
-      .addCase(fetchJourneysList.fulfilled, (state, action) => {
+      .addCase(fetchJourneysListEffect.fulfilled, (state, action) => {
         state.listLoadingState = "loaded";
         state.list = action.payload;
       })
-      .addCase(fetchJourneysList.rejected, (state) => {
+      .addCase(fetchJourneysListEffect.rejected, (state) => {
         state.listLoadingState = "error";
       })
       .addCase(createJourneyEffect.fulfilled, (state, action) => {

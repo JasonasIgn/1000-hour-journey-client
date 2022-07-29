@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchJourneysList } from "../store/features/journeys/effects";
+import { fetchJourneysListEffect } from "../store/features/journeys/effects";
 import { Container } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
@@ -20,7 +20,7 @@ export const JourneysView: React.FC = () => {
 
   useEffect(() => {
     if (listLoadingState === "pristine") {
-      dispatch(fetchJourneysList());
+      dispatch(fetchJourneysListEffect());
     }
   }, [dispatch, listLoadingState]);
 

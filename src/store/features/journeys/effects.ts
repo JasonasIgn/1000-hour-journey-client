@@ -3,7 +3,7 @@ import axios from "axios";
 import { AddJourneyFormData } from "../../../components/AddJourneyDialog/types";
 import { apiUrls } from "../../../config";
 
-export const fetchJourneysList = createAsyncThunk(
+export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
   async () => {
     try {
