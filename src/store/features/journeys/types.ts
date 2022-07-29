@@ -9,10 +9,10 @@ export interface JourneyListItem {
 
 export interface Log {
   id: number;
-  journey_id: number;
-  hours_spent: number;
+  journeyId: number;
+  hoursSpent: number;
   description: string;
-  significance_level: number;
+  significanceLevel: number;
   createdAt: Date;
   updatedAt: Date;
 }
