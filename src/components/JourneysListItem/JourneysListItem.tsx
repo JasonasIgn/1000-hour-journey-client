@@ -6,6 +6,7 @@ import {
   Progress,
   Text,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { Journey } from "../../store/features/journeys/types";
 
 interface JourneysListItemProps {
@@ -17,6 +18,7 @@ export const JourneysListItem: React.FC<JourneysListItemProps> = ({
   journey,
   rootBoxProps,
 }) => {
+  let navigate = useNavigate();
   return (
     <Flex
       flexDirection="column"
@@ -32,6 +34,9 @@ export const JourneysListItem: React.FC<JourneysListItemProps> = ({
       }}
       transition="transform 0.1s"
       {...rootBoxProps}
+      onClick={() => {
+        navigate(`/journeys/${journey.id}`);
+      }}
     >
       <Box>
         <Heading size="lg">{journey.title}</Heading>
