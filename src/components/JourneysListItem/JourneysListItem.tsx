@@ -37,7 +37,7 @@ export const JourneysListItem: React.FC<JourneysListItemProps> = ({
         <Heading size="lg">{journey.title}</Heading>
         <Text fontSize="sm">{journey.description}</Text>
       </Box>
-      <Progress hasStripe value={journey.total_hours / 10} />
+      <Progress hasStripe value={journey.totalHours / 10} />
     </Flex>
   );
 };
