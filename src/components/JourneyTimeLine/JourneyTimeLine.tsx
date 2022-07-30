@@ -2,13 +2,19 @@ import { Box, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { Journey } from "../../store/features/journeys/types";
+import { LogsHourMap } from "../../views/JourneyView/types";
 
 interface JourneyTimeLineProps {
   journey: Journey;
+  hoursToLogMap: LogsHourMap;
 }
 
-export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({ journey }) => {
-  const [value, setValue] = useState(journey.totalHours);
+export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
+  journey,
+  hoursToLogMap,
+}) => {
+  const [currentHour, setCurrentHour] = useState(journey.totalHours);
+  const activeLogId = hoursToLogMap[currentHour];
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
   const onUpdate = useCallback(({ x, scale }: any) => {
@@ -37,18 +43,18 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({ journey }) => {
         <Slider
           top="70%"
           step={0.1}
-          defaultValue={value}
+          defaultValue={currentHour}
           min={0}
           max={1000}
           colorScheme="teal"
-          onChange={(v) => setValue(v)}
+          onChange={(hour) => setCurrentHour(hour)}
         >
           <SliderTrack display="flex">
             {journey.logs.map((log) => {
               const widthPercentage = log.hoursSpent / 10;
               return (
                 <Box
-                  bg="red"
+                  bg={log.id === activeLogId ? "blue" : "red"}
                   width={`${widthPercentage}%`}
                   boxShadow="-1px 0px 0 black"
                   _hover={{ bg: "blue" }}

@@ -1,10 +1,11 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { JourneyTimeLine } from "../components/JourneyTimeLine/JourneyTimeLine";
-import { fetchJourneyEffect } from "../store/features/journeys/effects";
-import { getJourney } from "../store/features/journeys/selectors";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
+import { fetchJourneyEffect } from "../../store/features/journeys/effects";
+import { getJourney } from "../../store/features/journeys/selectors";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getLogHoursMap } from "./utils";
 
 export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,11 @@ export const JourneyView: React.FC = () => {
       dispatch(fetchJourneyEffect({ id: params.journeyId }));
     }
   });
+
+  const logsHourMap = useMemo(
+    () => getLogHoursMap(journey?.logs || []),
+    [journey?.logs]
+  );
 
   if (!journey) {
     return <Text>Loading...</Text>;
@@ -29,7 +35,7 @@ export const JourneyView: React.FC = () => {
           journey log {params.journeyId}
         </Flex>
         <Flex paddingTop="5%" width="100%">
-          <JourneyTimeLine journey={journey} />
+          <JourneyTimeLine journey={journey} hoursToLogMap={logsHourMap} />
         </Flex>
       </Flex>
     </Container>

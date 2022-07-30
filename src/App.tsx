@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { JourneysView } from "./views/JourneysView";
-import { JourneyView } from "./views/JourneyView";
+import { JourneysView } from "./views/JourneysView/JourneysView";
+import { JourneyView } from "./views/JourneyView/JourneyView";
 
 const App = () => {
   return (
