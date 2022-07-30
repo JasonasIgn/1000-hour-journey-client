@@ -40,7 +40,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   useEffect(() => {
-    pinchZoomRef.current?.scaleTo({ x: 30, y: 0, scale: 20 });
+    pinchZoomRef.current?.scaleTo({ x: 30, y: -90, scale: 20 });
   }, []);
 
   useEffect(() => {
@@ -81,7 +81,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             })}
           </SliderTrack>
 
-          <SliderThumb width="6px" height="6px" />
+          <SliderThumb
+            width="6px"
+            height="6px"
+            _active={{ transform: `translateY(-50%)` }}
+            _focusVisible={{ boxShadow: "none" }}
+          />
         </Slider>
       </Box>
     </QuickPinchZoom>
