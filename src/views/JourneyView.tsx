@@ -28,7 +28,7 @@ export const JourneyView: React.FC = () => {
         <Flex height="70%" width="70%" bg="red" padding={5}>
           journey log {params.journeyId}
         </Flex>
-        <Flex paddingTop="10%" width="100%">
+        <Flex paddingTop="5%" width="100%">
           <JourneyTimeLine journey={journey} />
         </Flex>
       </Flex>
