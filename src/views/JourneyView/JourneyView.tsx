@@ -1,6 +1,9 @@
+import { AddIcon } from "@chakra-ui/icons";
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AddJourneyLogDialog } from "../../components/AddJourneyLogDialog/AddJourneyLogDialog";
+import { FabButton } from "../../components/FabButton/FabButton";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
 import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
@@ -12,6 +15,7 @@ export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
+  const [modalOpen, setModalOpen] = useState(false);
   const [activeLog, setActiveLog] = useState<LogExtended>();
 
   useEffect(() => {
@@ -32,6 +36,10 @@ export const JourneyView: React.FC = () => {
           <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
         </Flex>
       </Flex>
+      <AddJourneyLogDialog open={modalOpen} setOpen={setModalOpen} />
+      <FabButton onClick={() => setModalOpen(true)}>
+        <AddIcon />
+      </FabButton>
     </Container>
   );
 };
