@@ -31,7 +31,6 @@ export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
     resolver: yupResolver(addJourneyFormValidation),
   });
   const { isSubmitting, errors } = formState;
-  console.log(errors);
   const onSubmit = async (data: any) => {
     try {
       await dispatch(createJourneyEffect(data));
