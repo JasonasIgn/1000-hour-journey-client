@@ -15,15 +15,18 @@ import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
+import { createJourneyLogEffect } from "../../store/features/journeys/effects";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
   open: boolean;
+  journeyId: number;
 }
 
 export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   open,
   setOpen,
+  journeyId,
 }) => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState, control } =
@@ -34,8 +37,8 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const onSubmit = async (data: AddJourneyLogFormData) => {
     try {
       console.log(data);
-      // await dispatch(createJourneyEffect(data));
-      // setOpen(false);
+      await dispatch(createJourneyLogEffect({ data, id: journeyId }));
+      setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
     }

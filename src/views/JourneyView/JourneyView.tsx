@@ -36,7 +36,11 @@ export const JourneyView: React.FC = () => {
           <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
         </Flex>
       </Flex>
-      <AddJourneyLogDialog open={modalOpen} setOpen={setModalOpen} />
+      <AddJourneyLogDialog
+        open={modalOpen}
+        setOpen={setModalOpen}
+        journeyId={journey.id}
+      />
       <FabButton onClick={() => setModalOpen(true)}>
         <AddIcon />
       </FabButton>

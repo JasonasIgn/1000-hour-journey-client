@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "../../../types";
 import {
   createJourneyEffect,
+  createJourneyLogEffect,
   fetchJourneyEffect,
   fetchJourneysListEffect,
 } from "./effects";
@@ -39,6 +40,12 @@ export const counterSlice = createSlice({
       })
       .addCase(fetchJourneyEffect.fulfilled, (state, action) => {
         state.journey = action.payload;
+      })
+      .addCase(createJourneyLogEffect.fulfilled, (state, action) => {
+        if (state.journey && action.payload) {
+          state.journey.logs.push(action.payload);
+          state.journey.totalHours += action.payload.hoursSpent;
+        }
       });
   },
 });
