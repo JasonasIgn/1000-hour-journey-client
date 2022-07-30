@@ -53,6 +53,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     setActiveLog(logsDictionary[activeLogId]);
   }, [activeLogId, logsDictionary, setActiveLog]);
 
+  useEffect(() => {
+    setCurrentHour(journey.totalHours - 0.1);
+  }, [journey.totalHours]);
+
   return (
     <QuickPinchZoom
       onUpdate={onUpdate}
@@ -75,6 +79,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           defaultValue={currentHour}
           min={0}
           max={1000}
+          value={currentHour}
           colorScheme="teal"
           onChange={(hour) => setCurrentHour(hour)}
         >
