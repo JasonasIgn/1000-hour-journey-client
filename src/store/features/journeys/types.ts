@@ -17,6 +17,10 @@ export interface Log {
   updatedAt: Date;
 }
 
+export interface LogExtended extends Log {
+  number: number;
+}
+
 export interface Journey extends JourneyListItem {
   logs: Log[];
 }

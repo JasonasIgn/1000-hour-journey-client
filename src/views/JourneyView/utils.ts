@@ -15,8 +15,8 @@ export const getLogHoursMap = (logs: Log[]): LogsHourMap => {
 
 export const getLogsDictionary = (logs: Log[]): LogsDictionary => {
   const logsDictionary: LogsDictionary = {};
-  logs.forEach((log) => {
-    logsDictionary[log.id] = log;
+  logs.forEach((log, index) => {
+    logsDictionary[log.id] = { ...log, number: index + 1 };
   });
   return logsDictionary;
 };

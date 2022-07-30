@@ -1,7 +1,7 @@
 import { Box, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Journey, Log } from "../../store/features/journeys/types";
+import { Journey, LogExtended } from "../../store/features/journeys/types";
 import {
   getLogHoursMap,
   getLogsDictionary,
@@ -9,7 +9,7 @@ import {
 
 interface JourneyTimeLineProps {
   journey: Journey;
-  setActiveLog: (log: Log) => void;
+  setActiveLog: (log: LogExtended) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
@@ -44,7 +44,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   useEffect(() => {
-    console.log("set log");
     setActiveLog(logsDictionary[activeLogId]);
   }, [activeLogId, logsDictionary, setActiveLog]);
 
@@ -72,6 +71,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               const widthPercentage = log.hoursSpent / 10;
               return (
                 <Box
+                  key={log.id}
                   bg={log.id === activeLogId ? "blue" : "red"}
                   width={`${widthPercentage}%`}
                   boxShadow="-1px 0px 0 black"

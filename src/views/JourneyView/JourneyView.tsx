@@ -5,14 +5,14 @@ import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLin
 import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
 import { getJourney } from "../../store/features/journeys/selectors";
-import { Log } from "../../store/features/journeys/types";
+import { LogExtended } from "../../store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
-  const [activeLog, setActiveLog] = useState<Log>();
+  const [activeLog, setActiveLog] = useState<LogExtended>();
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
@@ -24,7 +24,6 @@ export const JourneyView: React.FC = () => {
     return <Text>Loading...</Text>;
   }
 
-  console.log(journey);
   return (
     <Container maxW="6xl">
       <Flex flexDirection="column" alignItems="center" height="100vh" pt={10}>
