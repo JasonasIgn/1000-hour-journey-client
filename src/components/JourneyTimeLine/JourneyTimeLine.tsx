@@ -1,25 +1,38 @@
 import { Box, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { Journey } from "../../store/features/journeys/types";
-import { LogsHourMap } from "../../views/JourneyView/types";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Journey, Log } from "../../store/features/journeys/types";
+import {
+  getLogHoursMap,
+  getLogsDictionary,
+} from "../../views/JourneyView/utils";
 
 interface JourneyTimeLineProps {
   journey: Journey;
-  hoursToLogMap: LogsHourMap;
+  setActiveLog: (log: Log) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
-  hoursToLogMap,
+  setActiveLog,
 }) => {
   const [currentHour, setCurrentHour] = useState(journey.totalHours);
-  const activeLogId = hoursToLogMap[currentHour];
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
+
+  const hoursToLogMap = useMemo(
+    () => getLogHoursMap(journey?.logs || []),
+    [journey?.logs]
+  );
+  const logsDictionary = useMemo(
+    () => getLogsDictionary(journey?.logs || []),
+    [journey?.logs]
+  );
+
+  const activeLogId = hoursToLogMap[currentHour];
+
   const onUpdate = useCallback(({ x, scale }: any) => {
     const { current } = timelineContainerRef;
-
     if (current) {
       const value = make3dTransformValue({ x, y: -90, scale });
       current.style.setProperty("transform", value);
@@ -29,6 +42,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   useEffect(() => {
     pinchZoomRef.current?.scaleTo({ x: 30, y: 0, scale: 20 });
   }, []);
+
+  useEffect(() => {
+    console.log("set log");
+    setActiveLog(logsDictionary[activeLogId]);
+  }, [activeLogId, logsDictionary, setActiveLog]);
 
   return (
     <QuickPinchZoom

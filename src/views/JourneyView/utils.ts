@@ -1,5 +1,5 @@
 import { Log } from "../../store/features/journeys/types";
-import { LogsHourMap } from "./types";
+import { LogsDictionary, LogsHourMap } from "./types";
 
 export const getLogHoursMap = (logs: Log[]): LogsHourMap => {
   const hoursMap: LogsHourMap = {};
@@ -11,4 +11,12 @@ export const getLogHoursMap = (logs: Log[]): LogsHourMap => {
     }
   });
   return hoursMap;
+};
+
+export const getLogsDictionary = (logs: Log[]): LogsDictionary => {
+  const logsDictionary: LogsDictionary = {};
+  logs.forEach((log) => {
+    logsDictionary[log.id] = log;
+  });
+  return logsDictionary;
 };

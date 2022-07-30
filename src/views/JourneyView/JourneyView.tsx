@@ -1,27 +1,24 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
-import { useEffect, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
+import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
 import { getJourney } from "../../store/features/journeys/selectors";
+import { Log } from "../../store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getLogHoursMap } from "./utils";
 
 export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
+  const [activeLog, setActiveLog] = useState<Log>();
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
       dispatch(fetchJourneyEffect({ id: params.journeyId }));
     }
   });
-
-  const logsHourMap = useMemo(
-    () => getLogHoursMap(journey?.logs || []),
-    [journey?.logs]
-  );
 
   if (!journey) {
     return <Text>Loading...</Text>;
@@ -31,11 +28,9 @@ export const JourneyView: React.FC = () => {
   return (
     <Container maxW="6xl">
       <Flex flexDirection="column" alignItems="center" height="100vh" pt={10}>
-        <Flex height="70%" width="70%" bg="red" padding={5}>
-          journey log {params.journeyId}
-        </Flex>
+        <LogShowcase log={activeLog} />
         <Flex paddingTop="5%" width="100%">
-          <JourneyTimeLine journey={journey} hoursToLogMap={logsHourMap} />
+          <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
         </Flex>
       </Flex>
     </Container>
