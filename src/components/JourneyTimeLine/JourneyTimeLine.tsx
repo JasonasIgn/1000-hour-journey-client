@@ -16,7 +16,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLog,
 }) => {
-  const [currentHour, setCurrentHour] = useState(journey.totalHours);
+  const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
 
