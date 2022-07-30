@@ -14,6 +14,7 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
 }) => {
   return (
     <Flex
+      flexDirection="column"
       position="absolute"
       height="100%"
       width="70%"

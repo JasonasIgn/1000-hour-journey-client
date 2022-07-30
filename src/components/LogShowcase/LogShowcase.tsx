@@ -36,8 +36,9 @@ export const LogShowcase: FC<LogShowcaseProps> = ({ log }) => {
             key={card?.key || index}
             log={card as Log}
             left={left}
-            transition="left 0.25s"
+            transition="left 0.25s, opacity 0.2s"
             bg="red"
+            opacity={index === 1 ? 1 : 0.1}
           />
         );
       })}
