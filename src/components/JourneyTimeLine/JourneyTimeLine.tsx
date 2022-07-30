@@ -6,6 +6,7 @@ import {
   getLogHoursMap,
   getLogsDictionary,
 } from "../../views/JourneyView/utils";
+import { getInitialXPosition } from "./utils";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -40,7 +41,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   useEffect(() => {
-    pinchZoomRef.current?.scaleTo({ x: 30, y: -90, scale: 20 });
+    pinchZoomRef.current?.scaleTo({
+      x: getInitialXPosition(journey.totalHours),
+      y: -90,
+      scale: 20,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -56,7 +62,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
       lockDragAxis={true}
       wheelScaleFactor={80}
     >
-      <Box ref={timelineContainerRef} height="200px" bg="gray" width="10000px">
+      <Box
+        ref={timelineContainerRef}
+        height="200px"
+        bg="gray"
+        width="10000px"
+        padding="0 12px"
+      >
         <Slider
           top="70%"
           step={0.1}
