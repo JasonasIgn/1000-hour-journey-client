@@ -52,7 +52,6 @@ export const createJourneyLogEffect = createAsyncThunk(
         apiUrls.createLog.replace("{id}", id.toString()),
         data
       );
-      console.log(response);
       return response.data;
     } catch (e) {
       console.log("error:", e);

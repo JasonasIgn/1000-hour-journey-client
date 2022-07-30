@@ -19,10 +19,14 @@ const initialState: JourneysState = {
   listLoadingState: "pristine",
 };
 
-export const counterSlice = createSlice({
+export const journeysSlice = createSlice({
   name: "journeys",
   initialState,
-  reducers: {},
+  reducers: {
+    resetJourney: (state) => {
+      state.journey = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchJourneysListEffect.pending, (state) => {
@@ -50,4 +54,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export default counterSlice.reducer;
+export const { resetJourney } = journeysSlice.actions;
+
+export default journeysSlice.reducer;

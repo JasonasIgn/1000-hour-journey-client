@@ -8,6 +8,7 @@ import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLin
 import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
 import { getJourney } from "../../store/features/journeys/selectors";
+import { resetJourney } from "../../store/features/journeys/slice";
 import { LogExtended } from "../../store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
@@ -22,8 +23,12 @@ export const JourneyView: React.FC = () => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
       dispatch(fetchJourneyEffect({ id: params.journeyId }));
     }
-  });
 
+    return () => {
+      dispatch(resetJourney());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   if (!journey) {
     return <Text>Loading...</Text>;
   }

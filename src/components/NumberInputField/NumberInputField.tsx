@@ -33,7 +33,6 @@ export const NumberInputField: FC<NumberInputFieldaProps> = forwardRef(
           {...rest}
           ref={ref as any}
           onChange={(_, val) => {
-            console.log(val);
             onChange(val);
           }}
         >

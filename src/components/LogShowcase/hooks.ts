@@ -11,7 +11,7 @@ export const useAnimatedCards = (log?: LogExtended) => {
   const [skipAnimation, setSkipAnimation] = useState(true);
   const [cards, setCards] = useState<Array<Partial<CardLog>>>([
     { key: generateId(7) },
-    { key: generateId(7), ...log },
+    { key: generateId(7) },
     { key: generateId(7) },
   ]);
 
