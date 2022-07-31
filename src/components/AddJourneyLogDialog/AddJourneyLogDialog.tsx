@@ -10,12 +10,14 @@ import {
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import format from 'date-fns/format'
 import { useAppDispatch } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "../../store/features/journeys/effects";
+import { InputField } from "../InputField/InputField";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -31,6 +33,9 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState, control } =
     useForm<AddJourneyLogFormData>({
+      defaultValues: {
+        loggedOn: format(new Date(), 'yyyy-MM-dd'),
+      },
       resolver: yupResolver(addJourneyFormValidation),
     });
   const { isSubmitting, errors } = formState;
@@ -65,6 +70,12 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
                 errorMessage={error?.message}
               />
             )}
+          />
+          <InputField
+            type="date"
+            label="Date of log"
+            {...register("loggedOn")}
+            errorMessage={errors.loggedOn?.message}
           />
         </ModalBody>
 

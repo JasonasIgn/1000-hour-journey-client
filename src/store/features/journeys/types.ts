@@ -13,6 +13,7 @@ export interface Log {
   hoursSpent: number;
   description: string;
   significanceLevel: number;
+  loggedOn: Date;
   createdAt: Date;
   updatedAt: Date;
 }
