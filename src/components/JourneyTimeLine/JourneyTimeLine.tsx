@@ -70,6 +70,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         activeLog={logsDictionary[activeLogId]}
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
+        totalHours={journey.totalHours}
       />
       <QuickPinchZoom
         onUpdate={onUpdate}

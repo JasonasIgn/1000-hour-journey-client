@@ -4,6 +4,7 @@ import { ReactComponent as PauseIcon } from "../../resources/pause_icon.svg";
 import { FC, useEffect } from "react";
 import { LogExtended } from "../../store/features/journeys/types";
 import { getTickSpeedByLogHours } from "./utils";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   currentHour: number;
@@ -11,6 +12,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   activeLog?: LogExtended;
   setIsPlaying: (playing: boolean) => void;
   isPlaying: boolean;
+  totalHours: number;
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
@@ -19,6 +21,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   activeLog,
   setIsPlaying,
   isPlaying,
+  totalHours,
   ...rest
 }) => {
   useInterval(
@@ -36,14 +39,27 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   return (
     <Flex {...rest} alignItems="center" width="100%" justifyContent="center">
       <IconButton
+        icon={<ArrowLeftIcon />}
+        aria-label="Skip to end"
+        onClick={() => {
+          setCurrentHour(0);
+        }}
+      />
+      <IconButton
         icon={isPlaying ? <PauseIcon width={20} height={20} /> : <PlayIcon />}
         aria-label="Play Journey"
         onClick={() => {
           setIsPlaying(!isPlaying);
         }}
-      >
-        Play
-      </IconButton>
+        mx={2}
+      />
+      <IconButton
+        icon={<ArrowRightIcon />}
+        aria-label="Rewind to beggining"
+        onClick={() => {
+          setCurrentHour(totalHours - 0.1);
+        }}
+      />
     </Flex>
   );
 };
