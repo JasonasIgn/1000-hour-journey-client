@@ -43,10 +43,23 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   useEffect(() => {
+    if (isPlaying) {
+      pinchZoomRef.current?.scaleTo({
+        x: getInitialXPosition(currentHour),
+        y: -90,
+        scale: 20,
+        animated: false,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentHour]);
+
+  useEffect(() => {
     pinchZoomRef.current?.scaleTo({
-      x: getInitialXPosition(journey.totalHours),
+      x: getInitialXPosition(currentHour, true),
       y: -90,
       scale: 20,
+      animated: true,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
