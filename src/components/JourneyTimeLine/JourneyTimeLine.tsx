@@ -42,6 +42,15 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
   }, []);
 
+  const centerZoomOnThumb = () => {
+    pinchZoomRef.current?.scaleTo({
+      x: getInitialXPosition(currentHour),
+      y: -90,
+      scale: 20,
+      animated: true,
+    });
+  };
+
   useEffect(() => {
     if (isPlaying) {
       pinchZoomRef.current?.scaleTo({
@@ -55,12 +64,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, [currentHour]);
 
   useEffect(() => {
-    pinchZoomRef.current?.scaleTo({
-      x: getInitialXPosition(currentHour, true),
-      y: -90,
-      scale: 20,
-      animated: true,
-    });
+    centerZoomOnThumb();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -101,6 +105,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           padding="0 12px"
         >
           <Slider
+            onClick={centerZoomOnThumb}
             top="70%"
             step={0.1}
             defaultValue={currentHour}
