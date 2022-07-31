@@ -37,9 +37,7 @@ export const JourneyView: React.FC = () => {
     <Container maxW="6xl">
       <Flex flexDirection="column" alignItems="center" height="100vh" pt={10}>
         <LogShowcase log={activeLog} />
-        <Flex paddingTop="5%" width="100%">
-          <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
-        </Flex>
+        <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
       </Flex>
       <AddJourneyLogDialog
         open={modalOpen}

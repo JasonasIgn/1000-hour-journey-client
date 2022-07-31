@@ -1,4 +1,4 @@
-import { Box, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
+import { Box, Flex, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Journey, LogExtended } from "../../store/features/journeys/types";
@@ -7,6 +7,7 @@ import {
   getLogsDictionary,
 } from "../../views/JourneyView/utils";
 import { getInitialXPosition } from "./utils";
+import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -17,6 +18,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLog,
 }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
@@ -51,61 +53,78 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useEffect(() => {
     setActiveLog(logsDictionary[activeLogId]);
-  }, [activeLogId, logsDictionary, setActiveLog]);
+  }, [activeLogId, logsDictionary, setActiveLog, currentHour]);
 
   useEffect(() => {
     setCurrentHour(journey.totalHours - 0.1);
   }, [journey.totalHours]);
 
   return (
-    <QuickPinchZoom
-      onUpdate={onUpdate}
-      maxZoom={20}
-      inertia={false}
-      ref={pinchZoomRef}
-      lockDragAxis={true}
-      wheelScaleFactor={80}
-    >
-      <Box
-        ref={timelineContainerRef}
-        height="200px"
-        bg="gray"
-        width="10000px"
-        padding="0 12px"
+    <Flex width="100%" flexDirection="column">
+      <JourneyTimeLineControls
+        height="40px"
+        py={2}
+        boxSizing="content-box"
+        setCurrentHour={setCurrentHour}
+        currentHour={currentHour}
+        activeLog={logsDictionary[activeLogId]}
+        setIsPlaying={setIsPlaying}
+        isPlaying={isPlaying}
+      />
+      <QuickPinchZoom
+        onUpdate={onUpdate}
+        maxZoom={20}
+        inertia={false}
+        ref={pinchZoomRef}
+        lockDragAxis={true}
+        wheelScaleFactor={80}
       >
-        <Slider
-          top="70%"
-          step={0.1}
-          defaultValue={currentHour}
-          min={0}
-          max={1000}
-          value={currentHour}
-          colorScheme="teal"
-          onChange={(hour) => setCurrentHour(hour)}
+        <Box
+          ref={timelineContainerRef}
+          height="200px"
+          bg="gray"
+          width="10000px"
+          padding="0 12px"
         >
-          <SliderTrack display="flex">
-            {journey.logs.map((log) => {
-              const widthPercentage = log.hoursSpent / 10;
-              return (
-                <Box
-                  key={log.id}
-                  bg={log.id === activeLogId ? "blue" : "red"}
-                  width={`${widthPercentage}%`}
-                  boxShadow="-1px 0px 0 black"
-                  _hover={{ bg: "blue" }}
-                />
-              );
-            })}
-          </SliderTrack>
+          <Slider
+            top="70%"
+            step={0.1}
+            defaultValue={currentHour}
+            min={0}
+            max={1000}
+            value={currentHour}
+            colorScheme="teal"
+            onChange={(hour) => {
+              setCurrentHour(hour);
+              if (isPlaying) {
+                setIsPlaying(false);
+              }
+            }}
+          >
+            <SliderTrack display="flex">
+              {journey.logs.map((log) => {
+                const widthPercentage = log.hoursSpent / 10;
+                return (
+                  <Box
+                    key={log.id}
+                    bg={log.id === activeLogId ? "blue" : "red"}
+                    width={`${widthPercentage}%`}
+                    boxShadow="-1px 0px 0 black"
+                    _hover={{ bg: "blue" }}
+                  />
+                );
+              })}
+            </SliderTrack>
 
-          <SliderThumb
-            width="6px"
-            height="6px"
-            _active={{ transform: `translateY(-50%)` }}
-            _focusVisible={{ boxShadow: "none" }}
-          />
-        </Slider>
-      </Box>
-    </QuickPinchZoom>
+            <SliderThumb
+              width="6px"
+              height="6px"
+              _active={{ transform: `translateY(-50%)` }}
+              _focusVisible={{ boxShadow: "none" }}
+            />
+          </Slider>
+        </Box>
+      </QuickPinchZoom>
+    </Flex>
   );
 };
