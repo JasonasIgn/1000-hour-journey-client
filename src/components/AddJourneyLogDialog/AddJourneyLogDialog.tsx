@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import format from 'date-fns/format'
+import format from "date-fns/format";
 import { useAppDispatch } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
@@ -31,10 +31,10 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   journeyId,
 }) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, control } =
+  const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyLogFormData>({
       defaultValues: {
-        loggedOn: format(new Date(), 'yyyy-MM-dd'),
+        loggedOn: format(new Date(), "yyyy-MM-dd"),
       },
       resolver: yupResolver(addJourneyFormValidation),
     });
@@ -42,6 +42,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const onSubmit = async (data: AddJourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, id: journeyId }));
+      reset();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);

@@ -27,14 +27,16 @@ export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
   setOpen,
 }) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState } = useForm<AddJourneyFormData>({
-    resolver: yupResolver(addJourneyFormValidation),
-  });
+  const { register, handleSubmit, formState, reset } =
+    useForm<AddJourneyFormData>({
+      resolver: yupResolver(addJourneyFormValidation),
+    });
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: any) => {
     try {
       await dispatch(createJourneyEffect(data));
       setOpen(false);
+      reset();
     } catch (e) {
       console.error("Caught error", e);
     }
