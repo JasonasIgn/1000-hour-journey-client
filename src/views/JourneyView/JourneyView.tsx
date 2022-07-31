@@ -37,14 +37,24 @@ export const JourneyView: React.FC = () => {
     <Container maxW="6xl">
       <Flex flexDirection="column" alignItems="center" height="100vh" pt={10}>
         <LogShowcase log={activeLog} />
-        <JourneyTimeLine journey={journey} setActiveLog={setActiveLog} />
+        <JourneyTimeLine
+          journey={journey}
+          setActiveLog={setActiveLog}
+          shouldSpaceTriggerPlay={!modalOpen}
+        />
       </Flex>
       <AddJourneyLogDialog
         open={modalOpen}
         setOpen={setModalOpen}
         journeyId={journey.id}
       />
-      <FabButton onClick={() => setModalOpen(true)}>
+      <FabButton
+        onClick={(e) => {
+          if (e.detail !== 0) {
+            setModalOpen(true);
+          }
+        }}
+      >
         <AddIcon />
       </FabButton>
     </Container>

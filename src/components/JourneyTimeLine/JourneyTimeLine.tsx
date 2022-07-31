@@ -12,14 +12,20 @@ import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeL
 interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLog: (log: LogExtended) => void;
+  shouldSpaceTriggerPlay: boolean;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLog,
+  shouldSpaceTriggerPlay,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
+  const spacePlayRef = useRef<{
+    isPlaying: boolean;
+    shouldSpaceTriggerPlay: boolean;
+  }>({ isPlaying, shouldSpaceTriggerPlay });
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
 
@@ -33,6 +39,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   );
 
   const activeLogId = hoursToLogMap[currentHour];
+
+  // TODO: Move to hook
+  const spaceKeyHandler = ({ key }: KeyboardEvent) => {
+    if (key === " " && spacePlayRef.current.shouldSpaceTriggerPlay) {
+      setIsPlaying(!spacePlayRef.current.isPlaying);
+    }
+  };
 
   const onUpdate = useCallback(({ x, scale }: any) => {
     const { current } = timelineContainerRef;
@@ -64,9 +77,17 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, [currentHour]);
 
   useEffect(() => {
+    window.addEventListener("keyup", spaceKeyHandler);
     centerZoomOnThumb();
+    return () => {
+      window.removeEventListener("keyup", spaceKeyHandler);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    spacePlayRef.current = { shouldSpaceTriggerPlay, isPlaying };
+  }, [isPlaying, shouldSpaceTriggerPlay]);
 
   useEffect(() => {
     setActiveLog(logsDictionary[activeLogId]);
