@@ -7,35 +7,40 @@ interface TimelineRulerProps {
 
 export const TimelineRuler: FC<TimelineRulerProps> = React.memo(
   ({ currentViewX }) => {
-    console.log("current x view: ", currentViewX);
+    const currentXHour = Math.round(
+      Math.abs(Math.abs(currentViewX / 9.9)) + 21
+    );
+    console.log(currentViewX, currentXHour);
     return (
       <>
-        {Array.from(Array(1000).keys()).map((val) => {
-          if (Math.abs(Math.abs(currentViewX / 9.5) + 20 - val) <= 30) {
-            const shouldDisplayNumber = val % 10 === 0;
-            return (
-              <SliderMark
-                key={val}
-                value={val}
-                color="white"
-                display="flex"
-                justifyContent="center"
-              >
-                <Box
-                  width="1px"
-                  height={shouldDisplayNumber ? "6px" : "3px"}
-                  bgColor="white"
-                  mt="2px"
-                />
-                {shouldDisplayNumber && (
-                  <Text fontSize="8px" position="absolute" top="9px">
-                    {val}
-                  </Text>
-                )}
-              </SliderMark>
-            );
+        {Array.from(Array(60).keys()).map((_, idx) => {
+          const offset = -30 + idx;
+          const sliderValue = currentXHour - offset;
+          if (sliderValue < 0 || sliderValue > 1000) {
+            return <></>;
           }
-          return <> </>;
+          const shouldDisplayNumber = sliderValue % 10 === 0;
+          return (
+            <SliderMark
+              key={sliderValue}
+              value={sliderValue}
+              color="white"
+              display="flex"
+              justifyContent="center"
+            >
+              <Box
+                width="1px"
+                height={shouldDisplayNumber ? "6px" : "3px"}
+                bgColor="white"
+                mt="2px"
+              />
+              {shouldDisplayNumber && (
+                <Text fontSize="8px" position="absolute" top="9px">
+                  {sliderValue}
+                </Text>
+              )}
+            </SliderMark>
+          );
         })}
       </>
     );
