@@ -36,7 +36,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const lastLogDate = lastLog
     ? format(new Date(lastLog?.loggedOn), "yyyy-MM-dd")
     : undefined;
-  console.log(lastLog);
+
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyLogFormData>({
       defaultValues: {
