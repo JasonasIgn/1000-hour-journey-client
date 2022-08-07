@@ -1,7 +1,15 @@
-import { Box, Flex, Slider, SliderThumb, SliderTrack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Slider,
+  SliderMark,
+  SliderThumb,
+  SliderTrack,
+} from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Journey, LogExtended } from "../../store/features/journeys/types";
+import format from "date-fns/format";
 import {
   getLogHoursMap,
   getLogsDictionary,
@@ -39,6 +47,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   );
 
   const activeLogId = hoursToLogMap[currentHour];
+  const activeLog = logsDictionary[activeLogId];
 
   // TODO: Move to hook
   const spaceKeyHandler = ({ key }: KeyboardEvent) => {
@@ -90,13 +99,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, [isPlaying, shouldSpaceTriggerPlay]);
 
   useEffect(() => {
-    setActiveLog(logsDictionary[activeLogId]);
-  }, [activeLogId, logsDictionary, setActiveLog, currentHour]);
+    setActiveLog(activeLog);
+  }, [activeLog, logsDictionary, setActiveLog, currentHour]);
 
   useEffect(() => {
     setCurrentHour(journey.totalHours - 0.1);
   }, [journey.totalHours]);
-
+  console.log(activeLog);
   return (
     <Flex width="100%" flexDirection="column">
       <JourneyTimeLineControls
@@ -105,7 +114,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         boxSizing="content-box"
         setCurrentHour={setCurrentHour}
         currentHour={currentHour}
-        activeLog={logsDictionary[activeLogId]}
+        activeLog={activeLog}
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
         totalHours={journey.totalHours}
@@ -141,6 +150,18 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               }
             }}
           >
+            {activeLog && (
+              <SliderMark
+                value={currentHour}
+                textAlign="center"
+                color="white"
+                mt="-5"
+                ml="-6"
+                fontSize="10px"
+              >
+                <>{format(new Date(activeLog.loggedOn), "yyyy-MM-dd")}</>
+              </SliderMark>
+            )}
             <SliderTrack display="flex">
               {journey.logs.map((log) => {
                 const widthPercentage = log.hoursSpent / 10;
