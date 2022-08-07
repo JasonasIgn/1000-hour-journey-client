@@ -17,12 +17,12 @@ export const TimelineRuler: FC<TimelineRulerProps> = React.memo(
           const offset = -30 + idx;
           const sliderValue = currentXHour - offset;
           if (sliderValue < 0 || sliderValue > 1000) {
-            return <></>;
+            return undefined;
           }
           const shouldDisplayNumber = sliderValue % 10 === 0;
           return (
             <SliderMark
-              key={sliderValue}
+              key={`${sliderValue}-as`}
               value={sliderValue}
               color="white"
               display="flex"
