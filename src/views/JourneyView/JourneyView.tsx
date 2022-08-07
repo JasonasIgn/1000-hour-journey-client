@@ -35,7 +35,12 @@ export const JourneyView: React.FC = () => {
 
   return (
     <Container maxW="6xl">
-      <Flex flexDirection="column" alignItems="center" height="100vh" pt={10}>
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        height="calc(100vh - 60px)"
+        pt={5}
+      >
         <LogShowcase log={activeLog} />
         <JourneyTimeLine
           journey={journey}

@@ -13,7 +13,7 @@ const getLeft = (position: number) => {
     return "-70%";
   }
   if (position === 1) {
-    return "15%";
+    return "18%";
   }
   return "100%";
 };
@@ -22,7 +22,7 @@ export const LogShowcase: FC<LogShowcaseProps> = ({ log }) => {
   const cards = useAnimatedCards(log);
   return (
     <Flex
-      height="70%"
+      height="65%"
       width="100%"
       justifyContent="center"
       position="relative"

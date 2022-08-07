@@ -19,7 +19,7 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
         flexDirection="column"
         position="absolute"
         height="100%"
-        width="70%"
+        width="65%"
         bg="red"
         padding={5}
         {...rest}
@@ -32,7 +32,7 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
       flexDirection="column"
       position="absolute"
       height="100%"
-      width="70%"
+      width="65%"
       bg="red"
       padding={5}
       {...rest}

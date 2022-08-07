@@ -25,7 +25,7 @@ export const JourneysView: React.FC = () => {
   }, [dispatch, listLoadingState]);
 
   return (
-    <Container maxW="6xl" pt={10}>
+    <Container maxW="6xl" pt={5}>
       <Heading>Journeys</Heading>
       <JourneysList journeys={list} rootBoxProps={{ mt: 10, mb: 120 }} />
       <FabButton onClick={() => setModalOpen(true)}>
