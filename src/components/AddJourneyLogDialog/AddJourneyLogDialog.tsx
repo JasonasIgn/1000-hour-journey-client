@@ -11,13 +11,14 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "../../store/features/journeys/effects";
 import { InputField } from "../InputField/InputField";
+import { getLastJourneyLog } from "../../store/features/journeys/selectors";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -31,6 +32,11 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   journeyId,
 }) => {
   const dispatch = useAppDispatch();
+  const lastLog = useAppSelector(getLastJourneyLog);
+  const lastLogDate = lastLog
+    ? format(new Date(lastLog?.loggedOn), "yyyy-MM-dd")
+    : undefined;
+  console.log(lastLog);
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyLogFormData>({
       defaultValues: {
@@ -75,6 +81,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
           <InputField
             type="date"
             label="Date of log"
+            min={lastLogDate || undefined}
             {...register("loggedOn")}
             errorMessage={errors.loggedOn?.message}
           />
