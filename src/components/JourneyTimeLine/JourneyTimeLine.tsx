@@ -166,14 +166,14 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               </SliderMark>
             )}
             <SliderTrack display="flex">
-              {journey.logs.map((log) => {
+              {journey.logs.map((log, idx) => {
                 const widthPercentage = log.hoursSpent / 10;
                 return (
                   <Box
                     key={log.id}
                     bg={log.id === activeLogId ? "blue" : "red"}
                     width={`${widthPercentage}%`}
-                    boxShadow="-1px 0px 0 black"
+                    borderLeft={idx === 0 ? "none" : "1px solid black"}
                     _hover={{ bg: "blue" }}
                   />
                 );

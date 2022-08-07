@@ -25,7 +25,7 @@ export const TimelineRuler: FC<TimelineRulerProps> = React.memo(
                   width="1px"
                   height={shouldDisplayNumber ? "6px" : "3px"}
                   bgColor="white"
-                  mt="3px"
+                  mt="2px"
                 />
                 {shouldDisplayNumber && (
                   <Text fontSize="8px" position="absolute" top="9px">
