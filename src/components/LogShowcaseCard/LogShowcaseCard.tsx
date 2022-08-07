@@ -1,5 +1,6 @@
 import { Box, Flex, FlexProps, Heading, Text } from "@chakra-ui/react";
 import { FC } from "react";
+import format from "date-fns/format";
 import { Log } from "../../store/features/journeys/types";
 
 interface LogShowcaseCardProps extends FlexProps {
@@ -12,6 +13,20 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
   logNumber,
   ...rest
 }) => {
+  if (!log?.id) {
+    return (
+      <Flex
+        flexDirection="column"
+        position="absolute"
+        height="100%"
+        width="70%"
+        bg="red"
+        padding={5}
+        {...rest}
+      />
+    );
+  }
+  console.log(log.loggedOn)
   return (
     <Flex
       flexDirection="column"
@@ -27,11 +42,14 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
           <Heading>Log #{logNumber}</Heading>
         </Box>
         <Box textAlign="center">
+          <Heading>{format(new Date(log.loggedOn), "yyyy-MM-dd")}</Heading>
+        </Box>
+        <Box textAlign="center">
           Hours spent
-          <Heading>{log?.hoursSpent}</Heading>
+          <Heading>{log.hoursSpent}</Heading>
         </Box>
       </Flex>
-      <Text>{log?.description}</Text>
+      <Text>{log.description}</Text>
     </Flex>
   );
 };
