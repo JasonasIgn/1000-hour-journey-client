@@ -16,6 +16,7 @@ import {
 } from "../../views/JourneyView/utils";
 import { getInitialXPosition } from "./utils";
 import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
+import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -29,6 +30,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   shouldSpaceTriggerPlay,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
   const spacePlayRef = useRef<{
     isPlaying: boolean;
@@ -59,6 +61,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const onUpdate = useCallback(({ x, scale }: any) => {
     const { current } = timelineContainerRef;
     if (current) {
+      setCurrentViewX(x);
       const value = make3dTransformValue({ x, y: -90, scale });
       current.style.setProperty("transform", value);
     }
@@ -105,7 +108,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   useEffect(() => {
     setCurrentHour(journey.totalHours - 0.1);
   }, [journey.totalHours]);
-  console.log(activeLog);
+
   return (
     <Flex width="100%" flexDirection="column">
       <JourneyTimeLineControls
@@ -176,7 +179,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 );
               })}
             </SliderTrack>
-
+            <TimelineRuler currentViewX={currentViewX} />
             <SliderThumb
               width="6px"
               height="6px"

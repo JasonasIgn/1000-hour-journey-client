@@ -26,7 +26,7 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
       />
     );
   }
-  console.log(log.loggedOn)
+
   return (
     <Flex
       flexDirection="column"
