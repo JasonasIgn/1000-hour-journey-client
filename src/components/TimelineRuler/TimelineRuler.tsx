@@ -10,7 +10,7 @@ export const TimelineRuler: FC<TimelineRulerProps> = React.memo(
     const currentXHour = Math.round(
       Math.abs(Math.abs(currentViewX / 9.9)) + 21
     );
-    console.log(currentViewX, currentXHour);
+
     return (
       <>
         {Array.from(Array(60).keys()).map((_, idx) => {
