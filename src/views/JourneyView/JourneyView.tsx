@@ -1,9 +1,7 @@
-import { AddIcon } from "@chakra-ui/icons";
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AddJourneyLogDialog } from "../../components/AddJourneyLogDialog/AddJourneyLogDialog";
-import { FabButton } from "../../components/FabButton/FabButton";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
 import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
@@ -16,7 +14,8 @@ export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [addLogModalOpen, setAddLogModalOpen] = useState(false);
+  const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
   const [activeLog, setActiveLog] = useState<LogExtended>();
 
   useEffect(() => {
@@ -29,6 +28,7 @@ export const JourneyView: React.FC = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   if (!journey) {
     return <Text>Loading...</Text>;
   }
@@ -45,23 +45,24 @@ export const JourneyView: React.FC = () => {
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}
-          shouldSpaceTriggerPlay={!modalOpen}
+          shouldSpaceTriggerPlay={!addLogModalOpen}
+          openAddLogModal={(e) => {
+            if (e.detail !== 0) {
+              setAddLogModalOpen(true);
+            }
+          }}
+          openAddAchievementModal={(e) => {
+            if (e.detail !== 0) {
+              setAddAchievementModalOpen(true);
+            }
+          }}
         />
       </Flex>
       <AddJourneyLogDialog
-        open={modalOpen}
-        setOpen={setModalOpen}
+        open={addLogModalOpen}
+        setOpen={setAddLogModalOpen}
         journeyId={journey.id}
       />
-      <FabButton
-        onClick={(e) => {
-          if (e.detail !== 0) {
-            setModalOpen(true);
-          }
-        }}
-      >
-        <AddIcon />
-      </FabButton>
     </Container>
   );
 };

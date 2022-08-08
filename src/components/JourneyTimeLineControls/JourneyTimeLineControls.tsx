@@ -1,6 +1,14 @@
-import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
+import {
+  FlexProps,
+  IconButton,
+  Flex,
+  useInterval,
+  Image,
+} from "@chakra-ui/react";
 import { ReactComponent as PlayIcon } from "../../resources/play_icon.svg";
 import { ReactComponent as PauseIcon } from "../../resources/pause_icon.svg";
+import AchievementIcon from "../../resources/achievement.png";
+import PageIcon from "../../resources/page.png";
 import { FC, useEffect } from "react";
 import { LogExtended } from "../../store/features/journeys/types";
 import { getTickSpeedByLogHours } from "./utils";
@@ -13,6 +21,8 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   setIsPlaying: (playing: boolean) => void;
   isPlaying: boolean;
   totalHours: number;
+  openAddLogModal: (e: React.MouseEvent) => void;
+  openAddAchievementModal: (e: React.MouseEvent) => void;
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
@@ -22,6 +32,8 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   setIsPlaying,
   isPlaying,
   totalHours,
+  openAddLogModal,
+  openAddAchievementModal,
   ...rest
 }) => {
   useInterval(
@@ -37,29 +49,52 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     }
   }, [activeLog, isPlaying, setIsPlaying]);
   return (
-    <Flex {...rest} alignItems="center" width="100%" justifyContent="center">
-      <IconButton
-        icon={<ArrowLeftIcon />}
-        aria-label="Skip to end"
-        onClick={() => {
-          setCurrentHour(0);
-        }}
-      />
-      <IconButton
-        icon={isPlaying ? <PauseIcon width={20} height={20} /> : <PlayIcon />}
-        aria-label="Play Journey"
-        onClick={() => {
-          setIsPlaying(!isPlaying);
-        }}
-        mx={2}
-      />
-      <IconButton
-        icon={<ArrowRightIcon />}
-        aria-label="Rewind to beggining"
-        onClick={() => {
-          setCurrentHour(totalHours - 0.1);
-        }}
-      />
+    <Flex
+      {...rest}
+      alignItems="center"
+      width="100%"
+      justifyContent="space-between"
+    >
+      <Flex width="88px" />
+      <Flex>
+        <IconButton
+          icon={<ArrowLeftIcon />}
+          aria-label="Skip to end"
+          onClick={() => {
+            setCurrentHour(0);
+          }}
+        />
+        <IconButton
+          icon={isPlaying ? <PauseIcon width={20} height={20} /> : <PlayIcon />}
+          aria-label="Play Journey"
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+          }}
+          mx={2}
+        />
+        <IconButton
+          icon={<ArrowRightIcon />}
+          aria-label="Rewind to beggining"
+          onClick={() => {
+            setCurrentHour(totalHours - 0.1);
+          }}
+        />
+      </Flex>
+      <Flex>
+        <IconButton
+          icon={
+            <Image src={AchievementIcon} alt="Achievement icon" width="24px" />
+          }
+          aria-label="Add achievement"
+          onClick={openAddAchievementModal}
+        />
+        <IconButton
+          ml={2}
+          icon={<Image src={PageIcon} alt="Page icon" width="24px" />}
+          aria-label="Add log"
+          onClick={openAddLogModal}
+        />
+      </Flex>
     </Flex>
   );
 };

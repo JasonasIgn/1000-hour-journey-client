@@ -7,7 +7,7 @@ import {
   SliderTrack,
 } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Journey, LogExtended } from "../../store/features/journeys/types";
 import format from "date-fns/format";
 import {
@@ -22,12 +22,16 @@ interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLog: (log: LogExtended) => void;
   shouldSpaceTriggerPlay: boolean;
+  openAddLogModal: (e: React.MouseEvent) => void;
+  openAddAchievementModal: (e: React.MouseEvent) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLog,
   shouldSpaceTriggerPlay,
+  openAddLogModal,
+  openAddAchievementModal
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
@@ -121,6 +125,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
         totalHours={journey.totalHours}
+        openAddLogModal={openAddLogModal}
+        openAddAchievementModal={openAddAchievementModal}
       />
       <QuickPinchZoom
         onUpdate={onUpdate}
