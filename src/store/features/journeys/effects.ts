@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { AddJourneyAchievementFormData } from "../../../components/AddJourneyAchivementDialog/types";
 import { AddJourneyFormData } from "../../../components/AddJourneyDialog/types";
 import { AddJourneyLogFormData } from "../../../components/AddJourneyLogDialog/types";
 import { apiUrls } from "../../../config";
-import { Log } from "./types";
+import { Achievement, Log } from "./types";
 
 export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
@@ -51,6 +52,27 @@ export const createJourneyLogEffect = createAsyncThunk(
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{id}", id.toString()),
+        { ...rest, media: media[0] },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);
+
+export const logJourneyAchievementEffect = createAsyncThunk(
+  "journeys/logAchievement",
+  async ({ data, id }: { data: AddJourneyAchievementFormData; id: number }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.post<Achievement>(
+        apiUrls.logAchievement.replace("{id}", id.toString()),
         { ...rest, media: media[0] },
         {
           headers: {

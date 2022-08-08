@@ -5,6 +5,7 @@ import {
   createJourneyLogEffect,
   fetchJourneyEffect,
   fetchJourneysListEffect,
+  logJourneyAchievementEffect,
 } from "./effects";
 import { Journey, JourneyListItem } from "./types";
 
@@ -49,6 +50,11 @@ export const journeysSlice = createSlice({
         if (state.journey && action.payload) {
           state.journey.logs.push(action.payload);
           state.journey.totalHours += action.payload.hoursSpent;
+        }
+      })
+      .addCase(logJourneyAchievementEffect.fulfilled, (state, action) => {
+        if (state.journey && action.payload) {
+          state.journey.achievements.push(action.payload);
         }
       });
   },

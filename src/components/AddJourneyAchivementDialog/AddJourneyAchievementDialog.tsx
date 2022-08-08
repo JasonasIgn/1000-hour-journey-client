@@ -19,6 +19,7 @@ import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { InputField } from "../InputField/InputField";
 import { getLastJourneyLog } from "../../store/features/journeys/selectors";
 import { LogExtended } from "../../store/features/journeys/types";
+import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
@@ -44,7 +45,7 @@ export const AddJourneyAchievementDialog: React.FC<
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: AddJourneyAchievementFormData) => {
     try {
-      console.log("submitted", data);
+      await dispatch(logJourneyAchievementEffect({ data, id: journeyId }));
       reset();
       setOpen(false);
     } catch (e) {
