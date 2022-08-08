@@ -14,8 +14,6 @@ export interface Log {
   description: string;
   significanceLevel: number;
   loggedOn: Date;
-  createdAt: Date;
-  updatedAt: Date;
   mediaUrl?: string;
 }
 
@@ -29,8 +27,6 @@ export interface Achievement {
   loggedAtHour: number;
   description: string;
   loggedOnDate: Date;
-  createdAt: Date;
-  updatedAt: Date;
   mediaUrl?: string;
 }
 
