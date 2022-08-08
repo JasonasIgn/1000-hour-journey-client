@@ -85,6 +85,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
             {...register("loggedOn")}
             errorMessage={errors.loggedOn?.message}
           />
+          <InputField type="file" label="Media" {...register("media")} />
         </ModalBody>
 
         <ModalFooter>

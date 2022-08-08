@@ -47,10 +47,16 @@ export const fetchJourneyEffect = createAsyncThunk(
 export const createJourneyLogEffect = createAsyncThunk(
   "journeys/createLog",
   async ({ data, id }: { data: AddJourneyLogFormData; id: number }) => {
+    const { media, ...rest } = data;
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{id}", id.toString()),
-        data
+        { ...rest, media: media[0] },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     } catch (e) {
