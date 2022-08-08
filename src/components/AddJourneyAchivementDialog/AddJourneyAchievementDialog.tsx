@@ -14,7 +14,7 @@ import format from "date-fns/format";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyAchievementFormData } from "./types";
-import { addJourneyFormValidation } from "./validation";
+import { addJourneyAchievementFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { InputField } from "../InputField/InputField";
 import { getLastJourneyLog } from "../../store/features/journeys/selectors";
@@ -39,7 +39,7 @@ export const AddJourneyAchievementDialog: React.FC<
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
       defaultValues: {},
-      resolver: yupResolver(addJourneyFormValidation),
+      resolver: yupResolver(addJourneyAchievementFormValidation),
     });
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: AddJourneyAchievementFormData) => {

@@ -14,7 +14,7 @@ import format from "date-fns/format";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
-import { addJourneyFormValidation } from "./validation";
+import { addJourneyLogFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "../../store/features/journeys/effects";
 import { InputField } from "../InputField/InputField";
@@ -42,9 +42,10 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
       defaultValues: {
         loggedOn: format(new Date(), "yyyy-MM-dd"),
       },
-      resolver: yupResolver(addJourneyFormValidation),
+      resolver: yupResolver(addJourneyLogFormValidation),
     });
   const { isSubmitting, errors } = formState;
+
   const onSubmit = async (data: AddJourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, id: journeyId }));
