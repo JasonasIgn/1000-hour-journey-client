@@ -5,5 +5,4 @@ export const apiUrls = {
   createJourney: `${API_BASE}/journeys`,
   fetchJourney: `${API_BASE}/journeys/{id}`,
   createLog: `${API_BASE}/journey/{id}/logs`,
-  media: `${API_BASE}/media`,
 };

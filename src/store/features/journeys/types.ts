@@ -16,7 +16,7 @@ export interface Log {
   loggedOn: Date;
   createdAt: Date;
   updatedAt: Date;
-  mediaName?: string;
+  mediaUrl?: string;
 }
 
 export interface LogExtended extends Log {

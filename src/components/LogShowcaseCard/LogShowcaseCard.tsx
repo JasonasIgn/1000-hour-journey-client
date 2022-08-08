@@ -2,7 +2,6 @@ import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
 import { Log } from "../../store/features/journeys/types";
-import { apiUrls } from "../../config";
 
 interface LogShowcaseCardProps extends FlexProps {
   log?: Log;
@@ -56,10 +55,10 @@ export const LogShowcaseCard: FC<LogShowcaseCardProps> = ({
         </Flex>
       </Flex>
 
-      {log.mediaName && (
+      {log?.mediaUrl && (
         <Flex height="80%" flex="1 1 auto" justifyContent="center">
           <Image
-            src={`${apiUrls.media}/${log.mediaName}`}
+            src={log.mediaUrl}
             alt={`${log.id} media`}
           />
         </Flex>
