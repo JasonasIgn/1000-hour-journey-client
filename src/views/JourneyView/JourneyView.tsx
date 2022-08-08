@@ -1,6 +1,7 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AddJourneyAchievementDialog } from "../../components/AddJourneyAchivementDialog/AddJourneyAchievementDialog";
 import { AddJourneyLogDialog } from "../../components/AddJourneyLogDialog/AddJourneyLogDialog";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
 import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
@@ -62,6 +63,12 @@ export const JourneyView: React.FC = () => {
         open={addLogModalOpen}
         setOpen={setAddLogModalOpen}
         journeyId={journey.id}
+      />
+      <AddJourneyAchievementDialog
+        open={addAchievementModalOpen}
+        setOpen={setAddAchievementModalOpen}
+        journeyId={journey.id}
+        activeLog={activeLog}
       />
     </Container>
   );
