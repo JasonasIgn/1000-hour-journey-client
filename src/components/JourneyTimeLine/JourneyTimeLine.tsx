@@ -165,6 +165,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         setCurrentHour={setNewCurrentHour}
         currentHour={currentHour}
         activeLog={activeLog}
+        activeAchievement={activeAchievement}
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
         totalHours={journey.totalHours}

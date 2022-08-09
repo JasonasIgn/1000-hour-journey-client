@@ -10,14 +10,15 @@ import { ReactComponent as PauseIcon } from "../../resources/pause_icon.svg";
 import AchievementIcon from "../../resources/achievement.png";
 import PageIcon from "../../resources/page.png";
 import { FC, useEffect } from "react";
-import { LogExtended } from "../../store/features/journeys/types";
-import { getTickSpeedByLogHours } from "./utils";
+import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { getTickSpeed } from "./utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   currentHour: number;
   setCurrentHour: (value: number) => void;
   activeLog?: LogExtended;
+  activeAchievement?: Achievement;
   setIsPlaying: (playing: boolean) => void;
   isPlaying: boolean;
   totalHours: number;
@@ -32,6 +33,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   setIsPlaying,
   isPlaying,
   totalHours,
+  activeAchievement,
   openAddLogModal,
   openAddAchievementModal,
   ...rest
@@ -40,7 +42,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     () => {
       setCurrentHour(Math.round((currentHour + 0.1) * 10) / 10);
     },
-    isPlaying && activeLog ? getTickSpeedByLogHours(activeLog) : null
+    isPlaying ? getTickSpeed(activeLog, activeAchievement) : null
   );
 
   useEffect(() => {
