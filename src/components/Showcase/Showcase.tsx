@@ -1,13 +1,14 @@
 import { Flex } from "@chakra-ui/react";
 import { FC } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { ShiftDirection } from "../../types";
 import { ShowcaseCard } from "../ShowcaseCard/ShowcaseCard";
 import { useAnimatedCards } from "./hooks";
 import { getLeftCssValue } from "./utils";
 
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
-  shiftDirection: "left" | "right";
+  shiftDirection: ShiftDirection;
 }
 
 export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {

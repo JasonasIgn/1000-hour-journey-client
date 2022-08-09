@@ -32,6 +32,7 @@ import {
 import { getInitialXPosition } from "./utils";
 import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
 import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
+import { ShiftDirection } from "../../types";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -40,7 +41,7 @@ interface JourneyTimeLineProps {
   shouldSpaceTriggerPlay: boolean;
   openAddLogModal: (e: React.MouseEvent) => void;
   openAddAchievementModal: (e: React.MouseEvent) => void;
-  setShiftDirection: (direction: 'left' | 'right') => void;
+  setShiftDirection: (direction: ShiftDirection) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
@@ -55,7 +56,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
-  
+
   const spacePlayRef = useRef<{
     isPlaying: boolean;
     shouldSpaceTriggerPlay: boolean;

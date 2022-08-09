@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { ShiftDirection } from "../../types";
 import { generateId } from "../../utils";
 
 interface Card {
@@ -8,7 +9,7 @@ interface Card {
 }
 
 export const useAnimatedCards = (
-  shiftDirection: "right" | "left",
+  shiftDirection: ShiftDirection,
   item?: LogExtended | Achievement
 ) => {
   const [skipAnimation, setSkipAnimation] = useState(true);

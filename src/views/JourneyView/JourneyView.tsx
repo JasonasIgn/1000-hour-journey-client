@@ -10,6 +10,7 @@ import { getJourney } from "../../store/features/journeys/selectors";
 import { resetJourney } from "../../store/features/journeys/slice";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { ShiftDirection } from "../../types";
 
 export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +20,7 @@ export const JourneyView: React.FC = () => {
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
   const [activeLog, setActiveLog] = useState<LogExtended>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
-  const [shiftDirection, setShiftDirection] = useState<"left" | "right">(
-    "left"
-  );
+  const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
