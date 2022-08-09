@@ -19,6 +19,7 @@ import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { InputField } from "../InputField/InputField";
 import { LogExtended } from "../../store/features/journeys/types";
 import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
+import { useEffect } from "react";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
@@ -32,7 +33,7 @@ export const AddJourneyAchievementDialog: React.FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
-
+  console.log(currentHour);
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
       defaultValues: {
@@ -45,12 +46,21 @@ export const AddJourneyAchievementDialog: React.FC<
   const onSubmit = async (data: AddJourneyAchievementFormData) => {
     try {
       await dispatch(logJourneyAchievementEffect({ data, id: journeyId }));
-      reset();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      reset({
+        loggedAtHour: currentHour,
+        loggedOnDate: format(new Date(activeLog.loggedOn), "yyyy-MM-dd"),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, reset]);
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
