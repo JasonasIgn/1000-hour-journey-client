@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { AddJourneyAchievementDialog } from "../../components/AddJourneyAchivementDialog/AddJourneyAchievementDialog";
 import { AddJourneyLogDialog } from "../../components/AddJourneyLogDialog/AddJourneyLogDialog";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
-import { LogShowcase } from "../../components/LogShowcase/LogShowcase";
+import { Showcase } from "../../components/Showcase/Showcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
 import { getJourney } from "../../store/features/journeys/selectors";
 import { resetJourney } from "../../store/features/journeys/slice";
@@ -42,7 +42,7 @@ export const JourneyView: React.FC = () => {
         height="calc(100vh - 60px)"
         pt={5}
       >
-        <LogShowcase item={activeLog} />
+        <Showcase item={activeLog} />
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}

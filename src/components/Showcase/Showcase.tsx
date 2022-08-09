@@ -3,22 +3,13 @@ import { FC } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { ShowcaseCard } from "../ShowcaseCard/ShowcaseCard";
 import { useAnimatedCards } from "./hooks";
+import { getLeftCssValue } from "./utils";
 
-interface LogShowcaseProps {
+interface ShowcaseProps {
   item?: LogExtended | Achievement;
 }
 
-const getLeft = (position: number) => {
-  if (position === 0) {
-    return "-70%";
-  }
-  if (position === 1) {
-    return "17.5%";
-  }
-  return "100%";
-};
-
-export const LogShowcase: FC<LogShowcaseProps> = ({ item }) => {
+export const Showcase: FC<ShowcaseProps> = ({ item }) => {
   const cards = useAnimatedCards(item);
 
   return (
@@ -30,7 +21,7 @@ export const LogShowcase: FC<LogShowcaseProps> = ({ item }) => {
       overflow="hidden"
     >
       {cards.map((card, index) => {
-        const left = getLeft(index);
+        const left = getLeftCssValue(index);
         return (
           <ShowcaseCard
             key={card?.key || index}
