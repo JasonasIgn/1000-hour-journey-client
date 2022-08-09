@@ -11,9 +11,9 @@ export const useAnimatedCards = (item?: LogExtended | Achievement) => {
   const [newItem, setNewItem] = useState<LogExtended | Achievement>();
   const [skipAnimation, setSkipAnimation] = useState(true);
   const [cards, setCards] = useState<Array<Card>>([
-    { key: generateId(7) },
-    { key: generateId(7) },
-    { key: generateId(7) },
+    { key: generateId() },
+    { key: generateId() },
+    { key: generateId() },
   ]);
 
   useEffect(() => {
@@ -31,12 +31,12 @@ export const useAnimatedCards = (item?: LogExtended | Achievement) => {
         tempCards[2] = { ...tempCards[2], data: item };
         if (shouldShiftLeft) {
           tempCards.shift();
-          tempCards[2] = { key: generateId(7) };
+          tempCards[2] = { key: generateId() };
         }
         if (shouldShiftRight) {
           tempCards[2] = tempCards[1];
           tempCards[1] = tempCards[0];
-          tempCards[0] = { key: generateId(7) };
+          tempCards[0] = { key: generateId() };
         }
       }
       setCards(tempCards);
