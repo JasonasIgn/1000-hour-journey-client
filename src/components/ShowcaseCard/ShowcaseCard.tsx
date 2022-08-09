@@ -1,6 +1,7 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
 import { FC } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
 import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
 
 interface ShowcaseCardProps extends FlexProps {
@@ -9,6 +10,7 @@ interface ShowcaseCardProps extends FlexProps {
 
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
+  const isItemAchievement = Boolean((item as Achievement)?.loggedAtHour);
   return (
     <Flex
       flexDirection="column"
@@ -21,6 +23,9 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
       {...rest}
     >
       {isItemLog && <LogShowcaseCardContent log={item as LogExtended} />}
+      {isItemAchievement && (
+        <AchievementShowcaseCardContent achievement={item as Achievement} />
+      )}
     </Flex>
   );
 };
