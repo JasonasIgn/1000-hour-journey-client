@@ -25,12 +25,13 @@ interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
   open: boolean;
   journeyId: number;
-  activeLog?: LogExtended;
+  activeLog: LogExtended;
+  currentHour: number;
 }
 
 export const AddJourneyAchievementDialog: React.FC<
   AddJourneyAchievementDialogProps
-> = ({ open, setOpen, journeyId }) => {
+> = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
   const lastLog = useAppSelector(getLastJourneyLog);
   const lastLogDate = lastLog
@@ -39,7 +40,10 @@ export const AddJourneyAchievementDialog: React.FC<
 
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
-      defaultValues: {},
+      defaultValues: {
+        loggedOnDate: format(new Date(activeLog.loggedOn), "yyyy-MM-dd"),
+        loggedAtHour: currentHour,
+      },
       resolver: yupResolver(addJourneyAchievementFormValidation),
     });
   const { isSubmitting, errors } = formState;

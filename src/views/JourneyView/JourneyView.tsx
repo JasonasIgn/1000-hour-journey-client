@@ -1,8 +1,6 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AddJourneyAchievementDialog } from "../../components/AddJourneyAchivementDialog/AddJourneyAchievementDialog";
-import { AddJourneyLogDialog } from "../../components/AddJourneyLogDialog/AddJourneyLogDialog";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
 import { Showcase } from "../../components/Showcase/Showcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
@@ -16,8 +14,7 @@ export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
-  const [addLogModalOpen, setAddLogModalOpen] = useState(false);
-  const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
+  
   const [activeLog, setActiveLog] = useState<LogExtended>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
@@ -53,31 +50,10 @@ export const JourneyView: React.FC = () => {
           journey={journey}
           setActiveLog={setActiveLog}
           setActiveAchievement={setActiveAchievement}
-          shouldSpaceTriggerPlay={!addLogModalOpen}
-          openAddLogModal={(e) => {
-            if (e.detail !== 0) {
-              setAddLogModalOpen(true);
-            }
-          }}
-          openAddAchievementModal={(e) => {
-            if (e.detail !== 0) {
-              setAddAchievementModalOpen(true);
-            }
-          }}
           setShiftDirection={setShiftDirection}
         />
       </Flex>
-      <AddJourneyLogDialog
-        open={addLogModalOpen}
-        setOpen={setAddLogModalOpen}
-        journeyId={journey.id}
-      />
-      <AddJourneyAchievementDialog
-        open={addAchievementModalOpen}
-        setOpen={setAddAchievementModalOpen}
-        journeyId={journey.id}
-        activeLog={activeLog}
-      />
+      
     </Container>
   );
 };

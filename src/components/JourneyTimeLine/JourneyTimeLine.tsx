@@ -33,30 +33,29 @@ import { getInitialXPosition } from "./utils";
 import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
 import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
 import { ShiftDirection } from "../../types";
+import { AddJourneyLogDialog } from "../AddJourneyLogDialog/AddJourneyLogDialog";
+import { AddJourneyAchievementDialog } from "../AddJourneyAchivementDialog/AddJourneyAchievementDialog";
 
 interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLog: (log: LogExtended) => void;
   setActiveAchievement: (log: Achievement) => void;
-  shouldSpaceTriggerPlay: boolean;
-  openAddLogModal: (e: React.MouseEvent) => void;
-  openAddAchievementModal: (e: React.MouseEvent) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLog,
-  shouldSpaceTriggerPlay,
-  openAddLogModal,
-  openAddAchievementModal,
   setActiveAchievement,
   setShiftDirection,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
+  const [addLogModalOpen, setAddLogModalOpen] = useState(false);
+  const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
+  const shouldSpaceTriggerPlay = !addLogModalOpen;
   const spacePlayRef = useRef<{
     isPlaying: boolean;
     shouldSpaceTriggerPlay: boolean;
@@ -169,8 +168,16 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
         totalHours={journey.totalHours}
-        openAddLogModal={openAddLogModal}
-        openAddAchievementModal={openAddAchievementModal}
+        openAddLogModal={(e) => {
+          if (e.detail !== 0) {
+            setAddLogModalOpen(true);
+          }
+        }}
+        openAddAchievementModal={(e) => {
+          if (e.detail !== 0) {
+            setAddAchievementModalOpen(true);
+          }
+        }}
       />
       <QuickPinchZoom
         onUpdate={onUpdate}
@@ -272,6 +279,20 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           </Slider>
         </Box>
       </QuickPinchZoom>
+      <AddJourneyLogDialog
+        open={addLogModalOpen}
+        setOpen={setAddLogModalOpen}
+        journeyId={journey.id}
+      />
+      {activeLog && (
+        <AddJourneyAchievementDialog
+          open={addAchievementModalOpen}
+          setOpen={setAddAchievementModalOpen}
+          journeyId={journey.id}
+          activeLog={activeLog}
+          currentHour={currentHour}
+        />
+      )}
     </Flex>
   );
 };
