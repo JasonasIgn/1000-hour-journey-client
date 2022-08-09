@@ -7,10 +7,11 @@ import { getLeftCssValue } from "./utils";
 
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
+  shiftDirection: "left" | "right";
 }
 
-export const Showcase: FC<ShowcaseProps> = ({ item }) => {
-  const cards = useAnimatedCards(item);
+export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {
+  const cards = useAnimatedCards(shiftDirection, item);
 
   return (
     <Flex

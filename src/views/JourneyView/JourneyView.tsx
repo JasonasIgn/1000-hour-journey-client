@@ -19,6 +19,9 @@ export const JourneyView: React.FC = () => {
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
   const [activeLog, setActiveLog] = useState<LogExtended>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
+  const [shiftDirection, setShiftDirection] = useState<"left" | "right">(
+    "left"
+  );
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
@@ -43,7 +46,10 @@ export const JourneyView: React.FC = () => {
         height="calc(100vh - 60px)"
         pt={5}
       >
-        <Showcase item={activeAchievement || activeLog} />
+        <Showcase
+          item={activeAchievement || activeLog}
+          shiftDirection={shiftDirection}
+        />
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}
@@ -59,6 +65,7 @@ export const JourneyView: React.FC = () => {
               setAddAchievementModalOpen(true);
             }
           }}
+          setShiftDirection={setShiftDirection}
         />
       </Flex>
       <AddJourneyLogDialog

@@ -40,6 +40,7 @@ interface JourneyTimeLineProps {
   shouldSpaceTriggerPlay: boolean;
   openAddLogModal: (e: React.MouseEvent) => void;
   openAddAchievementModal: (e: React.MouseEvent) => void;
+  setShiftDirection: (direction: 'left' | 'right') => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
@@ -49,10 +50,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   openAddLogModal,
   openAddAchievementModal,
   setActiveAchievement,
+  setShiftDirection,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
+  
   const spacePlayRef = useRef<{
     isPlaying: boolean;
     shouldSpaceTriggerPlay: boolean;
@@ -83,6 +86,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   const activeAchievementId = hoursToAchievementsMap[currentHour];
   const activeAchievement = achievementsDictionary[activeAchievementId];
+
+  const setNewCurrentHour = (hour: number) => {
+    setCurrentHour(hour);
+    setShiftDirection(hour > currentHour ? "left" : "right");
+  };
 
   // TODO: Move to hook
   const spaceKeyHandler = ({ key }: KeyboardEvent) => {
@@ -143,7 +151,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, [activeAchievement, setActiveAchievement]);
 
   useEffect(() => {
-    setCurrentHour(journey.totalHours - 0.1);
+    setNewCurrentHour(journey.totalHours - 0.1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [journey.totalHours]);
 
   return (
@@ -152,7 +161,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         height="40px"
         py={2}
         boxSizing="content-box"
-        setCurrentHour={setCurrentHour}
+        setCurrentHour={setNewCurrentHour}
         currentHour={currentHour}
         activeLog={activeLog}
         setIsPlaying={setIsPlaying}
@@ -186,7 +195,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             value={currentHour}
             colorScheme="teal"
             onChange={(hour) => {
-              setCurrentHour(hour);
+              setNewCurrentHour(hour);
               if (isPlaying) {
                 setIsPlaying(false);
               }
