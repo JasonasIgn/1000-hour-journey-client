@@ -208,7 +208,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 value={currentHour}
                 textAlign="center"
                 color="white"
-                mt="-5"
+                mt="-8"
                 ml="-6"
                 fontSize="10px"
               >
