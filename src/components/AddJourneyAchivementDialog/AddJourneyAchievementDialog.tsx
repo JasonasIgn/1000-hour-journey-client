@@ -77,6 +77,7 @@ export const AddJourneyAchievementDialog: React.FC<
                 label="Journey hour snapshot"
                 {...field}
                 errorMessage={error?.message}
+                isDisabled
               />
             )}
           />
@@ -86,6 +87,7 @@ export const AddJourneyAchievementDialog: React.FC<
             min={lastLogDate || undefined}
             {...register("loggedOnDate")}
             errorMessage={errors.loggedOnDate?.message}
+            isDisabled
           />
           <InputField type="file" label="Media" {...register("media")} />
         </ModalBody>
