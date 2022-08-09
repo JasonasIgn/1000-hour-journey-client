@@ -1,13 +1,22 @@
 import {
   Box,
   Flex,
+  Image,
   Slider,
   SliderMark,
   SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import AchievementIcon from "../../resources/achievement.png";
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Journey, LogExtended } from "../../store/features/journeys/types";
 import format from "date-fns/format";
 import {
@@ -31,7 +40,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setActiveLog,
   shouldSpaceTriggerPlay,
   openAddLogModal,
-  openAddAchievementModal
+  openAddAchievementModal,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
@@ -171,6 +180,27 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 <>{format(new Date(activeLog.loggedOn), "yyyy-MM-dd")}</>
               </SliderMark>
             )}
+            {journey.achievements.map((achievement) => {
+              return (
+                <SliderMark
+                  value={achievement.loggedAtHour}
+                  display="flex"
+                  justifyContent="center"
+                  color="white"
+                  bgColor="yellow"
+                  mt="-7px"
+                  width="1px"
+                  height={1}
+                >
+                  <Image
+                    src={AchievementIcon}
+                    minWidth="11px"
+                    top="-11px"
+                    position="absolute"
+                  />
+                </SliderMark>
+              );
+            })}
             <SliderTrack display="flex">
               {journey.logs.map((log, idx) => {
                 const widthPercentage = log.hoursSpent / 10;
