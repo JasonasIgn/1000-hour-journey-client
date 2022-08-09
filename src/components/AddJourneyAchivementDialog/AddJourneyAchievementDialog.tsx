@@ -11,13 +11,12 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyAchievementFormData } from "./types";
 import { addJourneyAchievementFormValidation } from "./validation";
 import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { InputField } from "../InputField/InputField";
-import { getLastJourneyLog } from "../../store/features/journeys/selectors";
 import { LogExtended } from "../../store/features/journeys/types";
 import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
 
@@ -33,10 +32,6 @@ export const AddJourneyAchievementDialog: React.FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
-  const lastLog = useAppSelector(getLastJourneyLog);
-  const lastLogDate = lastLog
-    ? format(new Date(lastLog?.loggedOn), "yyyy-MM-dd")
-    : undefined;
 
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
@@ -84,7 +79,6 @@ export const AddJourneyAchievementDialog: React.FC<
           <InputField
             type="date"
             label="Date of achievement"
-            min={lastLogDate || undefined}
             {...register("loggedOnDate")}
             errorMessage={errors.loggedOnDate?.message}
             isDisabled
