@@ -89,6 +89,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           }
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
+          disabled={!activeLog}
         />
         <IconButton
           ml={2}
