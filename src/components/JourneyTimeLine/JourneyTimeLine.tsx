@@ -207,6 +207,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             {journey.achievements.map((achievement) => {
               return (
                 <SliderMark
+                  key={achievement.id}
                   value={achievement.loggedAtHour}
                   display="flex"
                   justifyContent="center"
