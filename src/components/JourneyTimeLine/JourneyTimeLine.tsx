@@ -233,6 +233,17 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                     minWidth="11px"
                     top="-11px"
                     position="absolute"
+                    cursor="pointer"
+                    pointerEvents="all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      setNewCurrentHour(achievement.loggedAtHour);
+                    }}
+                    onPointerDownCapture={(e) => {
+                      e.stopPropagation();
+                    }}
+                    _hover={{ transform: "scale(1.1)" }}
                   />
                 </SliderMark>
               );
