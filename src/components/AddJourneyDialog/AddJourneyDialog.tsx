@@ -16,6 +16,7 @@ import { InputField } from "../InputField/InputField";
 import { TextAreaField } from "../TextAreaField/TextAreaField";
 import { AddJourneyFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
+import { useEffect } from "react";
 
 interface AddJourneyDialogProps {
   setOpen: (open: boolean) => void;
@@ -36,11 +37,18 @@ export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
     try {
       await dispatch(createJourneyEffect(data));
       setOpen(false);
-      reset();
     } catch (e) {
       console.error("Caught error", e);
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, reset]);
+
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
       <ModalOverlay />
