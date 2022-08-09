@@ -24,7 +24,7 @@ export const Showcase: FC<ShowcaseProps> = ({ item }) => {
         const left = getLeftCssValue(index);
         return (
           <ShowcaseCard
-            key={card?.key || index}
+            key={card.key}
             item={card.data}
             left={left}
             opacity={index === 1 ? 1 : 0.1}

@@ -8,7 +8,7 @@ interface Card {
 }
 
 export const useAnimatedCards = (item?: LogExtended | Achievement) => {
-  const [newLog, setNewLog] = useState<LogExtended | Achievement>();
+  const [newItem, setNewItem] = useState<LogExtended | Achievement>();
   const [skipAnimation, setSkipAnimation] = useState(true);
   const [cards, setCards] = useState<Array<Card>>([
     { key: generateId(7) },
@@ -19,13 +19,13 @@ export const useAnimatedCards = (item?: LogExtended | Achievement) => {
   useEffect(() => {
     if (item) {
       let tempCards = [...cards];
-      setNewLog(item);
+      setNewItem(item);
       if (skipAnimation) {
         setSkipAnimation(false);
         tempCards[1] = { ...tempCards[1], data: item };
       }
       if (!skipAnimation) {
-        const shouldShiftLeft = item.id >= (newLog?.id || 0);
+        const shouldShiftLeft = item.id >= (newItem?.id || 0);
         const shouldShiftRight = !shouldShiftLeft;
         tempCards[0] = { ...tempCards[0], data: item };
         tempCards[2] = { ...tempCards[2], data: item };
