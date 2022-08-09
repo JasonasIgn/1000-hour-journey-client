@@ -17,7 +17,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Journey, LogExtended } from "../../store/features/journeys/types";
+import {
+  Achievement,
+  Journey,
+  LogExtended,
+} from "../../store/features/journeys/types";
 import format from "date-fns/format";
 import {
   getAchievementHoursMap,
@@ -32,6 +36,7 @@ import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
 interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLog: (log: LogExtended) => void;
+  setActiveAchievement: (log: Achievement) => void;
   shouldSpaceTriggerPlay: boolean;
   openAddLogModal: (e: React.MouseEvent) => void;
   openAddAchievementModal: (e: React.MouseEvent) => void;
@@ -43,6 +48,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   shouldSpaceTriggerPlay,
   openAddLogModal,
   openAddAchievementModal,
+  setActiveAchievement,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
@@ -130,7 +136,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useEffect(() => {
     setActiveLog(activeLog);
-  }, [activeLog, logsDictionary, setActiveLog, currentHour]);
+  }, [activeLog, setActiveLog]);
+
+  useEffect(() => {
+    setActiveAchievement(activeAchievement);
+  }, [activeAchievement, setActiveAchievement]);
 
   useEffect(() => {
     setCurrentHour(journey.totalHours - 0.1);

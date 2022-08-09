@@ -8,7 +8,7 @@ import { Showcase } from "../../components/Showcase/Showcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
 import { getJourney } from "../../store/features/journeys/selectors";
 import { resetJourney } from "../../store/features/journeys/slice";
-import { LogExtended } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 export const JourneyView: React.FC = () => {
@@ -18,6 +18,7 @@ export const JourneyView: React.FC = () => {
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
   const [activeLog, setActiveLog] = useState<LogExtended>();
+  const [activeAchievement, setActiveAchievement] = useState<Achievement>();
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
@@ -46,6 +47,7 @@ export const JourneyView: React.FC = () => {
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}
+          setActiveAchievement={setActiveAchievement}
           shouldSpaceTriggerPlay={!addLogModalOpen}
           openAddLogModal={(e) => {
             if (e.detail !== 0) {
