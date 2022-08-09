@@ -23,7 +23,7 @@ interface NumberInputFieldaProps
 
 export const NumberInputField: FC<NumberInputFieldaProps> = forwardRef(
   (
-    { label, errorMessage, formControlProps, onChange, value, ...rest },
+    { label, errorMessage, formControlProps, onChange, ...rest },
     ref
   ) => {
     return (
