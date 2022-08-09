@@ -33,7 +33,6 @@ export const AddJourneyAchievementDialog: React.FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
-  console.log(currentHour);
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
       defaultValues: {

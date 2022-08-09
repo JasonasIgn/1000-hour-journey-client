@@ -19,6 +19,7 @@ import { NumberInputField } from "../NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "../../store/features/journeys/effects";
 import { InputField } from "../InputField/InputField";
 import { getLastJourneyLog } from "../../store/features/journeys/selectors";
+import { useEffect } from "react";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -49,12 +50,18 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const onSubmit = async (data: AddJourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, id: journeyId }));
-      reset();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, reset]);
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
