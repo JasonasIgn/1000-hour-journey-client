@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { FC } from "react";
 import { Log, LogExtended } from "../../store/features/journeys/types";
-import { LogShowcaseCard } from "../LogShowcaseCard/LogShowcaseCard";
+import { ShowcaseCard } from "../ShowcaseCard/ShowcaseCard";
 import { useAnimatedCards } from "./hooks";
 
 interface LogShowcaseProps {
@@ -31,7 +31,7 @@ export const LogShowcase: FC<LogShowcaseProps> = ({ log }) => {
       {cards.map((card, index) => {
         const left = getLeft(index);
         return (
-          <LogShowcaseCard
+          <ShowcaseCard
             logNumber={card.number || 0}
             key={card?.key || index}
             log={card as Log}
