@@ -1,8 +1,8 @@
-import { Log } from "../../store/features/journeys/types";
-import { LogsDictionary, LogsHourMap } from "./types";
+import { Achievement, Log } from "../../store/features/journeys/types";
+import { LogsDictionary, IdsHourMap, AchievementsDictionary } from "./types";
 
-export const getLogHoursMap = (logs: Log[]): LogsHourMap => {
-  const hoursMap: LogsHourMap = {};
+export const getLogHoursMap = (logs: Log[]): IdsHourMap => {
+  const hoursMap: IdsHourMap = {};
   let currentHour = 0;
   logs.forEach((log) => {
     for (let i = 0; i < log.hoursSpent * 10; i++) {
@@ -19,4 +19,25 @@ export const getLogsDictionary = (logs: Log[]): LogsDictionary => {
     logsDictionary[log.id] = { ...log, number: index + 1 };
   });
   return logsDictionary;
+};
+
+export const getAchievementHoursMap = (
+  achievements: Achievement[]
+): IdsHourMap => {
+  const idsHoursMap: IdsHourMap = {};
+  achievements.forEach((achievement) => {
+    console.log(achievement.loggedAtHour);
+    idsHoursMap[achievement.loggedAtHour] = achievement.id;
+  });
+  return idsHoursMap;
+};
+
+export const getAchievementsDictionary = (
+  achievements: Achievement[]
+): AchievementsDictionary => {
+  const achievementsDictionary: AchievementsDictionary = {};
+  achievements.forEach((achievement, index) => {
+    achievementsDictionary[achievement.id] = achievement;
+  });
+  return achievementsDictionary;
 };

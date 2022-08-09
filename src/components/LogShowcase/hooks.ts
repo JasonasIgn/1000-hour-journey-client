@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { LogExtended } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { generateId } from "../../utils";
 
 interface CardLog extends LogExtended {
   key: string;
 }
 
-export const useAnimatedCards = (log?: LogExtended) => {
-  const [newLog, setNewLog] = useState<LogExtended>();
+export const useAnimatedCards = (log?: LogExtended | Achievement) => {
+  const [newLog, setNewLog] = useState<LogExtended | Achievement>();
   const [skipAnimation, setSkipAnimation] = useState(true);
   const [cards, setCards] = useState<Array<Partial<CardLog>>>([
     { key: generateId(7) },

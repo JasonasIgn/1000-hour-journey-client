@@ -20,6 +20,8 @@ import React, {
 import { Journey, LogExtended } from "../../store/features/journeys/types";
 import format from "date-fns/format";
 import {
+  getAchievementHoursMap,
+  getAchievementsDictionary,
   getLogHoursMap,
   getLogsDictionary,
 } from "../../views/JourneyView/utils";
@@ -61,8 +63,20 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     [journey?.logs]
   );
 
-  const activeLogId = hoursToLogMap[currentHour];
+  const hoursToAchievementsMap = useMemo(
+    () => getAchievementHoursMap(journey.achievements),
+    [journey.achievements]
+  );
+  const achievementsDictionary = useMemo(
+    () => getAchievementsDictionary(journey.achievements),
+    [journey.achievements]
+  );
+
+  const activeLogId = hoursToAchievementsMap[currentHour];
   const activeLog = logsDictionary[activeLogId];
+
+  const activeAchievementId = hoursToLogMap[currentHour];
+  const activeAchievement = achievementsDictionary[activeAchievementId];
 
   // TODO: Move to hook
   const spaceKeyHandler = ({ key }: KeyboardEvent) => {
