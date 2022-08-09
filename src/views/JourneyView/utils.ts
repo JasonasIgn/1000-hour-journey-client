@@ -26,7 +26,6 @@ export const getAchievementHoursMap = (
 ): IdsHourMap => {
   const idsHoursMap: IdsHourMap = {};
   achievements.forEach((achievement) => {
-    console.log(achievement.loggedAtHour);
     idsHoursMap[achievement.loggedAtHour] = achievement.id;
   });
   return idsHoursMap;

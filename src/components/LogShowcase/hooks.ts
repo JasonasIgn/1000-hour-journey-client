@@ -2,32 +2,33 @@ import { useEffect, useState } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { generateId } from "../../utils";
 
-interface CardLog extends LogExtended {
+interface Card {
   key: string;
+  data?: LogExtended | Achievement;
 }
 
-export const useAnimatedCards = (log?: LogExtended | Achievement) => {
+export const useAnimatedCards = (item?: LogExtended | Achievement) => {
   const [newLog, setNewLog] = useState<LogExtended | Achievement>();
   const [skipAnimation, setSkipAnimation] = useState(true);
-  const [cards, setCards] = useState<Array<Partial<CardLog>>>([
+  const [cards, setCards] = useState<Array<Card>>([
     { key: generateId(7) },
     { key: generateId(7) },
     { key: generateId(7) },
   ]);
 
   useEffect(() => {
-    if (log) {
+    if (item) {
       let tempCards = [...cards];
-      setNewLog(log);
+      setNewLog(item);
       if (skipAnimation) {
         setSkipAnimation(false);
-        tempCards[1] = { ...tempCards[1], ...log };
+        tempCards[1] = { ...tempCards[1], data: item };
       }
       if (!skipAnimation) {
-        const shouldShiftLeft = log.id >= (newLog?.id || 0);
+        const shouldShiftLeft = item.id >= (newLog?.id || 0);
         const shouldShiftRight = !shouldShiftLeft;
-        tempCards[0] = { ...tempCards[0], ...log };
-        tempCards[2] = { ...tempCards[2], ...log };
+        tempCards[0] = { ...tempCards[0], data: item };
+        tempCards[2] = { ...tempCards[2], data: item };
         if (shouldShiftLeft) {
           tempCards.shift();
           tempCards[2] = { key: generateId(7) };
@@ -42,7 +43,7 @@ export const useAnimatedCards = (log?: LogExtended | Achievement) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [log]);
+  }, [item]);
 
   return cards;
 };

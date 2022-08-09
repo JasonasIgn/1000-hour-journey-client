@@ -1,18 +1,14 @@
-import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react";
 import { FC } from "react";
-import format from "date-fns/format";
-import { Log } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
 
 interface ShowcaseCardProps extends FlexProps {
-  log?: Log;
-  logNumber: number;
+  item?: LogExtended | Achievement;
 }
 
-export const ShowcaseCard: FC<ShowcaseCardProps> = ({
-  log,
-  logNumber,
-  ...rest
-}) => {
+export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
+  const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   return (
     <Flex
       flexDirection="column"
@@ -21,37 +17,10 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
       width="65%"
       bg="red"
       padding={5}
+      transition="left 0.25s, opacity 0.2s"
       {...rest}
     >
-      {log?.id && (
-        <>
-          <Flex flexDirection="column">
-            <Flex justifyContent="space-between">
-              <Box textAlign="center">
-                <Heading>Log #{logNumber}</Heading>
-              </Box>
-              <Box textAlign="center">
-                <Heading>
-                  {format(new Date(log.loggedOn), "yyyy-MM-dd")}
-                </Heading>
-              </Box>
-              <Box textAlign="center">
-                Hours spent
-                <Heading>{log.hoursSpent}</Heading>
-              </Box>
-            </Flex>
-            <Flex>
-              <Text>{log.description}</Text>
-            </Flex>
-          </Flex>
-
-          {log?.mediaUrl && (
-            <Flex height="80%" flex="1 1 auto" justifyContent="center">
-              <Image src={log.mediaUrl} alt={`${log.id} media`} />
-            </Flex>
-          )}
-        </>
-      )}
+      {isItemLog && <LogShowcaseCardContent log={item as LogExtended} />}
     </Flex>
   );
 };

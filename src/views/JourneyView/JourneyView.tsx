@@ -42,7 +42,7 @@ export const JourneyView: React.FC = () => {
         height="calc(100vh - 60px)"
         pt={5}
       >
-        <LogShowcase log={activeLog} />
+        <LogShowcase item={activeLog} />
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}

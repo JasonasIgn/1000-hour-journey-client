@@ -72,10 +72,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     [journey.achievements]
   );
 
-  const activeLogId = hoursToAchievementsMap[currentHour];
+  const activeLogId = hoursToLogMap[currentHour];
   const activeLog = logsDictionary[activeLogId];
 
-  const activeAchievementId = hoursToLogMap[currentHour];
+  const activeAchievementId = hoursToAchievementsMap[currentHour];
   const activeAchievement = achievementsDictionary[activeAchievementId];
 
   // TODO: Move to hook

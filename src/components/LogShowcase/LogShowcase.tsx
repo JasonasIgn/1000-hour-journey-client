@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react";
 import { FC } from "react";
-import { Log, LogExtended } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { ShowcaseCard } from "../ShowcaseCard/ShowcaseCard";
 import { useAnimatedCards } from "./hooks";
 
 interface LogShowcaseProps {
-  log?: LogExtended;
+  item?: LogExtended | Achievement;
 }
 
 const getLeft = (position: number) => {
@@ -18,8 +18,9 @@ const getLeft = (position: number) => {
   return "100%";
 };
 
-export const LogShowcase: FC<LogShowcaseProps> = ({ log }) => {
-  const cards = useAnimatedCards(log);
+export const LogShowcase: FC<LogShowcaseProps> = ({ item }) => {
+  const cards = useAnimatedCards(item);
+
   return (
     <Flex
       height="65%"
@@ -32,12 +33,9 @@ export const LogShowcase: FC<LogShowcaseProps> = ({ log }) => {
         const left = getLeft(index);
         return (
           <ShowcaseCard
-            logNumber={card.number || 0}
             key={card?.key || index}
-            log={card as Log}
+            item={card.data}
             left={left}
-            transition="left 0.25s, opacity 0.2s"
-            bg="red"
             opacity={index === 1 ? 1 : 0.1}
           />
         );
