@@ -55,7 +55,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
-  const shouldSpaceTriggerPlay = !addLogModalOpen;
+  const shouldSpaceTriggerPlay = !addLogModalOpen && !addAchievementModalOpen;
   const spacePlayRef = useRef<{
     isPlaying: boolean;
     shouldSpaceTriggerPlay: boolean;
