@@ -109,7 +109,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   const centerZoomOnThumb = () => {
-    pinchZoomRef.current?.scaleTo({
+    pinchZoomRef.current?.alignCenter({
       x: getInitialXPosition(currentHour),
       y: -90,
       scale: 20,
@@ -119,7 +119,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useEffect(() => {
     if (isPlaying) {
-      pinchZoomRef.current?.scaleTo({
+      pinchZoomRef.current?.alignCenter({
         x: getInitialXPosition(currentHour),
         y: -90,
         scale: 20,

@@ -1,10 +1,13 @@
-export const getInitialXPosition = (totalHours: number, initial?: boolean) => {
+export const getInitialXPosition = (currentHour: number, initial?: boolean) => {
   const maxXPosition = 1120;
-  const middleModifier = initial ? 19.5 : 27;
-  const xPosition = (totalHours / 1000) * maxXPosition;
-  const finalPosition = xPosition - middleModifier;
-  if (finalPosition > 0) {
-    return finalPosition;
+  const offsetModifier = 27;
+  const xPosition = (currentHour / 1000) * maxXPosition;
+  const finalPosition = xPosition;
+  if (finalPosition < offsetModifier) {
+    return offsetModifier;
   }
-  return 0;
+  if (finalPosition > maxXPosition - offsetModifier) {
+    return maxXPosition - offsetModifier;
+  }
+  return finalPosition;
 };
