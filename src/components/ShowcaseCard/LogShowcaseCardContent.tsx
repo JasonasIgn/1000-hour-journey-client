@@ -19,10 +19,12 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
             <Heading>Log #{log.number}</Heading>
           </Box>
           <Box textAlign="center">
-            <Heading>{format(new Date(log.loggedOn), "yyyy-MM-dd")}</Heading>
+            <Heading>
+              {format(new Date(log.loggedOn), "yyyy-MM-dd")}
+            </Heading>
           </Box>
           <Box textAlign="center">
-            Hours spent
+            <Text> Hours spent</Text>
             <Heading>{log.hoursSpent}</Heading>
           </Box>
         </Flex>

@@ -23,7 +23,7 @@ export const AchievementShowcaseCardContent: FC<
             </Heading>
           </Box>
           <Box textAlign="center">
-            At journey hour
+            <Text>At journey hour</Text>
             <Heading>{achievement.loggedAtHour}</Heading>
           </Box>
         </Flex>
