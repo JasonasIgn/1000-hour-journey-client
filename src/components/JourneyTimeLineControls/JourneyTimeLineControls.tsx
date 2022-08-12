@@ -63,7 +63,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       <Flex>
         <IconButton
           icon={<ArrowLeftIcon />}
-          aria-label="Skip to end"
+          aria-label="Rewind to beggining"
           onClick={() => {
             setCurrentHour(0);
             centerZoomOnThumb(0.1);
@@ -79,7 +79,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
         />
         <IconButton
           icon={<ArrowRightIcon />}
-          aria-label="Rewind to beggining"
+          aria-label="Skip to end"
           onClick={() => {
             setCurrentHour(totalHours - 0.1);
             centerZoomOnThumb(totalHours - 0.1);
