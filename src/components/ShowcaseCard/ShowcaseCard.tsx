@@ -17,7 +17,10 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
       position="absolute"
       height="100%"
       width="65%"
-      bg="#5D5B5D"
+      bg="brand.800"
+      border="1px solid"
+      borderColor="brand.700"
+      borderRadius="20px"
       padding={5}
       transition="left 0.25s, opacity 0.2s"
       {...rest}

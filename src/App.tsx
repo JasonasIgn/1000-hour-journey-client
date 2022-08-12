@@ -6,7 +6,7 @@ import { JourneyView } from "./views/JourneyView/JourneyView";
 
 const App = () => {
   return (
-    <Box>
+    <Box bgColor="brand.900">
       <Header />
       <Routes>
         <Route path="/journeys">
