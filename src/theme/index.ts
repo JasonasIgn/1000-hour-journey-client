@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { HeadingStyle } from "./components/Heading";
+import { ProgressStyle } from "./components/Progress";
 import { TextStyle } from "./components/Text";
 
 const theme = extendTheme({
@@ -20,6 +21,7 @@ const theme = extendTheme({
   components: {
     Heading: HeadingStyle,
     Text: TextStyle,
+    Progress: ProgressStyle,
   },
 });
 
