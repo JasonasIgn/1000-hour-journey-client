@@ -17,24 +17,21 @@ interface NumberInputFieldaProps
   label?: string;
   errorMessage?: string;
   formControlProps?: FormControlProps;
-  onChange: (value: number) => void;
+  onChange: (value: number | string) => void;
   value?: number;
 }
 
 export const NumberInputField: FC<NumberInputFieldaProps> = forwardRef(
-  (
-    { label, errorMessage, formControlProps, onChange, ...rest },
-    ref
-  ) => {
+  ({ label, errorMessage, formControlProps, onChange, ...rest }, ref) => {
     return (
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
         <NumberInput
+          step={0.1}
+          precision={1}
           {...rest}
           ref={ref as any}
-          onChange={(_, val) => {
-            onChange(val);
-          }}
+          onChange={onChange}
         >
           <NumberInputFieldNative />
           <NumberInputStepper>
