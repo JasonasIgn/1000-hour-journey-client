@@ -10,7 +10,7 @@ interface ShowcaseCardProps extends FlexProps {
 
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
-  const isItemAchievement = Boolean((item as Achievement)?.loggedAtHour);
+  const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
     <Flex
       flexDirection="column"
