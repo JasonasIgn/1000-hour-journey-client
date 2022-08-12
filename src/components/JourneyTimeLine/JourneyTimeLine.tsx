@@ -195,7 +195,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           padding="0 12px"
         >
           <Slider
-            onClick={centerZoomOnThumb}
+            onChangeEnd={centerZoomOnThumb}
             top="70%"
             step={0.1}
             defaultValue={currentHour}
