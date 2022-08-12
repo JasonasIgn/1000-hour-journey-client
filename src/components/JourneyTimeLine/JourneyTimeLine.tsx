@@ -203,7 +203,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               min={0}
               max={1000}
               value={currentHour}
-              colorScheme="teal"
               onChange={(hour) => {
                 setNewCurrentHour(hour);
                 if (isPlaying) {
@@ -231,7 +230,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                     display="flex"
                     justifyContent="center"
                     color="white"
-                    bgColor="yellow"
+                    bgColor="brand.100"
                     mt="-7px"
                     width="1px"
                     height={1}
@@ -262,10 +261,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                   return (
                     <Box
                       key={log.id}
-                      bg={log.id === activeLogId ? "blue" : "red"}
+                      bg={log.id === activeLogId ? "brand.300" : "brand.600"}
                       width={`${widthPercentage}%`}
-                      borderLeft={idx === 0 ? "none" : "1px solid black"}
-                      _hover={{ bg: "blue" }}
+                      borderLeft={idx === 0 ? "none" : "1px solid"}
+                      borderColor="gray.400"
+                      _hover={{ bg: "brand.300" }}
                     />
                   );
                 })}
