@@ -108,9 +108,9 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
   }, []);
 
-  const centerZoomOnThumb = () => {
+  const centerZoomOnThumb = (currentHourOverride?: number) => {
     pinchZoomRef.current?.alignCenter({
-      x: getInitialXPosition(currentHour),
+      x: getInitialXPosition(currentHourOverride || currentHour),
       y: -90,
       scale: 20,
       animated: true,
@@ -178,6 +178,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             setAddAchievementModalOpen(true);
           }
         }}
+        centerZoomOnThumb={centerZoomOnThumb}
       />
       <QuickPinchZoom
         onUpdate={onUpdate}

@@ -24,6 +24,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   totalHours: number;
   openAddLogModal: (e: React.MouseEvent) => void;
   openAddAchievementModal: (e: React.MouseEvent) => void;
+  centerZoomOnThumb: (currentHourOverride?: number) => void;
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
@@ -36,6 +37,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   activeAchievement,
   openAddLogModal,
   openAddAchievementModal,
+  centerZoomOnThumb,
   ...rest
 }) => {
   useInterval(
@@ -64,6 +66,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           aria-label="Skip to end"
           onClick={() => {
             setCurrentHour(0);
+            centerZoomOnThumb(0.1);
           }}
         />
         <IconButton
@@ -79,6 +82,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           aria-label="Rewind to beggining"
           onClick={() => {
             setCurrentHour(totalHours - 0.1);
+            centerZoomOnThumb(totalHours - 0.1);
           }}
         />
       </Flex>
