@@ -180,106 +180,107 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         }}
         centerZoomOnThumb={centerZoomOnThumb}
       />
-      <QuickPinchZoom
-        onUpdate={onUpdate}
-        maxZoom={20}
-        inertia={false}
-        ref={pinchZoomRef}
-        lockDragAxis={true}
-        wheelScaleFactor={80}
-      >
-        <Box
-          ref={timelineContainerRef}
-          height="200px"
-          bg="gray"
-          width="10000px"
-          padding="0 12px"
+      <Box border="1px solid" borderColor="brand.700" borderRadius="20px">
+        <QuickPinchZoom
+          onUpdate={onUpdate}
+          maxZoom={20}
+          inertia={false}
+          ref={pinchZoomRef}
+          lockDragAxis={true}
+          wheelScaleFactor={80}
         >
-          <Slider
-            onChangeEnd={centerZoomOnThumb}
-            top="70%"
-            step={0.1}
-            defaultValue={currentHour}
-            min={0}
-            max={1000}
-            value={currentHour}
-            colorScheme="teal"
-            onChange={(hour) => {
-              setNewCurrentHour(hour);
-              if (isPlaying) {
-                setIsPlaying(false);
-              }
-            }}
+          <Box
+            ref={timelineContainerRef}
+            height="200px"
+            width="10000px"
+            padding="0 12px"
           >
-            {activeLog && (
-              <SliderMark
-                value={currentHour}
-                textAlign="center"
-                color="white"
-                mt="-8"
-                ml="-6"
-                fontSize="10px"
-              >
-                <>{format(new Date(activeLog.loggedOn), "yyyy-MM-dd")}</>
-              </SliderMark>
-            )}
-            {journey.achievements.map((achievement) => {
-              return (
+            <Slider
+              onChangeEnd={centerZoomOnThumb}
+              top="70%"
+              step={0.1}
+              defaultValue={currentHour}
+              min={0}
+              max={1000}
+              value={currentHour}
+              colorScheme="teal"
+              onChange={(hour) => {
+                setNewCurrentHour(hour);
+                if (isPlaying) {
+                  setIsPlaying(false);
+                }
+              }}
+            >
+              {activeLog && (
                 <SliderMark
-                  key={achievement.id}
-                  value={achievement.loggedAtHour}
-                  display="flex"
-                  justifyContent="center"
+                  value={currentHour}
+                  textAlign="center"
                   color="white"
-                  bgColor="yellow"
-                  mt="-7px"
-                  width="1px"
-                  height={1}
+                  mt="-8"
+                  ml="-6"
+                  fontSize="10px"
                 >
-                  <Image
-                    src={AchievementIcon}
-                    minWidth="11px"
-                    top="-11px"
-                    position="absolute"
-                    cursor="pointer"
-                    pointerEvents="all"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setNewCurrentHour(achievement.loggedAtHour);
-                    }}
-                    onPointerDownCapture={(e) => {
-                      e.stopPropagation();
-                    }}
-                    _hover={{ transform: "scale(1.1)" }}
-                  />
+                  <>{format(new Date(activeLog.loggedOn), "yyyy-MM-dd")}</>
                 </SliderMark>
-              );
-            })}
-            <SliderTrack display="flex">
-              {journey.logs.map((log, idx) => {
-                const widthPercentage = log.hoursSpent / 10;
+              )}
+              {journey.achievements.map((achievement) => {
                 return (
-                  <Box
-                    key={log.id}
-                    bg={log.id === activeLogId ? "blue" : "red"}
-                    width={`${widthPercentage}%`}
-                    borderLeft={idx === 0 ? "none" : "1px solid black"}
-                    _hover={{ bg: "blue" }}
-                  />
+                  <SliderMark
+                    key={achievement.id}
+                    value={achievement.loggedAtHour}
+                    display="flex"
+                    justifyContent="center"
+                    color="white"
+                    bgColor="yellow"
+                    mt="-7px"
+                    width="1px"
+                    height={1}
+                  >
+                    <Image
+                      src={AchievementIcon}
+                      minWidth="11px"
+                      top="-11px"
+                      position="absolute"
+                      cursor="pointer"
+                      pointerEvents="all"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setNewCurrentHour(achievement.loggedAtHour);
+                      }}
+                      onPointerDownCapture={(e) => {
+                        e.stopPropagation();
+                      }}
+                      _hover={{ transform: "scale(1.1)" }}
+                    />
+                  </SliderMark>
                 );
               })}
-            </SliderTrack>
-            <TimelineRuler currentViewX={currentViewX} />
-            <SliderThumb
-              width="6px"
-              height="6px"
-              _active={{ transform: `translateY(-50%)` }}
-              _focusVisible={{ boxShadow: "none" }}
-            />
-          </Slider>
-        </Box>
-      </QuickPinchZoom>
+              <SliderTrack display="flex">
+                {journey.logs.map((log, idx) => {
+                  const widthPercentage = log.hoursSpent / 10;
+                  return (
+                    <Box
+                      key={log.id}
+                      bg={log.id === activeLogId ? "blue" : "red"}
+                      width={`${widthPercentage}%`}
+                      borderLeft={idx === 0 ? "none" : "1px solid black"}
+                      _hover={{ bg: "blue" }}
+                    />
+                  );
+                })}
+              </SliderTrack>
+              <TimelineRuler currentViewX={currentViewX} />
+              <SliderThumb
+                width="6px"
+                height="6px"
+                _active={{ transform: `translateY(-50%)` }}
+                _focusVisible={{ boxShadow: "none" }}
+              />
+            </Slider>
+          </Box>
+        </QuickPinchZoom>
+      </Box>
       <AddJourneyLogDialog
         open={addLogModalOpen}
         setOpen={setAddLogModalOpen}
