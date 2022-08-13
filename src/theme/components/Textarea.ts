@@ -5,4 +5,7 @@ export const TextareaStyle: ComponentStyleConfig = {
     color: "gray.400",
     borderColor: "gray.400",
   },
+  defaultProps: {
+    focusBorderColor: "brand.400",
+  },
 };

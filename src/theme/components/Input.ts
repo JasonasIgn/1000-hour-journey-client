@@ -11,4 +11,7 @@ export const InputStyle: ComponentStyleConfig = {
       },
     },
   },
+  defaultProps: {
+    focusBorderColor: "brand.400",
+  },
 };
