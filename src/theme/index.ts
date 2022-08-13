@@ -1,8 +1,12 @@
 import { extendTheme } from "@chakra-ui/react";
+import { FormLabelStyle } from "./components/FormLabel";
 import { HeadingStyle } from "./components/Heading";
+import { InputStyle } from "./components/Input";
 import { ModalStyle } from "./components/Modal";
+import { NumberInputStyle } from "./components/NumberInput";
 import { ProgressStyle } from "./components/Progress";
 import { TextStyle } from "./components/Text";
+import { TextareaStyle } from "./components/Textarea";
 
 const theme = extendTheme({
   colors: {
@@ -24,6 +28,10 @@ const theme = extendTheme({
     Text: TextStyle,
     Progress: ProgressStyle,
     Modal: ModalStyle,
+    FormLabel: FormLabelStyle,
+    Input: InputStyle,
+    Textarea: TextareaStyle,
+    NumberInput: NumberInputStyle,
   },
 });
 
