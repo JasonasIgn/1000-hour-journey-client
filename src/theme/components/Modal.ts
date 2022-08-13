@@ -15,11 +15,11 @@ export const ModalStyle: ComponentStyleConfig = {
     },
     closeButton: {
       border: "1px solid",
-      borderColor: "brand.500",
-      color: "brand.500",
+      borderColor: "brand.400",
+      color: "brand.400",
       _hover: {
-        color: "brand.400",
-        borderColor: "brand.400",
+        color: "brand.300",
+        borderColor: "brand.300",
         bgColor: "brand.700",
       },
     },
