@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { HeadingStyle } from "./components/Heading";
+import { ModalStyle } from "./components/Modal";
 import { ProgressStyle } from "./components/Progress";
 import { TextStyle } from "./components/Text";
 
@@ -22,6 +23,7 @@ const theme = extendTheme({
     Heading: HeadingStyle,
     Text: TextStyle,
     Progress: ProgressStyle,
+    Modal: ModalStyle,
   },
 });
 
