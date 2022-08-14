@@ -1,4 +1,4 @@
-import { FC, forwardRef } from "react";
+import { FC, forwardRef, Ref } from "react";
 import {
   FormControl,
   FormControlProps,
@@ -8,11 +8,12 @@ import {
   InputProps,
 } from "@chakra-ui/react";
 
-interface InputFieldProps extends InputProps {
+export interface InputFieldProps extends InputProps {
   value?: string;
   label?: string;
   errorMessage?: string;
   formControlProps?: FormControlProps;
+  ref?: Ref<any>;
 }
 
 export const InputField: FC<InputFieldProps> = forwardRef(

@@ -21,6 +21,7 @@ import { InputField } from "../InputField/InputField";
 import { getLastJourneyLog } from "../../store/features/journeys/selectors";
 import { useEffect } from "react";
 import { dateFormats } from "../../utils/constants";
+import { UploadField } from "../UploadField/UploadField";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -47,7 +48,6 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
       resolver: yupResolver(addJourneyLogFormValidation),
     });
   const { isSubmitting, errors } = formState;
-
   const onSubmit = async (data: AddJourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, id: journeyId }));
@@ -94,7 +94,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
             {...register("loggedOn")}
             errorMessage={errors.loggedOn?.message}
           />
-          <InputField type="file" label="Media" {...register("media")} />
+          <UploadField label="Media" {...register("media")} />
         </ModalBody>
 
         <ModalFooter>
