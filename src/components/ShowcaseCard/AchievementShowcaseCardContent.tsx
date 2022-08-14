@@ -2,6 +2,7 @@ import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
 import { Achievement } from "../../store/features/journeys/types";
+import { dateFormats } from "../../utils/constants";
 
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;
@@ -19,7 +20,7 @@ export const AchievementShowcaseCardContent: FC<
           </Box>
           <Box textAlign="center">
             <Heading>
-              {format(new Date(achievement.loggedOnDate), "yyyy-MM-dd")}
+              {format(new Date(achievement.loggedOnDate), dateFormats.standart)}
             </Heading>
           </Box>
           <Box textAlign="center">

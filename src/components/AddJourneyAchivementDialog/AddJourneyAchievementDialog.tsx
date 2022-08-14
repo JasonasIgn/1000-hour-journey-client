@@ -20,6 +20,7 @@ import { InputField } from "../InputField/InputField";
 import { LogExtended } from "../../store/features/journeys/types";
 import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
 import { useEffect } from "react";
+import { dateFormats } from "../../utils/constants";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
@@ -36,7 +37,10 @@ export const AddJourneyAchievementDialog: React.FC<
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyAchievementFormData>({
       defaultValues: {
-        loggedOnDate: format(new Date(activeLog.loggedOn), "yyyy-MM-dd"),
+        loggedOnDate: format(
+          new Date(activeLog.loggedOn),
+          dateFormats.standart
+        ),
         loggedAtHour: currentHour,
       },
       resolver: yupResolver(addJourneyAchievementFormValidation),
@@ -55,7 +59,10 @@ export const AddJourneyAchievementDialog: React.FC<
     if (open) {
       reset({
         loggedAtHour: currentHour,
-        loggedOnDate: format(new Date(activeLog.loggedOn), "yyyy-MM-dd"),
+        loggedOnDate: format(
+          new Date(activeLog.loggedOn),
+          dateFormats.standart
+        ),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

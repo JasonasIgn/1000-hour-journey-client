@@ -20,6 +20,7 @@ import { createJourneyLogEffect } from "../../store/features/journeys/effects";
 import { InputField } from "../InputField/InputField";
 import { getLastJourneyLog } from "../../store/features/journeys/selectors";
 import { useEffect } from "react";
+import { dateFormats } from "../../utils/constants";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -35,13 +36,13 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const dispatch = useAppDispatch();
   const lastLog = useAppSelector(getLastJourneyLog);
   const lastLogDate = lastLog
-    ? format(new Date(lastLog?.loggedOn), "yyyy-MM-dd")
+    ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
 
   const { register, handleSubmit, formState, control, reset } =
     useForm<AddJourneyLogFormData>({
       defaultValues: {
-        loggedOn: format(new Date(), "yyyy-MM-dd"),
+        loggedOn: format(new Date(), dateFormats.standart),
       },
       resolver: yupResolver(addJourneyLogFormValidation),
     });

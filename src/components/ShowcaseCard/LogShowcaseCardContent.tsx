@@ -2,6 +2,7 @@ import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
 import { LogExtended } from "../../store/features/journeys/types";
+import { dateFormats } from "../../utils/constants";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
@@ -20,7 +21,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           </Box>
           <Box textAlign="center">
             <Heading>
-              {format(new Date(log.loggedOn), "yyyy-MM-dd")}
+              {format(new Date(log.loggedOn), dateFormats.standart)}
             </Heading>
           </Box>
           <Box textAlign="center">

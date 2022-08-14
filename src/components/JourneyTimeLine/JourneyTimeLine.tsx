@@ -35,6 +35,7 @@ import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
 import { ShiftDirection } from "../../types";
 import { AddJourneyLogDialog } from "../AddJourneyLogDialog/AddJourneyLogDialog";
 import { AddJourneyAchievementDialog } from "../AddJourneyAchivementDialog/AddJourneyAchievementDialog";
+import { dateFormats } from "../../utils/constants";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -183,7 +184,9 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
       <Box border="1px solid" borderColor="brand.700" borderRadius="20px">
         <Text ml={6} mt={6}>
           Date: &nbsp;
-          {activeLog ? format(new Date(activeLog.loggedOn), "yyyy-MM-dd") : "-"}
+          {activeLog
+            ? format(new Date(activeLog.loggedOn), dateFormats.standart)
+            : "-"}
         </Text>
         <QuickPinchZoom
           onUpdate={onUpdate}
