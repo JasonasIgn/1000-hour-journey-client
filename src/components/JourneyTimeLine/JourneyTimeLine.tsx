@@ -5,6 +5,7 @@ import {
   SliderMark,
   SliderThumb,
   SliderTrack,
+  Text,
 } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
 import { ReactComponent as AchievementIcon } from "../../resources/achievement.svg";
@@ -180,6 +181,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         centerZoomOnThumb={centerZoomOnThumb}
       />
       <Box border="1px solid" borderColor="brand.700" borderRadius="20px">
+        <Text ml={6} mt={6}>
+          Date: &nbsp;
+          {activeLog ? format(new Date(activeLog.loggedOn), "yyyy-MM-dd") : "-"}
+        </Text>
         <QuickPinchZoom
           onUpdate={onUpdate}
           maxZoom={20}
@@ -209,18 +214,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 }
               }}
             >
-              {activeLog && (
-                <SliderMark
-                  value={currentHour}
-                  textAlign="center"
-                  color="white"
-                  mt="-8"
-                  ml="-6"
-                  fontSize="10px"
-                >
-                  <>{format(new Date(activeLog.loggedOn), "yyyy-MM-dd")}</>
-                </SliderMark>
-              )}
               {journey.achievements.map((achievement) => {
                 return (
                   <SliderMark
