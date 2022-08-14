@@ -182,11 +182,14 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         centerZoomOnThumb={centerZoomOnThumb}
       />
       <Box border="1px solid" borderColor="brand.700" borderRadius="20px">
-        <Text ml={6} mt={6}>
+        <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;
           {activeLog
             ? format(new Date(activeLog.loggedOn), dateFormats.standart)
             : "-"}
+        </Text>
+        <Text ml={6} mt={12} position="absolute">
+          Hour: &nbsp;{currentHour}
         </Text>
         <QuickPinchZoom
           onUpdate={onUpdate}
