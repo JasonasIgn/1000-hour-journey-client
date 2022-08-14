@@ -88,14 +88,14 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       </Flex>
       <Flex>
         <IconButton
-          icon={<AchievementIcon width={23} height={23} stroke="white" />}
+          icon={<AchievementIcon width={22} height={22} stroke="white" />}
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
           disabled={!activeLog}
         />
         <IconButton
           ml={2}
-          icon={<PageIcon width={23} height={23} fill="white" />}
+          icon={<PageIcon width={22} height={22} fill="white" />}
           aria-label="Add log"
           onClick={openAddLogModal}
         />
