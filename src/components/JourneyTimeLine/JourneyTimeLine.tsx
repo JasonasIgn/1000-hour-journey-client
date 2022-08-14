@@ -1,14 +1,13 @@
 import {
   Box,
   Flex,
-  Image,
   Slider,
   SliderMark,
   SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
-import AchievementIcon from "../../resources/achievement.png";
+import { ReactComponent as AchievementIcon } from "../../resources/achievement.svg";
 import React, {
   FC,
   useCallback,
@@ -235,10 +234,9 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                     width="1px"
                     height={1}
                   >
-                    <Image
-                      src={AchievementIcon}
-                      minWidth="11px"
-                      top="-11px"
+                    <Box
+                      minWidth="9px"
+                      top="-10px"
                       position="absolute"
                       cursor="pointer"
                       pointerEvents="all"
@@ -251,7 +249,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                         e.stopPropagation();
                       }}
                       _hover={{ transform: "scale(1.1)" }}
-                    />
+                    >
+                      <AchievementIcon
+                        stroke="white"
+                        width="9px"
+                        height="9px"
+                      />
+                    </Box>
                   </SliderMark>
                 );
               })}

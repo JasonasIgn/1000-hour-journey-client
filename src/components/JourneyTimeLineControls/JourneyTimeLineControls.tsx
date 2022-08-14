@@ -1,14 +1,8 @@
-import {
-  FlexProps,
-  IconButton,
-  Flex,
-  useInterval,
-  Image,
-} from "@chakra-ui/react";
+import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
 import { ReactComponent as PlayIcon } from "../../resources/play_icon.svg";
 import { ReactComponent as PauseIcon } from "../../resources/pause_icon.svg";
-import AchievementIcon from "../../resources/achievement.png";
-import PageIcon from "../../resources/page.png";
+import { ReactComponent as AchievementIcon } from "../../resources/achievement.svg";
+import { ReactComponent as PageIcon } from "../../resources/page.svg";
 import { FC, useEffect } from "react";
 import { Achievement, LogExtended } from "../../store/features/journeys/types";
 import { getTickSpeed } from "./utils";
@@ -70,7 +64,13 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           }}
         />
         <IconButton
-          icon={isPlaying ? <PauseIcon width={20} height={20} /> : <PlayIcon />}
+          icon={
+            isPlaying ? (
+              <PauseIcon width={20} height={20} fill="white" />
+            ) : (
+              <PlayIcon fill="white" />
+            )
+          }
           aria-label="Play Journey"
           onClick={() => {
             setIsPlaying(!isPlaying);
@@ -88,16 +88,14 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       </Flex>
       <Flex>
         <IconButton
-          icon={
-            <Image src={AchievementIcon} alt="Achievement icon" width="24px" />
-          }
+          icon={<AchievementIcon width={23} height={23} stroke="white" />}
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
           disabled={!activeLog}
         />
         <IconButton
           ml={2}
-          icon={<Image src={PageIcon} alt="Page icon" width="24px" />}
+          icon={<PageIcon width={23} height={23} fill="white" />}
           aria-label="Add log"
           onClick={openAddLogModal}
         />
