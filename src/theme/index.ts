@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { ButtonStyle } from "./components/Button";
 import { FormLabelStyle } from "./components/FormLabel";
 import { HeadingStyle } from "./components/Heading";
 import { InputStyle } from "./components/Input";
@@ -32,6 +33,7 @@ const theme = extendTheme({
     Input: InputStyle,
     Textarea: TextareaStyle,
     NumberInput: NumberInputStyle,
+    Button: ButtonStyle,
   },
 });
 
