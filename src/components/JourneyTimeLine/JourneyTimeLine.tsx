@@ -52,7 +52,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
-  const [currentHour, setCurrentHour] = useState(journey.totalHours - 0.1);
+  const [currentHour, setCurrentHour] = useState(
+    Math.round((journey.totalHours - 0.1) * 10) / 10
+  );
+
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
@@ -89,7 +92,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const activeAchievement = achievementsDictionary[activeAchievementId];
 
   const setNewCurrentHour = (hour: number) => {
-    setCurrentHour(hour);
+    setCurrentHour(Math.round(hour * 10) / 10);
     setShiftDirection(hour > currentHour ? "left" : "right");
   };
 
