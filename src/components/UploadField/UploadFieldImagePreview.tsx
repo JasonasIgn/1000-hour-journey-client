@@ -11,13 +11,14 @@ export const UploadFieldImagePreview: FC<UploadFieldImagePreviewProps> = ({
   onCancel,
 }) => {
   return (
-    <Flex justifyContent="center">
-      <Box
-        height={200}
-        position="relative"
-        border="1px solid"
-        borderColor="brand.300"
-      >
+    <Flex
+      justifyContent="center"
+      border="2px dashed"
+      borderColor="gray.400"
+      borderRadius={4}
+      height={200}
+    >
+      <Box position="relative" border="1px solid" borderColor="brand.300">
         <Image
           src={URL.createObjectURL(file)}
           alt="Uploaded media"

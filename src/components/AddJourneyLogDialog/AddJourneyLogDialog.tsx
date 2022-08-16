@@ -1,5 +1,7 @@
 import {
   Button,
+  Grid,
+  GridItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -64,40 +66,54 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   }, [open, reset]);
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)}>
+    <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
         <ModalHeader>Create new log</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <TextAreaField
-            label="Description"
-            {...register("description")}
-            errorMessage={errors.description?.message}
-          />
-          <Controller
-            name="hoursSpent"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <NumberInputField
-                label="Hours Spent"
-                {...field}
-                errorMessage={error?.message}
+          <Grid
+            templateRows="repeat(3, auto)"
+            templateColumns="repeat(2, 1fr)"
+            gap={4}
+          >
+            <GridItem colSpan={2} height={112}>
+              <TextAreaField
+                label="Description"
+                {...register("description")}
+                errorMessage={errors.description?.message}
               />
-            )}
-          />
-          <InputField
-            type="date"
-            label="Date of log"
-            min={lastLogDate || undefined}
-            {...register("loggedOn")}
-            errorMessage={errors.loggedOn?.message}
-          />
-          <UploadField
-            label="Media"
-            {...register("media")}
-            onClear={() => setValue("media", {} as FileList)}
-          />
+            </GridItem>
+            <GridItem colSpan={1} height="72px">
+              <Controller
+                name="hoursSpent"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <NumberInputField
+                    label="Hours Spent"
+                    {...field}
+                    errorMessage={error?.message}
+                  />
+                )}
+              />
+            </GridItem>
+            <GridItem colSpan={1} height="72px">
+              <InputField
+                type="date"
+                label="Date of log"
+                min={lastLogDate || undefined}
+                {...register("loggedOn")}
+                errorMessage={errors.loggedOn?.message}
+              />
+            </GridItem>
+            <GridItem colSpan={2}>
+              <UploadField
+                label="Media"
+                {...register("media")}
+                onClear={() => setValue("media", {} as FileList)}
+              />
+            </GridItem>
+          </Grid>
         </ModalBody>
 
         <ModalFooter>
