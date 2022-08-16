@@ -40,7 +40,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
     ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
 
-  const { register, handleSubmit, formState, control, reset } =
+  const { register, handleSubmit, formState, control, reset, setValue } =
     useForm<AddJourneyLogFormData>({
       defaultValues: {
         loggedOn: format(new Date(), dateFormats.standart),
@@ -56,7 +56,6 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
       console.error("Caught error", e);
     }
   };
-
   useEffect(() => {
     if (open) {
       reset();
@@ -94,7 +93,11 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
             {...register("loggedOn")}
             errorMessage={errors.loggedOn?.message}
           />
-          <UploadField label="Media" {...register("media")} />
+          <UploadField
+            label="Media"
+            {...register("media")}
+            onClear={() => setValue("media", {} as FileList)}
+          />
         </ModalBody>
 
         <ModalFooter>
