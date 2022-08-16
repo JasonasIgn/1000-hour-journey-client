@@ -13,12 +13,16 @@ export const UploadFieldImagePreview: FC<UploadFieldImagePreviewProps> = ({
   return (
     <Flex justifyContent="center">
       <Box
-        maxWidth={220}
+        height={200}
         position="relative"
         border="1px solid"
         borderColor="brand.300"
       >
-        <Image src={URL.createObjectURL(file)} alt="Uploaded media" />
+        <Image
+          src={URL.createObjectURL(file)}
+          alt="Uploaded media"
+          height="100%"
+        />
         <Box
           position="absolute"
           width="100%"
