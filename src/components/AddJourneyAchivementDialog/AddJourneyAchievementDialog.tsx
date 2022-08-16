@@ -1,5 +1,7 @@
 import {
   Button,
+  Grid,
+  GridItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -21,6 +23,7 @@ import { LogExtended } from "../../store/features/journeys/types";
 import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
 import { useEffect } from "react";
 import { dateFormats } from "../../utils/constants";
+import { UploadField } from "../UploadField/UploadField";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
@@ -34,7 +37,7 @@ export const AddJourneyAchievementDialog: React.FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, control, reset } =
+  const { register, handleSubmit, formState, control, reset, setValue } =
     useForm<AddJourneyAchievementFormData>({
       defaultValues: {
         loggedOnDate: format(
@@ -75,31 +78,49 @@ export const AddJourneyAchievementDialog: React.FC<
         <ModalHeader>Log an achievement</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <TextAreaField
-            label="Description"
-            {...register("description")}
-            errorMessage={errors.description?.message}
-          />
-          <Controller
-            name="loggedAtHour"
-            control={control}
-            render={({ field, fieldState: { error } }) => (
-              <NumberInputField
-                label="Journey hour snapshot"
-                {...field}
-                errorMessage={error?.message}
+          <Grid
+            templateRows="repeat(3, auto)"
+            templateColumns="repeat(2, 1fr)"
+            gap={4}
+          >
+            <GridItem colSpan={2} height={112}>
+              <TextAreaField
+                label="Description"
+                {...register("description")}
+                errorMessage={errors.description?.message}
+              />
+            </GridItem>
+            <GridItem colSpan={1} height="72px">
+              <Controller
+                name="loggedAtHour"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <NumberInputField
+                    label="Journey hour snapshot"
+                    {...field}
+                    errorMessage={error?.message}
+                    isDisabled
+                  />
+                )}
+              />
+            </GridItem>
+            <GridItem colSpan={1} height="72px">
+              <InputField
+                type="date"
+                label="Date of achievement"
+                {...register("loggedOnDate")}
+                errorMessage={errors.loggedOnDate?.message}
                 isDisabled
               />
-            )}
-          />
-          <InputField
-            type="date"
-            label="Date of achievement"
-            {...register("loggedOnDate")}
-            errorMessage={errors.loggedOnDate?.message}
-            isDisabled
-          />
-          <InputField type="file" label="Media" {...register("media")} />
+            </GridItem>
+            <GridItem colSpan={2}>
+              <UploadField
+                label="Media"
+                {...register("media")}
+                onClear={() => setValue("media", {} as FileList)}
+              />
+            </GridItem>
+          </Grid>
         </ModalBody>
 
         <ModalFooter>
