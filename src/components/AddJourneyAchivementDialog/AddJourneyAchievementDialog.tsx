@@ -72,7 +72,7 @@ export const AddJourneyAchievementDialog: React.FC<
   }, [open, reset]);
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)}>
+    <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
         <ModalHeader>Log an achievement</ModalHeader>
@@ -83,14 +83,14 @@ export const AddJourneyAchievementDialog: React.FC<
             templateColumns="repeat(2, 1fr)"
             gap={4}
           >
-            <GridItem colSpan={2} height={112}>
+            <GridItem colSpan={2}>
               <TextAreaField
                 label="Description"
                 {...register("description")}
                 errorMessage={errors.description?.message}
               />
             </GridItem>
-            <GridItem colSpan={1} height="72px">
+            <GridItem colSpan={1}>
               <Controller
                 name="loggedAtHour"
                 control={control}
@@ -104,7 +104,7 @@ export const AddJourneyAchievementDialog: React.FC<
                 )}
               />
             </GridItem>
-            <GridItem colSpan={1} height="72px">
+            <GridItem colSpan={1}>
               <InputField
                 type="date"
                 label="Date of achievement"

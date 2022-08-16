@@ -77,14 +77,14 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
             templateColumns="repeat(2, 1fr)"
             gap={4}
           >
-            <GridItem colSpan={2} height={112}>
+            <GridItem colSpan={2}>
               <TextAreaField
                 label="Description"
                 {...register("description")}
                 errorMessage={errors.description?.message}
               />
             </GridItem>
-            <GridItem colSpan={1} height="72px">
+            <GridItem colSpan={1}>
               <Controller
                 name="hoursSpent"
                 control={control}
@@ -97,7 +97,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
                 )}
               />
             </GridItem>
-            <GridItem colSpan={1} height="72px">
+            <GridItem colSpan={1}>
               <InputField
                 type="date"
                 label="Date of log"
