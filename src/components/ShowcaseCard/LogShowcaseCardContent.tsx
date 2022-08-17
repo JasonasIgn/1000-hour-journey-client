@@ -1,6 +1,15 @@
-import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  FlexProps,
+  Heading,
+  IconButton,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
+import { ReactComponent as EditIcon } from "../../resources/edit.svg";
 import { LogExtended } from "../../store/features/journeys/types";
 import { dateFormats } from "../../utils/constants";
 
@@ -14,6 +23,24 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
 }) => {
   return (
     <>
+      <Flex
+        position="absolute"
+        top={0}
+        left={0}
+        width="100%"
+        height="100%"
+        alignItems="center"
+      >
+        <IconButton
+          icon={<EditIcon width="22px" fill="white" />}
+          aria-label="edit"
+          position="absolute"
+          borderRadius="50%"
+          right="-20px"
+          color="brand.700"
+          border="1px solid"
+        />
+      </Flex>
       <Flex flexDirection="column" {...rest}>
         <Flex justifyContent="space-between">
           <Box textAlign="center">
