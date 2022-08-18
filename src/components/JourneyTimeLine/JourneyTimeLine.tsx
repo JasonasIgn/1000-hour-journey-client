@@ -33,7 +33,7 @@ import { getInitialXPosition } from "./utils";
 import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
 import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
 import { ShiftDirection } from "../../types";
-import { AddJourneyLogDialog } from "../JourneyLogDialogs/AddJourneyLogDialog/AddJourneyLogDialog";
+import { AddLogDialog } from "../JourneyLogDialogs/AddLogDialog/AddLogDialog";
 import { AddJourneyAchievementDialog } from "../AddJourneyAchivementDialog/AddJourneyAchievementDialog";
 import { dateFormats } from "../../utils/constants";
 
@@ -287,7 +287,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           </Box>
         </QuickPinchZoom>
       </Box>
-      <AddJourneyLogDialog
+      <AddLogDialog
         open={addLogModalOpen}
         setOpen={setAddLogModalOpen}
         journeyId={journey.id}

@@ -25,13 +25,13 @@ import { useEffect } from "react";
 import { dateFormats } from "../../../utils/constants";
 import { UploadField } from "../../UploadField/UploadField";
 
-interface AddJourneyLogDialogProps {
+interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
   open: boolean;
   journeyId: number;
 }
 
-export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
+export const AddLogDialog: React.FC<AddLogDialogProps> = ({
   open,
   setOpen,
   journeyId,
