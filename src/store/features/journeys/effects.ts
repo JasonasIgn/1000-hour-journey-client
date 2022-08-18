@@ -52,7 +52,7 @@ export const createJourneyLogEffect = createAsyncThunk(
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{id}", id.toString()),
-        { ...rest, media: media[0] },
+        { ...rest, media: media?.[0] },
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -104,7 +104,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
         apiUrls.updateLog
           .replace("{id}", journeyId.toString())
           .replace("{logId}", logId.toString()),
-        { ...rest, media: media[0] },
+        { ...rest, media: media?.[0] },
         {
           headers: {
             "Content-Type": "multipart/form-data",
