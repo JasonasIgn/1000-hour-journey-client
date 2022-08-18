@@ -38,7 +38,7 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const open = useAppSelector(getEditLogDialogOpen);
-  console.log(format(new Date(log.loggedOn), dateFormats.standart));
+
   const handleClose = () => {
     dispatch(setEditLogDialogOpen(false));
   };
