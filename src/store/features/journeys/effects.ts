@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AddJourneyAchievementFormData } from "../../../components/AddJourneyAchivementDialog/types";
 import { AddJourneyFormData } from "../../../components/AddJourneyDialog/types";
-import { AddJourneyLogFormData } from "../../../components/JourneyLogDialogs/AddJourneyLogDialog/types";
+import { JourneyLogFormData } from "../../../components/JourneyLogDialogs/types";
 import { apiUrls } from "../../../config";
 import { Achievement, Log } from "./types";
 
@@ -47,7 +47,7 @@ export const fetchJourneyEffect = createAsyncThunk(
 
 export const createJourneyLogEffect = createAsyncThunk(
   "journeys/createLog",
-  async ({ data, id }: { data: AddJourneyLogFormData; id: number }) => {
+  async ({ data, id }: { data: JourneyLogFormData; id: number }) => {
     const { media, ...rest } = data;
     try {
       const response = await axios.post<Log>(
