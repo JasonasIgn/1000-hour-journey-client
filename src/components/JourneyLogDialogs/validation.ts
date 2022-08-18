@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const addJourneyLogFormValidation = yup.object({
+export const journeyLogFormValidation = yup.object({
   description: yup.string().required("This field is required"),
   hoursSpent: yup
     .number()

@@ -15,8 +15,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { TextAreaField } from "../../TextAreaField/TextAreaField";
-import { AddJourneyLogFormData } from "./types";
-import { addJourneyLogFormValidation } from "./validation";
+import { JourneyLogFormData } from "../types";
+import { journeyLogFormValidation } from "../validation";
 import { NumberInputField } from "../../NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "../../../store/features/journeys/effects";
 import { InputField } from "../../InputField/InputField";
@@ -43,14 +43,14 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
     : undefined;
 
   const { register, handleSubmit, formState, control, reset, setValue } =
-    useForm<AddJourneyLogFormData>({
+    useForm<JourneyLogFormData>({
       defaultValues: {
         loggedOn: format(new Date(), dateFormats.standart),
       },
-      resolver: yupResolver(addJourneyLogFormValidation),
+      resolver: yupResolver(journeyLogFormValidation),
     });
   const { isSubmitting, errors } = formState;
-  const onSubmit = async (data: AddJourneyLogFormData) => {
+  const onSubmit = async (data: JourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, id: journeyId }));
       setOpen(false);

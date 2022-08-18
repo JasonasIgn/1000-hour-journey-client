@@ -1,4 +1,4 @@
-export interface AddJourneyLogFormData {
+export interface JourneyLogFormData {
   description: string;
   hoursSpent: number;
   loggedOn: string;
