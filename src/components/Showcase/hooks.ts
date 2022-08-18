@@ -21,12 +21,12 @@ export const useAnimatedCards = (
 
   useEffect(() => {
     if (item) {
+      const isNewItemAlreadyDisplaying = item.id === cards[1].data?.id;
       let tempCards = [...cards];
-      if (skipAnimation) {
+      if (skipAnimation || isNewItemAlreadyDisplaying) {
         setSkipAnimation(false);
         tempCards[1] = { ...tempCards[1], data: item };
-      }
-      if (!skipAnimation) {
+      } else {
         tempCards[0] = { ...tempCards[0], data: item };
         tempCards[2] = { ...tempCards[2], data: item };
         if (shiftDirection === "left") {
