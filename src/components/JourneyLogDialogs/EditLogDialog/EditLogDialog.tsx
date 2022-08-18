@@ -20,7 +20,6 @@ import { journeyLogFormValidation } from "../validation";
 import { NumberInputField } from "../../NumberInputField/NumberInputField";
 import { updateJourneyLogEffect } from "../../../store/features/journeys/effects";
 import { InputField } from "../../InputField/InputField";
-import { getLastJourneyLog } from "../../../store/features/journeys/selectors";
 import { useEffect } from "react";
 import { dateFormats } from "../../../utils/constants";
 import { UploadField } from "../../UploadField/UploadField";
@@ -39,11 +38,7 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const open = useAppSelector(getEditLogDialogOpen);
-  const lastLog = useAppSelector(getLastJourneyLog);
-  const lastLogDate = lastLog
-    ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
-    : undefined;
-
+  console.log(format(new Date(log.loggedOn), dateFormats.standart));
   const handleClose = () => {
     dispatch(setEditLogDialogOpen(false));
   };
@@ -51,7 +46,9 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
   const { register, handleSubmit, formState, control, reset, setValue } =
     useForm<JourneyLogFormData>({
       defaultValues: {
-        loggedOn: format(new Date(), dateFormats.standart),
+        loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
+        hoursSpent: log.hoursSpent,
+        description: log.description,
       },
       resolver: yupResolver(journeyLogFormValidation),
     });
@@ -68,7 +65,11 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
   };
   useEffect(() => {
     if (open) {
-      reset();
+      reset({
+        loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
+        hoursSpent: log.hoursSpent,
+        description: log.description,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, reset]);
@@ -109,7 +110,7 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
               <InputField
                 type="date"
                 label="Date of log"
-                min={lastLogDate || undefined}
+                disabled
                 {...register("loggedOn")}
                 errorMessage={errors.loggedOn?.message}
               />
