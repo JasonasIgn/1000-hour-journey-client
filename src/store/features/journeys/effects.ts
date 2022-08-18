@@ -100,7 +100,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
   }) => {
     const { media, ...rest } = data;
     try {
-      const response = await axios.post<Log>(
+      const response = await axios.patch<Log>(
         apiUrls.updateLog
           .replace("{id}", journeyId.toString())
           .replace("{logId}", logId.toString()),

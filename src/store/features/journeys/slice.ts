@@ -6,6 +6,7 @@ import {
   fetchJourneyEffect,
   fetchJourneysListEffect,
   logJourneyAchievementEffect,
+  updateJourneyLogEffect,
 } from "./effects";
 import { Journey, JourneyListItem } from "./types";
 
@@ -55,6 +56,14 @@ export const journeysSlice = createSlice({
       .addCase(logJourneyAchievementEffect.fulfilled, (state, action) => {
         if (state.journey && action.payload) {
           state.journey.achievements.push(action.payload);
+        }
+      })
+      .addCase(updateJourneyLogEffect.fulfilled, (state, action) => {
+        if (state.journey && action.payload) {
+          const updatedLogIndex = state.journey.logs.findIndex(
+            (log) => log.id === action.payload?.id
+          );
+          state.journey.logs[updatedLogIndex] = action.payload;
         }
       });
   },

@@ -130,7 +130,7 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
             Close
           </Button>
           <Button variant="ghost" type="submit" disabled={isSubmitting}>
-            Create
+            Save
           </Button>
         </ModalFooter>
       </ModalContent>
