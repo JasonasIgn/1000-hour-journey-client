@@ -86,3 +86,34 @@ export const logJourneyAchievementEffect = createAsyncThunk(
     }
   }
 );
+
+export const updateJourneyLogEffect = createAsyncThunk(
+  "journeys/updateLog",
+  async ({
+    data,
+    journeyId,
+    logId,
+  }: {
+    data: JourneyLogFormData;
+    journeyId: number;
+    logId: number;
+  }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.post<Log>(
+        apiUrls.updateLog
+          .replace("{id}", journeyId.toString())
+          .replace("{logId}", logId.toString()),
+        { ...rest, media: media[0] },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);
