@@ -1,6 +1,7 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { EditLogDialog } from "../../components/JourneyLogDialogs/EditLogDialog/EditLogDialog";
 import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
 import { Showcase } from "../../components/Showcase/Showcase";
 import { fetchJourneyEffect } from "../../store/features/journeys/effects";
@@ -14,7 +15,7 @@ export const JourneyView: React.FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
-  
+
   const [activeLog, setActiveLog] = useState<LogExtended>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
@@ -53,7 +54,12 @@ export const JourneyView: React.FC = () => {
           setShiftDirection={setShiftDirection}
         />
       </Flex>
-      
+      {activeLog && (
+        <EditLogDialog
+          journeyId={journey.id}
+          log={activeLog}
+        />
+      )}
     </Container>
   );
 };

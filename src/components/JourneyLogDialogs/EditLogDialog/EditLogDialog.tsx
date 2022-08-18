@@ -18,29 +18,35 @@ import { TextAreaField } from "../../TextAreaField/TextAreaField";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
 import { NumberInputField } from "../../NumberInputField/NumberInputField";
-import { createJourneyLogEffect } from "../../../store/features/journeys/effects";
+import { updateJourneyLogEffect } from "../../../store/features/journeys/effects";
 import { InputField } from "../../InputField/InputField";
 import { getLastJourneyLog } from "../../../store/features/journeys/selectors";
 import { useEffect } from "react";
 import { dateFormats } from "../../../utils/constants";
 import { UploadField } from "../../UploadField/UploadField";
+import { LogExtended } from "../../../store/features/journeys/types";
+import { setEditLogDialogOpen } from "../../../store/features/journeyView/slice";
+import { getEditLogDialogOpen } from "../../../store/features/journeyView/selectors";
 
-interface AddJourneyLogDialogProps {
-  setOpen: (open: boolean) => void;
-  open: boolean;
+interface EditLogDialogProps {
   journeyId: number;
+  log: LogExtended;
 }
 
-export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
-  open,
-  setOpen,
+export const EditLogDialog: React.FC<EditLogDialogProps> = ({
   journeyId,
+  log,
 }) => {
   const dispatch = useAppDispatch();
+  const open = useAppSelector(getEditLogDialogOpen);
   const lastLog = useAppSelector(getLastJourneyLog);
   const lastLogDate = lastLog
     ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
+
+  const handleClose = () => {
+    dispatch(setEditLogDialogOpen(false));
+  };
 
   const { register, handleSubmit, formState, control, reset, setValue } =
     useForm<JourneyLogFormData>({
@@ -52,8 +58,10 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: JourneyLogFormData) => {
     try {
-      await dispatch(createJourneyLogEffect({ data, id: journeyId }));
-      setOpen(false);
+      await dispatch(
+        updateJourneyLogEffect({ data, journeyId, logId: log.id })
+      );
+      handleClose();
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -66,7 +74,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
   }, [open, reset]);
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
+    <Modal isOpen={open} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
         <ModalHeader>Edit log</ModalHeader>
@@ -117,7 +125,7 @@ export const AddJourneyLogDialog: React.FC<AddJourneyLogDialogProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button mr={3} onClick={() => setOpen(false)}>
+          <Button mr={3} onClick={handleClose}>
             Close
           </Button>
           <Button variant="ghost" type="submit" disabled={isSubmitting}>

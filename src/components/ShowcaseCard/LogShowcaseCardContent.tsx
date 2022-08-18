@@ -12,6 +12,8 @@ import format from "date-fns/format";
 import { ReactComponent as EditIcon } from "../../resources/edit.svg";
 import { LogExtended } from "../../store/features/journeys/types";
 import { dateFormats } from "../../utils/constants";
+import { useAppDispatch } from "../../store/hooks";
+import { setEditLogDialogOpen } from "../../store/features/journeyView/slice";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
@@ -21,6 +23,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   log,
   ...rest
 }) => {
+  const dispatch = useAppDispatch();
   return (
     <>
       <Flex
@@ -39,6 +42,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           right="-20px"
           color="brand.700"
           border="1px solid"
+          onClick={() => dispatch(setEditLogDialogOpen(true))}
         />
       </Flex>
       <Flex flexDirection="column" {...rest}>
