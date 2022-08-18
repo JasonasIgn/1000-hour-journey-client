@@ -13,17 +13,17 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { TextAreaField } from "../TextAreaField/TextAreaField";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { TextAreaField } from "../../TextAreaField/TextAreaField";
 import { AddJourneyLogFormData } from "./types";
 import { addJourneyLogFormValidation } from "./validation";
-import { NumberInputField } from "../NumberInputField/NumberInputField";
-import { createJourneyLogEffect } from "../../store/features/journeys/effects";
-import { InputField } from "../InputField/InputField";
-import { getLastJourneyLog } from "../../store/features/journeys/selectors";
+import { NumberInputField } from "../../NumberInputField/NumberInputField";
+import { createJourneyLogEffect } from "../../../store/features/journeys/effects";
+import { InputField } from "../../InputField/InputField";
+import { getLastJourneyLog } from "../../../store/features/journeys/selectors";
 import { useEffect } from "react";
-import { dateFormats } from "../../utils/constants";
-import { UploadField } from "../UploadField/UploadField";
+import { dateFormats } from "../../../utils/constants";
+import { UploadField } from "../../UploadField/UploadField";
 
 interface AddJourneyLogDialogProps {
   setOpen: (open: boolean) => void;
