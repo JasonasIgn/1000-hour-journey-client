@@ -2,12 +2,12 @@ import { FC } from "react";
 import { Box, CloseButton, Flex, Image } from "@chakra-ui/react";
 
 interface UploadFieldImagePreviewProps {
-  file: File;
+  src: string;
   onCancel: () => void;
 }
 
 export const UploadFieldImagePreview: FC<UploadFieldImagePreviewProps> = ({
-  file,
+  src,
   onCancel,
 }) => {
   return (
@@ -19,11 +19,7 @@ export const UploadFieldImagePreview: FC<UploadFieldImagePreviewProps> = ({
       height={200}
     >
       <Box position="relative" border="1px solid" borderColor="brand.300">
-        <Image
-          src={URL.createObjectURL(file)}
-          alt="Uploaded media"
-          height="100%"
-        />
+        <Image src={src} alt="Uploaded media" height="100%" />
         <Box
           position="absolute"
           width="100%"

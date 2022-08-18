@@ -30,15 +30,15 @@ export const UploadField: FC<UploadFieldProps> = forwardRef(
     { label, errorMessage, formControlProps, onChange, onClear, ...rest },
     ref
   ) => {
-    const [files, setFiles] = useState<FileList | null>();
+    const [previewSrc, setPreviewSrc] = useState<string | null>();
     return (
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
-        {files?.[0] ? (
+        {previewSrc ? (
           <UploadFieldImagePreview
-            file={files[0]}
+            src={previewSrc}
             onCancel={() => {
-              setFiles(null);
+              setPreviewSrc(null);
               onClear();
             }}
           />
@@ -67,7 +67,9 @@ export const UploadField: FC<UploadFieldProps> = forwardRef(
               onChange={(e) => {
                 if (onChange) {
                   onChange(e);
-                  setFiles(e.target.files);
+                  if (e.target.files?.[0]) {
+                    setPreviewSrc(URL.createObjectURL(e.target.files[0]));
+                  }
                 }
               }}
               onClick={(e) => {
