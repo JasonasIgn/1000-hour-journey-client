@@ -3,8 +3,8 @@ export const API_BASE = "http://localhost:3333";
 export const apiUrls = {
   fetchJourneysList: `${API_BASE}/journeys`,
   createJourney: `${API_BASE}/journeys`,
-  fetchJourney: `${API_BASE}/journeys/{id}`,
-  createLog: `${API_BASE}/journey/{id}/logs`,
-  updateLog: `${API_BASE}/journey/{id}/logs/{logId}`,
-  logAchievement: `${API_BASE}/journey/{id}/achievements`,
+  fetchJourney: `${API_BASE}/journeys/{journeyId}`,
+  createLog: `${API_BASE}/journey/{journeyId}/logs`,
+  updateLog: `${API_BASE}/journey/{journeyId}/logs/{logId}`,
+  logAchievement: `${API_BASE}/journey/{journeyId}/achievements`,
 };

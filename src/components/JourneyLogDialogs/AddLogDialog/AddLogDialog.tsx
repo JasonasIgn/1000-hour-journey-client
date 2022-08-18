@@ -52,7 +52,7 @@ export const AddLogDialog: React.FC<AddLogDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: JourneyLogFormData) => {
     try {
-      await dispatch(createJourneyLogEffect({ data, id: journeyId }));
+      await dispatch(createJourneyLogEffect({ data, journeyId }));
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);

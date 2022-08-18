@@ -22,7 +22,7 @@ export const JourneyView: React.FC = () => {
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
-      dispatch(fetchJourneyEffect({ id: params.journeyId }));
+      dispatch(fetchJourneyEffect({ journeyId: params.journeyId }));
     }
 
     return () => {
@@ -54,12 +54,7 @@ export const JourneyView: React.FC = () => {
           setShiftDirection={setShiftDirection}
         />
       </Flex>
-      {activeLog && (
-        <EditLogDialog
-          journeyId={journey.id}
-          log={activeLog}
-        />
-      )}
+      {activeLog && <EditLogDialog journeyId={journey.id} log={activeLog} />}
     </Container>
   );
 };

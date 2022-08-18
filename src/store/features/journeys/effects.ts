@@ -32,11 +32,11 @@ export const createJourneyEffect = createAsyncThunk(
 
 export const fetchJourneyEffect = createAsyncThunk(
   "journeys/fetchJourney",
-  async (data: { id: number | string }) => {
-    const { id } = data;
+  async (data: { journeyId: number | string }) => {
+    const { journeyId } = data;
     try {
       const response = await axios.get(
-        apiUrls.fetchJourney.replace("{id}", id.toString())
+        apiUrls.fetchJourney.replace("{journeyId}", journeyId.toString())
       );
       return response.data;
     } catch (e) {
@@ -47,11 +47,17 @@ export const fetchJourneyEffect = createAsyncThunk(
 
 export const createJourneyLogEffect = createAsyncThunk(
   "journeys/createLog",
-  async ({ data, id }: { data: JourneyLogFormData; id: number }) => {
+  async ({
+    data,
+    journeyId,
+  }: {
+    data: JourneyLogFormData;
+    journeyId: number;
+  }) => {
     const { media, ...rest } = data;
     try {
       const response = await axios.post<Log>(
-        apiUrls.createLog.replace("{id}", id.toString()),
+        apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media?.[0] },
         {
           headers: {
@@ -68,11 +74,17 @@ export const createJourneyLogEffect = createAsyncThunk(
 
 export const logJourneyAchievementEffect = createAsyncThunk(
   "journeys/logAchievement",
-  async ({ data, id }: { data: AddJourneyAchievementFormData; id: number }) => {
+  async ({
+    data,
+    journeyId,
+  }: {
+    data: AddJourneyAchievementFormData;
+    journeyId: number;
+  }) => {
     const { media, ...rest } = data;
     try {
       const response = await axios.post<Achievement>(
-        apiUrls.logAchievement.replace("{id}", id.toString()),
+        apiUrls.logAchievement.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media[0] },
         {
           headers: {
@@ -102,7 +114,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
     try {
       const response = await axios.patch<Log>(
         apiUrls.updateLog
-          .replace("{id}", journeyId.toString())
+          .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
         { ...rest, media: media?.[0] },
         {

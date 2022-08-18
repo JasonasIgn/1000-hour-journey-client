@@ -51,7 +51,7 @@ export const AddJourneyAchievementDialog: React.FC<
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: AddJourneyAchievementFormData) => {
     try {
-      await dispatch(logJourneyAchievementEffect({ data, id: journeyId }));
+      await dispatch(logJourneyAchievementEffect({ data, journeyId }));
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
