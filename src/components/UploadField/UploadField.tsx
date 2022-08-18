@@ -23,14 +23,25 @@ interface UploadFieldProps extends InputFieldProps {
   rootBoxProps?: BoxProps;
   ref?: Ref<HTMLInputElement>;
   onClear: () => void;
+  initialPreviewSrc?: string;
 }
 
 export const UploadField: FC<UploadFieldProps> = forwardRef(
   (
-    { label, errorMessage, formControlProps, onChange, onClear, ...rest },
+    {
+      label,
+      errorMessage,
+      formControlProps,
+      onChange,
+      onClear,
+      initialPreviewSrc,
+      ...rest
+    },
     ref
   ) => {
-    const [previewSrc, setPreviewSrc] = useState<string | null>();
+    const [previewSrc, setPreviewSrc] = useState<string | null>(
+      initialPreviewSrc || null
+    );
     return (
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>

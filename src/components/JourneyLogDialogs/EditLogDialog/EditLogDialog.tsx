@@ -120,6 +120,7 @@ export const EditLogDialog: React.FC<EditLogDialogProps> = ({
                 label="Media"
                 {...register("media")}
                 onClear={() => setValue("media", {} as FileList)}
+                initialPreviewSrc={log.mediaUrl}
               />
             </GridItem>
           </Grid>
