@@ -89,18 +89,25 @@ export const UploadField: FC<UploadFieldProps> = forwardRef(
                 }
               }}
             />
-            <Box position="absolute" width="40px" height="40px" fill="gray.400">
+            <Box
+              position="absolute"
+              width="40px"
+              height="40px"
+              fill="gray.400"
+              zIndex={-1}
+            >
               <UploadIcon fill="inherit" />
             </Box>
-            <Text fontSize="20px" mt="44px" position="absolute">
+            <Text fontSize="20px" mt="44px" position="absolute" zIndex={-1}>
               Drag&Drop files here
             </Text>
-            <Text mt="80px" position="absolute">
+            <Text mt="80px" position="absolute" zIndex={-1}>
               or
             </Text>
             <Button
               mt="120px"
               position="absolute"
+              zIndex={-1}
               onClick={() => {
                 const uploadInput = document.getElementById("upload-input");
                 if (uploadInput) {
