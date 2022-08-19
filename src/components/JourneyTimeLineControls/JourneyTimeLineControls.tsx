@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, MouseEvent } from "react";
 import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
 import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
 import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
@@ -16,8 +16,8 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   setIsPlaying: (playing: boolean) => void;
   isPlaying: boolean;
   totalHours: number;
-  openAddLogModal: (e: React.MouseEvent) => void;
-  openAddAchievementModal: (e: React.MouseEvent) => void;
+  openAddLogModal: (e: MouseEvent) => void;
+  openAddAchievementModal: (e: MouseEvent) => void;
   centerZoomOnThumb: (currentHourOverride?: number) => void;
 }
 

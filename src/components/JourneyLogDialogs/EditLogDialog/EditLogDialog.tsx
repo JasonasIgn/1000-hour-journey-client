@@ -20,7 +20,7 @@ import { journeyLogFormValidation } from "../validation";
 import { NumberInputField } from "components/NumberInputField/NumberInputField";
 import { updateJourneyLogEffect } from "store/features/journeys/effects";
 import { InputField } from "components/InputField/InputField";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { dateFormats } from "utils/constants";
 import { UploadField } from "components/UploadField/UploadField";
 import { LogExtended } from "store/features/journeys/types";
@@ -32,10 +32,7 @@ interface EditLogDialogProps {
   log: LogExtended;
 }
 
-export const EditLogDialog: React.FC<EditLogDialogProps> = ({
-  journeyId,
-  log,
-}) => {
+export const EditLogDialog: FC<EditLogDialogProps> = ({ journeyId, log }) => {
   const dispatch = useAppDispatch();
   const open = useAppSelector(getEditLogDialogOpen);
 

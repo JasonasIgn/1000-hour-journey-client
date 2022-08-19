@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Box, BoxProps } from "@chakra-ui/react";
 import { JourneyListItem } from "store/features/journeys/types";
 import { JourneysListItem } from "components/JourneysListItem/JourneysListItem";
@@ -7,7 +8,7 @@ interface JourneysListProps {
   rootBoxProps?: BoxProps;
 }
 
-export const JourneysList: React.FC<JourneysListProps> = ({
+export const JourneysList: FC<JourneysListProps> = ({
   journeys,
   rootBoxProps,
 }) => {

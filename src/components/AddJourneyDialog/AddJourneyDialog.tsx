@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createJourneyEffect } from "store/features/journeys/effects";
@@ -23,7 +23,7 @@ interface AddJourneyDialogProps {
   open: boolean;
 }
 
-export const AddJourneyDialog: React.FC<AddJourneyDialogProps> = ({
+export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   open,
   setOpen,
 }) => {

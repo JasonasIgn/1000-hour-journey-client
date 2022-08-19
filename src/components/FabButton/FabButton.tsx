@@ -1,6 +1,7 @@
+import { FC } from "react";
 import { Button, ButtonProps } from "@chakra-ui/react";
 
-export const FabButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
+export const FabButton: FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <Button
       position="fixed"

@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
@@ -31,7 +31,7 @@ interface AddLogDialogProps {
   journeyId: number;
 }
 
-export const AddLogDialog: React.FC<AddLogDialogProps> = ({
+export const AddLogDialog: FC<AddLogDialogProps> = ({
   open,
   setOpen,
   journeyId,

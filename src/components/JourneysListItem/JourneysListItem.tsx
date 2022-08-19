@@ -1,3 +1,4 @@
+import { FC } from "react";
 import {
   Box,
   Flex,
@@ -14,7 +15,7 @@ interface JourneysListItemProps {
   rootBoxProps?: FlexProps;
 }
 
-export const JourneysListItem: React.FC<JourneysListItemProps> = ({
+export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
   rootBoxProps,
 }) => {

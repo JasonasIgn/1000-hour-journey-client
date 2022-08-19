@@ -1,3 +1,4 @@
+import { useEffect, FC } from "react";
 import {
   Button,
   Grid,
@@ -21,7 +22,6 @@ import { NumberInputField } from "components/NumberInputField/NumberInputField";
 import { InputField } from "components/InputField/InputField";
 import { LogExtended } from "store/features/journeys/types";
 import { logJourneyAchievementEffect } from "store/features/journeys/effects";
-import { useEffect } from "react";
 import { dateFormats } from "utils/constants";
 import { UploadField } from "components/UploadField/UploadField";
 
@@ -33,7 +33,7 @@ interface AddJourneyAchievementDialogProps {
   currentHour: number;
 }
 
-export const AddJourneyAchievementDialog: React.FC<
+export const AddJourneyAchievementDialog: FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
