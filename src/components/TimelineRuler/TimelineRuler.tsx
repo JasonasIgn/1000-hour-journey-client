@@ -1,11 +1,11 @@
 import { Box, SliderMark, Text } from "@chakra-ui/react";
-import React, { FC } from "react";
+import { FC, memo } from "react";
 
 interface TimelineRulerProps {
   currentViewX: number;
 }
 
-export const TimelineRuler: FC<TimelineRulerProps> = React.memo(
+export const TimelineRuler: FC<TimelineRulerProps> = memo(
   ({ currentViewX }) => {
     const currentXHour = Math.round(
       Math.abs(Math.abs(currentViewX / 9.9)) + 21

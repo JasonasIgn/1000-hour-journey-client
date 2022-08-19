@@ -8,15 +8,15 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createJourneyEffect } from "../../store/features/journeys/effects";
-import { useAppDispatch } from "../../store/hooks";
-import { InputField } from "../InputField/InputField";
-import { TextAreaField } from "../TextAreaField/TextAreaField";
+import { createJourneyEffect } from "store/features/journeys/effects";
+import { useAppDispatch } from "store/hooks";
+import { InputField } from "components/InputField/InputField";
+import { TextAreaField } from "components/TextAreaField/TextAreaField";
 import { AddJourneyFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
-import { useEffect } from "react";
 
 interface AddJourneyDialogProps {
   setOpen: (open: boolean) => void;

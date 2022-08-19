@@ -1,10 +1,10 @@
-import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
-import { ReactComponent as PlayIcon } from "../../resources/play_icon.svg";
-import { ReactComponent as PauseIcon } from "../../resources/pause_icon.svg";
-import { ReactComponent as AchievementIcon } from "../../resources/achievement.svg";
-import { ReactComponent as PageIcon } from "../../resources/page.svg";
 import { FC, useEffect } from "react";
-import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
+import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
+import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
+import { ReactComponent as PageIcon } from "resources/page.svg";
+import { Achievement, LogExtended } from "store/features/journeys/types";
 import { getTickSpeed } from "./utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 

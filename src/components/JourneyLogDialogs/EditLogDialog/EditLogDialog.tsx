@@ -13,19 +13,19 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { TextAreaField } from "../../TextAreaField/TextAreaField";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { TextAreaField } from "components/TextAreaField/TextAreaField";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
-import { NumberInputField } from "../../NumberInputField/NumberInputField";
-import { updateJourneyLogEffect } from "../../../store/features/journeys/effects";
-import { InputField } from "../../InputField/InputField";
+import { NumberInputField } from "components/NumberInputField/NumberInputField";
+import { updateJourneyLogEffect } from "store/features/journeys/effects";
+import { InputField } from "components/InputField/InputField";
 import { useEffect } from "react";
-import { dateFormats } from "../../../utils/constants";
-import { UploadField } from "../../UploadField/UploadField";
-import { LogExtended } from "../../../store/features/journeys/types";
-import { setEditLogDialogOpen } from "../../../store/features/journeyView/slice";
-import { getEditLogDialogOpen } from "../../../store/features/journeyView/selectors";
+import { dateFormats } from "utils/constants";
+import { UploadField } from "components/UploadField/UploadField";
+import { LogExtended } from "store/features/journeys/types";
+import { setEditLogDialogOpen } from "store/features/journeyView/slice";
+import { getEditLogDialogOpen } from "store/features/journeyView/selectors";
 
 interface EditLogDialogProps {
   journeyId: number;

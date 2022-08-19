@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
 import { FC } from "react";
-import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "store/features/journeys/types";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
 import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
 

@@ -1,5 +1,5 @@
 import { FC, forwardRef, Ref, useState } from "react";
-import { ReactComponent as UploadIcon } from "../../resources/upload.svg";
+import { ReactComponent as UploadIcon } from "resources/upload.svg";
 import {
   Box,
   BoxProps,
@@ -12,7 +12,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { InputFieldProps } from "../InputField/InputField";
+import { InputFieldProps } from "components/InputField/InputField";
 import { UploadFieldImagePreview } from "./UploadFieldImagePreview";
 
 interface UploadFieldProps extends InputFieldProps {

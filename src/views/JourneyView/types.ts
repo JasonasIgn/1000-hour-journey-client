@@ -1,4 +1,4 @@
-import { Achievement, LogExtended } from "../../store/features/journeys/types";
+import { Achievement, LogExtended } from "store/features/journeys/types";
 
 export interface IdsHourMap {
   [index: number]: number;

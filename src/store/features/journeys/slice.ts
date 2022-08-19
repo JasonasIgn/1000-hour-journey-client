@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LoadingState } from "../../../types";
+import { LoadingState } from "types";
 import {
   createJourneyEffect,
   createJourneyLogEffect,

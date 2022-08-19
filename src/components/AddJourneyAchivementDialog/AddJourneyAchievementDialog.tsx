@@ -13,17 +13,17 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
-import { useAppDispatch } from "../../store/hooks";
-import { TextAreaField } from "../TextAreaField/TextAreaField";
+import { useAppDispatch } from "store/hooks";
+import { TextAreaField } from "components/TextAreaField/TextAreaField";
 import { AddJourneyAchievementFormData } from "./types";
 import { addJourneyAchievementFormValidation } from "./validation";
-import { NumberInputField } from "../NumberInputField/NumberInputField";
-import { InputField } from "../InputField/InputField";
-import { LogExtended } from "../../store/features/journeys/types";
-import { logJourneyAchievementEffect } from "../../store/features/journeys/effects";
+import { NumberInputField } from "components/NumberInputField/NumberInputField";
+import { InputField } from "components/InputField/InputField";
+import { LogExtended } from "store/features/journeys/types";
+import { logJourneyAchievementEffect } from "store/features/journeys/effects";
 import { useEffect } from "react";
-import { dateFormats } from "../../utils/constants";
-import { UploadField } from "../UploadField/UploadField";
+import { dateFormats } from "utils/constants";
+import { UploadField } from "components/UploadField/UploadField";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Achievement, LogExtended } from "../../store/features/journeys/types";
-import { ShiftDirection } from "../../types";
-import { generateId } from "../../utils/helpers";
+import { Achievement, LogExtended } from "store/features/journeys/types";
+import { ShiftDirection } from "types";
+import { generateId } from "utils/helpers";
 
 interface Card {
   key: string;

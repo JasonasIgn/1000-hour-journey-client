@@ -1,17 +1,17 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { useParams } from "react-router-dom";
-import { EditLogDialog } from "../../components/JourneyLogDialogs/EditLogDialog/EditLogDialog";
-import { JourneyTimeLine } from "../../components/JourneyTimeLine/JourneyTimeLine";
-import { Showcase } from "../../components/Showcase/Showcase";
-import { fetchJourneyEffect } from "../../store/features/journeys/effects";
-import { getJourney } from "../../store/features/journeys/selectors";
-import { resetJourney } from "../../store/features/journeys/slice";
-import { Achievement, LogExtended } from "../../store/features/journeys/types";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { ShiftDirection } from "../../types";
+import { EditLogDialog } from "components/JourneyLogDialogs/EditLogDialog/EditLogDialog";
+import { JourneyTimeLine } from "components/JourneyTimeLine/JourneyTimeLine";
+import { Showcase } from "components/Showcase/Showcase";
+import { fetchJourneyEffect } from "store/features/journeys/effects";
+import { getJourney } from "store/features/journeys/selectors";
+import { resetJourney } from "store/features/journeys/slice";
+import { Achievement, LogExtended } from "store/features/journeys/types";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { ShiftDirection } from "types";
 
-export const JourneyView: React.FC = () => {
+export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);

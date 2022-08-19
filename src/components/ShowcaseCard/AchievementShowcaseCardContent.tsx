@@ -1,8 +1,8 @@
 import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
-import { Achievement } from "../../store/features/journeys/types";
-import { dateFormats } from "../../utils/constants";
+import { Achievement } from "store/features/journeys/types";
+import { dateFormats } from "utils/constants";
 
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;

@@ -1,6 +1,6 @@
 import { Box, BoxProps } from "@chakra-ui/react";
-import { JourneyListItem } from "../../store/features/journeys/types";
-import { JourneysListItem } from "../JourneysListItem/JourneysListItem";
+import { JourneyListItem } from "store/features/journeys/types";
+import { JourneysListItem } from "components/JourneysListItem/JourneysListItem";
 
 interface JourneysListProps {
   journeys: JourneyListItem[];

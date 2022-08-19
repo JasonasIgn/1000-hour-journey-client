@@ -9,11 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
-import { ReactComponent as EditIcon } from "../../resources/edit.svg";
-import { LogExtended } from "../../store/features/journeys/types";
-import { dateFormats } from "../../utils/constants";
-import { useAppDispatch } from "../../store/hooks";
-import { setEditLogDialogOpen } from "../../store/features/journeyView/slice";
+import { ReactComponent as EditIcon } from "resources/edit.svg";
+import { LogExtended } from "store/features/journeys/types";
+import { dateFormats } from "utils/constants";
+import { useAppDispatch } from "store/hooks";
+import { setEditLogDialogOpen } from "store/features/journeyView/slice";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;

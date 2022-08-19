@@ -1,4 +1,4 @@
-import { Achievement, Log } from "../../store/features/journeys/types";
+import { Achievement, Log } from "store/features/journeys/types";
 import { LogsDictionary, IdsHourMap, AchievementsDictionary } from "./types";
 
 export const getLogHoursMap = (logs: Log[]): IdsHourMap => {

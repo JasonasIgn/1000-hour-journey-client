@@ -8,34 +8,27 @@ import {
   Text,
 } from "@chakra-ui/react";
 import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
-import { ReactComponent as AchievementIcon } from "../../resources/achievement.svg";
-import React, {
-  FC,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Achievement,
   Journey,
   LogExtended,
-} from "../../store/features/journeys/types";
+} from "store/features/journeys/types";
 import format from "date-fns/format";
 import {
   getAchievementHoursMap,
   getAchievementsDictionary,
   getLogHoursMap,
   getLogsDictionary,
-} from "../../views/JourneyView/utils";
+} from "views/JourneyView/utils";
 import { getInitialXPosition } from "./utils";
-import { JourneyTimeLineControls } from "../JourneyTimeLineControls/JourneyTimeLineControls";
-import { TimelineRuler } from "../TimelineRuler/TimelineRuler";
-import { ShiftDirection } from "../../types";
-import { AddLogDialog } from "../JourneyLogDialogs/AddLogDialog/AddLogDialog";
-import { AddJourneyAchievementDialog } from "../AddJourneyAchivementDialog/AddJourneyAchievementDialog";
-import { dateFormats } from "../../utils/constants";
+import { JourneyTimeLineControls } from "components/JourneyTimeLineControls/JourneyTimeLineControls";
+import { TimelineRuler } from "components/TimelineRuler/TimelineRuler";
+import { ShiftDirection } from "types";
+import { AddLogDialog } from "components/JourneyLogDialogs/AddLogDialog/AddLogDialog";
+import { AddJourneyAchievementDialog } from "components/AddJourneyAchivementDialog/AddJourneyAchievementDialog";
+import { dateFormats } from "utils/constants";
 
 interface JourneyTimeLineProps {
   journey: Journey;

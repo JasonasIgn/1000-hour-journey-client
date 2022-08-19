@@ -1,6 +1,6 @@
 import { Flex, Image, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import Logo from "../../resources/logo.png";
+import Logo from "resources/logo.png";
 
 export const Header = () => {
   return (
