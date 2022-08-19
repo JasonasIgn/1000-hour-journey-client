@@ -13,8 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
-import { InputField } from "components/InputField/InputField";
-import { TextAreaField } from "components/TextAreaField/TextAreaField";
+import { InputField, TextAreaField } from "components";
 import { AddJourneyFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
 

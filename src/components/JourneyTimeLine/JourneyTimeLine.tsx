@@ -23,11 +23,13 @@ import {
   getLogsDictionary,
 } from "views/JourneyView/utils";
 import { getInitialXPosition } from "./utils";
-import { JourneyTimeLineControls } from "components/JourneyTimeLineControls/JourneyTimeLineControls";
-import { TimelineRuler } from "components/TimelineRuler/TimelineRuler";
+import {
+  JourneyTimeLineControls,
+  TimelineRuler,
+  AddLogDialog,
+  AddJourneyAchievementDialog,
+} from "components";
 import { ShiftDirection } from "types";
-import { AddLogDialog } from "components/JourneyLogDialogs/AddLogDialog/AddLogDialog";
-import { AddJourneyAchievementDialog } from "components/AddJourneyAchivementDialog/AddJourneyAchievementDialog";
 import { dateFormats } from "utils/constants";
 
 interface JourneyTimeLineProps {

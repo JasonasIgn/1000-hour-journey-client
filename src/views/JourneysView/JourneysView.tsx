@@ -7,9 +7,7 @@ import {
   getJourneysListLoadingState,
 } from "store/features/journeys/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { JourneysList } from "components/JourneysList/JourneysList";
-import { FabButton } from "components/FabButton/FabButton";
-import { AddJourneyDialog } from "components/AddJourneyDialog/AddJourneyDialog";
+import { JourneysList, FabButton, AddJourneyDialog } from "components";
 
 export const JourneysView: FC = () => {
   const dispatch = useAppDispatch();

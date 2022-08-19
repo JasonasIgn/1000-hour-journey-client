@@ -15,15 +15,17 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { TextAreaField } from "components/TextAreaField/TextAreaField";
+import {
+  TextAreaField,
+  NumberInputField,
+  InputField,
+  UploadField,
+} from "components";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
-import { NumberInputField } from "components/NumberInputField/NumberInputField";
 import { createJourneyLogEffect } from "store/features/journeys/effects";
-import { InputField } from "components/InputField/InputField";
 import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
-import { UploadField } from "components/UploadField/UploadField";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;

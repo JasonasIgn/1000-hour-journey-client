@@ -12,7 +12,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { InputFieldProps } from "components/InputField/InputField";
+import { InputFieldProps } from "components";
 import { UploadFieldImagePreview } from "./UploadFieldImagePreview";
 
 interface UploadFieldProps extends InputFieldProps {

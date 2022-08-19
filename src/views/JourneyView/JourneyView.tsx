@@ -1,9 +1,7 @@
 import { Container, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState, FC } from "react";
 import { useParams } from "react-router-dom";
-import { EditLogDialog } from "components/JourneyLogDialogs/EditLogDialog/EditLogDialog";
-import { JourneyTimeLine } from "components/JourneyTimeLine/JourneyTimeLine";
-import { Showcase } from "components/Showcase/Showcase";
+import { EditLogDialog, JourneyTimeLine, Showcase } from "components";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { getJourney } from "store/features/journeys/selectors";
 import { resetJourney } from "store/features/journeys/slice";

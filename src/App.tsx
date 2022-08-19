@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Header } from "components/Header/Header";
+import { Header } from "components";
 import { JourneysView } from "views/JourneysView/JourneysView";
 import { JourneyView } from "views/JourneyView/JourneyView";
 
