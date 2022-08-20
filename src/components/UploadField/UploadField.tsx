@@ -107,7 +107,6 @@ export const UploadField: FC<UploadFieldProps> = forwardRef(
             <Button
               mt="120px"
               position="absolute"
-              zIndex={-1}
               onClick={() => {
                 const uploadInput = document.getElementById("upload-input");
                 if (uploadInput) {
