@@ -24,7 +24,7 @@ export const JourneysView: FC = () => {
   return (
     <Container maxW="6xl" pt={5}>
       <Heading>Journeys</Heading>
-      <JourneysList journeys={list} rootBoxProps={{ mt: 10, mb: 120 }} />
+      <JourneysList journeys={list} rootBoxProps={{ mt: 10, pb: 120 }} />
       <FabButton onClick={() => setModalOpen(true)}>
         <AddIcon />
       </FabButton>
