@@ -3,9 +3,9 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const ModalStyle: ComponentStyleConfig = {
   baseStyle: {
     dialog: {
-      bgColor: "brand.800",
+      bgColor: "brand.900",
       border: "2px solid",
-      borderColor: "brand.700",
+      borderColor: "brand.800",
     },
     header: {
       color: "gray.400",
@@ -20,7 +20,7 @@ export const ModalStyle: ComponentStyleConfig = {
       _hover: {
         color: "brand.300",
         borderColor: "brand.300",
-        bgColor: "brand.700",
+        bgColor: "brand.800",
       },
     },
   },
