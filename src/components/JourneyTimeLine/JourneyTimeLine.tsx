@@ -31,6 +31,7 @@ import {
 } from "components";
 import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
+import { useSpaceKeyForPlaying } from "./hooks";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -55,12 +56,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
   const shouldSpaceTriggerPlay = !addLogModalOpen && !addAchievementModalOpen;
-  const spacePlayRef = useRef<{
-    isPlaying: boolean;
-    shouldSpaceTriggerPlay: boolean;
-  }>({ isPlaying, shouldSpaceTriggerPlay });
+
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
+
+  useSpaceKeyForPlaying({ isPlaying, setIsPlaying, shouldSpaceTriggerPlay });
 
   const hoursToLogMap = useMemo(
     () => getLogHoursMap(journey?.logs || []),
@@ -89,13 +89,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const setNewCurrentHour = (hour: number) => {
     setCurrentHour(Math.round(hour * 10) / 10);
     setShiftDirection(hour > currentHour ? "left" : "right");
-  };
-
-  // TODO: Move to hook
-  const spaceKeyHandler = ({ key }: KeyboardEvent) => {
-    if (key === " " && spacePlayRef.current.shouldSpaceTriggerPlay) {
-      setIsPlaying(!spacePlayRef.current.isPlaying);
-    }
   };
 
   const onUpdate = useCallback(({ x, scale }: any) => {
@@ -129,17 +122,9 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, [currentHour]);
 
   useEffect(() => {
-    window.addEventListener("keyup", spaceKeyHandler);
     centerZoomOnThumb();
-    return () => {
-      window.removeEventListener("keyup", spaceKeyHandler);
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    spacePlayRef.current = { shouldSpaceTriggerPlay, isPlaying };
-  }, [isPlaying, shouldSpaceTriggerPlay]);
 
   useEffect(() => {
     setActiveLog(activeLog);
