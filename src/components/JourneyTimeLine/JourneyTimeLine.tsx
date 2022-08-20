@@ -187,7 +187,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             : "-"}
         </Text>
         <Text ml={6} mt={12} position="absolute">
-          Hour: &nbsp;{currentHour}
+          Hour: &nbsp;{currentHour < 0 ? 0 : currentHour}
         </Text>
         <QuickPinchZoom
           onUpdate={onUpdate}
