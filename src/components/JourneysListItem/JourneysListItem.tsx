@@ -65,8 +65,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           <CircularProgress
             thickness={6}
             value={journey.totalHours / 10}
-            color="brand.400"
+            color="brand.300"
             size="90px"
+            trackColor="gray.400"
           >
             <CircularProgressLabel color="white">
               {journey.totalHours / 10}%
