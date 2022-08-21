@@ -49,6 +49,10 @@ export const journeysSlice = createSlice({
       })
       .addCase(createJourneyLogEffect.fulfilled, (state, action) => {
         if (state.journey && action.payload) {
+          const listItemIndex = state.list.findIndex(
+            (journey) => journey.id === action.payload?.journeyId
+          );
+          state.list[listItemIndex].totalHours += action.payload.hoursSpent;
           state.journey.logs.push(action.payload);
           state.journey.totalHours += action.payload.hoursSpent;
         }
