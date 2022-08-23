@@ -7,4 +7,5 @@ export const apiUrls = {
   createLog: `${API_BASE}/journey/{journeyId}/logs`,
   updateLog: `${API_BASE}/journey/{journeyId}/logs/{logId}`,
   logAchievement: `${API_BASE}/journey/{journeyId}/achievements`,
+  updateJourney: `${API_BASE}/journeys/{journeyId}`,
 };

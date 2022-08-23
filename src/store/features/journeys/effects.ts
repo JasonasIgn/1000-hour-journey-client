@@ -4,7 +4,7 @@ import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDi
 import { JourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
-import { Achievement, Log } from "./types";
+import { Achievement, Journey, Log } from "./types";
 
 export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
@@ -125,6 +125,27 @@ export const updateJourneyLogEffect = createAsyncThunk(
         apiUrls.updateLog
           .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
+        { ...rest, media: media?.[0] },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);
+
+export const updateJourneyEffect = createAsyncThunk(
+  "journeys/updateJourney",
+  async ({ data, journeyId }: { data: JourneyFormData; journeyId: number }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.patch<Journey>(
+        apiUrls.updateJourney.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media?.[0] },
         {
           headers: {
