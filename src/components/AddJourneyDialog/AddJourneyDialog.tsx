@@ -49,7 +49,7 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   }, [open, reset]);
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)}>
+    <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
         <ModalHeader>Create new journey</ModalHeader>
