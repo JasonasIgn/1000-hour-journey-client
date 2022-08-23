@@ -45,7 +45,10 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      reset();
+      reset({
+        title: journey?.title,
+        description: journey?.description,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, reset]);
@@ -73,6 +76,7 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
             label="Media"
             {...register("media")}
             onClear={() => setValue("media", {} as FileList)}
+            initialPreviewSrc={journey?.mediaUrl}
           />
         </ModalBody>
 
