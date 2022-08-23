@@ -41,15 +41,17 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         navigate(`/journeys/${journey.id}`);
       }}
     >
-      <Box
+      <Flex
         width={144}
         minWidth={144}
         height="100%"
         border="1px solid"
         borderColor="brand.300"
+        alignItems="center"
+        justifyContent="center"
       >
         <Image src={journey.mediaUrl || Logo} />
-      </Box>
+      </Flex>
       <Box ml={5}>
         <Heading size="lg">{journey.title}</Heading>
         <Text fontSize="sm">{journey.description}</Text>
@@ -70,7 +72,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
             trackColor="gray.400"
           >
             <CircularProgressLabel color="white">
-              {Math.round((journey.totalHours) * 10) / 100}%
+              {Math.round(journey.totalHours * 10) / 100}%
             </CircularProgressLabel>
           </CircularProgress>
         </Box>
