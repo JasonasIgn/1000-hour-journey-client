@@ -5,6 +5,7 @@ export interface JourneyListItem {
   totalHours: number;
   createdAt: Date;
   updatedAt: Date;
+  mediaUrl?: string;
 }
 
 export interface Log {

@@ -48,7 +48,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         border="1px solid"
         borderColor="brand.300"
       >
-        <Image src={Logo} />
+        <Image src={journey.mediaUrl || Logo} />
       </Box>
       <Box ml={5}>
         <Heading size="lg">{journey.title}</Heading>
