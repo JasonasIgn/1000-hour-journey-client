@@ -16,17 +16,19 @@ import { useAppDispatch } from "store/hooks";
 import { InputField, TextAreaField, UploadField } from "components";
 import { JourneyFormData } from "../types";
 import { journeyFormValidation } from "../validation";
+import { JourneyListItem } from "store/features/journeys/types";
 
-interface AddJourneyDialogProps {
-  setOpen: (open: boolean) => void;
-  open: boolean;
+interface EditJourneyDialogProps {
+  handleClose: () => void;
+  journey: JourneyListItem | null;
 }
 
-export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
-  open,
-  setOpen,
+export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
+  handleClose,
+  journey,
 }) => {
   const dispatch = useAppDispatch();
+  const isOpen = Boolean(journey);
   const { register, handleSubmit, formState, reset, setValue } =
     useForm<JourneyFormData>({
       resolver: yupResolver(journeyFormValidation),
@@ -35,24 +37,24 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   const onSubmit = async (data: any) => {
     try {
       await dispatch(createJourneyEffect(data));
-      setOpen(false);
+      handleClose();
     } catch (e) {
       console.error("Caught error", e);
     }
   };
 
   useEffect(() => {
-    if (open) {
+    if (isOpen) {
       reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, reset]);
+  }, [isOpen, reset]);
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
+    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Create new journey</ModalHeader>
+        <ModalHeader>Edit journey</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <InputField
@@ -75,7 +77,7 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button mr={3} onClick={() => setOpen(false)}>
+          <Button mr={3} onClick={handleClose}>
             Close
           </Button>
           <Button variant="ghost" type="submit" disabled={isSubmitting}>

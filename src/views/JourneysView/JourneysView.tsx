@@ -7,13 +7,22 @@ import {
   getJourneysListLoadingState,
 } from "store/features/journeys/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { JourneysList, FabButton, AddJourneyDialog } from "components";
+import {
+  JourneysList,
+  FabButton,
+  AddJourneyDialog,
+  EditJourneyDialog,
+} from "components";
+import { JourneyListItem } from "store/features/journeys/types";
 
 export const JourneysView: FC = () => {
   const dispatch = useAppDispatch();
   const listLoadingState = useAppSelector(getJourneysListLoadingState);
   const list = useAppSelector(getJourneysList);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingJourney, setEditingJourney] = useState<JourneyListItem | null>(
+    null
+  );
 
   useEffect(() => {
     if (listLoadingState === "pristine") {
@@ -24,11 +33,19 @@ export const JourneysView: FC = () => {
   return (
     <Container maxW="6xl" pt={5}>
       <Heading>Journeys</Heading>
-      <JourneysList journeys={list} rootBoxProps={{ mt: 10, pb: 120 }} />
+      <JourneysList
+        journeys={list}
+        rootBoxProps={{ mt: 10, pb: 120 }}
+        openEditJourneyDialog={setEditingJourney}
+      />
       <FabButton onClick={() => setModalOpen(true)}>
         <AddIcon />
       </FabButton>
       <AddJourneyDialog open={modalOpen} setOpen={setModalOpen} />
+      <EditJourneyDialog
+        journey={editingJourney}
+        handleClose={() => setEditingJourney(null)}
+      />
     </Container>
   );
 };

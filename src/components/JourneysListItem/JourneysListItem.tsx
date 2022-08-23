@@ -18,11 +18,13 @@ import { JourneyListItem } from "store/features/journeys/types";
 interface JourneysListItemProps {
   journey: JourneyListItem;
   rootBoxProps?: FlexProps;
+  onEditClick: () => void;
 }
 
 export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
   rootBoxProps,
+  onEditClick,
 }) => {
   let navigate = useNavigate();
   return (
@@ -97,9 +99,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         color="brand.700"
         border="1px solid"
         top="-10px"
-        onClick={() => {
-          console.log("open edit modal");
-        }}
+        onClick={onEditClick}
       />
     </Flex>
   );
