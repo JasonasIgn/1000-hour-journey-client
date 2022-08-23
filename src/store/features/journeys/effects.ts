@@ -21,8 +21,17 @@ export const fetchJourneysListEffect = createAsyncThunk(
 export const createJourneyEffect = createAsyncThunk(
   "journeys/create",
   async (data: AddJourneyFormData) => {
+    const { media, ...rest } = data;
     try {
-      const response = await axios.post(apiUrls.createJourney, data);
+      const response = await axios.post(
+        apiUrls.createJourney,
+        { ...rest, media: media?.[0] },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       return response.data;
     } catch (e) {
       console.log("error:", e);
