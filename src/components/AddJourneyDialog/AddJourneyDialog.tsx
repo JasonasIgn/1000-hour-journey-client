@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
-import { InputField, TextAreaField } from "components";
+import { InputField, TextAreaField, UploadField } from "components";
 import { AddJourneyFormData } from "./types";
 import { addJourneyFormValidation } from "./validation";
 
@@ -27,7 +27,7 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   setOpen,
 }) => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, reset } =
+  const { register, handleSubmit, formState, reset, setValue } =
     useForm<AddJourneyFormData>({
       resolver: yupResolver(addJourneyFormValidation),
     });
@@ -65,6 +65,12 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
             label="Description"
             {...register("description")}
             errorMessage={errors.description?.message}
+            formControlProps={{ mb: 3 }}
+          />
+          <UploadField
+            label="Media"
+            {...register("media")}
+            onClear={() => setValue("media", {} as FileList)}
           />
         </ModalBody>
 
