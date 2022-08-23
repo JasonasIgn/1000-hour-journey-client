@@ -55,7 +55,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         alignItems="center"
         justifyContent="center"
       >
-        <Image src={journey.mediaUrl || Logo} />
+        <Image src={journey.mediaUrl || Logo} maxHeight="100%" />
       </Flex>
       <Box ml={5}>
         <Heading size="lg">{journey.title}</Heading>
