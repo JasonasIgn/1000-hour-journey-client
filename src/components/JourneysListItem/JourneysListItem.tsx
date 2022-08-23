@@ -8,7 +8,9 @@ import {
   Heading,
   Text,
   Image,
+  IconButton,
 } from "@chakra-ui/react";
+import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
 import { useNavigate } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
@@ -25,6 +27,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   let navigate = useNavigate();
   return (
     <Flex
+      position="relative"
       height={180}
       bg="brand.800"
       borderRadius={28}
@@ -85,6 +88,19 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           </Text>
         </Flex>
       </Flex>
+      <IconButton
+        icon={<EditIcon width="22px" fill="white" />}
+        aria-label="edit"
+        position="absolute"
+        borderRadius="50%"
+        right="-20px"
+        color="brand.700"
+        border="1px solid"
+        top="-10px"
+        onClick={() => {
+          console.log("open edit modal");
+        }}
+      />
     </Flex>
   );
 };
