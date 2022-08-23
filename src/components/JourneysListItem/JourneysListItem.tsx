@@ -99,7 +99,10 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         color="brand.700"
         border="1px solid"
         top="-10px"
-        onClick={onEditClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onEditClick();
+        }}
       />
     </Flex>
   );
