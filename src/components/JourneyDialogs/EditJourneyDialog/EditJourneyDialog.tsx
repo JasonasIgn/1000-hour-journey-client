@@ -11,7 +11,7 @@ import {
 import { useEffect, FC } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createJourneyEffect } from "store/features/journeys/effects";
+import { updateJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
 import { InputField, TextAreaField, UploadField } from "components";
 import { JourneyFormData } from "../types";
@@ -36,7 +36,10 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: any) => {
     try {
-      await dispatch(createJourneyEffect(data));
+      if (!journey) {
+        throw new Error("No journey selected");
+      }
+      await dispatch(updateJourneyEffect({ data, journeyId: journey.id }));
       handleClose();
     } catch (e) {
       console.error("Caught error", e);
