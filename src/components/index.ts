@@ -1,5 +1,5 @@
 export * from "./AddJourneyAchivementDialog";
-export * from "./AddJourneyDialog";
+export * from "./JourneyDialogs";
 export * from "./FabButton";
 export * from "./Header";
 export * from "./InputField";

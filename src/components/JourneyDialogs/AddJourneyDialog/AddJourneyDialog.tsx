@@ -14,8 +14,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
 import { InputField, TextAreaField, UploadField } from "components";
-import { AddJourneyFormData } from "./types";
-import { addJourneyFormValidation } from "./validation";
+import { AddJourneyFormData } from "../types";
+import { addJourneyFormValidation } from "../validation";
 
 interface AddJourneyDialogProps {
   setOpen: (open: boolean) => void;

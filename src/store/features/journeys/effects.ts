@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDialog/types";
-import { AddJourneyFormData } from "components/AddJourneyDialog/types";
+import { AddJourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
 import { Achievement, Log } from "./types";
