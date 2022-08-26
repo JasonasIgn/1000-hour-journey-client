@@ -119,7 +119,11 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({ journeyId, log }) => {
                 label="Media"
                 {...register("media")}
                 onClear={() => setValue("media", {} as FileList)}
-                initialPreviewSrc={log.mediaUrl}
+                initialPreviewSrc={
+                  log?.mediaUrl
+                    ? `${log.mediaUrl}?${log.updatedAt.toString()}` // prevents caching
+                    : undefined
+                }
               />
             </GridItem>
           </Grid>

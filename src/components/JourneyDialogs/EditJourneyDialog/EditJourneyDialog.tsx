@@ -79,7 +79,11 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
             label="Media"
             {...register("media")}
             onClear={() => setValue("media", {} as FileList)}
-            initialPreviewSrc={journey?.mediaUrl}
+            initialPreviewSrc={
+              journey?.mediaUrl
+                ? `${journey?.mediaUrl}?${journey.updatedAt.toString()}` // prevent caching
+                : undefined
+            }
           />
         </ModalBody>
 
