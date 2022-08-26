@@ -53,7 +53,8 @@ export const journeysSlice = createSlice({
           const listItemIndex = state.list.findIndex(
             (journey) => journey.id === action.payload?.journeyId
           );
-          state.list[listItemIndex].totalHours += action.payload.hoursSpent;
+          state.list[listItemIndex].totalHours +=
+            Math.round(action.payload.hoursSpent * 10) / 10;
           state.journey.logs.push(action.payload);
           state.journey.totalHours += action.payload.hoursSpent;
         }
