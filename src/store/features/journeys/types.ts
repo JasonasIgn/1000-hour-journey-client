@@ -16,6 +16,7 @@ export interface Log {
   significanceLevel: number;
   loggedOn: Date;
   mediaUrl?: string;
+  updatedAt: Date;
 }
 
 export interface LogExtended extends Log {
@@ -29,6 +30,7 @@ export interface Achievement {
   description: string;
   loggedOnDate: Date;
   mediaUrl?: string;
+  updatedAt: Date;
 }
 
 export interface Journey extends JourneyListItem {

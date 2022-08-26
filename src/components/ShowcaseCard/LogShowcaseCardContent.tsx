@@ -67,7 +67,10 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
 
       {log?.mediaUrl && (
         <Flex height="80%" flex="1 1 auto" justifyContent="center">
-          <Image src={log.mediaUrl} alt={`${log.id} media`} />
+          <Image
+            src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
+            alt={`${log.id} media`}
+          />
         </Flex>
       )}
     </>

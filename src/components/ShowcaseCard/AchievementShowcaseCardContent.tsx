@@ -35,7 +35,10 @@ export const AchievementShowcaseCardContent: FC<
 
       {achievement?.mediaUrl && (
         <Flex height="80%" flex="1 1 auto" justifyContent="center">
-          <Image src={achievement.mediaUrl} alt={`${achievement.id} media`} />
+          <Image
+            src={`${achievement.mediaUrl}?${achievement.updatedAt.toString()}`} // prevent caching
+            alt={`${achievement.id} media`}
+          />
         </Flex>
       )}
     </>
