@@ -57,7 +57,11 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       >
         <Image
           key={journey.updatedAt.toString()}
-          src={`${journey.mediaUrl}?${journey.updatedAt.toString()}` || Logo} // Prevent caching
+          src={
+            journey?.mediaUrl
+              ? `${journey.mediaUrl}?${journey.updatedAt.toString()}` // Prevent caching
+              : Logo
+          }
           maxHeight="100%"
         />
       </Flex>
