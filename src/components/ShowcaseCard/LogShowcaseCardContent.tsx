@@ -69,7 +69,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           </Heading>
         </Box>
         <Box textAlign="center">
-          <Text> Hours spent</Text>
+          <Text>Hours spent</Text>
           <Heading>{log.hoursSpent}</Heading>
         </Box>
       </Flex>
