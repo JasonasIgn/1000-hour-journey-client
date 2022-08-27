@@ -1,5 +1,6 @@
 import {
   Box,
+  chakra,
   Flex,
   FlexProps,
   Heading,
@@ -9,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import format from "date-fns/format";
-import { ReactComponent as EditIcon } from "resources/edit.svg";
+import { ReactComponent as EditIconComponent } from "resources/edit.svg";
 import { LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 import { useAppDispatch } from "store/hooks";
@@ -18,6 +19,8 @@ import { setEditLogDialogOpen } from "store/features/journeyView/slice";
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
 }
+
+const EditIcon = chakra(EditIconComponent);
 
 export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   log,
@@ -35,7 +38,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         alignItems="center"
       >
         <IconButton
-          icon={<EditIcon width="22px" fill="white" />}
+          icon={<EditIcon width="22px" fill="gray.300" />}
           aria-label="edit"
           position="absolute"
           borderRadius="50%"

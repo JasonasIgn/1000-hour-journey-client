@@ -9,8 +9,9 @@ import {
   Text,
   Image,
   IconButton,
+  chakra,
 } from "@chakra-ui/react";
-import { ReactComponent as EditIcon } from "resources/edit.svg";
+import { ReactComponent as EditIconComponent } from "resources/edit.svg";
 import Logo from "resources/logo.png";
 import { useNavigate } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
@@ -20,6 +21,8 @@ interface JourneysListItemProps {
   rootBoxProps?: FlexProps;
   onEditClick: () => void;
 }
+
+const EditIcon = chakra(EditIconComponent);
 
 export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
@@ -99,7 +102,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         </Flex>
       </Flex>
       <IconButton
-        icon={<EditIcon width="22px" fill="white" />}
+        icon={<EditIcon width="22px" fill="gray.300" />}
         aria-label="edit"
         position="absolute"
         borderRadius="50%"

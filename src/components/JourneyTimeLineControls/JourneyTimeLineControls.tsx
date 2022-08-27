@@ -1,9 +1,15 @@
 import { FC, useEffect, MouseEvent } from "react";
-import { FlexProps, IconButton, Flex, useInterval } from "@chakra-ui/react";
-import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
-import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
-import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
-import { ReactComponent as PageIcon } from "resources/page.svg";
+import {
+  FlexProps,
+  IconButton,
+  Flex,
+  useInterval,
+  chakra,
+} from "@chakra-ui/react";
+import { ReactComponent as PlayIconComponent } from "resources/play_icon.svg";
+import { ReactComponent as PauseIconComponent } from "resources/pause_icon.svg";
+import { ReactComponent as AchievementIconComponent } from "resources/achievement.svg";
+import { ReactComponent as PageIconComponent } from "resources/page.svg";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { getTickSpeed } from "./utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
@@ -20,6 +26,11 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   openAddAchievementModal: (e: MouseEvent) => void;
   centerZoomOnThumb: (currentHourOverride?: number) => void;
 }
+
+const PageIcon = chakra(PageIconComponent);
+const AchievementIcon = chakra(AchievementIconComponent);
+const PauseIcon = chakra(PauseIconComponent);
+const PlayIcon = chakra(PlayIconComponent);
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   currentHour,
@@ -66,9 +77,9 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
         <IconButton
           icon={
             isPlaying ? (
-              <PauseIcon width={20} height={20} fill="white" />
+              <PauseIcon width="20px" height="20px" fill="gray.300" />
             ) : (
-              <PlayIcon fill="white" />
+              <PlayIcon fill="gray.300" />
             )
           }
           aria-label="Play Journey"
@@ -88,14 +99,14 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       </Flex>
       <Flex>
         <IconButton
-          icon={<AchievementIcon width={22} height={22} stroke="white" />}
+          icon={<AchievementIcon width={22} height={22} stroke="gray.300" />}
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
           disabled={!activeLog}
         />
         <IconButton
           ml={2}
-          icon={<PageIcon width={22} height={22} fill="white" />}
+          icon={<PageIcon width={22} height={22} fill="gray.300" />}
           aria-label="Add log"
           onClick={openAddLogModal}
         />
