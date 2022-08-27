@@ -23,7 +23,7 @@ export const AchievementShowcaseCardContent: FC<
       >
         <Box textAlign="left">
           <Text>Achievement</Text>
-          <Heading>#0</Heading>
+          <Heading> </Heading>
         </Box>
         <Box textAlign="left">
           <Text>Date</Text>
