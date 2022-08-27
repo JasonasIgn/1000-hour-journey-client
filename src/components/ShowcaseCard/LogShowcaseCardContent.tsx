@@ -73,7 +73,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           <Heading>{log.hoursSpent}</Heading>
         </Box>
       </Flex>
-      <Flex height="80%" width="100%">
+      <Flex height="84%" width="100%">
         <Flex flex="1 1 40%">
           <Text>{log.description}</Text>
         </Flex>
@@ -90,6 +90,8 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
             <Image
               src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
+              margin="auto"
+              maxHeight="100%"
             />
           </Flex>
         )}
