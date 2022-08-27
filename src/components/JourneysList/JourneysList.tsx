@@ -16,7 +16,7 @@ export const JourneysList: FC<JourneysListProps> = ({
 }) => {
   return (
     <Box {...rootBoxProps}>
-      {journeys.map((item) => (
+      {journeys?.map((item) => (
         <JourneysListItem
           journey={item}
           key={item.id}
