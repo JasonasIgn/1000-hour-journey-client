@@ -45,37 +45,55 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           right="-20px"
           color="brand.700"
           border="1px solid"
-          onClick={() => dispatch(setEditLogDialogOpen(true))}
+          onClick={() => {
+            dispatch(setEditLogDialogOpen(true));
+          }}
         />
       </Flex>
-      <Flex flexDirection="column" {...rest}>
-        <Flex justifyContent="space-between">
-          <Box textAlign="center">
-            <Heading>Log #{log.number}</Heading>
-          </Box>
-          <Box textAlign="center">
-            <Heading>
-              {format(new Date(log.loggedOn), dateFormats.standart)}
-            </Heading>
-          </Box>
-          <Box textAlign="center">
-            <Text> Hours spent</Text>
-            <Heading>{log.hoursSpent}</Heading>
-          </Box>
-        </Flex>
-        <Flex>
+      <Flex
+        justifyContent="space-between"
+        borderBottom="1px solid"
+        borderColor="brand.300"
+        pb={3}
+        mb={3}
+        {...rest}
+      >
+        <Box textAlign="left">
+          <Text>Log</Text>
+          <Heading>#{log.number}</Heading>
+        </Box>
+        <Box textAlign="left">
+          <Text>Date</Text>
+          <Heading>
+            {format(new Date(log.loggedOn), dateFormats.standart)}
+          </Heading>
+        </Box>
+        <Box textAlign="center">
+          <Text> Hours spent</Text>
+          <Heading>{log.hoursSpent}</Heading>
+        </Box>
+      </Flex>
+      <Flex height="80%" width="100%">
+        <Flex flex="1 1 40%">
           <Text>{log.description}</Text>
         </Flex>
+        {log?.mediaUrl && (
+          <Flex
+            height="100%"
+            width="60%"
+            justifyContent="center"
+            pl={3}
+            ml={3}
+            borderLeft="1px solid"
+            borderColor="brand.300"
+          >
+            <Image
+              src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
+              alt={`${log.id} media`}
+            />
+          </Flex>
+        )}
       </Flex>
-
-      {log?.mediaUrl && (
-        <Flex height="80%" flex="1 1 auto" justifyContent="center">
-          <Image
-            src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
-            alt={`${log.id} media`}
-          />
-        </Flex>
-      )}
     </>
   );
 };
