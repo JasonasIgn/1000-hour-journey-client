@@ -11,11 +11,11 @@ export const Header = () => {
       <Flex ml={4}>
         <Tabs variant="soft-rounded" colorScheme="green">
           <TabList>
-            <Tab>
-              <RouterLink to="/dashboard">Dashboard</RouterLink>
+            <Tab as={RouterLink} to="/dashboard">
+              Dashboard
             </Tab>
-            <Tab>
-              <RouterLink to="/journeys">Journeys</RouterLink>
+            <Tab as={RouterLink} to="/journeys">
+              Journeys
             </Tab>
           </TabList>
         </Tabs>
