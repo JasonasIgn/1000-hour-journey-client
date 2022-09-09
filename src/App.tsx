@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/dashboard">
           <Route index element={<DashboardView />} />
         </Route>
-        <Route path="/" element={<Navigate to="/journeys" replace={true} />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace={true} />} />
       </Routes>
     </Box>
   );
