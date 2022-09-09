@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const NumberInputStyle: ComponentStyleConfig = {
+export const NumberInput: ComponentStyleConfig = {
   baseStyle: {
     field: {
       color: "gray.400",

@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const ButtonStyle: ComponentStyleConfig = {
+export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
       color: "gray.300",

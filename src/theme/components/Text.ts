@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const TextStyle: ComponentStyleConfig = {
+export const Text: ComponentStyleConfig = {
   baseStyle: {
     color: "gray.400",
   },

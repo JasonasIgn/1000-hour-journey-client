@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const TextareaStyle: ComponentStyleConfig = {
+export const Textarea: ComponentStyleConfig = {
   baseStyle: {
     color: "gray.400",
     borderColor: "gray.400",

@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const TabsStyle: ComponentStyleConfig = {
+export const Tabs: ComponentStyleConfig = {
   variants: {
     "soft-rounded": {
       tab: {

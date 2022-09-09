@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const ModalStyle: ComponentStyleConfig = {
+export const Modal: ComponentStyleConfig = {
   baseStyle: {
     dialog: {
       bgColor: "brand.900",

@@ -1,14 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { ButtonStyle } from "./components/Button";
-import { FormLabelStyle } from "./components/FormLabel";
-import { HeadingStyle } from "./components/Heading";
-import { InputStyle } from "./components/Input";
-import { ModalStyle } from "./components/Modal";
-import { NumberInputStyle } from "./components/NumberInput";
-import { ProgressStyle } from "./components/Progress";
-import { TabsStyle } from "./components/Tabs";
-import { TextStyle } from "./components/Text";
-import { TextareaStyle } from "./components/Textarea";
+import * as components from "./components";
 
 const theme = extendTheme({
   colors: {
@@ -26,16 +17,7 @@ const theme = extendTheme({
     },
   },
   components: {
-    Heading: HeadingStyle,
-    Text: TextStyle,
-    Progress: ProgressStyle,
-    Modal: ModalStyle,
-    FormLabel: FormLabelStyle,
-    Input: InputStyle,
-    Textarea: TextareaStyle,
-    NumberInput: NumberInputStyle,
-    Button: ButtonStyle,
-    Tabs: TabsStyle,
+    ...components,
   },
 });
 
