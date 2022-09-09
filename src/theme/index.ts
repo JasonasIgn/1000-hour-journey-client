@@ -6,6 +6,7 @@ import { InputStyle } from "./components/Input";
 import { ModalStyle } from "./components/Modal";
 import { NumberInputStyle } from "./components/NumberInput";
 import { ProgressStyle } from "./components/Progress";
+import { TabsStyle } from "./components/Tabs";
 import { TextStyle } from "./components/Text";
 import { TextareaStyle } from "./components/Textarea";
 
@@ -34,6 +35,7 @@ const theme = extendTheme({
     Textarea: TextareaStyle,
     NumberInput: NumberInputStyle,
     Button: ButtonStyle,
+    Tabs: TabsStyle,
   },
 });
 
