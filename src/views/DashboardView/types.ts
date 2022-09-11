@@ -1,4 +1,4 @@
-interface LogTimerFrameStatistics {
+export interface LogTimerFrameStatistics {
   logsCount: number;
   totalHours: number | null;
   hoursSpentPerLog: number | null;
