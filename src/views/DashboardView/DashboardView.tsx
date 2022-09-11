@@ -33,7 +33,9 @@ export const DashboardView: FC = () => {
               <StatLabel>Hours Spent</StatLabel>
               <StatNumber>{statistics.allTime.totalHours}</StatNumber>
               <StatLabel>Average Hours Per Log</StatLabel>
-              <StatNumber>{statistics.allTime.hoursSpentPerLog}</StatNumber>
+              <StatNumber>
+                {Math.round(statistics.allTime.hoursSpentPerLog * 1000) / 1000}
+              </StatNumber>
             </Stat>
           </Flex>
           <Flex direction="column" flex="1 1 auto" mx={8}>
@@ -46,7 +48,9 @@ export const DashboardView: FC = () => {
               <StatLabel>Hours Spent</StatLabel>
               <StatNumber>{statistics.thisYear.totalHours}</StatNumber>
               <StatLabel>Average Hours Per Log</StatLabel>
-              <StatNumber>{statistics.thisYear.hoursSpentPerLog}</StatNumber>
+              <StatNumber>
+                {Math.round(statistics.thisYear.hoursSpentPerLog * 1000) / 1000}
+              </StatNumber>
             </Stat>
           </Flex>
           <Flex direction="column" flex="1 1 auto">
@@ -59,7 +63,10 @@ export const DashboardView: FC = () => {
               <StatLabel>Hours Spent</StatLabel>
               <StatNumber>{statistics.thisMonth.totalHours}</StatNumber>
               <StatLabel>Average Hours Per Log</StatLabel>
-              <StatNumber>{statistics.thisMonth.hoursSpentPerLog}</StatNumber>
+              <StatNumber>
+                {Math.round(statistics.thisMonth.hoursSpentPerLog * 1000) /
+                  1000}
+              </StatNumber>
             </Stat>
           </Flex>
         </Flex>
