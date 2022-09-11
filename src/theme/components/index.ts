@@ -8,3 +8,4 @@ export * from "./Progress";
 export * from "./Tabs";
 export * from "./Text";
 export * from "./Textarea";
+export * from "./Stat";
