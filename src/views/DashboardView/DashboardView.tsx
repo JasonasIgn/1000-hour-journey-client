@@ -9,7 +9,7 @@ export const DashboardView: FC = () => {
   if (loading) {
     return <Text>Loading...</Text>;
   }
-  console.log(statistics);
+
   return (
     <Container maxW="6xl" pt={5}>
       <Heading>Logs</Heading>
