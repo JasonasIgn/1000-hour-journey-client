@@ -9,8 +9,8 @@ interface RouteTab {
 }
 
 const tabs: RouteTab[] = [
-  { path: "/dashboard", name: "Dashboard" },
   { path: "/journeys", name: "Journeys" },
+  { path: "/dashboard", name: "Dashboard" },
 ];
 
 export const Header = () => {
