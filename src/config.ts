@@ -8,4 +8,6 @@ export const apiUrls = {
   updateLog: `${API_BASE}/journey/{journeyId}/logs/{logId}`,
   logAchievement: `${API_BASE}/journey/{journeyId}/achievements`,
   updateJourney: `${API_BASE}/journeys/{journeyId}`,
+  logStatistics: `${API_BASE}/logs/statistics`,
+  getLogs: `${API_BASE}/logs`,
 };

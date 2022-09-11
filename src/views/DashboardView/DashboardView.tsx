@@ -1,10 +1,18 @@
 import { FC } from "react";
-import { Container, Text } from "@chakra-ui/react";
+import { Container, Heading, Text } from "@chakra-ui/react";
+import { useStatistics } from "./hooks";
 
 export const DashboardView: FC = () => {
+  const statistics = useStatistics();
+  const loading = !statistics;
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+  console.log(statistics);
   return (
-    <Container maxW="6xl">
-      <Text>Dashboard</Text>
+    <Container maxW="6xl" pt={5}>
+      <Heading>Logs</Heading>
     </Container>
   );
 };
