@@ -1,17 +1,13 @@
+interface LogTimerFrameStatistics {
+  logsCount: number;
+  totalHours: number | null;
+  hoursSpentPerLog: number | null;
+}
+
 export interface LogsStatistics {
-  allTime: {
-    logsCount: number;
-    totalHours: number;
-    hoursSpentPerLog: number;
-  };
-  thisYear: {
-    logsCount: number;
-    totalHours: number;
-    hoursSpentPerLog: number;
-  };
-  thisMonth: {
-    logsCount: number;
-    totalHours: number;
-    hoursSpentPerLog: number;
-  };
+  allTime: LogTimerFrameStatistics;
+  thisYear: LogTimerFrameStatistics;
+  thisMonth: LogTimerFrameStatistics;
+  thisWeek: LogTimerFrameStatistics;
+  today: LogTimerFrameStatistics;
 }
