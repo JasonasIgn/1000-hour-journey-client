@@ -11,3 +11,13 @@ export interface LogsStatistics {
   thisWeek: LogTimerFrameStatistics;
   today: LogTimerFrameStatistics;
 }
+
+export interface LogsQuery {
+  month?: number;
+  year: number;
+}
+
+export interface ChartLogData {
+  name: string;
+  hoursSpent: number;
+}
