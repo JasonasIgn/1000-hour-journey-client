@@ -27,7 +27,7 @@ export const useStatistics = () => {
 export const useLogsChartData = () => {
   const [query, setQuery] = useState<LogsQuery>({
     year: new Date().getFullYear(),
-    month: new Date().getMonth(),
+    month: new Date().getMonth() + 1,
   });
   const [chartData, setChartData] = useState<ChartLogData[]>();
   const fetchLogs = useCallback(async () => {
