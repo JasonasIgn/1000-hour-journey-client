@@ -13,7 +13,7 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
   setQuery,
 }) => {
   return (
-    <Flex>
+    <Flex mb={2}>
       <Flex direction="column">
         <Text textAlign="center">Year</Text>
         <Flex height={50} alignItems="center">

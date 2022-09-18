@@ -35,7 +35,7 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
     <Flex direction="column" alignItems="center">
       <StatisticsDatePicker query={query} setQuery={setQuery} />
       <Flex>
-        <BarChart width={1000} height={300} data={logsChartData}>
+        <BarChart width={1010} height={300} data={logsChartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
@@ -53,7 +53,7 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
           defaultIndex={0}
           onChange={(idx) => setDisplayUnit(displayUnits[idx].unit)}
         >
-          <TabList>
+          <TabList width={100} ml="10px">
             {displayUnits.map((unit) => (
               <Tab key={unit.unit}>{unit.name}</Tab>
             ))}

@@ -23,7 +23,7 @@ export const DashboardView: FC = () => {
           <LogStatCard statistics={statistics.thisWeek} heading="Past 7 days" />
           <LogStatCard statistics={statistics.today} heading="Today" mr={0} />
         </Flex>
-        <Flex pt={6}>
+        <Flex pt={14}>
           <StatisticsBarChart />
         </Flex>
       </Flex>
