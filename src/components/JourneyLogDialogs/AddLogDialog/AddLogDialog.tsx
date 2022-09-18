@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { useEffect, FC } from "react";
+import { useEffect, FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
@@ -26,6 +26,8 @@ import { journeyLogFormValidation } from "../validation";
 import { createJourneyLogEffect } from "store/features/journeys/effects";
 import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
+import { getTimerTime } from "store/features/timer/selectors";
+import { pauseTimer, resetTimer } from "store/features/timer/slice";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -40,6 +42,8 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const lastLog = useAppSelector(getLastJourneyLog);
+  const timerTime = useAppSelector(getTimerTime);
+  const [shouldResetTimer, setShouldResetTimer] = useState(true);
   const lastLogDate = lastLog
     ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
@@ -55,6 +59,9 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   const onSubmit = async (data: JourneyLogFormData) => {
     try {
       await dispatch(createJourneyLogEffect({ data, journeyId }));
+      if (shouldResetTimer) {
+        dispatch(resetTimer());
+      }
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
@@ -62,10 +69,20 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   };
   useEffect(() => {
     if (open) {
+      dispatch(pauseTimer());
+      setShouldResetTimer(true);
       reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, reset]);
+
+  useEffect(() => {
+    setValue(
+      "hoursSpent",
+      timerTime.hours + Math.round(timerTime.minutes / 6) / 10
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timerTime]);
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
@@ -90,11 +107,18 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
               <Controller
                 name="hoursSpent"
                 control={control}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field: { onChange, ...rest },
+                  fieldState: { error },
+                }) => (
                   <NumberInputField
                     label="Hours Spent"
-                    {...field}
                     errorMessage={error?.message}
+                    onChange={(val) => {
+                      onChange(val);
+                      setShouldResetTimer(false);
+                    }}
+                    {...rest}
                   />
                 )}
               />

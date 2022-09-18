@@ -15,14 +15,47 @@ import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
 import { ReactComponent as StopIcon } from "resources/stop.svg";
 import { ReactComponent as TimerIcon } from "resources/timer.svg";
 import { useStopwatch } from "react-timer-hook";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import {
+  getTimerShouldPause,
+  getTimerShouldReset,
+} from "store/features/timer/selectors";
+import { useEffect } from "react";
+import {
+  pauseTimerCompleted,
+  resetTimerCompleted,
+} from "store/features/timer/slice";
 
 export const Timer = () => {
+  const dispatch = useAppDispatch();
+  const shouldPause = useAppSelector(getTimerShouldPause);
+  const shouldReset = useAppSelector(getTimerShouldReset);
+
+  const stopwatchOffset = new Date();
+  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + 600);
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: false });
+    useStopwatch({ autoStart: false, offsetTimestamp: stopwatchOffset });
+
+  useEffect(() => {
+    if (shouldPause) {
+      pause();
+      dispatch(pauseTimerCompleted({ hours, minutes }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldPause]);
+
+  useEffect(() => {
+    if (shouldReset) {
+      reset(undefined, false);
+      dispatch(resetTimerCompleted());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldReset]);
   return (
     <Popover
       placement="bottom-start"
       arrowShadowColor="brand.100"
+      closeOnBlur={false}
       arrowSize={10}
     >
       <PopoverTrigger>
