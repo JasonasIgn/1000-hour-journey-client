@@ -4,6 +4,9 @@ export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
       color: "gray.300",
+      _hover: {
+        bgColor: "brand.300",
+      },
     },
     ghost: {
       color: "brand.100",
