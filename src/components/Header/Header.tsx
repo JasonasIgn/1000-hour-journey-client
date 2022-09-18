@@ -1,4 +1,5 @@
 import { Flex, Image, Link, Tab, TabList, Tabs } from "@chakra-ui/react";
+import { Timer } from "components/Timer";
 import { useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import Logo from "resources/logo.png";
@@ -26,25 +27,33 @@ export const Header = () => {
   }, [location]);
 
   return (
-    <Flex height="60px" padding={2.5} alignItems="center">
-      <Link as={RouterLink} to="/" height="100%">
-        <Image src={Logo} alt="1000 hour journeys logo" height="100%" />
-      </Link>
-      <Flex ml={4}>
-        <Tabs
-          variant="soft-rounded"
-          index={tabIndex}
-          onChange={handleTabsChange}
-        >
-          <TabList>
-            {tabs.map((tab) => (
-              <Tab as={RouterLink} to={tab.path} key={tab.name}>
-                {tab.name}
-              </Tab>
-            ))}
-          </TabList>
-        </Tabs>
+    <Flex
+      height="60px"
+      padding={2.5}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Flex height="full">
+        <Link as={RouterLink} to="/" height="100%">
+          <Image src={Logo} alt="1000 hour journeys logo" height="100%" />
+        </Link>
+        <Flex ml={4}>
+          <Tabs
+            variant="soft-rounded"
+            index={tabIndex}
+            onChange={handleTabsChange}
+          >
+            <TabList>
+              {tabs.map((tab) => (
+                <Tab as={RouterLink} to={tab.path} key={tab.name}>
+                  {tab.name}
+                </Tab>
+              ))}
+            </TabList>
+          </Tabs>
+        </Flex>
       </Flex>
+      <Timer />
     </Flex>
   );
 };
