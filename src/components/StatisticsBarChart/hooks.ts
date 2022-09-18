@@ -7,6 +7,7 @@ import { StatisticsDisplayUnit } from "./types";
 import {
   transformDataForChartMonthDays,
   transformDataForChartMonthWeeks,
+  transformDataForChartYearMonths,
 } from "./utils";
 
 interface UseLogsChartDataProps {
@@ -23,13 +24,16 @@ export const useLogsChartData = (props: UseLogsChartDataProps) => {
   const fetchLogs = useCallback(async () => {
     try {
       const response = await axios.get<Log[]>(apiUrls.getLogs, {
-        params: query,
+        params: {
+          ...query,
+          month: displayUnit !== "month" ? query.month : undefined,
+        },
       });
       setRawData(response.data);
     } catch (e) {
       console.log("error:", e);
     }
-  }, [query]);
+  }, [displayUnit, query]);
 
   useEffect(() => {
     if (rawData) {
@@ -38,6 +42,9 @@ export const useLogsChartData = (props: UseLogsChartDataProps) => {
       }
       if (displayUnit === "week") {
         setChartData(transformDataForChartMonthWeeks(rawData, query));
+      }
+      if (displayUnit === "month") {
+        setChartData(transformDataForChartYearMonths(rawData, query));
       }
     }
 

@@ -17,7 +17,9 @@ export const transformDataForChartMonthDays = (
   }
   logs.forEach((log) => {
     const formattedDateIndex = format(new Date(log.loggedOn), "yyyy-MM-dd");
-    result[formattedDateIndex].hoursSpent += log.hoursSpent;
+    if (result[formattedDateIndex]) {
+      result[formattedDateIndex].hoursSpent += log.hoursSpent;
+    }
   });
   return Object.values(result);
 };
@@ -40,5 +42,25 @@ export const transformDataForChartMonthWeeks = (
   return Object.values(result).map((week) => ({
     ...week,
     hoursSpent: Math.round(week.hoursSpent * 100) / 100,
+  }));
+};
+
+export const transformDataForChartYearMonths = (
+  logs: Log[],
+  query: DateQuery
+): ChartLogData[] => {
+  const monthsCount = 12;
+  const result: { [index: string]: ChartLogData } = {};
+  for (let i = 1; i <= monthsCount; i++) {
+    const dateIndex = `Month ${i}`;
+    result[dateIndex] = { name: dateIndex, hoursSpent: 0 };
+  }
+  logs.forEach((log) => {
+    const monthNumber = new Date(log.loggedOn).getMonth() + 1;
+    result[`Month ${monthNumber}`].hoursSpent += log.hoursSpent;
+  });
+  return Object.values(result).map((month) => ({
+    ...month,
+    hoursSpent: Math.round(month.hoursSpent * 100) / 100,
   }));
 };
