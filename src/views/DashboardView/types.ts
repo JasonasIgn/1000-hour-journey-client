@@ -12,8 +12,8 @@ export interface LogsStatistics {
   today: LogTimerFrameStatistics;
 }
 
-export interface LogsQuery {
-  month?: number;
+export interface DateQuery {
+  month: number;
   year: number;
 }
 
