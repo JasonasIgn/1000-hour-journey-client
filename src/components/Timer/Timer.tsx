@@ -31,10 +31,8 @@ export const Timer = () => {
   const shouldPause = useAppSelector(getTimerShouldPause);
   const shouldReset = useAppSelector(getTimerShouldReset);
 
-  const stopwatchOffset = new Date();
-  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + 600);
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: false, offsetTimestamp: stopwatchOffset });
+    useStopwatch({ autoStart: false });
 
   useEffect(() => {
     if (shouldPause) {
