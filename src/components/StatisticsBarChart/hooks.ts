@@ -11,14 +11,12 @@ import {
 
 interface UseLogsChartDataProps {
   displayUnit: StatisticsDisplayUnit;
+  query: DateQuery;
 }
 
 export const useLogsChartData = (props: UseLogsChartDataProps) => {
-  const { displayUnit } = props;
-  const [query, setQuery] = useState<DateQuery>({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-  });
+  const { displayUnit, query } = props;
+
   const [chartData, setChartData] = useState<ChartLogData[]>();
   const [rawData, setRawData] = useState<Log[]>();
 
