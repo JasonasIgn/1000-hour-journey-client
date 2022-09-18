@@ -37,5 +37,8 @@ export const transformDataForChartMonthWeeks = (
     const logWeekNumber = Math.ceil(new Date(log.loggedOn).getDate() / 7);
     result[`Week ${logWeekNumber}`].hoursSpent += log.hoursSpent;
   });
-  return Object.values(result);
+  return Object.values(result).map((week) => ({
+    ...week,
+    hoursSpent: Math.round(week.hoursSpent * 100) / 100,
+  }));
 };
