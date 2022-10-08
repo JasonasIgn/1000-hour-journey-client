@@ -24,6 +24,7 @@ import {
   resetTimerCompleted,
 } from "store/features/timer/slice";
 import { TimerTrigger } from "./TimerTrigger/TimerTrigger";
+import { DEFAULT_DOCUMENT_TITLE } from "utils/constants";
 
 export const Timer = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,10 @@ export const Timer = () => {
 
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useStopwatch({ autoStart: false });
+
+  const timerText = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
   useEffect(() => {
     if (shouldPause) {
@@ -48,6 +53,15 @@ export const Timer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldReset]);
+
+  useEffect(() => {
+    if (seconds !== 0 || hours !== 0 || minutes !== 0) {
+      document.title = `${timerText} - ${DEFAULT_DOCUMENT_TITLE}`;
+    } else {
+      document.title = DEFAULT_DOCUMENT_TITLE;
+    }
+  }, [hours, minutes, seconds, timerText]);
+
   return (
     <Popover
       placement="bottom-start"
@@ -60,9 +74,7 @@ export const Timer = () => {
         <PopoverCloseButton />
         <PopoverBody>
           <Text fontSize="4xl" textAlign="center" color="gray.200">
-            {hours.toString().padStart(2, "0")}:
-            {minutes.toString().padStart(2, "0")}:
-            {seconds.toString().padStart(2, "0")}
+            {timerText}
           </Text>
         </PopoverBody>
         <PopoverArrow
