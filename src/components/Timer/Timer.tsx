@@ -7,13 +7,11 @@ import {
   PopoverCloseButton,
   PopoverContent,
   PopoverFooter,
-  PopoverTrigger,
   Text,
 } from "@chakra-ui/react";
 import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
 import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
 import { ReactComponent as StopIcon } from "resources/stop.svg";
-import { ReactComponent as TimerIcon } from "resources/timer.svg";
 import { useStopwatch } from "react-timer-hook";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import {
@@ -25,6 +23,7 @@ import {
   pauseTimerCompleted,
   resetTimerCompleted,
 } from "store/features/timer/slice";
+import { TimerTrigger } from "./TimerTrigger/TimerTrigger";
 
 export const Timer = () => {
   const dispatch = useAppDispatch();
@@ -56,9 +55,7 @@ export const Timer = () => {
       closeOnBlur={false}
       arrowSize={10}
     >
-      <PopoverTrigger>
-        <Icon as={TimerIcon} fill="brand.100" w={10} h={10} cursor="pointer" />
-      </PopoverTrigger>
+      <TimerTrigger isRunning={isRunning} />
       <PopoverContent bg="brand.700" borderColor="brand.400">
         <PopoverCloseButton />
         <PopoverBody>
@@ -88,7 +85,6 @@ export const Timer = () => {
             }
             aria-label="Start/Pause Stopwatch"
             onClick={() => {
-              console.log("clicked");
               if (isRunning) {
                 pause();
               } else {
