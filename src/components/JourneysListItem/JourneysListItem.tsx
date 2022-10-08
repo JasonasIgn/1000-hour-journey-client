@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactComponent as EditIconComponent } from "resources/edit.svg";
 import Logo from "resources/logo.png";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 
 interface JourneysListItemProps {
@@ -28,26 +28,22 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
   rootBoxProps,
   onEditClick,
-}) => {
-  let navigate = useNavigate();
-  return (
+}) => (
+  <Link to={`/journeys/${journey.id}`}>
     <Flex
       position="relative"
       height={180}
       bg="brand.800"
-      borderRadius={28}
+      borderRadius={20}
       border="2px solid"
       borderColor="brand.700"
       padding={4}
       cursor="pointer"
       _hover={{
-        transform: "scale(1.008)",
+        transform: "scale(1.005)",
       }}
       transition="transform 0.1s"
       {...rootBoxProps}
-      onClick={() => {
-        navigate(`/journeys/${journey.id}`);
-      }}
     >
       <Flex
         width={144}
@@ -116,5 +112,5 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         }}
       />
     </Flex>
-  );
-};
+  </Link>
+);
