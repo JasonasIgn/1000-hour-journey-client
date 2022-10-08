@@ -16,6 +16,13 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
         h={10}
         cursor="pointer"
         sx={{
+          transition: "transform 100ms",
+          "&:hover": {
+            transform: "scale(1.03)",
+          },
+          "&:active": {
+            transform: "scale(0.98)",
+          },
           ".timer-arrow": {
             animationPlayState: isRunning ? "running" : "paused",
             animationDuration: "2s",
