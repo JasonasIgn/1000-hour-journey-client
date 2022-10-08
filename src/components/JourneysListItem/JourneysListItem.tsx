@@ -9,9 +9,9 @@ import {
   Text,
   Image,
   IconButton,
-  chakra,
+  Icon,
 } from "@chakra-ui/react";
-import { ReactComponent as EditIconComponent } from "resources/edit.svg";
+import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
 import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
@@ -21,8 +21,6 @@ interface JourneysListItemProps {
   rootBoxProps?: FlexProps;
   onEditClick: () => void;
 }
-
-const EditIcon = chakra(EditIconComponent);
 
 export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
@@ -48,7 +46,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       <Flex
         width={144}
         minWidth={144}
-        height="100%"
+        height="full"
         border="1px solid"
         borderColor="brand.300"
         alignItems="center"
@@ -61,7 +59,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
               ? `${journey.mediaUrl}?${journey.updatedAt.toString()}` // Prevent caching
               : Logo
           }
-          maxHeight="100%"
+          maxHeight="full"
         />
       </Flex>
       <Box ml={5}>
@@ -98,7 +96,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         </Flex>
       </Flex>
       <IconButton
-        icon={<EditIcon width="22px" fill="gray.300" />}
+        icon={<Icon as={EditIcon} width="22px" height="22px" fill="gray.300" />}
         aria-label="edit"
         position="absolute"
         borderRadius="50%"
