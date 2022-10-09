@@ -5,15 +5,17 @@ export const Modal: ComponentStyleConfig = {
     dialog: {
       bgColor: "brand.900",
       border: "2px solid",
-      borderColor: "brand.800",
+      borderColor: "brand.600",
     },
     header: {
+      fontSize: "26px",
       color: "gray.400",
     },
     dialogContainer: {
       alignItems: "center",
     },
     closeButton: {
+      top: "15px",
       border: "1px solid",
       borderColor: "brand.400",
       color: "brand.400",
