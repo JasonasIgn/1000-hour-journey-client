@@ -21,6 +21,7 @@ import {
   getAchievementsDictionary,
   getLogHoursMap,
   getLogsDictionary,
+  getLogBeginningsDictionary,
 } from "views/JourneyView/utils";
 import { getInitialXPosition } from "./utils";
 import {
@@ -66,6 +67,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useSpaceKeyForPlaying({ isPlaying, setIsPlaying, shouldSpaceTriggerPlay });
 
+  const logBegginingsMap = useMemo(
+    () => getLogBeginningsDictionary(journey?.logs || []),
+    [journey?.logs]
+  );
   const hoursToLogMap = useMemo(
     () => getLogHoursMap(journey?.logs || []),
     [journey?.logs]
@@ -156,6 +161,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         setIsPlaying={setIsPlaying}
         isPlaying={isPlaying}
         totalHours={journey.totalHours}
+        logBegginingsMap={logBegginingsMap}
         openAddLogModal={(e) => {
           if (e.detail !== 0) {
             setAddLogModalOpen(true);

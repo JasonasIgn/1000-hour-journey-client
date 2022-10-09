@@ -13,6 +13,16 @@ export const getLogHoursMap = (logs: Log[]): IdsHourMap => {
   return hoursMap;
 };
 
+export const getLogBeginningsDictionary = (logs: Log[]): IdsHourMap => {
+  const dictionary: IdsHourMap = {};
+  let hour = 0;
+  logs.forEach((log) => {
+    dictionary[log.id] = hour;
+    hour += log.hoursSpent;
+  });
+  return dictionary;
+};
+
 export const getLogsDictionary = (logs: Log[]): LogsDictionary => {
   const logsDictionary: LogsDictionary = {};
   logs.forEach((log, index) => {

@@ -4,15 +4,17 @@ import {
   IconButton,
   Flex,
   useInterval,
-  chakra,
+  Icon,
 } from "@chakra-ui/react";
-import { ReactComponent as PlayIconComponent } from "resources/play_icon.svg";
-import { ReactComponent as PauseIconComponent } from "resources/pause_icon.svg";
-import { ReactComponent as AchievementIconComponent } from "resources/achievement.svg";
-import { ReactComponent as PageIconComponent } from "resources/page.svg";
+import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
+import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
+import { ReactComponent as PageIcon } from "resources/page.svg";
+import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { getTickSpeed } from "./utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { IdsHourMap } from "views/JourneyView/types";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   currentHour: number;
@@ -25,12 +27,8 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
   centerZoomOnThumb: (currentHourOverride?: number) => void;
+  logBegginingsMap: IdsHourMap;
 }
-
-const PageIcon = chakra(PageIconComponent);
-const AchievementIcon = chakra(AchievementIconComponent);
-const PauseIcon = chakra(PauseIconComponent);
-const PlayIcon = chakra(PlayIconComponent);
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   currentHour,
@@ -43,6 +41,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   openAddLogModal,
   openAddAchievementModal,
   centerZoomOnThumb,
+  logBegginingsMap,
   ...rest
 }) => {
   useInterval(
@@ -57,6 +56,43 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       setIsPlaying(false);
     }
   }, [activeLog, isPlaying, setIsPlaying]);
+
+  const onGoToPreviousClick = () => {
+    const orderedLogIds = Object.keys(logBegginingsMap);
+    const currentOrderLogId = orderedLogIds.findIndex(
+      (logId) => logId === activeLog?.id.toString()
+    );
+    if (currentOrderLogId > 0) {
+      const previousLogId = orderedLogIds[currentOrderLogId - 1];
+      const hour = logBegginingsMap[Number(previousLogId)];
+      setCurrentHour(hour);
+      centerZoomOnThumb(hour + 0.1);
+    }
+  };
+
+  const onGoToNextClick = () => {
+    const orderedLogIds = Object.keys(logBegginingsMap);
+    const currentOrderLogId = orderedLogIds.findIndex(
+      (logId) => logId === activeLog?.id.toString()
+    );
+    const nextLogId = orderedLogIds[currentOrderLogId + 1];
+    if (nextLogId) {
+      const hour = logBegginingsMap[Number(nextLogId)];
+      setCurrentHour(hour);
+      centerZoomOnThumb(hour + 0.1);
+    }
+  };
+
+  const onRewindClick = () => {
+    setCurrentHour(0);
+    centerZoomOnThumb(0.1);
+  };
+
+  const onSkipClick = () => {
+    setCurrentHour(totalHours - 0.1);
+    centerZoomOnThumb(totalHours - 0.1);
+  };
+
   return (
     <Flex
       {...rest}
@@ -69,17 +105,26 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
         <IconButton
           icon={<ArrowLeftIcon />}
           aria-label="Rewind to beggining"
-          onClick={() => {
-            setCurrentHour(0);
-            centerZoomOnThumb(0.1);
-          }}
+          onClick={onRewindClick}
+        />
+        <IconButton
+          ml={2}
+          icon={
+            <Icon
+              as={RightArrowIcon}
+              fill="gray.300"
+              transform="rotate(180deg)"
+            />
+          }
+          aria-label="Go to previous log"
+          onClick={onGoToPreviousClick}
         />
         <IconButton
           icon={
             isPlaying ? (
-              <PauseIcon width="20px" height="20px" fill="gray.300" />
+              <Icon as={PauseIcon} width="20px" height="20px" fill="gray.300" />
             ) : (
-              <PlayIcon fill="gray.300" />
+              <Icon as={PlayIcon} fill="gray.300" />
             )
           }
           aria-label="Play Journey"
@@ -89,24 +134,34 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           mx={2}
         />
         <IconButton
+          mr={2}
+          icon={<Icon as={RightArrowIcon} fill="gray.300" />}
+          aria-label="Go to next log"
+          onClick={onGoToNextClick}
+        />
+        <IconButton
           icon={<ArrowRightIcon />}
           aria-label="Skip to end"
-          onClick={() => {
-            setCurrentHour(totalHours - 0.1);
-            centerZoomOnThumb(totalHours - 0.1);
-          }}
+          onClick={onSkipClick}
         />
       </Flex>
       <Flex>
         <IconButton
-          icon={<AchievementIcon width={22} height={22} stroke="gray.300" />}
+          icon={
+            <Icon
+              as={AchievementIcon}
+              width={22}
+              height={22}
+              stroke="gray.300"
+            />
+          }
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
           disabled={!activeLog}
         />
         <IconButton
           ml={2}
-          icon={<PageIcon width={22} height={22} fill="gray.300" />}
+          icon={<Icon as={PageIcon} width={22} height={22} fill="gray.300" />}
           aria-label="Add log"
           onClick={openAddLogModal}
         />
