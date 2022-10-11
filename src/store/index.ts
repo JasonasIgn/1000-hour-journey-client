@@ -1,16 +1,8 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import journeysReducer from "./features/journeys/slice";
-import journeyViewReducer from "./features/journeyView/slice";
-import timerReducer from "./features/timer/slice";
-import authReducer from "./features/auth/slice";
+import { createRootReducer } from "./reducers";
 
 export const store = configureStore({
-  reducer: {
-    journeys: journeysReducer,
-    journeyView: journeyViewReducer,
-    timer: timerReducer,
-    auth: authReducer,
-  },
+  reducer: createRootReducer(),
 });
 
 export type AppDispatch = typeof store.dispatch;
