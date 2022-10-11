@@ -1,6 +1,6 @@
 import { Flex, Image, Link, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Timer } from "components/Timer";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import Logo from "resources/logo.png";
 
@@ -14,7 +14,11 @@ const tabs: RouteTab[] = [
   { path: "/dashboard", name: "Dashboard" },
 ];
 
-export const Header = () => {
+interface HeaderProps {
+  isLoggedIn: boolean;
+}
+
+export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
   const location = useLocation();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -38,22 +42,24 @@ export const Header = () => {
           <Image src={Logo} alt="1000 hour journeys logo" height="100%" />
         </Link>
         <Flex ml={4}>
-          <Tabs
-            variant="soft-rounded"
-            index={tabIndex}
-            onChange={handleTabsChange}
-          >
-            <TabList>
-              {tabs.map((tab) => (
-                <Tab as={RouterLink} to={tab.path} key={tab.name}>
-                  {tab.name}
-                </Tab>
-              ))}
-            </TabList>
-          </Tabs>
+          {isLoggedIn && (
+            <Tabs
+              variant="soft-rounded"
+              index={tabIndex}
+              onChange={handleTabsChange}
+            >
+              <TabList>
+                {tabs.map((tab) => (
+                  <Tab as={RouterLink} to={tab.path} key={tab.name}>
+                    {tab.name}
+                  </Tab>
+                ))}
+              </TabList>
+            </Tabs>
+          )}
         </Flex>
       </Flex>
-      <Timer />
+      {isLoggedIn && <Timer />}
     </Flex>
   );
 };

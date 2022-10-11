@@ -10,4 +10,5 @@ export const apiUrls = {
   updateJourney: `${API_BASE}/journeys/{journeyId}`,
   logStatistics: `${API_BASE}/logs/statistics`,
   getLogs: `${API_BASE}/logs`,
+  isLoggedIn: `${API_BASE}/amILoggedIn`,
 };
