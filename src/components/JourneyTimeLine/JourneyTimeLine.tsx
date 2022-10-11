@@ -34,7 +34,7 @@ import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
 import { useSpaceKeyForPlaying } from "./hooks";
 import { useAppSelector } from "store/hooks";
-import { getEditLogDialogOpen } from "store/features/journeyView/selectors";
+import { getEditLogDialogOpen } from "store/features/journey/selectors";
 
 interface JourneyTimeLineProps {
   journey: Journey;

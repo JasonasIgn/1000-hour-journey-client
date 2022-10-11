@@ -1,14 +1,14 @@
 import { AnyAction, combineReducers, Reducer } from "@reduxjs/toolkit";
 import { RootState } from "store";
 import journeysReducer from "./features/journeys/slice";
-import journeyViewReducer from "./features/journeyView/slice";
+import journeyReducer from "./features/journey/slice";
 import timerReducer from "./features/timer/slice";
 import authReducer from "./features/auth/slice";
 import { logoutEffect } from "./features/auth/effects";
 
 export const rootReducers = {
   journeys: journeysReducer,
-  journeyView: journeyViewReducer,
+  journey: journeyReducer,
   timer: timerReducer,
   auth: authReducer,
 };

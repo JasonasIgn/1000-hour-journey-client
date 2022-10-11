@@ -26,8 +26,8 @@ import { updateJourneyLogEffect } from "store/features/journeys/effects";
 import { useEffect, FC } from "react";
 import { dateFormats } from "utils/constants";
 import { LogExtended } from "store/features/journeys/types";
-import { setEditLogDialogOpen } from "store/features/journeyView/slice";
-import { getEditLogDialogOpen } from "store/features/journeyView/selectors";
+import { setEditLogDialogOpen } from "store/features/journey/slice";
+import { getEditLogDialogOpen } from "store/features/journey/selectors";
 
 interface EditLogDialogProps {
   journeyId: number;

@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface JourneyViewState {
+export interface JourneyState {
   editLogDialogOpen: boolean;
 }
 
-const initialState: JourneyViewState = {
+const initialState: JourneyState = {
   editLogDialogOpen: false,
 };
 
-export const journeyViewSlice = createSlice({
-  name: "journeys",
+export const journeySlice = createSlice({
+  name: "journey",
   initialState,
   reducers: {
     setEditLogDialogOpen: (state, action) => {
@@ -18,6 +18,6 @@ export const journeyViewSlice = createSlice({
   },
 });
 
-export const { setEditLogDialogOpen } = journeyViewSlice.actions;
+export const { setEditLogDialogOpen } = journeySlice.actions;
 
-export default journeyViewSlice.reducer;
+export default journeySlice.reducer;

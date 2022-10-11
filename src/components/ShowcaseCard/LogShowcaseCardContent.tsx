@@ -14,7 +14,7 @@ import { ReactComponent as EditIconComponent } from "resources/edit.svg";
 import { LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 import { useAppDispatch } from "store/hooks";
-import { setEditLogDialogOpen } from "store/features/journeyView/slice";
+import { setEditLogDialogOpen } from "store/features/journey/slice";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
