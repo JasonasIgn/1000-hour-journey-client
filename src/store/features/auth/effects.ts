@@ -34,3 +34,19 @@ export const loginEffect = createAsyncThunk(
     }
   }
 );
+
+export const logoutEffect = createAsyncThunk("auth/logout", async () => {
+  try {
+    await axios.post<FetchIsLoggedInResponse>(
+      apiUrls.logout,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return true;
+  } catch (e) {
+    console.log("error:", e);
+    throw e;
+  }
+});

@@ -3,6 +3,8 @@ import { Timer } from "components/Timer";
 import { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import Logo from "resources/logo.png";
+import { logoutEffect } from "store/features/auth/effects";
+import { useAppDispatch } from "store/hooks";
 
 interface RouteTab {
   path: string;
@@ -19,6 +21,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -59,7 +62,20 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
           )}
         </Flex>
       </Flex>
-      {isLoggedIn && <Timer />}
+      {isLoggedIn && (
+        <Flex alignItems="center">
+          <Timer />
+          <Link
+            ml={3}
+            color="brand.200"
+            onClick={() => {
+              dispatch(logoutEffect());
+            }}
+          >
+            Log out
+          </Link>
+        </Flex>
+      )}
     </Flex>
   );
 };
