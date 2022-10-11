@@ -1,22 +1,28 @@
 import { Box } from "@chakra-ui/react";
-import { Navigate, Route, Routes } from "react-router-dom";
 import { Header } from "components";
-import { JourneysView, JourneyView, DashboardView } from "views";
+import { useInitialization } from "utils/hooks";
+import { useAppSelector } from "store/hooks";
+import { getIsLoggedIn } from "store/features/auth/selectors";
+import { AuthRoutes } from "components/Routes/AuthRoutes";
+import { GuestRoutes } from "components/Routes/GuestRoutes";
 
 const App = () => {
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
+  const isInitializing = useInitialization();
+
+  if (isInitializing) {
+    return (
+      <Box bgColor="brand.900" minHeight="100vh">
+        Initializing...
+      </Box>
+    );
+  }
+
   return (
     <Box bgColor="brand.900" minHeight="100vh">
-      <Header />
-      <Routes>
-        <Route path="/journeys">
-          <Route path=":journeyId" element={<JourneyView />} />
-          <Route index element={<JourneysView />} />
-        </Route>
-        <Route path="/dashboard">
-          <Route index element={<DashboardView />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/journeys" replace={true} />} />
-      </Routes>
+      <Header isLoggedIn={isLoggedIn} />
+      {isLoggedIn && <AuthRoutes />}
+      {!isLoggedIn && <GuestRoutes />}
     </Box>
   );
 };
