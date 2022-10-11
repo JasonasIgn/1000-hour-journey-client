@@ -1,5 +1,4 @@
 import { AnyAction, combineReducers, Reducer } from "@reduxjs/toolkit";
-import { RootState } from "store";
 import journeysReducer from "./features/journeys/slice";
 import journeyReducer from "./features/journey/slice";
 import timerReducer from "./features/timer/slice";
@@ -23,3 +22,7 @@ export const createRootReducer = (): Reducer => {
     return appReducer(state, action);
   };
 };
+
+export const rootReducerType = combineReducers(rootReducers);
+
+export type RootState = ReturnType<typeof rootReducerType>;

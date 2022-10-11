@@ -1,4 +1,4 @@
-import { RootState } from "store";
+import { RootState } from "store/reducers";
 
 export const getJourneysList = (state: RootState) => state.journeys.list;
 

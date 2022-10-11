@@ -1,7 +1,8 @@
 import { Store } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { AppDispatch, RootState } from "store";
+import { AppDispatch } from "store";
 import { logOut } from "store/features/auth/slice";
+import { RootState } from "store/reducers";
 
 const axios401ResponseInterceptor = (store: Store<RootState>) => [
   (response: AxiosResponse) => response,
@@ -15,6 +16,5 @@ const axios401ResponseInterceptor = (store: Store<RootState>) => [
 ];
 
 export const createAxiosInterceptor = (store: Store<RootState>) => {
-    axios.interceptors.response.use(...axios401ResponseInterceptor(store));
-  };
-  
+  axios.interceptors.response.use(...axios401ResponseInterceptor(store));
+};
