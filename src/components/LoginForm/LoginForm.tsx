@@ -55,6 +55,7 @@ export const LoginForm: FC<LoginFormProps> = () => {
         <Heading textAlign="center">Log in</Heading>
         <Box mt={4}>
           <InputField
+            type="password"
             label="Password"
             {...register("password")}
             errorMessage={errors.password?.message}
