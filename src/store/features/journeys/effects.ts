@@ -29,6 +29,7 @@ export const createJourneyEffect = createAsyncThunk(
         apiUrls.createJourney,
         { ...rest, media: media?.[0] },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -47,7 +48,8 @@ export const fetchJourneyEffect = createAsyncThunk(
     const { journeyId } = data;
     try {
       const response = await axios.get(
-        apiUrls.fetchJourney.replace("{journeyId}", journeyId.toString())
+        apiUrls.fetchJourney.replace("{journeyId}", journeyId.toString()),
+        { withCredentials: true }
       );
       return response.data;
     } catch (e) {
@@ -71,6 +73,7 @@ export const createJourneyLogEffect = createAsyncThunk(
         apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media?.[0] },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -98,6 +101,7 @@ export const logJourneyAchievementEffect = createAsyncThunk(
         apiUrls.logAchievement.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media[0] },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -129,6 +133,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
           .replace("{logId}", logId.toString()),
         { ...rest, media: media?.[0] },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -150,6 +155,7 @@ export const updateJourneyEffect = createAsyncThunk(
         apiUrls.updateJourney.replace("{journeyId}", journeyId.toString()),
         { ...rest, media: media?.[0] },
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },

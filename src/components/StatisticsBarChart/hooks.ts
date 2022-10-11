@@ -28,6 +28,7 @@ export const useLogsChartData = (props: UseLogsChartDataProps) => {
           ...query,
           month: displayUnit !== "month" ? query.month : undefined,
         },
+        withCredentials: true,
       });
       setRawData(response.data);
     } catch (e) {

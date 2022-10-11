@@ -7,7 +7,9 @@ export const useStatistics = () => {
   const [statistics, setStatistics] = useState<LogsStatistics>();
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get<LogsStatistics>(apiUrls.logStatistics);
+      const response = await axios.get<LogsStatistics>(apiUrls.logStatistics, {
+        withCredentials: true,
+      });
       setStatistics(response.data);
       return response.data;
     } catch (e) {
