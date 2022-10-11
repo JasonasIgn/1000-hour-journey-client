@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchIsLoggedIn } from "store/features/auth/effects";
+import { fetchIsLoggedInEffect } from "store/features/auth/effects";
 import { getAuthLoadingState } from "store/features/auth/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 
@@ -9,7 +9,7 @@ export const useInitialization = () => {
   const isInitializing = authLoadingState !== "loaded";
   useEffect(() => {
     if (authLoadingState === "pristine") {
-      dispatch(fetchIsLoggedIn());
+      dispatch(fetchIsLoggedInEffect());
     }
   }, [authLoadingState, dispatch]);
 

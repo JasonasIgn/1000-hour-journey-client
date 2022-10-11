@@ -11,4 +11,6 @@ export const apiUrls = {
   logStatistics: `${API_BASE}/logs/statistics`,
   getLogs: `${API_BASE}/logs`,
   isLoggedIn: `${API_BASE}/amILoggedIn`,
+  login: `${API_BASE}/login`,
+  logout: `${API_BASE}/logout`,
 };

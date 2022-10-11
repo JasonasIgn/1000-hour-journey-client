@@ -10,7 +10,9 @@ export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
   async () => {
     try {
-      const response = await axios.get(apiUrls.fetchJourneysList);
+      const response = await axios.get(apiUrls.fetchJourneysList, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (e) {
       console.log("error:", e);

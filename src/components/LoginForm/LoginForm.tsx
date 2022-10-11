@@ -6,23 +6,27 @@ import { useAppDispatch } from "store/hooks";
 import { InputField } from "components";
 import { LoginFormData } from "./types";
 import { loginFormValidation } from "./validation";
+import { loginEffect } from "store/features/auth/effects";
 
 interface LoginFormProps {}
 
 export const LoginForm: FC<LoginFormProps> = () => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, reset } = useForm<LoginFormData>({
-    defaultValues: {
-      password: "",
-    },
-    resolver: yupResolver(loginFormValidation),
-  });
+  const { register, handleSubmit, formState, reset, setError } =
+    useForm<LoginFormData>({
+      defaultValues: {
+        password: "",
+      },
+      resolver: yupResolver(loginFormValidation),
+    });
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: LoginFormData) => {
     try {
-      // Login request
-    } catch (e) {
-      console.error("Caught error", e);
+      await dispatch(loginEffect({ data })).unwrap();
+    } catch (e: any) {
+      if (e?.code === "ERR_BAD_REQUEST") {
+        setError("password", { message: "Invalid credentials" });
+      }
     }
   };
 

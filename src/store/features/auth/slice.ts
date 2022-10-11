@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "types";
-import { fetchIsLoggedIn } from "./effects";
+import { fetchIsLoggedInEffect, loginEffect } from "./effects";
 
 export interface AuthState {
   loggedIn: boolean;
@@ -25,15 +25,18 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchIsLoggedIn.pending, (state) => {
+      .addCase(fetchIsLoggedInEffect.pending, (state) => {
         state.loadingState = "loading";
       })
-      .addCase(fetchIsLoggedIn.fulfilled, (state, { payload }) => {
+      .addCase(fetchIsLoggedInEffect.fulfilled, (state, { payload }) => {
         state.loadingState = "loaded";
         state.loggedIn = payload.isLoggedIn;
       })
-      .addCase(fetchIsLoggedIn.rejected, (state) => {
+      .addCase(fetchIsLoggedInEffect.rejected, (state) => {
         state.loadingState = "error";
+      })
+      .addCase(loginEffect.fulfilled, (state) => {
+        state.loggedIn = true;
       });
   },
 });
