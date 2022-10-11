@@ -67,7 +67,7 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
           <Timer />
           <Link
             ml={3}
-            color="brand.200"
+            color="brand.50"
             onClick={() => {
               dispatch(logoutEffect());
             }}
