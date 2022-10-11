@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface TimerState {
   shouldPause: boolean;
   shouldReset: boolean;
+  isOpen: boolean;
   time: {
     minutes: number;
     hours: number;
@@ -14,6 +15,7 @@ const initialState: TimerState = {
     minutes: 0,
     hours: 0,
   },
+  isOpen: false,
   shouldPause: false,
   shouldReset: false,
 };
@@ -24,6 +26,12 @@ export const timerSlice = createSlice({
   reducers: {
     pauseTimer: (state) => {
       state.shouldPause = true;
+    },
+    closeTimer: (state) => {
+      state.isOpen = false;
+    },
+    openTimer: (state) => {
+      state.isOpen = true;
     },
     pauseTimerCompleted: (state, action) => {
       state.shouldPause = false;
@@ -45,6 +53,8 @@ export const {
   resetTimer,
   pauseTimerCompleted,
   resetTimerCompleted,
+  closeTimer,
+  openTimer,
 } = timerSlice.actions;
 
 export default timerSlice.reducer;

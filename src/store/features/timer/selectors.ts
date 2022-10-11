@@ -7,3 +7,5 @@ export const getTimerShouldPause = (state: RootState) =>
 
 export const getTimerShouldReset = (state: RootState) =>
   state.timer.shouldReset;
+
+export const getTimerOpenState = (state: RootState) => state.timer.isOpen;

@@ -27,7 +27,7 @@ import { createJourneyLogEffect } from "store/features/journeys/effects";
 import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
 import { getTimerTime } from "store/features/timer/selectors";
-import { pauseTimer, resetTimer } from "store/features/timer/slice";
+import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -61,6 +61,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
       await dispatch(createJourneyLogEffect({ data, journeyId }));
       if (shouldResetTimer) {
         dispatch(resetTimer());
+        dispatch(closeTimer());
       }
       setOpen(false);
     } catch (e) {

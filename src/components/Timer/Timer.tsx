@@ -15,11 +15,14 @@ import { ReactComponent as StopIcon } from "resources/stop.svg";
 import { useStopwatch } from "react-timer-hook";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import {
+  getTimerOpenState,
   getTimerShouldPause,
   getTimerShouldReset,
 } from "store/features/timer/selectors";
 import { useEffect } from "react";
 import {
+  closeTimer,
+  openTimer,
   pauseTimerCompleted,
   resetTimerCompleted,
 } from "store/features/timer/slice";
@@ -30,10 +33,14 @@ export const Timer = () => {
   const dispatch = useAppDispatch();
   const shouldPause = useAppSelector(getTimerShouldPause);
   const shouldReset = useAppSelector(getTimerShouldReset);
+  const isOpen = useAppSelector(getTimerOpenState);
 
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({ autoStart: false });
-
+    useStopwatch({
+      autoStart: false,
+      offsetTimestamp: new Date(new Date().getTime() + 1000000),
+    });
+  console.log(new Date(new Date().getTime() + 1000000));
   const timerText = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
@@ -68,6 +75,9 @@ export const Timer = () => {
       arrowShadowColor="brand.100"
       closeOnBlur={false}
       arrowSize={10}
+      isOpen={isOpen}
+      onClose={() => dispatch(closeTimer())}
+      onOpen={() => dispatch(openTimer())}
     >
       <TimerTrigger isRunning={isRunning} />
       <PopoverContent bg="brand.700" borderColor="brand.400">
