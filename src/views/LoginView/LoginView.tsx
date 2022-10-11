@@ -1,4 +1,5 @@
 import { Container, Flex } from "@chakra-ui/react";
+import { LoginForm } from "components/LoginForm";
 import { FC } from "react";
 
 export const LoginView: FC = () => {
@@ -10,7 +11,7 @@ export const LoginView: FC = () => {
         height="calc(100vh - 60px)"
         pt={5}
       >
-        Login view
+        <LoginForm />
       </Flex>
     </Container>
   );

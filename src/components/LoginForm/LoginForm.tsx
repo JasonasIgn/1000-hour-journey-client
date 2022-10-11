@@ -1,0 +1,68 @@
+import { useEffect, FC } from "react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch } from "store/hooks";
+import { InputField } from "components";
+import { LoginFormData } from "./types";
+import { loginFormValidation } from "./validation";
+
+interface LoginFormProps {}
+
+export const LoginForm: FC<LoginFormProps> = () => {
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, formState, reset } = useForm<LoginFormData>({
+    defaultValues: {
+      password: "",
+    },
+    resolver: yupResolver(loginFormValidation),
+  });
+  const { isSubmitting, errors } = formState;
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      // Login request
+    } catch (e) {
+      console.error("Caught error", e);
+    }
+  };
+
+  useEffect(() => {
+    reset({ password: "" });
+  }, [reset]);
+
+  return (
+    <Flex
+      as="form"
+      onSubmit={handleSubmit(onSubmit)}
+      p={8}
+      borderRadius={8}
+      bg="brand.800"
+      maxWidth={500}
+      width="full"
+      maxHeight={280}
+      height="full"
+      mt="140px"
+      border="1px solid"
+      borderColor="brand.700"
+      direction="column"
+      justifyContent="space-between"
+    >
+      <Box>
+        <Heading textAlign="center">Log in</Heading>
+        <Box mt={4}>
+          <InputField
+            label="Password"
+            {...register("password")}
+            errorMessage={errors.password?.message}
+          />
+        </Box>
+      </Box>
+
+      <Flex justifyContent="center">
+        <Button type="submit" disabled={isSubmitting} width={40}>
+          Login
+        </Button>
+      </Flex>
+    </Flex>
+  );
+};
