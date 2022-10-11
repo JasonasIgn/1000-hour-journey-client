@@ -36,11 +36,7 @@ export const Timer = () => {
   const isOpen = useAppSelector(getTimerOpenState);
 
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
-    useStopwatch({
-      autoStart: false,
-      offsetTimestamp: new Date(new Date().getTime() + 1000000),
-    });
-  console.log(new Date(new Date().getTime() + 1000000));
+    useStopwatch({ autoStart: false });
   const timerText = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
