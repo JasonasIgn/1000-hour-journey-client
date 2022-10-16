@@ -20,6 +20,7 @@ import {
   NumberInputField,
   InputField,
   UploadField,
+  CreatebleSelectField,
 } from "components";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
@@ -28,6 +29,7 @@ import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
 import { getTimerTime } from "store/features/timer/selectors";
 import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
+import { Tag } from "store/features/journeys/types";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -131,6 +133,14 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
                 min={lastLogDate || undefined}
                 {...register("loggedOn")}
                 errorMessage={errors.loggedOn?.message}
+              />
+            </GridItem>
+            <GridItem colSpan={2}>
+              <CreatebleSelectField<Tag>
+                options={[]}
+                control={control as any}
+                name="tags"
+                label="Tags"
               />
             </GridItem>
             <GridItem colSpan={2}>

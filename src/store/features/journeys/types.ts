@@ -37,3 +37,10 @@ export interface Journey extends JourneyListItem {
   logs: Log[];
   achievements: Achievement[];
 }
+
+export interface Tag {
+  id: number;
+  journeyId: number;
+  name: string;
+  updatedAt: Date;
+}

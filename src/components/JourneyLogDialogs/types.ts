@@ -3,4 +3,5 @@ export interface JourneyLogFormData {
   hoursSpent: number;
   loggedOn: string;
   media: FileList;
+  tags: number[];
 }
