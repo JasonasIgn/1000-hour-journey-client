@@ -18,7 +18,10 @@ export const transformDataForChartMonthDays = (
   logs.forEach((log) => {
     const formattedDateIndex = format(new Date(log.loggedOn), "yyyy-MM-dd");
     if (result[formattedDateIndex]) {
-      result[formattedDateIndex].hoursSpent += log.hoursSpent;
+      result[formattedDateIndex].hoursSpent =
+        Math.round(
+          (result[formattedDateIndex].hoursSpent + log.hoursSpent) * 100
+        ) / 100;
     }
   });
   return Object.values(result);
