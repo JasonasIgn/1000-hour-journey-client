@@ -8,6 +8,13 @@ export interface JourneyListItem {
   mediaUrl?: string;
 }
 
+export interface Tag {
+  id: number;
+  journeyId: number;
+  name: string;
+  updatedAt: Date;
+}
+
 export interface Log {
   id: number;
   journeyId: number;
@@ -17,6 +24,7 @@ export interface Log {
   loggedOn: Date;
   mediaUrl?: string;
   updatedAt: Date;
+  tags: Tag[];
 }
 
 export interface LogExtended extends Log {
@@ -30,13 +38,6 @@ export interface Achievement {
   description: string;
   loggedOnDate: Date;
   mediaUrl?: string;
-  updatedAt: Date;
-}
-
-export interface Tag {
-  id: number;
-  journeyId: number;
-  name: string;
   updatedAt: Date;
 }
 

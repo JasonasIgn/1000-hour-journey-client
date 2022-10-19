@@ -126,13 +126,13 @@ export const updateJourneyLogEffect = createAsyncThunk(
     journeyId: number;
     logId: number;
   }) => {
-    const { media, ...rest } = data;
+    const { media, tags, ...rest } = data;
     try {
       const response = await axios.patch<Log>(
         apiUrls.updateLog
           .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
-        { ...rest, media: media?.[0] },
+        { ...rest, media: media?.[0], tags: getTagIdsArray(tags) },
         {
           withCredentials: true,
           headers: {

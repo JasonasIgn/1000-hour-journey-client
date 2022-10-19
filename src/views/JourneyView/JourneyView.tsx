@@ -52,7 +52,13 @@ export const JourneyView: FC = () => {
           setShiftDirection={setShiftDirection}
         />
       </Flex>
-      {activeLog && <EditLogDialog journeyId={journey.id} log={activeLog} />}
+      {activeLog && (
+        <EditLogDialog
+          journeyId={journey.id}
+          log={activeLog}
+          tags={journey.tags}
+        />
+      )}
     </Container>
   );
 };
