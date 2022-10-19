@@ -13,9 +13,6 @@ export const Menu: ComponentStyleConfig = {
         backgroundColor: "brand.500",
       },
     },
-    divider: {
-      borderColor: "red",
-    },
   },
   variants: {},
   defaultProps: {
