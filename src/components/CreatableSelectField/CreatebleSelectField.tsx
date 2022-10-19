@@ -1,7 +1,9 @@
 import {
   CreatableSelect,
+  CreatableProps,
   OnChangeValue,
   ActionMeta,
+  GroupBase,
 } from "chakra-react-select";
 import {
   FormControl,
@@ -11,10 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { Control, Controller } from "react-hook-form";
 
-export interface CreatebleSelectFieldProps<Option extends {}> {
+export interface CreatebleSelectFieldProps<Option extends {}>
+  extends CreatableProps<Option, true, GroupBase<Option>> {
   label?: string;
   formControlProps?: FormControlProps;
-  options: Option[];
   control: Control;
   name: string;
 }
@@ -25,13 +27,14 @@ export const CreatebleSelectField = <Option extends {}>({
   control,
   options,
   name,
+  ...rest
 }: CreatebleSelectFieldProps<Option>) => {
   return (
     <Controller
       control={control}
       name={name}
       render={({
-        field: { onChange, onBlur, value, ref },
+        field: { onChange, value, ref },
         fieldState: { error },
       }) => (
         <FormControl isInvalid={Boolean(error?.message)} {...formControlProps}>
@@ -40,6 +43,7 @@ export const CreatebleSelectField = <Option extends {}>({
             isMulti
             ref={ref as any}
             options={options}
+            value={value}
             onChange={(
               newValue: OnChangeValue<Option, true>,
               actionMeta: ActionMeta<Option>
@@ -47,6 +51,7 @@ export const CreatebleSelectField = <Option extends {}>({
               console.log(actionMeta);
               onChange(newValue);
             }}
+            {...rest}
           />
           {error?.message && (
             <FormErrorMessage>{error.message}</FormErrorMessage>

@@ -24,23 +24,30 @@ import {
 } from "components";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
-import { createJourneyLogEffect } from "store/features/journeys/effects";
+import {
+  createJourneyLogEffect,
+  createJourneyTagEffect,
+} from "store/features/journeys/effects";
 import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
 import { getTimerTime } from "store/features/timer/selectors";
 import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
 import { Tag } from "store/features/journeys/types";
+import { getTagOption, getTagOptions } from "../utils";
+import { Option } from "types";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
   open: boolean;
   journeyId: number;
+  tags: Tag[];
 }
 
 export const AddLogDialog: FC<AddLogDialogProps> = ({
   open,
   setOpen,
   journeyId,
+  tags,
 }) => {
   const dispatch = useAppDispatch();
   const lastLog = useAppSelector(getLastJourneyLog);
@@ -50,13 +57,21 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
     ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
 
-  const { register, handleSubmit, formState, control, reset, setValue } =
-    useForm<JourneyLogFormData>({
-      defaultValues: {
-        loggedOn: format(new Date(), dateFormats.standart),
-      },
-      resolver: yupResolver(journeyLogFormValidation),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState,
+    control,
+    reset,
+    setValue,
+    getValues,
+  } = useForm<JourneyLogFormData>({
+    defaultValues: {
+      loggedOn: format(new Date(), dateFormats.standart),
+      tags: [],
+    },
+    resolver: yupResolver(journeyLogFormValidation),
+  });
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: JourneyLogFormData) => {
     try {
@@ -86,6 +101,21 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerTime]);
+
+  const onCreateOption = async (value: string) => {
+    try {
+      const currentValue = getValues("tags");
+      const createdTag = await dispatch(
+        createJourneyTagEffect({
+          data: { name: value },
+          journeyId,
+        })
+      ).unwrap();
+      setValue("tags", [...currentValue, getTagOption(createdTag)]);
+    } catch (e) {
+      console.error("Error creating tag", e);
+    }
+  };
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
@@ -136,11 +166,12 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
               />
             </GridItem>
             <GridItem colSpan={2}>
-              <CreatebleSelectField<Tag>
-                options={[]}
+              <CreatebleSelectField<Option>
+                options={getTagOptions(tags)}
                 control={control as any}
                 name="tags"
                 label="Tags"
+                onCreateOption={onCreateOption}
               />
             </GridItem>
             <GridItem colSpan={2}>

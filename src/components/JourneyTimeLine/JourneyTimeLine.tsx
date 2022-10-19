@@ -281,6 +281,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         open={addLogModalOpen}
         setOpen={setAddLogModalOpen}
         journeyId={journey.id}
+        tags={journey.tags}
       />
       {activeLog && (
         <AddJourneyAchievementDialog

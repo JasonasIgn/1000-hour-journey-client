@@ -3,6 +3,7 @@ import { LoadingState } from "types";
 import {
   createJourneyEffect,
   createJourneyLogEffect,
+  createJourneyTagEffect,
   fetchJourneyEffect,
   fetchJourneysListEffect,
   logJourneyAchievementEffect,
@@ -81,6 +82,11 @@ export const journeysSlice = createSlice({
             (journey) => journey.id === action.payload?.id
           );
           state.list[updatedLogIndex] = action.payload;
+        }
+      })
+      .addCase(createJourneyTagEffect.fulfilled, (state, { payload }) => {
+        if (state.journey && payload) {
+          state.journey.tags.push(payload);
         }
       });
   },

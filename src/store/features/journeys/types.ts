@@ -33,14 +33,15 @@ export interface Achievement {
   updatedAt: Date;
 }
 
-export interface Journey extends JourneyListItem {
-  logs: Log[];
-  achievements: Achievement[];
-}
-
 export interface Tag {
   id: number;
   journeyId: number;
   name: string;
   updatedAt: Date;
+}
+
+export interface Journey extends JourneyListItem {
+  logs: Log[];
+  achievements: Achievement[];
+  tags: Tag[];
 }

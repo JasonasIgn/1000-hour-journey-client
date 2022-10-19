@@ -4,7 +4,8 @@ import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDi
 import { JourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
-import { Achievement, Journey, Log } from "./types";
+import { Achievement, Journey, Log, Tag } from "./types";
+import { getTagIdsArray } from "./utils";
 
 export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
@@ -67,11 +68,11 @@ export const createJourneyLogEffect = createAsyncThunk(
     data: JourneyLogFormData;
     journeyId: number;
   }) => {
-    const { media, ...rest } = data;
+    const { media, tags, ...rest } = data;
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0] },
+        { ...rest, media: media?.[0], tags: getTagIdsArray(tags) },
         {
           withCredentials: true,
           headers: {
@@ -164,6 +165,31 @@ export const updateJourneyEffect = createAsyncThunk(
       return response.data;
     } catch (e) {
       console.log("error:", e);
+    }
+  }
+);
+
+export const createJourneyTagEffect = createAsyncThunk(
+  "journeys/createJourneyTag",
+  async ({
+    data,
+    journeyId,
+  }: {
+    data: { name: string };
+    journeyId: number;
+  }) => {
+    try {
+      const response = await axios.post<Tag>(
+        apiUrls.createTag.replace("{journeyId}", journeyId.toString()),
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
     }
   }
 );

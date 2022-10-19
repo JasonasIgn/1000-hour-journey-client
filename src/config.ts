@@ -13,4 +13,5 @@ export const apiUrls = {
   isLoggedIn: `${API_BASE}/amILoggedIn`,
   login: `${API_BASE}/login`,
   logout: `${API_BASE}/logout`,
+  createTag: `${API_BASE}/journey/{journeyId}/tags`,
 };
