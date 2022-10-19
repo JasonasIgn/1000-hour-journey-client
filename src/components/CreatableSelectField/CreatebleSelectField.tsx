@@ -4,6 +4,7 @@ import {
   OnChangeValue,
   ActionMeta,
   GroupBase,
+  ChakraStylesConfig,
 } from "chakra-react-select";
 import {
   FormControl,
@@ -12,6 +13,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { Control, Controller } from "react-hook-form";
+import { chakraStyles } from "./style";
 
 export interface CreatebleSelectFieldProps<Option extends {}>
   extends CreatableProps<Option, true, GroupBase<Option>> {
@@ -33,13 +35,17 @@ export const CreatebleSelectField = <Option extends {}>({
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, value, ref },
-        fieldState: { error },
-      }) => (
+      render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
         <FormControl isInvalid={Boolean(error?.message)} {...formControlProps}>
           <FormLabel>{label}</FormLabel>
           <CreatableSelect
+            chakraStyles={
+              chakraStyles as ChakraStylesConfig<
+                Option,
+                true,
+                GroupBase<Option>
+              >
+            }
             isMulti
             ref={ref as any}
             options={options}
