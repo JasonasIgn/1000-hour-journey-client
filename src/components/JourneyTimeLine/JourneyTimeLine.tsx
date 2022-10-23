@@ -126,16 +126,19 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   const centerZoomOnThumb = (currentHourOverride?: number) => {
+    // TODO: fix zooming on lower than < 1000 px screen with
+    const scaleRatioPerPixel = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
     const hour = currentHourOverride || currentHour;
+    const scale = currentScale / zoomUnit;
     const xPosition =
-      ((containerOuterWidth + TIMELINE_X_PADDING_PX) /
-        WIDTH_BETWEEN_MARKS_PX /
-        100) *
-      hour;
+      (TIMELINE_X_PADDING_PX + hour * WIDTH_BETWEEN_MARKS_PX) *
+      scaleRatioPerPixel;
+
+    console.log(scaleRatioPerPixel);
     pinchZoomRef.current?.alignCenter({
       x: xPosition,
       y: 0,
-      scale: currentScale / zoomUnit,
+      scale,
       animated: true,
     });
   };
