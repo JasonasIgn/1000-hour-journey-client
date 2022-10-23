@@ -1,15 +1,15 @@
-export const getInitialXPosition = (currentHour: number, initial?: boolean) => {
-  const maxXPosition = 1120;
-  const offsetModifier = 27;
-  const xPosition = (currentHour / 1000) * maxXPosition;
-  const finalPosition = xPosition;
-  if (finalPosition < offsetModifier) {
-    return offsetModifier;
-  }
-  if (finalPosition > maxXPosition - offsetModifier) {
-    return maxXPosition - offsetModifier;
-  }
-  return finalPosition;
+import {
+  TIMELINE_INNER_WIDTH_PX,
+  TIMELINE_X_PADDING_PX,
+  WIDTH_BETWEEN_MARKS_PX,
+} from "./constants";
+
+export const getZoomXPosition = (hour: number, containerOuterWidth: number) => {
+  const scaleRatioPerPixel = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
+  const xPosition =
+    (TIMELINE_X_PADDING_PX + hour * WIDTH_BETWEEN_MARKS_PX) *
+    scaleRatioPerPixel;
+  return xPosition;
 };
 
 export const getFinalScale = (scale: number) => {

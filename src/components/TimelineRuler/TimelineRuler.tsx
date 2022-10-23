@@ -60,7 +60,3 @@ export const TimelineRuler: FC<TimelineRulerProps> = memo(
     );
   }
 );
-
-// 9800
-// 2060
-// 200?

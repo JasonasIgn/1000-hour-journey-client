@@ -23,7 +23,7 @@ import {
   getLogsDictionary,
   getLogBeginningsDictionary,
 } from "views/JourneyView/utils";
-import { getFinalScale, getInitialXPosition } from "./utils";
+import { getFinalScale, getZoomXPosition } from "./utils";
 import {
   JourneyTimeLineControls,
   TimelineRuler,
@@ -40,7 +40,6 @@ import {
   TIMELINE_BORDER_WIDTH_PX,
   TIMELINE_INNER_WIDTH_PX,
   TIMELINE_X_PADDING_PX,
-  WIDTH_BETWEEN_MARKS_PX,
 } from "./constants";
 
 interface JourneyTimeLineProps {
@@ -126,15 +125,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   const centerZoomOnThumb = (currentHourOverride?: number) => {
+    console.log("centering");
     // TODO: fix zooming on lower than < 1000 px screen with
-    const scaleRatioPerPixel = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
     const hour = currentHourOverride || currentHour;
     const scale = currentScale / zoomUnit;
-    const xPosition =
-      (TIMELINE_X_PADDING_PX + hour * WIDTH_BETWEEN_MARKS_PX) *
-      scaleRatioPerPixel;
-
-    console.log(scaleRatioPerPixel);
+    const xPosition = getZoomXPosition(hour, containerOuterWidth);
+    console.log(xPosition);
     pinchZoomRef.current?.alignCenter({
       x: xPosition,
       y: 0,
@@ -145,10 +141,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useEffect(() => {
     if (isPlaying) {
+      const scale = currentScale / zoomUnit;
+      const xPosition = getZoomXPosition(currentHour, containerOuterWidth);
       pinchZoomRef.current?.alignCenter({
-        x: getInitialXPosition(currentHour),
+        x: xPosition,
         y: 0,
-        scale: 20,
+        scale,
         animated: false,
       });
     }
@@ -172,6 +170,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     setNewCurrentHour(journey.totalHours - 0.1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [journey.totalHours]);
+
   return (
     <Flex width="100%" flexDirection="column">
       <JourneyTimeLineControls
