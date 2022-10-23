@@ -23,7 +23,7 @@ import {
   getLogsDictionary,
   getLogBeginningsDictionary,
 } from "views/JourneyView/utils";
-import { getInitialXPosition } from "./utils";
+import { getFinalScale, getInitialXPosition } from "./utils";
 import {
   JourneyTimeLineControls,
   TimelineRuler,
@@ -35,6 +35,13 @@ import { dateFormats } from "utils/constants";
 import { useSpaceKeyForPlaying } from "./hooks";
 import { useAppSelector } from "store/hooks";
 import { getEditLogDialogOpen } from "store/features/journey/selectors";
+import {
+  MAX_HOURS,
+  TIMELINE_BORDER_WIDTH_PX,
+  TIMELINE_INNER_WIDTH_PX,
+  TIMELINE_X_PADDING_PX,
+  WIDTH_BETWEEN_MARKS_PX,
+} from "./constants";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -49,11 +56,15 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setActiveAchievement,
   setShiftDirection,
 }) => {
+  const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
+  const zoomUnit = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
+  const [currentScale, setCurrentScale] = useState(2);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(
     Math.round((journey.totalHours - 0.1) * 10) / 10
   );
+
   const isEditLogModalOpen = useAppSelector(getEditLogDialogOpen);
 
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
@@ -99,21 +110,32 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     setCurrentHour(Math.round(hour * 10) / 10);
     setShiftDirection(hour > currentHour ? "left" : "right");
   };
-
   const onUpdate = useCallback(({ x, scale }: any) => {
+    const finalScale = getFinalScale(scale);
+    setCurrentScale(finalScale);
     const { current } = timelineContainerRef;
     if (current) {
       setCurrentViewX(x);
-      const value = make3dTransformValue({ x, y: -90, scale });
+      const value = make3dTransformValue({
+        x,
+        y: 0,
+        scale: finalScale,
+      });
       current.style.setProperty("transform", value);
     }
   }, []);
 
   const centerZoomOnThumb = (currentHourOverride?: number) => {
+    const hour = currentHourOverride || currentHour;
+    const xPosition =
+      ((containerOuterWidth + TIMELINE_X_PADDING_PX) /
+        WIDTH_BETWEEN_MARKS_PX /
+        100) *
+      hour;
     pinchZoomRef.current?.alignCenter({
-      x: getInitialXPosition(currentHourOverride || currentHour),
-      y: -90,
-      scale: 20,
+      x: xPosition,
+      y: 0,
+      scale: currentScale / zoomUnit,
       animated: true,
     });
   };
@@ -122,7 +144,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     if (isPlaying) {
       pinchZoomRef.current?.alignCenter({
         x: getInitialXPosition(currentHour),
-        y: -90,
+        y: 0,
         scale: 20,
         animated: false,
       });
@@ -147,7 +169,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     setNewCurrentHour(journey.totalHours - 0.1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [journey.totalHours]);
-
   return (
     <Flex width="100%" flexDirection="column">
       <JourneyTimeLineControls
@@ -174,7 +195,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         }}
         centerZoomOnThumb={centerZoomOnThumb}
       />
-      <Box border="1px solid" borderColor="brand.700" borderRadius="20px">
+      <Box
+        border={`${TIMELINE_BORDER_WIDTH_PX}px solid`}
+        borderColor="brand.700"
+        borderRadius="20px"
+      >
         <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;
           {activeLog
@@ -187,6 +212,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         <QuickPinchZoom
           onUpdate={onUpdate}
           maxZoom={20}
+          minZoom={10}
           inertia={false}
           ref={pinchZoomRef}
           lockDragAxis={true}
@@ -195,16 +221,16 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           <Box
             ref={timelineContainerRef}
             height="200px"
-            width="10000px"
-            padding="0 12px"
+            width={`${TIMELINE_INNER_WIDTH_PX}px`}
+            px={`${TIMELINE_X_PADDING_PX}px`}
           >
             <Slider
               onChangeEnd={centerZoomOnThumb}
-              top="70%"
+              top={`${Math.round(70 / currentScale)}px`}
               step={0.1}
               defaultValue={currentHour}
               min={0}
-              max={1000}
+              max={MAX_HOURS}
               value={currentHour}
               onChange={(hour) => {
                 setNewCurrentHour(hour);
@@ -213,44 +239,38 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 }
               }}
             >
-              {journey.achievements.map((achievement) => {
-                return (
-                  <SliderMark
-                    key={achievement.id}
-                    value={achievement.loggedAtHour}
-                    display="flex"
-                    justifyContent="center"
-                    color="white"
-                    bgColor="brand.100"
-                    mt="-7px"
-                    width="1px"
-                    height={1}
+              {journey.achievements.map((achievement) => (
+                <SliderMark
+                  key={achievement.id}
+                  value={achievement.loggedAtHour}
+                  display="flex"
+                  justifyContent="center"
+                  color="white"
+                  bgColor="brand.100"
+                  mt="-7px"
+                  width="1px"
+                  height={1}
+                >
+                  <Box
+                    minWidth="9px"
+                    top="-10px"
+                    position="absolute"
+                    cursor="pointer"
+                    pointerEvents="all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      setNewCurrentHour(achievement.loggedAtHour);
+                    }}
+                    onPointerDownCapture={(e) => {
+                      e.stopPropagation();
+                    }}
+                    _hover={{ transform: "scale(1.1)" }}
                   >
-                    <Box
-                      minWidth="9px"
-                      top="-10px"
-                      position="absolute"
-                      cursor="pointer"
-                      pointerEvents="all"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        setNewCurrentHour(achievement.loggedAtHour);
-                      }}
-                      onPointerDownCapture={(e) => {
-                        e.stopPropagation();
-                      }}
-                      _hover={{ transform: "scale(1.1)" }}
-                    >
-                      <AchievementIcon
-                        stroke="white"
-                        width="9px"
-                        height="9px"
-                      />
-                    </Box>
-                  </SliderMark>
-                );
-              })}
+                    <AchievementIcon stroke="white" width="9px" height="9px" />
+                  </Box>
+                </SliderMark>
+              ))}
               <SliderTrack display="flex">
                 {journey.logs.map((log, idx) => {
                   const widthPercentage = log.hoursSpent / 10;
@@ -266,7 +286,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                   );
                 })}
               </SliderTrack>
-              <TimelineRuler currentViewX={currentViewX} />
+              <TimelineRuler
+                currentViewX={currentViewX}
+                scale={currentScale}
+                containerOuterWidth={containerOuterWidth}
+              />
               <SliderThumb
                 width="6px"
                 height="6px"

@@ -16,7 +16,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
       flexDirection="column"
       position="absolute"
       height="100%"
-      width="65%"
+      width="45%"
       bg="brand.800"
       border="1px solid"
       borderColor="brand.700"

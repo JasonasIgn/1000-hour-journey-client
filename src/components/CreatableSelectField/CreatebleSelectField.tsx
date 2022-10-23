@@ -54,7 +54,6 @@ export const CreatebleSelectField = <Option extends {}>({
               newValue: OnChangeValue<Option, true>,
               actionMeta: ActionMeta<Option>
             ) => {
-              console.log(actionMeta);
               onChange(newValue);
             }}
             {...rest}

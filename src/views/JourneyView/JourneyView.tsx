@@ -1,4 +1,4 @@
-import { Container, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState, FC } from "react";
 import { useParams } from "react-router-dom";
 import { EditLogDialog, JourneyTimeLine, Showcase } from "components";
@@ -8,6 +8,7 @@ import { resetJourney } from "store/features/journeys/slice";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
+import { JourneyTitle } from "components/JourneyTitle";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -34,13 +35,9 @@ export const JourneyView: FC = () => {
   }
 
   return (
-    <Container maxW="6xl">
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        height="calc(100vh - 60px)"
-        pt={5}
-      >
+    <Flex flexDirection="column" flex="1 1 0">
+      <JourneyTitle title={journey.title} />
+      <Flex flexDirection="column" alignItems="center" height="full" pt={5}>
         <Showcase
           item={activeAchievement || activeLog}
           shiftDirection={shiftDirection}
@@ -59,6 +56,6 @@ export const JourneyView: FC = () => {
           tags={journey.tags}
         />
       )}
-    </Container>
+    </Flex>
   );
 };

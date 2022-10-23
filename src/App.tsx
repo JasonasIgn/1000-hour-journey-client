@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "components";
 import { useInitialization } from "utils/hooks";
 import { useAppSelector } from "store/hooks";
@@ -19,11 +19,11 @@ const App = () => {
   }
 
   return (
-    <Box bgColor="brand.900" minHeight="100vh">
+    <Flex bgColor="brand.900" minHeight="100vh" flexDirection="column">
       <Header isLoggedIn={isLoggedIn} />
       {isLoggedIn && <AuthRoutes />}
       {!isLoggedIn && <GuestRoutes />}
-    </Box>
+    </Flex>
   );
 };
 

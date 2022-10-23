@@ -11,3 +11,15 @@ export const getInitialXPosition = (currentHour: number, initial?: boolean) => {
   }
   return finalPosition;
 };
+
+export const getFinalScale = (scale: number) => {
+  const maxScale = 3;
+  const minScale = 2;
+  if (scale > maxScale) {
+    return maxScale;
+  }
+  if (scale < minScale) {
+    return minScale;
+  }
+  return scale;
+};

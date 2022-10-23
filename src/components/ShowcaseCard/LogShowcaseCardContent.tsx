@@ -73,7 +73,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           <Heading>{log.hoursSpent}</Heading>
         </Box>
       </Flex>
-      <Flex height="84%" width="100%">
+      <Flex minHeight={0} width="100%">
         <Flex flex="1 1 40%">
           <Text>{log.description}</Text>
         </Flex>
