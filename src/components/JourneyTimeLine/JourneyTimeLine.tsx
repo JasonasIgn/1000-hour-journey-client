@@ -125,12 +125,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   const centerZoomOnThumb = (currentHourOverride?: number) => {
-    console.log("centering");
     // TODO: fix zooming on lower than < 1000 px screen with
     const hour = currentHourOverride || currentHour;
     const scale = currentScale / zoomUnit;
     const xPosition = getZoomXPosition(hour, containerOuterWidth);
-    console.log(xPosition);
     pinchZoomRef.current?.alignCenter({
       x: xPosition,
       y: 0,
