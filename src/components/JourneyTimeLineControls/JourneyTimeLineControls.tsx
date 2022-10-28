@@ -1,18 +1,9 @@
-import { FC, useEffect, MouseEvent } from "react";
-import {
-  FlexProps,
-  IconButton,
-  Flex,
-  useInterval,
-  Icon,
-} from "@chakra-ui/react";
-import { ReactComponent as PlayIcon } from "resources/play_icon.svg";
-import { ReactComponent as PauseIcon } from "resources/pause_icon.svg";
+import { FC, MouseEvent } from "react";
+import { FlexProps, IconButton, Flex, Icon } from "@chakra-ui/react";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as PageIcon } from "resources/page.svg";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
 import { Achievement, LogExtended } from "store/features/journeys/types";
-import { getTickSpeed } from "./utils";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 
@@ -21,8 +12,6 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   setCurrentHour: (value: number) => void;
   activeLog?: LogExtended;
   activeAchievement?: Achievement;
-  setIsPlaying: (playing: boolean) => void;
-  isPlaying: boolean;
   totalHours: number;
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
@@ -34,8 +23,6 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   currentHour,
   setCurrentHour,
   activeLog,
-  setIsPlaying,
-  isPlaying,
   totalHours,
   activeAchievement,
   openAddLogModal,
@@ -44,19 +31,6 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   logBegginingsMap,
   ...rest
 }) => {
-  useInterval(
-    () => {
-      setCurrentHour(Math.round((currentHour + 0.1) * 10) / 10);
-    },
-    isPlaying ? getTickSpeed(activeLog, activeAchievement) : null
-  );
-
-  useEffect(() => {
-    if (!activeLog && isPlaying) {
-      setIsPlaying(false);
-    }
-  }, [activeLog, isPlaying, setIsPlaying]);
-
   const onGoToPreviousClick = () => {
     const orderedLogIds = Object.keys(logBegginingsMap);
     const currentOrderLogId = orderedLogIds.findIndex(
@@ -109,6 +83,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
         />
         <IconButton
           ml={2}
+          mr={2}
           icon={
             <Icon
               as={RightArrowIcon}
@@ -118,20 +93,6 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           }
           aria-label="Go to previous log"
           onClick={onGoToPreviousClick}
-        />
-        <IconButton
-          icon={
-            isPlaying ? (
-              <Icon as={PauseIcon} width="20px" height="20px" fill="gray.300" />
-            ) : (
-              <Icon as={PlayIcon} fill="gray.300" />
-            )
-          }
-          aria-label="Play Journey"
-          onClick={() => {
-            setIsPlaying(!isPlaying);
-          }}
-          mx={2}
         />
         <IconButton
           mr={2}

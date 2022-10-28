@@ -32,9 +32,6 @@ import {
 } from "components";
 import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
-import { useSpaceKeyForPlaying } from "./hooks";
-import { useAppSelector } from "store/hooks";
-import { getEditLogDialogOpen } from "store/features/journey/selectors";
 import {
   MAX_HOURS,
   TIMELINE_BORDER_WIDTH_PX,
@@ -58,24 +55,16 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
   const zoomUnit = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
   const [currentScale, setCurrentScale] = useState(2);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(
     Math.round((journey.totalHours - 0.1) * 10) / 10
   );
 
-  const isEditLogModalOpen = useAppSelector(getEditLogDialogOpen);
-
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
-  const shouldSpaceTriggerPlay =
-    !addLogModalOpen && !addAchievementModalOpen && !isEditLogModalOpen;
-
   const timelineContainerRef = useRef<any>();
   const pinchZoomRef = useRef<any>();
-
-  useSpaceKeyForPlaying({ isPlaying, setIsPlaying, shouldSpaceTriggerPlay });
 
   const logBegginingsMap = useMemo(
     () => getLogBeginningsDictionary(journey?.logs || []),
@@ -138,20 +127,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   };
 
   useEffect(() => {
-    if (isPlaying) {
-      const scale = currentScale / zoomUnit;
-      const xPosition = getZoomXPosition(currentHour, containerOuterWidth);
-      pinchZoomRef.current?.alignCenter({
-        x: xPosition,
-        y: 0,
-        scale,
-        animated: false,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentHour]);
-
-  useEffect(() => {
     centerZoomOnThumb();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -179,8 +154,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         currentHour={currentHour}
         activeLog={activeLog}
         activeAchievement={activeAchievement}
-        setIsPlaying={setIsPlaying}
-        isPlaying={isPlaying}
         totalHours={journey.totalHours}
         logBegginingsMap={logBegginingsMap}
         openAddLogModal={(e) => {
@@ -233,12 +206,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               max={MAX_HOURS}
               value={currentHour}
               focusThumbOnChange={false}
-              onChange={(hour) => {
-                setNewCurrentHour(hour);
-                if (isPlaying) {
-                  setIsPlaying(false);
-                }
-              }}
+              onChange={setNewCurrentHour}
             >
               {journey.achievements.map((achievement) => (
                 <SliderMark
