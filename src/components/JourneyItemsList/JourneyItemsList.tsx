@@ -19,7 +19,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({ logs }) => {
       </Flex>
       <Flex direction="column" overflow="auto" px={1}>
         {logs.map((log, idx) => (
-          <JourneyItemsListItem log={log} index={idx} key={log.id} />
+          <JourneyItemsListItem log={log} index={idx + 1} key={log.id} />
         ))}
       </Flex>
     </Flex>
