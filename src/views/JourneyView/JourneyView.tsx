@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
 import { JourneyTitle } from "components/JourneyTitle";
 import { GeneralJourneyInfo } from "components/GeneralJourneyInfo";
+import { JourneyItemsList } from "components/JourneyItemsList";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +46,7 @@ export const JourneyView: FC = () => {
         pt={5}
         px={6}
       >
-        <Flex flex={1} width="full">
+        <Flex flex="1 1 0" width="full" minHeight={0}>
           <Flex width="25%">
             <GeneralJourneyInfo journey={journey} />
           </Flex>
@@ -55,7 +56,9 @@ export const JourneyView: FC = () => {
               shiftDirection={shiftDirection}
             />
           </Flex>
-          <Flex border="1px solid red" width="25%" />
+          <Flex border="1px solid red" width="25%">
+            <JourneyItemsList logs={journey.logs} />
+          </Flex>
         </Flex>
         <JourneyTimeLine
           journey={journey}
