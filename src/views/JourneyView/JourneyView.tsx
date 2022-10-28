@@ -38,10 +38,16 @@ export const JourneyView: FC = () => {
     <Flex flexDirection="column" flex="1 1 0">
       <JourneyTitle title={journey.title} />
       <Flex flexDirection="column" alignItems="center" height="full" pt={5}>
-        <Showcase
-          item={activeAchievement || activeLog}
-          shiftDirection={shiftDirection}
-        />
+        <Flex flex={1} width="full">
+          <Flex border="1px solid red" width="30%" />
+          <Flex width="40%">
+            <Showcase
+              item={activeAchievement || activeLog}
+              shiftDirection={shiftDirection}
+            />
+          </Flex>
+          <Flex border="1px solid red" width="30%" />
+        </Flex>
         <JourneyTimeLine
           journey={journey}
           setActiveLog={setActiveLog}

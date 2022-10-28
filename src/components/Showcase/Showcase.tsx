@@ -16,9 +16,10 @@ export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {
 
   return (
     <Flex
-      height="45%"
+      flex="1"
       width="100%"
       justifyContent="center"
+      alignItems="center"
       position="relative"
       overflow="hidden"
     >
