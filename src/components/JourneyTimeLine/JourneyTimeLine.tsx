@@ -232,6 +232,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               min={0}
               max={MAX_HOURS}
               value={currentHour}
+              focusThumbOnChange={false}
               onChange={(hour) => {
                 setNewCurrentHour(hour);
                 if (isPlaying) {
