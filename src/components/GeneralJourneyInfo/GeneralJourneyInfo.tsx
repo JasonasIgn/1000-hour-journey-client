@@ -65,7 +65,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
             <Flex direction="column" alignItems="center">
               <Heading size="md">Left</Heading>
               <Heading size="lg" mt={3} color="grey.100">
-                {1000 - journey.totalHours} h
+                {Math.round((1000 - journey.totalHours) * 10) / 10} h
               </Heading>
             </Flex>
           </SimpleGrid>

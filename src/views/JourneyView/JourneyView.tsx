@@ -56,7 +56,7 @@ export const JourneyView: FC = () => {
               shiftDirection={shiftDirection}
             />
           </Flex>
-          <Flex border="1px solid red" width="25%">
+          <Flex width="25%">
             <JourneyItemsList logs={journey.logs} />
           </Flex>
         </Flex>
