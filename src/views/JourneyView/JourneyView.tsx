@@ -9,6 +9,7 @@ import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
 import { JourneyTitle } from "components/JourneyTitle";
+import { GeneralJourneyInfo } from "components/GeneralJourneyInfo";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -37,16 +38,24 @@ export const JourneyView: FC = () => {
   return (
     <Flex flexDirection="column" flex="1 1 0">
       <JourneyTitle title={journey.title} />
-      <Flex flexDirection="column" alignItems="center" height="full" pt={5}>
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        height="full"
+        pt={5}
+        px={6}
+      >
         <Flex flex={1} width="full">
-          <Flex border="1px solid red" width="30%" />
-          <Flex width="40%">
+          <Flex width="25%">
+            <GeneralJourneyInfo journey={journey} />
+          </Flex>
+          <Flex width="50%">
             <Showcase
               item={activeAchievement || activeLog}
               shiftDirection={shiftDirection}
             />
           </Flex>
-          <Flex border="1px solid red" width="30%" />
+          <Flex border="1px solid red" width="25%" />
         </Flex>
         <JourneyTimeLine
           journey={journey}

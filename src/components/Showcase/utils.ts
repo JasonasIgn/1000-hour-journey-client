@@ -3,7 +3,7 @@ export const getLeftCssValue = (position: number) => {
     return "-100%";
   }
   if (position === 1) {
-    return "5%";
+    return "10%";
   }
   return "100%";
 };
