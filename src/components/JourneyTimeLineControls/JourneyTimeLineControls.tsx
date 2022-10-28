@@ -15,7 +15,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   totalHours: number;
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
-  centerZoomOnThumb: (currentHourOverride?: number) => void;
+  centerZoomOnThumb: (hour: number) => void;
   logBegginingsMap: IdsHourMap;
 }
 

@@ -7,7 +7,10 @@ import {
   SliderTrack,
   Text,
 } from "@chakra-ui/react";
-import QuickPinchZoom, { make3dTransformValue } from "react-quick-pinch-zoom";
+import QuickPinchZoom, {
+  make3dTransformValue,
+  UpdateAction,
+} from "react-quick-pinch-zoom";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -63,8 +66,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
-  const timelineContainerRef = useRef<any>();
-  const pinchZoomRef = useRef<any>();
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  const pinchZoomRef = useRef<QuickPinchZoom>(null);
 
   const logBegginingsMap = useMemo(
     () => getLogBeginningsDictionary(journey?.logs || []),
@@ -98,7 +101,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     setCurrentHour(Math.round(hour * 10) / 10);
     setShiftDirection(hour > currentHour ? "left" : "right");
   };
-  const onUpdate = useCallback(({ x, scale }: any) => {
+
+  const onUpdate = useCallback(({ x, scale }: UpdateAction) => {
     const finalScale = getFinalScale(scale);
     setCurrentScale(finalScale);
     const { current } = timelineContainerRef;
@@ -113,9 +117,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
   }, []);
 
-  const centerZoomOnThumb = (currentHourOverride?: number) => {
+  const centerZoomOnThumb = (hour: number) => {
     // TODO: fix zooming on lower than < 1000 px screen with
-    const hour = currentHourOverride || currentHour;
     const scale = currentScale / zoomUnit;
     const xPosition = getZoomXPosition(hour, containerOuterWidth);
     pinchZoomRef.current?.alignCenter({
@@ -127,7 +130,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   };
 
   useEffect(() => {
-    centerZoomOnThumb();
+    centerZoomOnThumb(currentHour);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
