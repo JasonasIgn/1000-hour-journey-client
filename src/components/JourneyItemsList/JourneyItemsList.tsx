@@ -5,9 +5,15 @@ import { JourneyItemsListItem } from "./JourneyItemsListItem/JourneyItemsListIte
 
 interface JourneyItemsListProps {
   logs: Log[];
+  activeLog?: Log;
+  setActiveLogById: (id: number) => void;
 }
 
-export const JourneyItemsList: FC<JourneyItemsListProps> = ({ logs }) => {
+export const JourneyItemsList: FC<JourneyItemsListProps> = ({
+  logs,
+  activeLog,
+  setActiveLogById,
+}) => {
   return (
     <Flex direction="column" w="full" mb={2}>
       <Flex mb={4} justify="center" align="center">
@@ -19,7 +25,15 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({ logs }) => {
       </Flex>
       <Flex direction="column" overflow="auto" px={1}>
         {logs.map((log, idx) => (
-          <JourneyItemsListItem log={log} index={idx + 1} key={log.id} />
+          <JourneyItemsListItem
+            log={log}
+            index={idx + 1}
+            key={log.id}
+            active={activeLog?.id === log.id}
+            onClick={() => {
+              setActiveLogById(log.id);
+            }}
+          />
         ))}
       </Flex>
     </Flex>

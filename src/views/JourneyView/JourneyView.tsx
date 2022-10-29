@@ -67,7 +67,11 @@ export const JourneyView: FC = () => {
             />
           </Flex>
           <Flex width="25%">
-            <JourneyItemsList logs={journey.logs} />
+            <JourneyItemsList
+              logs={journey.logs}
+              activeLog={activeLog}
+              setActiveLogById={setActiveLogById}
+            />
           </Flex>
         </Flex>
         <JourneyTimeLine
