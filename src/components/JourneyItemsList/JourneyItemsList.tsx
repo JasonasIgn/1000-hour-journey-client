@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Divider, Flex, Heading } from "@chakra-ui/react";
 import { Log } from "store/features/journeys/types";
 import { JourneyItemsListItem } from "./JourneyItemsListItem/JourneyItemsListItem";
@@ -14,6 +14,12 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   activeLog,
   setActiveLogById,
 }) => {
+  const activeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [activeLog]);
+
   return (
     <Flex direction="column" w="full" mb={2}>
       <Flex mb={4} justify="center" align="center">
@@ -33,6 +39,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
             onClick={() => {
               setActiveLogById(log.id);
             }}
+            ref={activeLog?.id === log.id ? activeRef : undefined}
           />
         ))}
       </Flex>

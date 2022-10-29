@@ -1,5 +1,4 @@
-import { FC } from "react";
-import { Flex, FlexProps, Heading, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, forwardRef, Heading, Text } from "@chakra-ui/react";
 import { Log } from "store/features/journeys/types";
 
 interface JourneyItemsListItemProps extends FlexProps {
@@ -8,13 +7,8 @@ interface JourneyItemsListItemProps extends FlexProps {
   active: boolean;
 }
 
-export const JourneyItemsListItem: FC<JourneyItemsListItemProps> = ({
-  log,
-  index,
-  active,
-  ...rest
-}) => {
-  return (
+export const JourneyItemsListItem = forwardRef(
+  ({ log, index, active, ...rest }: JourneyItemsListItemProps, ref) => (
     <Flex
       w="full"
       border="1px solid"
@@ -30,6 +24,7 @@ export const JourneyItemsListItem: FC<JourneyItemsListItemProps> = ({
         transform: "scale(1.005)",
       }}
       transition="transform 0.1s"
+      ref={ref}
       {...rest}
     >
       <Heading size="sm">#{index}</Heading>
@@ -42,5 +37,5 @@ export const JourneyItemsListItem: FC<JourneyItemsListItemProps> = ({
         {log.description}
       </Text>
     </Flex>
-  );
-};
+  )
+);
