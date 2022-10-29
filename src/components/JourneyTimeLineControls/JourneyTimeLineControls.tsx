@@ -3,32 +3,32 @@ import { FlexProps, IconButton, Flex, Icon } from "@chakra-ui/react";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as PageIcon } from "resources/page.svg";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
-import { Achievement, LogExtended } from "store/features/journeys/types";
+import {
+  Achievement,
+  Journey,
+  LogExtended,
+} from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
-  currentHour: number;
-  setCurrentHour: (value: number) => void;
   activeLog?: LogExtended;
   activeAchievement?: Achievement;
-  totalHours: number;
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
-  centerZoomOnThumb: (hour: number) => void;
   logBegginingsMap: IdsHourMap;
+  setActiveLogById: (id: number) => void;
+  journey: Journey;
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
-  currentHour,
-  setCurrentHour,
   activeLog,
-  totalHours,
   activeAchievement,
   openAddLogModal,
   openAddAchievementModal,
-  centerZoomOnThumb,
   logBegginingsMap,
+  setActiveLogById,
+  journey,
   ...rest
 }) => {
   const onGoToPreviousClick = () => {
@@ -38,9 +38,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     );
     if (currentOrderLogId > 0) {
       const previousLogId = orderedLogIds[currentOrderLogId - 1];
-      const hour = logBegginingsMap[Number(previousLogId)];
-      setCurrentHour(hour);
-      centerZoomOnThumb(hour + 0.1);
+      setActiveLogById(Number(previousLogId));
     }
   };
 
@@ -51,20 +49,22 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     );
     const nextLogId = orderedLogIds[currentOrderLogId + 1];
     if (nextLogId) {
-      const hour = logBegginingsMap[Number(nextLogId)];
-      setCurrentHour(hour);
-      centerZoomOnThumb(hour + 0.1);
+      setActiveLogById(Number(nextLogId));
     }
   };
 
   const onRewindClick = () => {
-    setCurrentHour(0);
-    centerZoomOnThumb(0.1);
+    const firstLogId = journey.logs[0].id;
+    if (firstLogId) {
+      setActiveLogById(firstLogId);
+    }
   };
 
   const onSkipClick = () => {
-    setCurrentHour(totalHours - 0.1);
-    centerZoomOnThumb(totalHours - 0.1);
+    const lastLogId = journey.logs[journey.logs.length - 1].id;
+    if (lastLogId) {
+      setActiveLogById(lastLogId);
+    }
   };
 
   return (

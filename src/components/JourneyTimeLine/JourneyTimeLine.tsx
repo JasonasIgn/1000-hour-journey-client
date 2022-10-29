@@ -44,14 +44,16 @@ import {
 
 interface JourneyTimeLineProps {
   journey: Journey;
-  setActiveLog: (log: LogExtended) => void;
+  setActiveLogById: (id: number) => void;
+  activeLog?: LogExtended;
   setActiveAchievement: (log: Achievement) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
-  setActiveLog,
+  setActiveLogById,
+  activeLog,
   setActiveAchievement,
   setShiftDirection,
 }) => {
@@ -71,15 +73,15 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   const logBegginingsMap = useMemo(
     () => getLogBeginningsDictionary(journey?.logs || []),
-    [journey?.logs]
+    [journey.logs]
   );
   const hoursToLogMap = useMemo(
     () => getLogHoursMap(journey?.logs || []),
-    [journey?.logs]
+    [journey.logs]
   );
   const logsDictionary = useMemo(
     () => getLogsDictionary(journey?.logs || []),
-    [journey?.logs]
+    [journey.logs]
   );
 
   const hoursToAchievementsMap = useMemo(
@@ -90,9 +92,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     () => getAchievementsDictionary(journey.achievements),
     [journey.achievements]
   );
-
-  const activeLogId = hoursToLogMap[currentHour];
-  const activeLog = logsDictionary[activeLogId];
 
   const activeAchievementId = hoursToAchievementsMap[currentHour];
   const activeAchievement = achievementsDictionary[activeAchievementId];
@@ -135,8 +134,22 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   }, []);
 
   useEffect(() => {
-    setActiveLog(activeLog);
-  }, [activeLog, setActiveLog]);
+    const currentHourLog = logsDictionary[hoursToLogMap[currentHour]];
+    if (currentHourLog && currentHourLog?.id !== activeLog?.id) {
+      setActiveLogById(currentHourLog.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentHour]);
+
+  useEffect(() => {
+    const currentHourLog = logsDictionary[hoursToLogMap[currentHour]];
+    if (activeLog && activeLog.id !== currentHourLog?.id) {
+      const newHour = Math.round(logBegginingsMap[activeLog.id] * 10) / 10;
+      setCurrentHour(newHour);
+      centerZoomOnThumb(newHour);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeLog]);
 
   useEffect(() => {
     setActiveAchievement(activeAchievement);
@@ -153,11 +166,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         height="40px"
         py={2}
         boxSizing="content-box"
-        setCurrentHour={setNewCurrentHour}
-        currentHour={currentHour}
         activeLog={activeLog}
         activeAchievement={activeAchievement}
-        totalHours={journey.totalHours}
         logBegginingsMap={logBegginingsMap}
         openAddLogModal={(e) => {
           if (e.detail !== 0) {
@@ -169,7 +179,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             setAddAchievementModalOpen(true);
           }
         }}
-        centerZoomOnThumb={centerZoomOnThumb}
+        journey={journey}
+        setActiveLogById={setActiveLogById}
       />
       <Box
         border={`${TIMELINE_BORDER_WIDTH_PX}px solid`}
@@ -249,7 +260,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                   return (
                     <Box
                       key={log.id}
-                      bg={log.id === activeLogId ? "brand.300" : "brand.600"}
+                      bg={log.id === activeLog?.id ? "brand.300" : "brand.600"}
                       width={`${widthPercentage}%`}
                       borderLeft={idx === 0 ? "none" : "1px solid"}
                       borderColor="gray.400"

@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState, FC } from "react";
+import { useEffect, useState, FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { EditLogDialog, JourneyTimeLine, Showcase } from "components";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
@@ -11,6 +11,7 @@ import { ShiftDirection } from "types";
 import { JourneyTitle } from "components/JourneyTitle";
 import { GeneralJourneyInfo } from "components/GeneralJourneyInfo";
 import { JourneyItemsList } from "components/JourneyItemsList";
+import { getLogsDictionary } from "./utils";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,15 @@ export const JourneyView: FC = () => {
   const [activeLog, setActiveLog] = useState<LogExtended>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
+
+  const logsDictionary = useMemo(
+    () => getLogsDictionary(journey?.logs || []),
+    [journey?.logs]
+  );
+
+  const setActiveLogById = (id: number) => {
+    setActiveLog(logsDictionary[id]);
+  };
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
@@ -62,7 +72,8 @@ export const JourneyView: FC = () => {
         </Flex>
         <JourneyTimeLine
           journey={journey}
-          setActiveLog={setActiveLog}
+          activeLog={activeLog}
+          setActiveLogById={setActiveLogById}
           setActiveAchievement={setActiveAchievement}
           setShiftDirection={setShiftDirection}
         />
