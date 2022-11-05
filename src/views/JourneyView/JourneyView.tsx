@@ -12,6 +12,7 @@ import { JourneyTitle } from "components/JourneyTitle";
 import { GeneralJourneyInfo } from "components/GeneralJourneyInfo";
 import { JourneyItemsList } from "components/JourneyItemsList";
 import { getLogsDictionary } from "./utils";
+import { JOURNEY_VIEW_X_PADDING } from "./constants";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -54,7 +55,7 @@ export const JourneyView: FC = () => {
         alignItems="center"
         height="full"
         pt={5}
-        px={6}
+        px={`${JOURNEY_VIEW_X_PADDING}px`}
       >
         <Flex flex="1 1 0" width="full" minHeight={0}>
           <Flex width="25%">
