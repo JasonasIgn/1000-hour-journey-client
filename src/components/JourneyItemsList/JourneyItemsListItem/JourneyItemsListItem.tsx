@@ -14,6 +14,7 @@ export const JourneyItemsListItem = forwardRef(
       border="1px solid"
       borderColor="brand.200"
       borderRadius="4px"
+      minHeight="40px"
       height="40px"
       mb={2}
       p={1}
