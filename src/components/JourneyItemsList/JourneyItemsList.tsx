@@ -4,6 +4,7 @@ import { Log, Tag } from "store/features/journeys/types";
 import { JourneyItemsListItem } from "./JourneyItemsListItem/JourneyItemsListItem";
 import { Select } from "chakra-react-select";
 import { getTagOptions } from "components/JourneyLogDialogs/utils";
+import { chakraStyles } from "components/CreatableSelectField/style";
 
 interface JourneyItemsListProps {
   logs: Log[];
@@ -39,6 +40,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           name="colors"
           options={getTagOptions(tags)}
           placeholder="Filter by tag..."
+          chakraStyles={chakraStyles}
         />
       </Flex>
       <Flex direction="column" overflow="auto" px={1}>
