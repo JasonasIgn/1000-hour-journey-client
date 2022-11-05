@@ -57,7 +57,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
                 size="90px"
                 trackColor="gray.400"
               >
-                <CircularProgressLabel color="white">
+                <CircularProgressLabel color="white" fontSize="xl">
                   {Math.round(journey.totalHours * 10) / 100}%
                 </CircularProgressLabel>
               </CircularProgress>

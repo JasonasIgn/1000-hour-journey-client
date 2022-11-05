@@ -81,7 +81,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
             size="90px"
             trackColor="gray.400"
           >
-            <CircularProgressLabel color="white">
+            <CircularProgressLabel color="white" fontSize="xl">
               {Math.round(journey.totalHours * 10) / 100}%
             </CircularProgressLabel>
           </CircularProgress>
