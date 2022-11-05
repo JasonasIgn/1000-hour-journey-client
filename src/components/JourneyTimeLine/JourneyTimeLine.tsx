@@ -207,7 +207,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         >
           <Box
             ref={timelineContainerRef}
-            height="200px"
+            height="180px"
             width={`${TIMELINE_INNER_WIDTH_PX}px`}
             px={`${TIMELINE_X_PADDING_PX}px`}
           >

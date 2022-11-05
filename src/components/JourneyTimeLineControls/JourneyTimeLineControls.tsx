@@ -74,7 +74,27 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       width="100%"
       justifyContent="space-between"
     >
-      <Flex width="88px" />
+      <Flex>
+        <IconButton
+          icon={<Icon as={PageIcon} width={22} height={22} fill="gray.300" />}
+          aria-label="Add log"
+          onClick={openAddLogModal}
+        />
+        <IconButton
+          ml={2}
+          icon={
+            <Icon
+              as={AchievementIcon}
+              width={22}
+              height={22}
+              stroke="gray.300"
+            />
+          }
+          aria-label="Add achievement"
+          onClick={openAddAchievementModal}
+          disabled={!activeLog}
+        />
+      </Flex>
       <Flex>
         <IconButton
           icon={<ArrowLeftIcon />}
@@ -106,27 +126,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           onClick={onSkipClick}
         />
       </Flex>
-      <Flex>
-        <IconButton
-          icon={
-            <Icon
-              as={AchievementIcon}
-              width={22}
-              height={22}
-              stroke="gray.300"
-            />
-          }
-          aria-label="Add achievement"
-          onClick={openAddAchievementModal}
-          disabled={!activeLog}
-        />
-        <IconButton
-          ml={2}
-          icon={<Icon as={PageIcon} width={22} height={22} fill="gray.300" />}
-          aria-label="Add log"
-          onClick={openAddLogModal}
-        />
-      </Flex>
+      <Flex width="88px" />
     </Flex>
   );
 };
