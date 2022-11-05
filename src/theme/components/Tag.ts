@@ -15,6 +15,6 @@ export const Tag: ComponentStyleConfig = {
   },
   variants: {},
   defaultProps: {
-    colorScheme: "blackAlpha",
+    colorScheme: "whiteAlpha",
   },
 };

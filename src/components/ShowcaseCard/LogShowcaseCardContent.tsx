@@ -6,6 +6,8 @@ import {
   Heading,
   IconButton,
   Image,
+  Tag,
+  TagLabel,
   Text,
 } from "@chakra-ui/react";
 import { FC } from "react";
@@ -73,25 +75,39 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           <Heading>{log.hoursSpent}</Heading>
         </Box>
       </Flex>
-      <Flex minHeight={0} width="100%">
-        <Flex flex="1 1 40%">
-          <Text>{log.description}</Text>
+      <Flex minHeight={0} width="full" height="full">
+        <Flex flex="1 1 40%" direction="column">
+          <Flex direction="column">
+            <Heading color="brand.100" size="sm">
+              Description
+            </Heading>
+            <Text>{log.description}</Text>
+          </Flex>
+          {log.tags.length > 0 && (
+            <Flex direction="column" mt={5}>
+              <Heading color="brand.100" size="sm" mb={2}>
+                Tags
+              </Heading>
+              <Flex>
+                {log.tags.map((tag) => (
+                  <Tag key={tag.id} variant="subtle">
+                    <TagLabel>{tag.name}</TagLabel>
+                  </Tag>
+                ))}
+              </Flex>
+            </Flex>
+          )}
         </Flex>
+
         {log?.mediaUrl && (
-          <Flex
-            height="100%"
-            width="60%"
-            justifyContent="center"
-            pl={3}
-            ml={3}
-            borderLeft="1px solid"
-            borderColor="brand.300"
-          >
+          <Flex height="100%" width="60%" justifyContent="center" ml={3}>
             <Image
               src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
               margin="auto"
               maxHeight="100%"
+              boxShadow="0px 0px 15px var(--chakra-colors-brand-100)"
+              borderRadius={12}
             />
           </Flex>
         )}
