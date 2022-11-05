@@ -72,6 +72,7 @@ export const JourneyView: FC = () => {
               logs={journey.logs}
               activeLog={activeLog}
               setActiveLogById={setActiveLogById}
+              tags={journey.tags}
             />
           </Flex>
         </Flex>
