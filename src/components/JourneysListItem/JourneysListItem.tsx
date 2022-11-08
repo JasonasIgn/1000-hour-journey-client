@@ -15,6 +15,7 @@ import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
 import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
+import { API_BASE } from "config";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -56,7 +57,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           key={journey.updatedAt.toString()}
           src={
             journey?.mediaUrl
-              ? `${journey.mediaUrl}?${journey.updatedAt.toString()}` // Prevent caching
+              ? `${API_BASE}${journey.mediaUrl}?${journey.updatedAt.toString()}` // Prevent caching
               : Logo
           }
           maxHeight="full"

@@ -3,6 +3,7 @@ import { FC } from "react";
 import format from "date-fns/format";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
+import { API_BASE } from "config";
 
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;
@@ -51,7 +52,7 @@ export const AchievementShowcaseCardContent: FC<
             borderColor="brand.300"
           >
             <Image
-              src={`${
+              src={`${API_BASE}${
                 achievement.mediaUrl
               }?${achievement.updatedAt.toString()}`} // prevent caching
               alt={`${achievement.id} media`}

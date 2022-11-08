@@ -17,6 +17,7 @@ import { LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 import { useAppDispatch } from "store/hooks";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
+import { API_BASE } from "config";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
@@ -102,7 +103,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         {log?.mediaUrl && (
           <Flex height="100%" width="60%" justifyContent="center" ml={3}>
             <Image
-              src={`${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
+              src={`${API_BASE}${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
               margin="auto"
               maxHeight="100%"
