@@ -6,7 +6,7 @@ services:
     image: 1000_hour_journeys_frontend
     build: 
       target: production
-    environment:
-      - REACT_APP_API_BASE=${REACT_APP_API_BASE}
+      args: 
+        - REACT_APP_API_BASE=${REACT_APP_API_BASE}
     ports:
       - 80:80
