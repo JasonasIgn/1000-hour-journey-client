@@ -1,4 +1,4 @@
-export const API_BASE = `http://${process.env.REACT_APP_API_HOST}:3333`;
+export const API_BASE = `http://${process.env.REACT_APP_API_BASE}:3333`;
 
 export const apiUrls = {
   fetchJourneysList: `${API_BASE}/journeys`,
