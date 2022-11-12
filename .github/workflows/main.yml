@@ -15,4 +15,6 @@ jobs:
 
       - name: Build and run latest code
         id: docker_build
+        env:
+          REACT_APP_API_BASE: ${{ secrets.REACT_APP_API_BASE }}
         run: ./docker_start.sh
