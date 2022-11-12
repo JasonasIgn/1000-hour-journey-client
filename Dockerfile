@@ -1,6 +1,7 @@
 FROM node:19.0.1-alpine AS builder
 ENV NODE_ENV production
 ARG REACT_APP_API_BASE
+ENV REACT_APP_API_BASE $REACT_APP_API_BASE
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
