@@ -2,9 +2,9 @@ import { Flex, Image, Link, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Timer } from "components/Timer";
 import { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import Logo from "resources/logo.png";
 import { logoutEffect } from "store/features/auth/effects";
 import { useAppDispatch } from "store/hooks";
+import Logo from "resources/logo.png";
 
 interface RouteTab {
   path: string;
