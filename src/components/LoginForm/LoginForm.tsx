@@ -1,5 +1,5 @@
 import { useEffect, FC } from "react";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
@@ -7,6 +7,7 @@ import { InputField } from "components";
 import { LoginFormData } from "./types";
 import { loginFormValidation } from "./validation";
 import { loginEffect } from "store/features/auth/effects";
+import { version } from "version";
 
 interface LoginFormProps {}
 
@@ -43,7 +44,7 @@ export const LoginForm: FC<LoginFormProps> = () => {
       bg="brand.800"
       maxWidth={500}
       width="full"
-      maxHeight={280}
+      maxHeight={300}
       height="full"
       mt="140px"
       border="1px solid"
@@ -62,12 +63,12 @@ export const LoginForm: FC<LoginFormProps> = () => {
           />
         </Box>
       </Box>
-
-      <Flex justifyContent="center">
+      <Flex justifyContent="center" mt={5}>
         <Button type="submit" disabled={isSubmitting} width={40}>
           Login
         </Button>
       </Flex>
+      <Text fontSize="12px">Version: {version}</Text>
     </Flex>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "1000-hours-journey-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "2.0.11",
@@ -20,6 +20,7 @@
     "chakra-react-select": "4.3.0",
     "date-fns": "2.29.3",
     "framer-motion": "7.5.3",
+    "genversion": "3.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.37.0",
@@ -34,8 +35,9 @@
     "yup": "0.32.11"
   },
   "scripts": {
+    "prestart": "genversion --es6 --semi src/version.ts",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "genversion --es6 --semi src/version.ts && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
