@@ -1,11 +1,6 @@
 name: Build & Deploy
 
 on:
-  workflow_run:
-    workflows: [Bump Version]
-    types:
-      - completed
-
   workflow_dispatch:
 
 jobs:
