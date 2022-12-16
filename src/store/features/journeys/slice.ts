@@ -60,7 +60,10 @@ export const journeysSlice = createSlice({
           }
 
           state.journey.logs.push(action.payload);
-          state.journey.totalHours += action.payload.hoursSpent;
+          state.journey.totalHours =
+            Math.round(
+              (action.payload.hoursSpent + state.journey.totalHours) * 10
+            ) / 10;
         }
       })
       .addCase(logJourneyAchievementEffect.fulfilled, (state, action) => {
