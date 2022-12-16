@@ -10,6 +10,7 @@ import {
 } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
+import { ShiftDirection } from "types";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   activeLog?: LogExtended;
@@ -19,6 +20,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   logBegginingsMap: IdsHourMap;
   setActiveLogById: (id: number) => void;
   journey: Journey;
+  setShiftDirection: (direction: ShiftDirection) => void;
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
@@ -29,9 +31,11 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   logBegginingsMap,
   setActiveLogById,
   journey,
+  setShiftDirection,
   ...rest
 }) => {
   const onGoToPreviousClick = () => {
+    setShiftDirection("right");
     const orderedLogIds = Object.keys(logBegginingsMap);
     const currentOrderLogId = orderedLogIds.findIndex(
       (logId) => logId === activeLog?.id.toString()
@@ -43,6 +47,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   };
 
   const onGoToNextClick = () => {
+    setShiftDirection("left");
     const orderedLogIds = Object.keys(logBegginingsMap);
     const currentOrderLogId = orderedLogIds.findIndex(
       (logId) => logId === activeLog?.id.toString()
@@ -55,6 +60,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
 
   const onRewindClick = () => {
     const firstLogId = journey.logs[0].id;
+    setShiftDirection("right");
     if (firstLogId) {
       setActiveLogById(firstLogId);
     }
@@ -62,6 +68,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
 
   const onSkipClick = () => {
     const lastLogId = journey.logs[journey.logs.length - 1].id;
+    setShiftDirection("left");
     if (lastLogId) {
       setActiveLogById(lastLogId);
     }

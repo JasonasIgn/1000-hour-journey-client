@@ -181,6 +181,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         }}
         journey={journey}
         setActiveLogById={setActiveLogById}
+        setShiftDirection={setShiftDirection}
       />
       <Box
         border={`${TIMELINE_BORDER_WIDTH_PX}px solid`}
