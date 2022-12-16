@@ -1,6 +1,6 @@
 {
   "name": "1000-hours-journey-client",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "2.0.11",
