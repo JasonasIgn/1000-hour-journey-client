@@ -2,6 +2,15 @@
   "name": "1000-hours-journey-client",
   "version": "0.2.5",
   "private": true,
+  "scripts": {
+    "prestart": "genversion --es6 --semi src/version.ts",
+    "start": "react-scripts start",
+    "build": "genversion --es6 --semi src/version.ts && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "yarn gen:theme-typings",
+    "gen:theme-typings": "chakra-cli tokens src/theme/index.ts"
+  },
   "dependencies": {
     "@chakra-ui/icons": "2.0.13",
     "@chakra-ui/react": "2.4.3",
@@ -33,12 +42,8 @@
     "typescript": "4.9.4",
     "yup": "0.32.11"
   },
-  "scripts": {
-    "prestart": "genversion --es6 --semi src/version.ts",
-    "start": "react-scripts start",
-    "build": "genversion --es6 --semi src/version.ts && react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@chakra-ui/cli": "2.2.0"
   },
   "eslintConfig": {
     "extends": [
