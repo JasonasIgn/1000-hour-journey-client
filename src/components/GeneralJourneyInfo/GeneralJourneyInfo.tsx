@@ -64,7 +64,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
     () => getPieChartData(journey.logs),
     [journey.logs]
   );
-  console.log(pieChartData);
+
   return (
     <Box w="full">
       <Flex direction="column">
