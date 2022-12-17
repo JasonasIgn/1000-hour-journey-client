@@ -19,7 +19,7 @@ import {
   NumberInputField,
   InputField,
   UploadField,
-  CreatebleSelectField,
+  CreatableSelectField,
 } from "components";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
@@ -150,7 +150,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
               />
             </GridItem>
             <GridItem colSpan={2}>
-              <CreatebleSelectField<Option>
+              <CreatableSelectField<Option>
                 options={getTagOptions(tags)}
                 control={control as any}
                 name="tags"

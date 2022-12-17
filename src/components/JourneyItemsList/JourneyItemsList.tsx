@@ -9,7 +9,7 @@ import {
   Select,
 } from "chakra-react-select";
 import { getTagOptions } from "components/JourneyLogDialogs/utils";
-import { chakraStyles } from "components/CreatableSelectField/style";
+import { chakraStyles } from "components/CreatableSelectField/styles";
 import { Option } from "types";
 
 interface JourneyItemsListProps {
@@ -53,7 +53,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
       <Flex direction="column" px={2} mb={3}>
         <Select<Option, true, GroupBase<Option>>
           isMulti
-          name="colors"
+          name="tags"
           options={getTagOptions(tags)}
           placeholder="Filter by tag..."
           chakraStyles={
