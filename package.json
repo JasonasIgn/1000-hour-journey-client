@@ -1,6 +1,6 @@
 {
   "name": "brain-fight-overhaul-host",
-  "version": "0.3.2",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "prestart": "genversion --es6 --semi src/version.ts",
