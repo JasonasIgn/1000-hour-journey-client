@@ -13,9 +13,9 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { Control, Controller } from "react-hook-form";
-import { chakraStyles } from "./style";
+import { chakraStyles } from "./styles";
 
-export interface CreatebleSelectFieldProps<Option extends {}>
+export interface CreatableSelectFieldProps<Option extends {}>
   extends CreatableProps<Option, true, GroupBase<Option>> {
   label?: string;
   formControlProps?: FormControlProps;
@@ -23,14 +23,14 @@ export interface CreatebleSelectFieldProps<Option extends {}>
   name: string;
 }
 
-export const CreatebleSelectField = <Option extends {}>({
+export const CreatableSelectField = <Option extends {}>({
   label,
   formControlProps,
   control,
   options,
   name,
   ...rest
-}: CreatebleSelectFieldProps<Option>) => {
+}: CreatableSelectFieldProps<Option>) => {
   return (
     <Controller
       control={control}
