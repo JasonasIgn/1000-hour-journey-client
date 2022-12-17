@@ -11,6 +11,15 @@ export const getPieChartData = (logs: Log[]) => {
   const data: DataType = {};
   logs.forEach((log) => {
     if (log.tags.length === 0) {
+      if (data["Unknown"] === undefined) {
+        data["Unknown"] = {
+          name: "Unknown",
+          value: Math.round(log.hoursSpent * 100) / 100,
+        };
+      } else {
+        data["Unknown"].value =
+          Math.round((data["Unknown"].value + log.hoursSpent) * 100) / 100;
+      }
       return;
     }
     const timePerTag = log.hoursSpent / log.tags.length;
