@@ -2,7 +2,7 @@ import axios from "axios";
 import { apiUrls } from "config";
 import { useCallback, useEffect, useState } from "react";
 import { Log } from "store/features/journeys/types";
-import { ChartLogData, DateQuery } from "views/DashboardView/types";
+import { ChartLogData, DateQuery } from "views/DashboardLogsView/types";
 import { StatisticsDisplayUnit } from "./types";
 import {
   transformDataForChartMonthDays,

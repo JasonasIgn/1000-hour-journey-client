@@ -7,7 +7,7 @@ import {
   StatLabel,
   StatNumber,
 } from "@chakra-ui/react";
-import { LogTimerFrameStatistics } from "views/DashboardView/types";
+import { LogTimerFrameStatistics } from "views/DashboardLogsView/types";
 
 interface LogStatCardProps extends FlexProps {
   statistics: LogTimerFrameStatistics;

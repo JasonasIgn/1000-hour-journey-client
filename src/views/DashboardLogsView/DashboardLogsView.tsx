@@ -4,7 +4,7 @@ import { useStatistics } from "./hooks";
 import { LogStatCard } from "components/LogStatCard";
 import { StatisticsBarChart } from "components/StatisticsBarChart";
 
-export const DashboardView: FC = () => {
+export const DashboardLogsView: FC = () => {
   const statistics = useStatistics();
   const loading = !statistics;
 

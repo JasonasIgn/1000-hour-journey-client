@@ -1,6 +1,6 @@
 import { Log } from "store/features/journeys/types";
 import format from "date-fns/format";
-import { ChartLogData, DateQuery } from "views/DashboardView/types";
+import { ChartLogData, DateQuery } from "views/DashboardLogsView/types";
 
 export const transformDataForChartMonthDays = (
   logs: Log[],

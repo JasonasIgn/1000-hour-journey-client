@@ -9,7 +9,7 @@ import {
   Legend,
   Bar,
 } from "recharts";
-import { DateQuery } from "views/DashboardView/types";
+import { DateQuery } from "views/DashboardLogsView/types";
 import { useLogsChartData } from "./hooks";
 import { StatisticsDisplayUnit } from "./types";
 import { StatisticsDatePicker } from "./YearPicker/StatisticsDatePicker";
