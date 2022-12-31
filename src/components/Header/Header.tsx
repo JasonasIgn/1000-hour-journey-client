@@ -48,8 +48,6 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
     setTabIndex(tabs.findIndex((tab) => location.pathname.includes(tab.path)));
   }, [location]);
 
-  console.log(tabIndex);
-
   return (
     <Flex
       height="60px"
