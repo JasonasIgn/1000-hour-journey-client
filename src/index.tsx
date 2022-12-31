@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
 import "./index.css";
+import 'react-vertical-timeline-component/style.min.css';
 import theme from "./theme";
 import { createAxiosInterceptor } from "utils/interceptors";
 

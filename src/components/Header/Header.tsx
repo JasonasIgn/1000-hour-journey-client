@@ -1,4 +1,15 @@
-import { Flex, Image, Link, Tab, TabList, Tabs } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Tab,
+  TabList,
+  Tabs,
+} from "@chakra-ui/react";
 import { Timer } from "components/Timer";
 import { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
@@ -9,11 +20,19 @@ import Logo from "resources/logo.png";
 interface RouteTab {
   path: string;
   name: string;
+  paths?: RouteTab[];
 }
 
 const tabs: RouteTab[] = [
   { path: "/journeys", name: "Journeys" },
-  { path: "/dashboard", name: "Dashboard" },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    paths: [
+      { path: "/logs", name: "Logs" },
+      { path: "/achievements", name: "Achievements" },
+    ],
+  },
 ];
 
 interface HeaderProps {
@@ -24,10 +43,6 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const [tabIndex, setTabIndex] = useState(0);
-
-  const handleTabsChange = (index: number) => {
-    setTabIndex(index);
-  };
 
   useEffect(() => {
     setTabIndex(tabs.findIndex((tab) => location.pathname.includes(tab.path)));
@@ -46,17 +61,35 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
         </Link>
         <Flex ml={4}>
           {isLoggedIn && (
-            <Tabs
-              variant="soft-rounded"
-              index={tabIndex}
-              onChange={handleTabsChange}
-            >
+            <Tabs variant="soft-rounded" index={tabIndex}>
               <TabList>
-                {tabs.map((tab) => (
-                  <Tab as={RouterLink} to={tab.path} key={tab.name}>
-                    {tab.name}
-                  </Tab>
-                ))}
+                {tabs.map((tab) => {
+                  if (tab.paths) {
+                    return (
+                      <Tab key={tab.name} as={Flex}>
+                        <Menu>
+                          <MenuButton>{tab.name}</MenuButton>
+                          <MenuList>
+                            {tab.paths.map((nestedPath) => (
+                              <MenuItem
+                                key={nestedPath.path}
+                                as={RouterLink}
+                                to={`${tab.path}${nestedPath.path}`}
+                              >
+                                {nestedPath.name}
+                              </MenuItem>
+                            ))}
+                          </MenuList>
+                        </Menu>
+                      </Tab>
+                    );
+                  }
+                  return (
+                    <Tab as={RouterLink} to={tab.path} key={tab.name}>
+                      {tab.name}
+                    </Tab>
+                  );
+                })}
               </TabList>
             </Tabs>
           )}

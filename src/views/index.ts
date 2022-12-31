@@ -1,4 +1,5 @@
 export * from "./JourneyView";
 export * from "./JourneysView";
-export * from "./DashboardView";
+export * from "./DashboardLogsView";
+export * from "./DashboardAchievementsView";
 export * from "./LoginView";

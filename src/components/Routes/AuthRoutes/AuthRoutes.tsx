@@ -1,11 +1,12 @@
 import { FC } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { DashboardView, JourneysView, JourneyView } from "views";
+import { DashboardLogsView, JourneysView, JourneyView } from "views";
+import { DashboardAchievementsView } from "views/DashboardAchievementsView";
 
 interface AuthRoutesProps {}
 
-export const AuthRoutes: FC<AuthRoutesProps> = (props) => {
+export const AuthRoutes: FC<AuthRoutesProps> = () => {
   return (
     <Routes>
       <Route path="/journeys">
@@ -13,7 +14,15 @@ export const AuthRoutes: FC<AuthRoutesProps> = (props) => {
         <Route index element={<JourneysView />} />
       </Route>
       <Route path="/dashboard">
-        <Route index element={<DashboardView />} />
+        <Route path="/dashboard/logs" element={<DashboardLogsView />} />
+        <Route
+          path="/dashboard/achievements"
+          element={<DashboardAchievementsView />}
+        />
+        <Route
+          index
+          element={<Navigate to="/dashboard/logs" replace={true} />}
+        />
       </Route>
       <Route path="*" element={<Navigate to="/journeys" replace={true} />} />
     </Routes>

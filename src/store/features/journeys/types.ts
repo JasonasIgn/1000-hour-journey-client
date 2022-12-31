@@ -39,6 +39,7 @@ export interface Achievement {
   loggedOnDate: Date;
   mediaUrl?: string;
   updatedAt: Date;
+  journey?: Journey;
 }
 
 export interface Journey extends JourneyListItem {

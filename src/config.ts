@@ -14,4 +14,5 @@ export const apiUrls = {
   login: `${API_BASE}/login`,
   logout: `${API_BASE}/logout`,
   createTag: `${API_BASE}/journey/{journeyId}/tags`,
+  fetchAchievements: `${API_BASE}/achievements`,
 };
