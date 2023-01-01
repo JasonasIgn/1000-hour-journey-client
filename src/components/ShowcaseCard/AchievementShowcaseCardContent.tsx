@@ -1,6 +1,7 @@
 import { Box, Flex, FlexProps, Heading, Image, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import format from "date-fns/format";
+import ImageViewer from "react-simple-image-viewer";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 import { API_BASE } from "config";
@@ -12,6 +13,7 @@ interface AchievementShowcaseCardContentProps extends FlexProps {
 export const AchievementShowcaseCardContent: FC<
   AchievementShowcaseCardContentProps
 > = ({ achievement, ...rest }) => {
+  const [currentViewedImage, setCurrentViewedImage] = useState("");
   return (
     <>
       <Flex
@@ -42,26 +44,37 @@ export const AchievementShowcaseCardContent: FC<
           <Text>{achievement.description}</Text>
         </Flex>
         {achievement?.mediaUrl && (
-          <Flex
-            height="100%"
-            width="60%"
-            justifyContent="center"
-            pl={3}
-            ml={3}
-            borderLeft="1px solid"
-            borderColor="brand.300"
-          >
+          <Flex height="100%" width="60%" justifyContent="center" pl={3} ml={3}>
             <Image
+              cursor="pointer"
               src={`${API_BASE}${
                 achievement.mediaUrl
               }?${achievement.updatedAt.toString()}`} // prevent caching
               alt={`${achievement.id} media`}
               margin="auto"
               maxHeight="100%"
+              boxShadow="0px 0px 15px var(--chakra-colors-brand-100)"
+              borderRadius={12}
+              onClick={() => {
+                setCurrentViewedImage(
+                  `${API_BASE}${
+                    achievement.mediaUrl
+                  }?${achievement.updatedAt.toString()}`
+                );
+              }}
             />
           </Flex>
         )}
       </Flex>
+      {Boolean(currentViewedImage) && (
+        <ImageViewer
+          src={[currentViewedImage]}
+          currentIndex={0}
+          disableScroll={false}
+          closeOnClickOutside={true}
+          onClose={() => setCurrentViewedImage("")}
+        />
+      )}
     </>
   );
 };
