@@ -8,8 +8,4 @@ export const chakraStyles: ChakraStylesConfig = {
       background: "brand.700",
     },
   }),
-  option: (provided) => ({
-    ...provided,
-    bg: "brand.900",
-  }),
 };

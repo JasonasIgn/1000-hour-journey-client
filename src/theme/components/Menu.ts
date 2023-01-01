@@ -6,6 +6,7 @@ export const Menu: ComponentStyleConfig = {
       backgroundColor: "brand.900",
     },
     item: {
+      backgroundColor: "brand.900",
       _hover: {
         backgroundColor: "brand.500",
       },
