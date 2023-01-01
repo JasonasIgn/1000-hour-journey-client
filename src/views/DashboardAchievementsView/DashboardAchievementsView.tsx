@@ -4,14 +4,22 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import format from "date-fns/format";
-import { Container, Flex, Heading, Text, Image } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Heading,
+  Text,
+  Image,
+  IconButton,
+} from "@chakra-ui/react";
 import { AchievementsDateQuery } from "./types";
 import { useFetchAchievements } from "./hooks";
 import { dateFormats } from "utils/constants";
 import { API_BASE } from "config";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 export const DashboardAchievementsView: FC = () => {
-  const [query] = useState<AchievementsDateQuery>({
+  const [query, setQuery] = useState<AchievementsDateQuery>({
     year: new Date().getFullYear(),
   });
   const achievements = useFetchAchievements(query);
@@ -24,6 +32,30 @@ export const DashboardAchievementsView: FC = () => {
   return (
     <Container maxW="6xl" pt={5}>
       <Heading>Achievements</Heading>
+      <Flex direction="column" align="center">
+        <Text textAlign="center">Year</Text>
+        <Flex height={50} alignItems="center">
+          <IconButton
+            icon={<ArrowBackIcon />}
+            aria-label="Back in years"
+            onClick={() => {
+              setQuery({ year: query.year - 1 });
+            }}
+          />
+          <Flex mx={2} width={34} justifyContent="center">
+            <Text color="gray.100" textAlign="center">
+              {query.year}
+            </Text>
+          </Flex>
+          <IconButton
+            icon={<ArrowForwardIcon />}
+            aria-label="Forward in years"
+            onClick={() => {
+              setQuery({ year: query.year + 1 });
+            }}
+          />
+        </Flex>
+      </Flex>
       <Flex pt={6} direction="column">
         <VerticalTimeline>
           {achievements.map((achievement) => (
