@@ -57,51 +57,55 @@ export const DashboardAchievementsView: FC = () => {
         </Flex>
       </Flex>
       <Flex pt={6} direction="column">
-        <VerticalTimeline>
-          {achievements.map((achievement) => (
-            <VerticalTimelineElement
-              key={achievement.id}
-              className="vertical-timeline-element--work"
-              contentStyle={{
-                background: "var(--chakra-colors-brand-500)",
-                color: "#fff",
-              }}
-              contentArrowStyle={{
-                borderRight: "7px solid var(--chakra-colors-brand-500)",
-              }}
-              date={format(
-                new Date(achievement.loggedOnDate),
-                dateFormats.standart
-              )}
-              iconStyle={{
-                background: "var(--chakra-colors-brand-300)",
-                color: "#fff",
-              }}
-            >
-              <Flex justify="space-between">
-                <Flex direction="column">
-                  <Heading color="gray.200 !important" as="h3" size="lg">
-                    {achievement.journey?.title}
-                  </Heading>
-                  <Heading color="gray.300 !important" as="h4" size="md">
-                    At journey {achievement.loggedAtHour} hour
-                  </Heading>
-                  <Text color="gray.300 !important">
-                    {achievement.description}
-                  </Text>
-                </Flex>
-                {achievement.mediaUrl && (
-                  <Image
-                    maxWidth="40%"
-                    src={`${API_BASE}${
-                      achievement.mediaUrl
-                    }?${achievement.updatedAt.toString()}`}
-                  />
+        {achievements.length > 0 ? (
+          <VerticalTimeline>
+            {achievements.map((achievement) => (
+              <VerticalTimelineElement
+                key={achievement.id}
+                className="vertical-timeline-element--work"
+                contentStyle={{
+                  background: "var(--chakra-colors-brand-500)",
+                  color: "#fff",
+                }}
+                contentArrowStyle={{
+                  borderRight: "7px solid var(--chakra-colors-brand-500)",
+                }}
+                date={format(
+                  new Date(achievement.loggedOnDate),
+                  dateFormats.standart
                 )}
-              </Flex>
-            </VerticalTimelineElement>
-          ))}
-        </VerticalTimeline>
+                iconStyle={{
+                  background: "var(--chakra-colors-brand-300)",
+                  color: "#fff",
+                }}
+              >
+                <Flex justify="space-between">
+                  <Flex direction="column">
+                    <Heading color="gray.200 !important" as="h3" size="lg">
+                      {achievement.journey?.title}
+                    </Heading>
+                    <Heading color="gray.300 !important" as="h4" size="md">
+                      At journey {achievement.loggedAtHour} hour
+                    </Heading>
+                    <Text color="gray.300 !important">
+                      {achievement.description}
+                    </Text>
+                  </Flex>
+                  {achievement.mediaUrl && (
+                    <Image
+                      maxWidth="40%"
+                      src={`${API_BASE}${
+                        achievement.mediaUrl
+                      }?${achievement.updatedAt.toString()}`}
+                    />
+                  )}
+                </Flex>
+              </VerticalTimelineElement>
+            ))}
+          </VerticalTimeline>
+        ) : (
+          <Heading textAlign="center">No achievements yet</Heading>
+        )}
       </Flex>
     </Container>
   );
