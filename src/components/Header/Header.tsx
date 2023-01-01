@@ -67,7 +67,7 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
                   if (tab.paths) {
                     return (
                       <Tab key={tab.name} as={Flex}>
-                        <Menu isOpen>
+                        <Menu>
                           <MenuButton>{tab.name}</MenuButton>
                           <MenuList>
                             {tab.paths.map((nestedPath) => (
