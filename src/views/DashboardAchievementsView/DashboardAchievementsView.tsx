@@ -3,6 +3,7 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import ImageViewer from "react-simple-image-viewer";
 import format from "date-fns/format";
 import {
   Container,
@@ -19,6 +20,7 @@ import { API_BASE } from "config";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 export const DashboardAchievementsView: FC = () => {
+  const [currentViewedImage, setCurrentViewedImage] = useState("");
   const [query, setQuery] = useState<AchievementsDateQuery>({
     year: new Date().getFullYear(),
   });
@@ -64,18 +66,18 @@ export const DashboardAchievementsView: FC = () => {
                 key={achievement.id}
                 className="vertical-timeline-element--work"
                 contentStyle={{
-                  background: "var(--chakra-colors-brand-500)",
+                  background: "var(--chakra-colors-brand-700)",
                   color: "#fff",
                 }}
                 contentArrowStyle={{
-                  borderRight: "7px solid var(--chakra-colors-brand-500)",
+                  borderRight: "7px solid var(--chakra-colors-brand-700)",
                 }}
                 date={format(
                   new Date(achievement.loggedOnDate),
                   dateFormats.standart
                 )}
                 iconStyle={{
-                  background: "var(--chakra-colors-brand-300)",
+                  background: "var(--chakra-colors-brand-500)",
                   color: "#fff",
                 }}
               >
@@ -93,10 +95,20 @@ export const DashboardAchievementsView: FC = () => {
                   </Flex>
                   {achievement.mediaUrl && (
                     <Image
+                      boxShadow="0px 0px 12px var(--chakra-colors-brand-100)"
+                      borderRadius={12}
+                      cursor="pointer"
                       maxWidth="40%"
                       src={`${API_BASE}${
                         achievement.mediaUrl
                       }?${achievement.updatedAt.toString()}`}
+                      onClick={() => {
+                        setCurrentViewedImage(
+                          `${API_BASE}${
+                            achievement.mediaUrl
+                          }?${achievement.updatedAt.toString()}`
+                        );
+                      }}
                     />
                   )}
                 </Flex>
@@ -107,6 +119,15 @@ export const DashboardAchievementsView: FC = () => {
           <Heading textAlign="center">No achievements yet</Heading>
         )}
       </Flex>
+      {Boolean(currentViewedImage) && (
+        <ImageViewer
+          src={[currentViewedImage]}
+          currentIndex={0}
+          disableScroll={false}
+          closeOnClickOutside={true}
+          onClose={() => setCurrentViewedImage("")}
+        />
+      )}
     </Container>
   );
 };
