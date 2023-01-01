@@ -10,8 +10,9 @@ import {
   TagLabel,
   Text,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import format from "date-fns/format";
+import ImageViewer from "react-simple-image-viewer";
 import { ReactComponent as EditIconComponent } from "resources/edit.svg";
 import { LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
@@ -30,13 +31,13 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   ...rest
 }) => {
   const dispatch = useAppDispatch();
+  const [currentViewedImage, setCurrentViewedImage] = useState("");
   return (
     <>
       <Flex
         position="absolute"
         top={0}
-        left={0}
-        width="100%"
+        right={0}
         height="100%"
         alignItems="center"
       >
@@ -103,16 +104,31 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         {log?.mediaUrl && (
           <Flex height="100%" width="60%" justifyContent="center" ml={3}>
             <Image
+              cursor="pointer"
               src={`${API_BASE}${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
               margin="auto"
               maxHeight="100%"
               boxShadow="0px 0px 15px var(--chakra-colors-brand-100)"
               borderRadius={12}
+              onClick={() => {
+                setCurrentViewedImage(
+                  `${API_BASE}${log.mediaUrl}?${log.updatedAt.toString()}`
+                );
+              }}
             />
           </Flex>
         )}
       </Flex>
+      {Boolean(currentViewedImage) && (
+        <ImageViewer
+          src={[currentViewedImage]}
+          currentIndex={0}
+          disableScroll={false}
+          closeOnClickOutside={true}
+          onClose={() => setCurrentViewedImage("")}
+        />
+      )}
     </>
   );
 };
