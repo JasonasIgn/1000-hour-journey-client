@@ -4,7 +4,7 @@ import format from "date-fns/format";
 import ImageViewer from "react-simple-image-viewer";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
-import { API_BASE } from "config";
+import { getImageSrc } from "utils/helpers";
 
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;
@@ -41,15 +41,15 @@ export const AchievementShowcaseCardContent: FC<
       </Flex>
       <Flex height="84%" width="100%">
         <Flex flex="1 1 40%">
-          <Text>{achievement.description}</Text>
+          <Text wordBreak="break-word">{achievement.description}</Text>
         </Flex>
         {achievement?.mediaUrl && (
           <Flex height="100%" width="60%" justifyContent="center" pl={3} ml={3}>
             <Image
               cursor="pointer"
-              src={`${API_BASE}${
+              src={`${getImageSrc(
                 achievement.mediaUrl
-              }?${achievement.updatedAt.toString()}`} // prevent caching
+              )}?${achievement.updatedAt.toString()}`} // prevent caching
               alt={`${achievement.id} media`}
               margin="auto"
               maxHeight="100%"
@@ -57,9 +57,9 @@ export const AchievementShowcaseCardContent: FC<
               borderRadius={12}
               onClick={() => {
                 setCurrentViewedImage(
-                  `${API_BASE}${
+                  `${getImageSrc(
                     achievement.mediaUrl
-                  }?${achievement.updatedAt.toString()}`
+                  )}?${achievement.updatedAt.toString()}`
                 );
               }}
             />

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Box, CloseButton, Flex, Image } from "@chakra-ui/react";
-import { API_BASE } from "config";
 
 interface UploadFieldImagePreviewProps {
   src: string;
@@ -20,7 +19,7 @@ export const UploadFieldImagePreview: FC<UploadFieldImagePreviewProps> = ({
       height={200}
     >
       <Box position="relative" border="1px solid" borderColor="brand.300">
-        <Image src={`${API_BASE}${src}`} alt="Uploaded media" height="100%" />
+        <Image src={src} alt="Uploaded media" height="100%" />
         <Box
           position="absolute"
           width="100%"
