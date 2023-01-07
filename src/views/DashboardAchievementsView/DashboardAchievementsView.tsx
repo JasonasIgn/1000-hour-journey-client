@@ -32,7 +32,7 @@ export const DashboardAchievementsView: FC = () => {
   }
 
   return (
-    <Container maxW="6xl" pt={5}>
+    <Container maxW="8xl" pt={5}>
       <Heading>Achievements</Heading>
       <Flex direction="column" align="center">
         <Text textAlign="center">Year</Text>
@@ -81,15 +81,15 @@ export const DashboardAchievementsView: FC = () => {
                   color: "#fff",
                 }}
               >
-                <Flex justify="space-between">
-                  <Flex direction="column">
+                <Flex justify="space-between" alignItems="center">
+                  <Flex direction="column" pr={4}>
                     <Heading color="gray.200 !important" as="h3" size="lg">
                       {achievement.journey?.title}
                     </Heading>
                     <Heading color="gray.300 !important" as="h4" size="md">
                       At journey {achievement.loggedAtHour} hour
                     </Heading>
-                    <Text color="gray.300 !important">
+                    <Text color="gray.300 !important" wordBreak="break-word">
                       {achievement.description}
                     </Text>
                   </Flex>
@@ -99,6 +99,7 @@ export const DashboardAchievementsView: FC = () => {
                       borderRadius={12}
                       cursor="pointer"
                       maxWidth="40%"
+                      height="100%"
                       src={`${API_BASE}${
                         achievement.mediaUrl
                       }?${achievement.updatedAt.toString()}`}
