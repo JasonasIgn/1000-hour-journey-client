@@ -55,8 +55,11 @@ export const journeysSlice = createSlice({
             (journey) => journey.id === action.payload?.journeyId
           );
           if (listItemIndex >= 0) {
-            state.list[listItemIndex].totalHours +=
-              Math.round(action.payload.hoursSpent * 10) / 10;
+            const listJourney = state.list[listItemIndex];
+            listJourney.totalHours =
+              Math.round(
+                (action.payload.hoursSpent + listJourney.totalHours) * 10
+              ) / 10;
           }
 
           state.journey.logs.push(action.payload);
