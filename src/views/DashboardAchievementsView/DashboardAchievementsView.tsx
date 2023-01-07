@@ -12,6 +12,7 @@ import {
   Text,
   Image,
   IconButton,
+  Box,
 } from "@chakra-ui/react";
 import { AchievementsDateQuery } from "./types";
 import { useFetchAchievements } from "./hooks";
@@ -80,6 +81,18 @@ export const DashboardAchievementsView: FC = () => {
                   background: "var(--chakra-colors-brand-500)",
                   color: "#fff",
                 }}
+                icon={
+                  <Box
+                    width="full"
+                    height="full"
+                    borderRadius="full"
+                    backgroundSize="contain"
+                    backgroundPosition="center"
+                    backgroundImage={`${API_BASE}${
+                      achievement.journey?.mediaUrl
+                    }?${achievement.updatedAt.toString()}`}
+                  />
+                }
               >
                 <Flex justify="space-between" alignItems="center">
                   <Flex direction="column" pr={4}>
