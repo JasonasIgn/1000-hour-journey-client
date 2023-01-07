@@ -34,7 +34,9 @@ export const DashboardAchievementsView: FC = () => {
 
   return (
     <Container maxW="8xl" pt={5}>
-      <Heading>Achievements</Heading>
+      <Heading textAlign="center" mb={5}>
+        Achievements
+      </Heading>
       <Flex direction="column" align="center">
         <Text textAlign="center">Year</Text>
         <Flex height={50} alignItems="center">
@@ -130,7 +132,9 @@ export const DashboardAchievementsView: FC = () => {
             ))}
           </VerticalTimeline>
         ) : (
-          <Heading textAlign="center">No achievements yet</Heading>
+          <Heading textAlign="center" mt="20%">
+            No achievements yet
+          </Heading>
         )}
       </Flex>
       {Boolean(currentViewedImage) && (

@@ -14,7 +14,9 @@ export const DashboardLogsView: FC = () => {
 
   return (
     <Container maxW="8xl" pt={5}>
-      <Heading>Logs</Heading>
+      <Heading textAlign="center" mb={5}>
+        Logs
+      </Heading>
       <Flex pt={6} direction="column">
         <Flex>
           <LogStatCard statistics={statistics.allTime} heading="All Time" />
