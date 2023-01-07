@@ -5,7 +5,7 @@ import { EditLogDialog, JourneyTimeLine, Showcase } from "components";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { getJourney } from "store/features/journeys/selectors";
 import { resetJourney } from "store/features/journeys/slice";
-import { Achievement, LogExtended } from "store/features/journeys/types";
+import { Achievement } from "store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
 import { JourneyTitle } from "components/JourneyTitle";
@@ -19,7 +19,7 @@ export const JourneyView: FC = () => {
   const params = useParams();
   const journey = useAppSelector(getJourney);
 
-  const [activeLog, setActiveLog] = useState<LogExtended>();
+  const [activeLogId, setActiveLogId] = useState<number>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
 
@@ -27,10 +27,7 @@ export const JourneyView: FC = () => {
     () => getLogsDictionary(journey?.logs || []),
     [journey?.logs]
   );
-
-  const setActiveLogById = (id: number) => {
-    setActiveLog(logsDictionary[id]);
-  };
+  const activeLog = activeLogId ? logsDictionary[activeLogId] : undefined;
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {
@@ -71,7 +68,7 @@ export const JourneyView: FC = () => {
             <JourneyItemsList
               logs={journey.logs}
               activeLog={activeLog}
-              setActiveLogById={setActiveLogById}
+              setActiveLogId={setActiveLogId}
               tags={journey.tags}
             />
           </Flex>
@@ -79,7 +76,7 @@ export const JourneyView: FC = () => {
         <JourneyTimeLine
           journey={journey}
           activeLog={activeLog}
-          setActiveLogById={setActiveLogById}
+          setActiveLogId={setActiveLogId}
           setActiveAchievement={setActiveAchievement}
           setShiftDirection={setShiftDirection}
         />

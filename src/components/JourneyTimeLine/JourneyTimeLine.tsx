@@ -44,7 +44,7 @@ import {
 
 interface JourneyTimeLineProps {
   journey: Journey;
-  setActiveLogById: (id: number) => void;
+  setActiveLogId: (id: number) => void;
   activeLog?: LogExtended;
   setActiveAchievement: (log: Achievement) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
@@ -52,7 +52,7 @@ interface JourneyTimeLineProps {
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
-  setActiveLogById,
+  setActiveLogId,
   activeLog,
   setActiveAchievement,
   setShiftDirection,
@@ -136,7 +136,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   useEffect(() => {
     const currentHourLog = logsDictionary[hoursToLogMap[currentHour]];
     if (currentHourLog && currentHourLog?.id !== activeLog?.id) {
-      setActiveLogById(currentHourLog.id);
+      setActiveLogId(currentHourLog.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHour]);
@@ -180,7 +180,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           }
         }}
         journey={journey}
-        setActiveLogById={setActiveLogById}
+        setActiveLogId={setActiveLogId}
         setShiftDirection={setShiftDirection}
       />
       <Box

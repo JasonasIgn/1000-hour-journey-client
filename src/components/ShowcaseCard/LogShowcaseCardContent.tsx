@@ -18,7 +18,7 @@ import { LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 import { useAppDispatch } from "store/hooks";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
-import { API_BASE } from "config";
+import { getImageSrc } from "utils/helpers";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
@@ -32,6 +32,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const [currentViewedImage, setCurrentViewedImage] = useState("");
+
   return (
     <>
       <Flex
@@ -105,7 +106,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           <Flex height="100%" width="60%" justifyContent="center" ml={3}>
             <Image
               cursor="pointer"
-              src={`${API_BASE}${log.mediaUrl}?${log.updatedAt.toString()}`} // prevent caching
+              src={`${getImageSrc(log.mediaUrl)}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
               margin="auto"
               maxHeight="100%"
@@ -113,7 +114,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
               borderRadius={12}
               onClick={() => {
                 setCurrentViewedImage(
-                  `${API_BASE}${log.mediaUrl}?${log.updatedAt.toString()}`
+                  `${getImageSrc(log.mediaUrl)}?${log.updatedAt.toString()}`
                 );
               }}
             />

@@ -1,3 +1,5 @@
+import { API_BASE } from "config";
+
 export const generateId = () => {
   let result = "";
   const characters =
@@ -8,3 +10,5 @@ export const generateId = () => {
   }
   return result;
 };
+
+export const getImageSrc = (src?: string) => (src ? `${API_BASE}${src}` : "");

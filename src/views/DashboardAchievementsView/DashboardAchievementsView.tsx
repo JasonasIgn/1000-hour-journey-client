@@ -19,6 +19,7 @@ import { useFetchAchievements } from "./hooks";
 import { dateFormats } from "utils/constants";
 import { API_BASE } from "config";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { getImageSrc } from "utils/helpers";
 
 export const DashboardAchievementsView: FC = () => {
   const [currentViewedImage, setCurrentViewedImage] = useState("");
@@ -115,14 +116,14 @@ export const DashboardAchievementsView: FC = () => {
                       cursor="pointer"
                       maxWidth="40%"
                       height="100%"
-                      src={`${API_BASE}${
+                      src={`${getImageSrc(
                         achievement.mediaUrl
-                      }?${achievement.updatedAt.toString()}`}
+                      )}?${achievement.updatedAt.toString()}`}
                       onClick={() => {
                         setCurrentViewedImage(
-                          `${API_BASE}${
+                          `${getImageSrc(
                             achievement.mediaUrl
-                          }?${achievement.updatedAt.toString()}`
+                          )}?${achievement.updatedAt.toString()}`
                         );
                       }}
                     />

@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { InputFieldProps } from "components";
 import { UploadFieldImagePreview } from "./UploadFieldImagePreview";
+import { getImageSrc } from "utils/helpers";
 
 interface UploadFieldProps extends InputFieldProps {
   value?: string;
@@ -40,8 +41,9 @@ export const UploadField: FC<UploadFieldProps> = forwardRef(
     ref
   ) => {
     const [previewSrc, setPreviewSrc] = useState<string | null>(
-      initialPreviewSrc || null
+      getImageSrc(initialPreviewSrc) || null
     );
+
     return (
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
