@@ -12,6 +12,7 @@ import {
   Text,
   Image,
   IconButton,
+  Box,
 } from "@chakra-ui/react";
 import { AchievementsDateQuery } from "./types";
 import { useFetchAchievements } from "./hooks";
@@ -32,8 +33,10 @@ export const DashboardAchievementsView: FC = () => {
   }
 
   return (
-    <Container maxW="6xl" pt={5}>
-      <Heading>Achievements</Heading>
+    <Container maxW="8xl" pt={5}>
+      <Heading textAlign="center" mb={5}>
+        Achievements
+      </Heading>
       <Flex direction="column" align="center">
         <Text textAlign="center">Year</Text>
         <Flex height={50} alignItems="center">
@@ -80,16 +83,28 @@ export const DashboardAchievementsView: FC = () => {
                   background: "var(--chakra-colors-brand-500)",
                   color: "#fff",
                 }}
+                icon={
+                  <Box
+                    width="full"
+                    height="full"
+                    borderRadius="full"
+                    backgroundSize="contain"
+                    backgroundPosition="center"
+                    backgroundImage={`${API_BASE}${
+                      achievement.journey?.mediaUrl
+                    }?${achievement.updatedAt.toString()}`}
+                  />
+                }
               >
-                <Flex justify="space-between">
-                  <Flex direction="column">
+                <Flex justify="space-between" alignItems="center">
+                  <Flex direction="column" pr={4}>
                     <Heading color="gray.200 !important" as="h3" size="lg">
                       {achievement.journey?.title}
                     </Heading>
                     <Heading color="gray.300 !important" as="h4" size="md">
                       At journey {achievement.loggedAtHour} hour
                     </Heading>
-                    <Text color="gray.300 !important">
+                    <Text color="gray.300 !important" wordBreak="break-word">
                       {achievement.description}
                     </Text>
                   </Flex>
@@ -99,6 +114,7 @@ export const DashboardAchievementsView: FC = () => {
                       borderRadius={12}
                       cursor="pointer"
                       maxWidth="40%"
+                      height="100%"
                       src={`${API_BASE}${
                         achievement.mediaUrl
                       }?${achievement.updatedAt.toString()}`}
@@ -116,7 +132,9 @@ export const DashboardAchievementsView: FC = () => {
             ))}
           </VerticalTimeline>
         ) : (
-          <Heading textAlign="center">No achievements yet</Heading>
+          <Heading textAlign="center" mt="20%">
+            No achievements yet
+          </Heading>
         )}
       </Flex>
       {Boolean(currentViewedImage) && (

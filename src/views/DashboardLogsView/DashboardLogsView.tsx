@@ -13,8 +13,10 @@ export const DashboardLogsView: FC = () => {
   }
 
   return (
-    <Container maxW="6xl" pt={5}>
-      <Heading>Logs</Heading>
+    <Container maxW="8xl" pt={5}>
+      <Heading textAlign="center" mb={5}>
+        Logs
+      </Heading>
       <Flex pt={6} direction="column">
         <Flex>
           <LogStatCard statistics={statistics.allTime} heading="All Time" />
@@ -23,7 +25,7 @@ export const DashboardLogsView: FC = () => {
           <LogStatCard statistics={statistics.thisWeek} heading="Past 7 days" />
           <LogStatCard statistics={statistics.today} heading="Today" mr={0} />
         </Flex>
-        <Flex pt={14}>
+        <Flex pt={14} justifyContent="center">
           <StatisticsBarChart />
         </Flex>
       </Flex>
