@@ -15,14 +15,14 @@ import { Option } from "types";
 interface JourneyItemsListProps {
   logs: Log[];
   activeLog?: Log;
-  setActiveLogById: (id: number) => void;
+  setActiveLogId: (id: number) => void;
   tags: Tag[];
 }
 
 export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   logs,
   activeLog,
-  setActiveLogById,
+  setActiveLogId,
   tags,
 }) => {
   const activeRef = useRef<HTMLDivElement>(null);
@@ -72,7 +72,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
             key={log.id}
             active={activeLog?.id === log.id}
             onClick={() => {
-              setActiveLogById(log.id);
+              setActiveLogId(log.id);
             }}
             ref={activeLog?.id === log.id ? activeRef : undefined}
           />

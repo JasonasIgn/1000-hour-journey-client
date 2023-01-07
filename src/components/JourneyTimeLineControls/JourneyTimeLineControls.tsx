@@ -18,7 +18,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
   logBegginingsMap: IdsHourMap;
-  setActiveLogById: (id: number) => void;
+  setActiveLogId: (id: number) => void;
   journey: Journey;
   setShiftDirection: (direction: ShiftDirection) => void;
 }
@@ -29,7 +29,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   openAddLogModal,
   openAddAchievementModal,
   logBegginingsMap,
-  setActiveLogById,
+  setActiveLogId,
   journey,
   setShiftDirection,
   ...rest
@@ -42,7 +42,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     );
     if (currentOrderLogId > 0) {
       const previousLogId = orderedLogIds[currentOrderLogId - 1];
-      setActiveLogById(Number(previousLogId));
+      setActiveLogId(Number(previousLogId));
     }
   };
 
@@ -54,7 +54,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     );
     const nextLogId = orderedLogIds[currentOrderLogId + 1];
     if (nextLogId) {
-      setActiveLogById(Number(nextLogId));
+      setActiveLogId(Number(nextLogId));
     }
   };
 
@@ -62,7 +62,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     const firstLogId = journey.logs[0].id;
     setShiftDirection("right");
     if (firstLogId) {
-      setActiveLogById(firstLogId);
+      setActiveLogId(firstLogId);
     }
   };
 
@@ -70,7 +70,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     const lastLogId = journey.logs[journey.logs.length - 1].id;
     setShiftDirection("left");
     if (lastLogId) {
-      setActiveLogById(lastLogId);
+      setActiveLogId(lastLogId);
     }
   };
 

@@ -32,6 +32,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const [currentViewedImage, setCurrentViewedImage] = useState("");
+
   return (
     <>
       <Flex
