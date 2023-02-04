@@ -84,7 +84,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
             <Heading color="brand.100" size="sm">
               Description
             </Heading>
-            <Text>{log.description}</Text>
+            <Text whiteSpace="pre-line">{log.description}</Text>
           </Flex>
           {log.tags.length > 0 && (
             <Flex direction="column" mt={5}>

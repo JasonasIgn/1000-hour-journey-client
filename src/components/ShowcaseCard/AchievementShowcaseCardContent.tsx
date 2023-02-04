@@ -41,7 +41,9 @@ export const AchievementShowcaseCardContent: FC<
       </Flex>
       <Flex height="84%" width="100%">
         <Flex flex="1 1 40%">
-          <Text wordBreak="break-word">{achievement.description}</Text>
+          <Text wordBreak="break-word" whiteSpace="pre-line">
+            {achievement.description}
+          </Text>
         </Flex>
         {achievement?.mediaUrl && (
           <Flex height="100%" width="60%" justifyContent="center" pl={3} ml={3}>
