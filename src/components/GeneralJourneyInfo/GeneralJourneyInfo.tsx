@@ -134,8 +134,8 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius="100%"
-                innerRadius="70%"
+                outerRadius="93%"
+                innerRadius="63%"
                 dataKey="value"
                 stroke="var(--chakra-colors-chakra-border-color)"
               >
