@@ -8,4 +8,8 @@ export const chakraStyles: ChakraStylesConfig = {
       background: "brand.700",
     },
   }),
+  indicatorSeparator: (provided, state) => ({
+    ...provided,
+    borderColor: state.isFocused ? "brand.400" : "gray.400",
+  }),
 };
