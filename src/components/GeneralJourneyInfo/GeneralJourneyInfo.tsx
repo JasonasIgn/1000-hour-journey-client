@@ -59,6 +59,7 @@ interface GeneralJourneyInfoProps {
 export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
   journey,
 }) => {
+  const isLogsEmpty = journey.logs.length === 0;
   const pieChartData = useMemo(
     () => getPieChartData(journey.logs),
     [journey.logs]
@@ -126,29 +127,36 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
           <Divider ml={2} borderColor="brand.100" />
         </Flex>
         <Flex justifyContent="center" flexGrow={1}>
-          <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={pieChartData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius="93%"
-                innerRadius="63%"
-                dataKey="value"
-                stroke="var(--chakra-colors-chakra-border-color)"
-              >
-                {pieChartData.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+          {isLogsEmpty && (
+            <Heading size="md" mt="2vh">
+              No time logged
+            </Heading>
+          )}
+          {!isLogsEmpty && (
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie
+                  data={pieChartData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  outerRadius="93%"
+                  innerRadius="63%"
+                  dataKey="value"
+                  stroke="var(--chakra-colors-chakra-border-color)"
+                >
+                  {pieChartData.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          )}
         </Flex>
       </Flex>
     </Flex>

@@ -41,6 +41,8 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
     );
   }, [logs, filterTags]);
 
+  const isListEmpty = filteredLogs.length === 0;
+
   return (
     <Flex direction="column" w="full" mb={2}>
       <Flex mb={4} justify="center" align="center">
@@ -64,7 +66,12 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           }}
         />
       </Flex>
-      <Flex direction="column" overflow="auto" px={1}>
+      <Flex direction="column" overflow="auto" px={1} height="full">
+        {isListEmpty && (
+          <Flex justifyContent="center" mt="2vh">
+            <Heading size="md">No logs available</Heading>
+          </Flex>
+        )}
         {filteredLogs.map((log, idx) => (
           <JourneyItemsListItem
             log={log}
