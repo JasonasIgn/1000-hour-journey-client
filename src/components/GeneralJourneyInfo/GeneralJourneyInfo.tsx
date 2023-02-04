@@ -1,6 +1,5 @@
 import { FC, useMemo } from "react";
 import {
-  Box,
   CircularProgress,
   CircularProgressLabel,
   Divider,
@@ -10,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Journey } from "store/features/journeys/types";
-import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { getPieChartData } from "./utils";
 
 const COLORS = [
@@ -66,7 +65,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
   );
 
   return (
-    <Box w="full">
+    <Flex w="full" direction="column">
       <Flex direction="column">
         <Flex alignItems="center" mb={4}>
           <Divider mr={2} borderColor="brand.100" />
@@ -118,7 +117,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
           </SimpleGrid>
         </Flex>
       </Flex>
-      <Flex direction="column" mt={8}>
+      <Flex direction="column" mt={8} flexGrow={1}>
         <Flex alignItems="center" mb={4}>
           <Divider mr={2} borderColor="brand.100" />
           <Heading size="md" color="brand.100" whiteSpace="nowrap">
@@ -126,30 +125,32 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
           </Heading>
           <Divider ml={2} borderColor="brand.100" />
         </Flex>
-        <Flex justifyContent="center" px={2}>
-          <PieChart width={320} height={320}>
-            <Pie
-              data={pieChartData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={145}
-              innerRadius={100}
-              dataKey="value"
-              stroke="var(--chakra-colors-chakra-border-color)"
-            >
-              {pieChartData.map((_, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
+        <Flex justifyContent="center" flexGrow={1}>
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius="100%"
+                innerRadius="70%"
+                dataKey="value"
+                stroke="var(--chakra-colors-chakra-border-color)"
+              >
+                {pieChartData.map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
