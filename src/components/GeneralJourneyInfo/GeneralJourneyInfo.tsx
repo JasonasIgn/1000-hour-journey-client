@@ -79,7 +79,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
         </Flex>
       </Flex>
 
-      <Flex direction="column" mt={8}>
+      <Flex direction="column" mt="2vh">
         <Flex alignItems="center" mb={4}>
           <Divider mr={2} borderColor="brand.100" />
           <Heading size="md" color="brand.100">
@@ -91,7 +91,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
           <SimpleGrid columns={3} w="full">
             <Flex direction="column" alignItems="center">
               <Heading size="md">Done</Heading>
-              <Heading size="lg" mt={3} color="grey.100">
+              <Heading size="lg" mt={2} fontSize="26px" color="grey.100">
                 {journey.totalHours} h
               </Heading>
             </Flex>
@@ -110,14 +110,14 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
             </Flex>
             <Flex direction="column" alignItems="center">
               <Heading size="md">Left</Heading>
-              <Heading size="lg" mt={3} color="grey.100">
+              <Heading size="lg" fontSize="26px" mt={2} color="grey.100">
                 {Math.round((1000 - journey.totalHours) * 10) / 10} h
               </Heading>
             </Flex>
           </SimpleGrid>
         </Flex>
       </Flex>
-      <Flex direction="column" mt={8} flexGrow={1}>
+      <Flex direction="column" mt="2vh" flexGrow={1}>
         <Flex alignItems="center" mb={4}>
           <Divider mr={2} borderColor="brand.100" />
           <Heading size="md" color="brand.100" whiteSpace="nowrap">
