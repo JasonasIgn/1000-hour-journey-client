@@ -121,7 +121,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
     <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Create new log</ModalHeader>
+        <ModalHeader>Create a log</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Grid
