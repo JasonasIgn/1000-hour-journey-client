@@ -1,4 +1,4 @@
-import { Flex, FlexProps } from "@chakra-ui/react";
+import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import { FC } from "react";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
@@ -11,6 +11,7 @@ interface ShowcaseCardProps extends FlexProps {
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
+
   return (
     <Flex
       flexDirection="column"
@@ -25,6 +26,11 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
       transition="left 0.25s, opacity 0.2s"
       {...rest}
     >
+      {!item && (
+        <Flex justifyContent="center" alignItems="center" h="full" mb="4vh">
+          <Heading size="lg">This could be your first log :)</Heading>
+        </Flex>
+      )}
       {isItemLog && <LogShowcaseCardContent log={item as LogExtended} />}
       {isItemAchievement && (
         <AchievementShowcaseCardContent achievement={item as Achievement} />
