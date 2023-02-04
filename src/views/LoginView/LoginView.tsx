@@ -1,6 +1,6 @@
-import { Container, Flex } from "@chakra-ui/react";
-import { LoginForm } from "components/LoginForm";
 import { FC } from "react";
+import { Container, Flex } from "@chakra-ui/react";
+import { LoginForm } from "components";
 
 export const LoginView: FC = () => {
   return (

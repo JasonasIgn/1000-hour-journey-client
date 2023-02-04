@@ -1,10 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { Header } from "components";
+import { Header, HEADER_HEIGHT_PX, AuthRoutes, GuestRoutes } from "components";
 import { useInitialization } from "utils/hooks";
 import { useAppSelector } from "store/hooks";
 import { getIsLoggedIn } from "store/features/auth/selectors";
-import { AuthRoutes } from "components/Routes/AuthRoutes";
-import { GuestRoutes } from "components/Routes/GuestRoutes";
 
 const App = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn);
@@ -19,7 +17,12 @@ const App = () => {
   }
 
   return (
-    <Flex bgColor="brand.900" minHeight="100vh" flexDirection="column">
+    <Flex
+      bgColor="brand.900"
+      minHeight="100vh"
+      flexDirection="column"
+      paddingTop={`${HEADER_HEIGHT_PX}px`}
+    >
       <Header isLoggedIn={isLoggedIn} />
       {isLoggedIn && <AuthRoutes />}
       {!isLoggedIn && <GuestRoutes />}

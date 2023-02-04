@@ -79,7 +79,12 @@ export const Timer = () => {
       <PopoverContent bg="brand.700" borderColor="brand.400">
         <PopoverCloseButton />
         <PopoverBody>
-          <Text fontSize="4xl" textAlign="center" color="gray.200">
+          <Text
+            fontSize="4xl"
+            textAlign="center"
+            color="gray.200"
+            userSelect="none"
+          >
             {timerText}
           </Text>
         </PopoverBody>
