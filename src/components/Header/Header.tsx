@@ -10,7 +10,7 @@ import {
   TabList,
   Tabs,
 } from "@chakra-ui/react";
-import { Timer } from "components/Timer";
+import { Timer } from "components";
 import { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { logoutEffect } from "store/features/auth/effects";
@@ -39,6 +39,8 @@ interface HeaderProps {
   isLoggedIn: boolean;
 }
 
+export const HEADER_HEIGHT_PX = 60;
+
 export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -50,10 +52,15 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
 
   return (
     <Flex
-      height="60px"
+      position="fixed"
+      width="100%"
+      backdropFilter="blur(4px)"
+      top={0}
+      height={`${HEADER_HEIGHT_PX}px`}
       padding={2.5}
       alignItems="center"
       justifyContent="space-between"
+      zIndex={10000}
     >
       <Flex height="full">
         <Link as={RouterLink} to="/" height="100%">
@@ -101,6 +108,7 @@ export const Header: FC<HeaderProps> = ({ isLoggedIn }) => {
           <Link
             ml={3}
             color="brand.50"
+            userSelect="none"
             onClick={() => {
               dispatch(logoutEffect());
             }}

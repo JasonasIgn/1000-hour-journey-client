@@ -15,6 +15,7 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
         w={10}
         h={10}
         cursor="pointer"
+        userSelect="none"
         sx={{
           transition: "transform 100ms",
           "&:hover": {

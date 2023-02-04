@@ -1,16 +1,20 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState, FC, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { EditLogDialog, JourneyTimeLine, Showcase } from "components";
+import {
+  EditLogDialog,
+  JourneyTimeLine,
+  Showcase,
+  JourneyItemsList,
+  GeneralJourneyInfo,
+  JourneyTitle,
+} from "components";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { getJourney } from "store/features/journeys/selectors";
 import { resetJourney } from "store/features/journeys/slice";
 import { Achievement } from "store/features/journeys/types";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
-import { JourneyTitle } from "components/JourneyTitle";
-import { GeneralJourneyInfo } from "components/GeneralJourneyInfo";
-import { JourneyItemsList } from "components/JourneyItemsList";
 import { getLogsDictionary } from "./utils";
 import { JOURNEY_VIEW_X_PADDING } from "./constants";
 

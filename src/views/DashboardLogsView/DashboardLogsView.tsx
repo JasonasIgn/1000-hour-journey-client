@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { useStatistics } from "./hooks";
-import { LogStatCard } from "components/LogStatCard";
-import { StatisticsBarChart } from "components/StatisticsBarChart";
+import { LogStatCard, StatisticsBarChart } from "components";
 
 export const DashboardLogsView: FC = () => {
   const statistics = useStatistics();
