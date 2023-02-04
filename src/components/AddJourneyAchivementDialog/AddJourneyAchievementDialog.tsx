@@ -77,7 +77,7 @@ export const AddJourneyAchievementDialog: FC<
     <Modal isOpen={open} onClose={() => setOpen(false)} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Log an achievement</ModalHeader>
+        <ModalHeader>Create an achievement</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Grid
@@ -130,7 +130,7 @@ export const AddJourneyAchievementDialog: FC<
             Close
           </Button>
           <Button variant="ghost" type="submit" disabled={isSubmitting}>
-            Log
+            Create
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -32,6 +32,7 @@ export const NumberInputField: FC<NumberInputFieldaProps> = forwardRef(
           {...rest}
           ref={ref as any}
           onChange={onChange}
+          min={0}
         >
           <NumberInputFieldNative />
           <NumberInputStepper>

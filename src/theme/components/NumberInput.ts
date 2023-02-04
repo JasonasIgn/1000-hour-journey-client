@@ -8,7 +8,10 @@ export const NumberInput: ComponentStyleConfig = {
     },
     stepper: {
       color: "gray.400",
-      borderColor: "inherit",
+      borderColor: "gray.400",
+      _active: {
+        backgroundColor: "brand.700",
+      },
     },
   },
   defaultProps: {
