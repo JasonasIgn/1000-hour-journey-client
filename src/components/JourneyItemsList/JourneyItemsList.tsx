@@ -11,6 +11,7 @@ import {
 import { getTagOptions } from "components/JourneyLogDialogs/utils";
 import { chakraStyles } from "components/CreatableSelectField/styles";
 import { Option } from "types";
+import { useAppDispatch } from "store/hooks";
 
 interface JourneyItemsListProps {
   logs: Log[];
@@ -25,6 +26,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   setActiveLogId,
   tags,
 }) => {
+  const dispatch = useAppDispatch();
   const activeRef = useRef<HTMLDivElement>(null);
   const [filterTags, setFilterTags] = useState<MultiValue<Option>>([]);
 
@@ -81,6 +83,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
             onClick={() => {
               setActiveLogId(log.id);
             }}
+            dispatch={dispatch}
             ref={activeLog?.id === log.id ? activeRef : undefined}
           />
         ))}

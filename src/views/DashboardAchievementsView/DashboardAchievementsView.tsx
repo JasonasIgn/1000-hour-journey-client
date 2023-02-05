@@ -3,7 +3,6 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import ImageViewer from "react-simple-image-viewer";
 import format from "date-fns/format";
 import {
   Container,
@@ -17,12 +16,13 @@ import {
 import { AchievementsDateQuery } from "./types";
 import { useFetchAchievements } from "./hooks";
 import { dateFormats } from "utils/constants";
-import { API_BASE } from "config";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { getImageSrc } from "utils/helpers";
+import { useAppDispatch } from "store/hooks";
+import { setViewedImageSrc } from "store/features/app/slice";
 
 export const DashboardAchievementsView: FC = () => {
-  const [currentViewedImage, setCurrentViewedImage] = useState("");
+  const dispatch = useAppDispatch();
   const [query, setQuery] = useState<AchievementsDateQuery>({
     year: new Date().getFullYear(),
   });
@@ -65,72 +65,72 @@ export const DashboardAchievementsView: FC = () => {
       <Flex pt={6} direction="column">
         {achievements.length > 0 ? (
           <VerticalTimeline>
-            {achievements.map((achievement) => (
-              <VerticalTimelineElement
-                key={achievement.id}
-                className="vertical-timeline-element--work"
-                contentStyle={{
-                  background: "var(--chakra-colors-brand-700)",
-                  color: "#fff",
-                }}
-                contentArrowStyle={{
-                  borderRight: "7px solid var(--chakra-colors-brand-700)",
-                }}
-                date={format(
-                  new Date(achievement.loggedOnDate),
-                  dateFormats.standart
-                )}
-                iconStyle={{
-                  background: "var(--chakra-colors-brand-500)",
-                  color: "#fff",
-                }}
-                icon={
-                  <Box
-                    width="full"
-                    height="full"
-                    borderRadius="full"
-                    backgroundSize="contain"
-                    backgroundPosition="center"
-                    backgroundImage={`${API_BASE}${
-                      achievement.journey?.mediaUrl
-                    }?${achievement.updatedAt.toString()}`}
-                  />
-                }
-              >
-                <Flex justify="space-between" alignItems="center">
-                  <Flex direction="column" pr={4}>
-                    <Heading color="gray.200 !important" as="h3" size="lg">
-                      {achievement.journey?.title}
-                    </Heading>
-                    <Heading color="gray.300 !important" as="h4" size="md">
-                      At journey {achievement.loggedAtHour} hour
-                    </Heading>
-                    <Text color="gray.300 !important" wordBreak="break-word">
-                      {achievement.description}
-                    </Text>
-                  </Flex>
-                  {achievement.mediaUrl && (
-                    <Image
-                      boxShadow="0px 0px 12px var(--chakra-colors-brand-100)"
-                      borderRadius={12}
-                      cursor="pointer"
-                      maxWidth="40%"
-                      height="100%"
-                      src={`${getImageSrc(
-                        achievement.mediaUrl
-                      )}?${achievement.updatedAt.toString()}`}
-                      onClick={() => {
-                        setCurrentViewedImage(
-                          `${getImageSrc(
-                            achievement.mediaUrl
-                          )}?${achievement.updatedAt.toString()}`
-                        );
-                      }}
-                    />
+            {achievements.map((achievement) => {
+              const achievementMediaSrc = `${getImageSrc(
+                achievement.mediaUrl
+              )}?${achievement.updatedAt.toString()}`;
+              const journeyMediaSrc = `${getImageSrc(
+                achievement.journey?.mediaUrl
+              )}?${achievement.updatedAt.toString()}`;
+              return (
+                <VerticalTimelineElement
+                  key={achievement.id}
+                  className="vertical-timeline-element--work"
+                  contentStyle={{
+                    background: "var(--chakra-colors-brand-700)",
+                    color: "#fff",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid var(--chakra-colors-brand-700)",
+                  }}
+                  date={format(
+                    new Date(achievement.loggedOnDate),
+                    dateFormats.standart
                   )}
-                </Flex>
-              </VerticalTimelineElement>
-            ))}
+                  iconStyle={{
+                    background: "var(--chakra-colors-brand-500)",
+                    color: "#fff",
+                  }}
+                  icon={
+                    <Box
+                      width="full"
+                      height="full"
+                      borderRadius="full"
+                      backgroundSize="contain"
+                      backgroundPosition="center"
+                      backgroundImage={journeyMediaSrc}
+                    />
+                  }
+                >
+                  <Flex justify="space-between" alignItems="center">
+                    <Flex direction="column" pr={4}>
+                      <Heading color="gray.200 !important" as="h3" size="lg">
+                        {achievement.journey?.title}
+                      </Heading>
+                      <Heading color="gray.300 !important" as="h4" size="md">
+                        At journey {achievement.loggedAtHour} hour
+                      </Heading>
+                      <Text color="gray.300 !important" wordBreak="break-word">
+                        {achievement.description}
+                      </Text>
+                    </Flex>
+                    {achievement.mediaUrl && (
+                      <Image
+                        boxShadow="0px 0px 12px var(--chakra-colors-brand-100)"
+                        borderRadius={12}
+                        cursor="pointer"
+                        maxWidth="40%"
+                        height="100%"
+                        src={achievementMediaSrc}
+                        onClick={() => {
+                          dispatch(setViewedImageSrc(achievementMediaSrc));
+                        }}
+                      />
+                    )}
+                  </Flex>
+                </VerticalTimelineElement>
+              );
+            })}
           </VerticalTimeline>
         ) : (
           <Heading textAlign="center" mt="20%">
@@ -138,15 +138,6 @@ export const DashboardAchievementsView: FC = () => {
           </Heading>
         )}
       </Flex>
-      {Boolean(currentViewedImage) && (
-        <ImageViewer
-          src={[currentViewedImage]}
-          currentIndex={0}
-          disableScroll={false}
-          closeOnClickOutside={true}
-          onClose={() => setCurrentViewedImage("")}
-        />
-      )}
     </Container>
   );
 };
