@@ -9,9 +9,14 @@ import { getTransformValue } from "./utils";
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
   shiftDirection: ShiftDirection;
+  defaultJourneyImageSrc?: string;
 }
 
-export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {
+export const Showcase: FC<ShowcaseProps> = ({
+  item,
+  shiftDirection,
+  defaultJourneyImageSrc,
+}) => {
   const cards = useAnimatedCards(shiftDirection, item);
 
   return (
@@ -30,6 +35,7 @@ export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {
           opacity={index === 1 ? 1 : 0.1}
           zIndex={index === 1 ? 10 : 1}
           transform={getTransformValue(index)}
+          defaultJourneyImageSrc={defaultJourneyImageSrc}
         />
       ))}
     </Flex>

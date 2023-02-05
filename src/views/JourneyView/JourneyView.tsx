@@ -66,6 +66,7 @@ export const JourneyView: FC = () => {
             <Showcase
               item={activeAchievement || activeLog}
               shiftDirection={shiftDirection}
+              defaultJourneyImageSrc={journey.mediaUrl}
             />
           </Flex>
           <Flex width="25%">

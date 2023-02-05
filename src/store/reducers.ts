@@ -3,6 +3,7 @@ import journeysReducer from "./features/journeys/slice";
 import journeyReducer from "./features/journey/slice";
 import timerReducer from "./features/timer/slice";
 import authReducer from "./features/auth/slice";
+import appReducer from "./features/app/slice";
 import { logoutEffect } from "./features/auth/effects";
 
 export const rootReducers = {
@@ -10,6 +11,7 @@ export const rootReducers = {
   journey: journeyReducer,
   timer: timerReducer,
   auth: authReducer,
+  app: appReducer,
 };
 
 export const createRootReducer = (): Reducer => {
