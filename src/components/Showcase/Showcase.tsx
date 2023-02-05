@@ -1,10 +1,10 @@
-import { Flex } from "@chakra-ui/react";
 import { FC } from "react";
+import { Flex } from "@chakra-ui/react";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { ShiftDirection } from "types";
 import { ShowcaseCard } from "components";
 import { useAnimatedCards } from "./hooks";
-import { getLeftCssValue } from "./utils";
+import { getTransformValue } from "./utils";
 
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
@@ -23,17 +23,15 @@ export const Showcase: FC<ShowcaseProps> = ({ item, shiftDirection }) => {
       position="relative"
       overflow="hidden"
     >
-      {cards.map((card, index) => {
-        const left = getLeftCssValue(index);
-        return (
-          <ShowcaseCard
-            key={card.key}
-            item={card.data}
-            left={left}
-            opacity={index === 1 ? 1 : 0.1}
-          />
-        );
-      })}
+      {cards.map((card, index) => (
+        <ShowcaseCard
+          key={card.key}
+          item={card.data}
+          opacity={index === 1 ? 1 : 0.1}
+          zIndex={index === 1 ? 10 : 1}
+          transform={getTransformValue(index)}
+        />
+      ))}
     </Flex>
   );
 };

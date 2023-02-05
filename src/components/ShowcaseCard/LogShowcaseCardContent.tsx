@@ -51,7 +51,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         </Box>
       </Flex>
       <Flex minHeight={0} width="full" height="full">
-        <Flex flex="1 1 40%" direction="column">
+        <Flex flex="1 1 50%" direction="column">
           <Flex direction="column">
             <Heading color="brand.100" size="sm">
               Description
@@ -75,12 +75,12 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         </Flex>
 
         {log?.mediaUrl && (
-          <Flex height="100%" width="60%" justifyContent="center" ml={3}>
+          <Flex height="100%" width="50%" justifyContent="center" ml={3}>
             <Image
               cursor="pointer"
               src={`${getImageSrc(log.mediaUrl)}?${log.updatedAt.toString()}`} // prevent caching
               alt={`${log.id} media`}
-              margin="auto"
+              marginBottom="auto"
               maxHeight="100%"
               boxShadow="0px 0px 15px var(--chakra-colors-brand-100)"
               borderRadius={12}

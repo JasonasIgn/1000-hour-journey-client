@@ -1,9 +1,9 @@
-export const getLeftCssValue = (position: number) => {
+export const getTransformValue = (position: number) => {
   if (position === 0) {
-    return "-100%";
+    return "scale(0) translateX(-200%)";
   }
   if (position === 1) {
-    return "10%";
+    return "scale(1) translateX(0%)";
   }
-  return "100%";
+  return "scale(0) translateX(200%)";
 };

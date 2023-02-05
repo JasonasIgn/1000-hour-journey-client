@@ -23,7 +23,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({ item, ...rest }) => {
       borderColor="brand.700"
       borderRadius="20px"
       padding={5}
-      transition="left 0.25s, opacity 0.2s"
+      transition="opacity 0.6s, transform 0.6s"
       {...rest}
     >
       {!item && (
