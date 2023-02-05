@@ -30,8 +30,6 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
       height="80%"
       width="70%"
       bg="brand.800"
-      border="1px solid"
-      borderColor="brand.700"
       borderRadius="20px"
       transition="opacity 0.6s, transform 0.6s"
       {...rest}
@@ -49,7 +47,6 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
           backgroundPosition="center"
           backgroundSize="cover"
           onClick={() => {
-            console.log("??");
             dispatch(setViewedImageSrc(itemImageSrc));
           }}
           cursor="pointer"

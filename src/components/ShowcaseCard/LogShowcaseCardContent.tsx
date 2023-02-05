@@ -22,7 +22,14 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
 }) => {
   return (
     <Flex w="full" height="full" direction="column">
-      <Flex direction="column" pb={3} mb={3} {...rest}>
+      <Flex
+        direction="column"
+        pb={3}
+        mb={3}
+        borderBottom="1px solid"
+        borderColor="brand.600"
+        {...rest}
+      >
         <Flex alignItems="center" direction="column" position="relative">
           <Heading>Log #{log.number}</Heading>
           <Heading size="sm" mt={2}>
@@ -45,9 +52,7 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
       </Flex>
       <Flex minHeight={0} width="full" height="full">
         <Flex direction="column" width="full">
-          <Text whiteSpace="pre-line">
-            {log.description}
-          </Text>
+          <Text whiteSpace="pre-line">{log.description}</Text>
           {log.tags.length > 0 && (
             <Flex direction="column" mt="auto">
               <Flex>

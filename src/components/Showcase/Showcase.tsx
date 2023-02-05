@@ -34,6 +34,9 @@ export const Showcase: FC<ShowcaseProps> = ({
           item={card.data}
           opacity={index === 1 ? 1 : 0.1}
           zIndex={index === 1 ? 10 : 1}
+          transition="opacity 0.6s, transform 0.6s"
+          border="1px solid"
+          borderColor="brand.600"
           transform={getTransformValue(index)}
           defaultJourneyImageSrc={defaultJourneyImageSrc}
         />
