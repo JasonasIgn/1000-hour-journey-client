@@ -23,10 +23,14 @@ import { setViewedImageSrc } from "store/features/app/slice";
 
 export const DashboardAchievementsView: FC = () => {
   const dispatch = useAppDispatch();
+  const currentYear = new Date().getFullYear();
   const [query, setQuery] = useState<AchievementsDateQuery>({
-    year: new Date().getFullYear(),
+    year: currentYear,
   });
-  const achievements = useFetchAchievements(query);
+  const shouldDisplayAll = query.year > currentYear;
+  const achievements = useFetchAchievements(
+    shouldDisplayAll ? undefined : query
+  );
   const loading = !achievements;
 
   if (loading) {
@@ -50,12 +54,13 @@ export const DashboardAchievementsView: FC = () => {
           />
           <Flex mx={2} width={34} justifyContent="center">
             <Text color="gray.100" textAlign="center">
-              {query.year}
+              {shouldDisplayAll ? "All" : query.year}
             </Text>
           </Flex>
           <IconButton
             icon={<ArrowForwardIcon />}
             aria-label="Forward in years"
+            isDisabled={shouldDisplayAll}
             onClick={() => {
               setQuery({ year: query.year + 1 });
             }}
