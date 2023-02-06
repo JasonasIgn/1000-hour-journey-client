@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Achievement } from "store/features/journeys/types";
 import { AchievementsDateQuery } from "./types";
 
-export const useFetchAchievements = (query: AchievementsDateQuery) => {
+export const useFetchAchievements = (query?: AchievementsDateQuery) => {
   const [achievements, setAchievements] = useState<Achievement[]>();
 
   const fetchAchievements = useCallback(async () => {
