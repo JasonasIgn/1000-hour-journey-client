@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Flex, FlexProps, Heading, Text } from "@chakra-ui/react";
+import { Badge, Flex, FlexProps, Heading, Text } from "@chakra-ui/react";
 import format from "date-fns/format";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
@@ -12,37 +12,37 @@ export const AchievementShowcaseCardContent: FC<
   AchievementShowcaseCardContentProps
 > = ({ achievement, ...rest }) => {
   return (
-    <>
+    <Flex w="full" height="full" direction="column">
       <Flex
-        justifyContent="space-between"
-        borderBottom="1px solid"
-        borderColor="brand.300"
+        direction="column"
         pb={3}
         mb={3}
+        borderBottom="1px solid"
+        borderColor="brand.600"
         {...rest}
       >
-        <Box textAlign="left">
-          <Text>Achievement</Text>
-          <Heading> </Heading>
-        </Box>
-        <Box textAlign="left">
-          <Text>Date</Text>
-          <Heading>
+        <Flex alignItems="center" direction="column" position="relative">
+          <Heading>Achievement</Heading>
+          <Heading size="sm" mt={2}>
             {format(new Date(achievement.loggedOnDate), dateFormats.standart)}
           </Heading>
-        </Box>
-        <Box textAlign="center">
-          <Text>At journey hour</Text>
-          <Heading>{achievement.loggedAtHour}</Heading>
-        </Box>
-      </Flex>
-      <Flex height="84%" width="100%">
-        <Flex flex="1 1 40%">
-          <Text wordBreak="break-word" whiteSpace="pre-line">
-            {achievement.description}
-          </Text>
         </Flex>
       </Flex>
-    </>
+      <Text wordBreak="break-word" whiteSpace="pre-line">
+        {achievement.description}
+      </Text>
+      <Flex mt="auto" justifyContent="center">
+        <Badge
+          variant="solid"
+          colorScheme="brand"
+          fontSize="16px"
+          px={3}
+          color="gray.400"
+          borderRadius={4}
+        >
+          {achievement.loggedAtHour} hours into the journey
+        </Badge>
+      </Flex>
+    </Flex>
   );
 };
