@@ -32,27 +32,32 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
       bg="brand.800"
       borderRadius="20px"
       transition="opacity 0.6s, transform 0.6s"
+      maxWidth={420}
       {...rest}
     >
-      {itemImageSrc && (
-        <Flex
-          top={0}
-          right={0}
-          height="40%"
-          borderTopRightRadius="20px"
-          borderTopLeftRadius="20px"
-          width="100%"
-          justifyContent="center"
-          backgroundImage={itemImageSrc}
-          backgroundPosition="center"
-          backgroundSize="cover"
-          onClick={() => {
-            dispatch(setViewedImageSrc(itemImageSrc));
-          }}
-          cursor="pointer"
-        />
-      )}
-      <Flex p={5} direction="column" flexGrow={1}>
+      <Flex
+        top={0}
+        right={0}
+        height="40%"
+        borderTopRightRadius="20px"
+        borderTopLeftRadius="20px"
+        width="100%"
+        justifyContent="center"
+        backgroundImage={itemImageSrc}
+        backgroundPosition="center"
+        backgroundSize="cover"
+        onClick={() => {
+          dispatch(setViewedImageSrc(itemImageSrc));
+        }}
+        cursor="pointer"
+      />
+      <Flex
+        p={5}
+        direction="column"
+        flexGrow={1}
+        borderTop="1px solid"
+        borderColor="brand.600"
+      >
         {!item && (
           <Flex justifyContent="center" alignItems="center" h="full" mb="4vh">
             <Heading size="lg">This could be your first log :)</Heading>
