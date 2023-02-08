@@ -108,6 +108,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         border="1px solid"
         top="-10px"
         onClick={(e) => {
+          e.preventDefault();
           e.stopPropagation();
           onEditClick();
         }}
