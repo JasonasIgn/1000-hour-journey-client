@@ -64,7 +64,7 @@ export const LoginForm: FC<LoginFormProps> = () => {
         </Box>
       </Box>
       <Flex justifyContent="center" mt={5}>
-        <Button type="submit" disabled={isSubmitting} width={40}>
+        <Button type="submit" isDisabled={isSubmitting} width={40}>
           Login
         </Button>
       </Flex>

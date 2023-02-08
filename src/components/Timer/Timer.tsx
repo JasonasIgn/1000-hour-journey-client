@@ -120,7 +120,7 @@ export const Timer = () => {
             borderRadius="full"
             icon={<Icon as={StopIcon} fill="gray.100" />}
             aria-label="Reset Stopwatch"
-            disabled={isRunning}
+            isDisabled={isRunning}
             onClick={() => {
               reset(undefined, false);
             }}

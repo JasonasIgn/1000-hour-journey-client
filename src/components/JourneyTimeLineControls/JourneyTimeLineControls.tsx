@@ -3,17 +3,13 @@ import { FlexProps, IconButton, Flex, Icon } from "@chakra-ui/react";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as PageIcon } from "resources/page.svg";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
-import {
-  Achievement,
-  Journey,
-  LogExtended,
-} from "store/features/journeys/types";
+import { Achievement, Journey } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 import { ShiftDirection } from "types";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
-  activeLog?: LogExtended;
+  activeLogId?: number;
   activeAchievement?: Achievement;
   openAddLogModal: (e: MouseEvent) => void;
   openAddAchievementModal: (e: MouseEvent) => void;
@@ -24,7 +20,7 @@ interface JourneyTimeLineControlsProps extends FlexProps {
 }
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
-  activeLog,
+  activeLogId,
   activeAchievement,
   openAddLogModal,
   openAddAchievementModal,
@@ -38,7 +34,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     setShiftDirection("right");
     const orderedLogIds = Object.keys(logBegginingsMap);
     const currentOrderLogId = orderedLogIds.findIndex(
-      (logId) => logId === activeLog?.id.toString()
+      (logId) => logId === activeLogId?.toString()
     );
     if (currentOrderLogId > 0) {
       const previousLogId = orderedLogIds[currentOrderLogId - 1];
@@ -50,7 +46,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
     setShiftDirection("left");
     const orderedLogIds = Object.keys(logBegginingsMap);
     const currentOrderLogId = orderedLogIds.findIndex(
-      (logId) => logId === activeLog?.id.toString()
+      (logId) => logId === activeLogId?.toString()
     );
     const nextLogId = orderedLogIds[currentOrderLogId + 1];
     if (nextLogId) {
@@ -99,7 +95,7 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
           }
           aria-label="Add achievement"
           onClick={openAddAchievementModal}
-          disabled={!activeLog}
+          isDisabled={!activeLogId}
         />
       </Flex>
       <Flex>

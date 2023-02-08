@@ -44,7 +44,7 @@ import {
 
 interface JourneyTimeLineProps {
   journey: Journey;
-  setActiveLogId: (id: number) => void;
+  setActiveLogId: (id: number | undefined) => void;
   activeLog?: LogExtended;
   setActiveAchievement: (log: Achievement) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
@@ -57,6 +57,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setActiveAchievement,
   setShiftDirection,
 }) => {
+  const isDragging = useRef(false);
   const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
   const zoomUnit = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
   const [currentScale, setCurrentScale] = useState(2);
@@ -135,13 +136,16 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   useEffect(() => {
     const currentHourLog = logsDictionary[hoursToLogMap[currentHour]];
-    if (currentHourLog && currentHourLog?.id !== activeLog?.id) {
-      setActiveLogId(currentHourLog.id);
+    if (currentHourLog?.id !== activeLog?.id) {
+      setActiveLogId(currentHourLog?.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHour]);
 
   useEffect(() => {
+    if (isDragging.current) {
+      return;
+    }
     const currentHourLog = logsDictionary[hoursToLogMap[currentHour]];
     if (activeLog && activeLog.id !== currentHourLog?.id) {
       const newHour = Math.round(logBegginingsMap[activeLog.id] * 10) / 10;
@@ -166,7 +170,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         height="40px"
         py={2}
         boxSizing="content-box"
-        activeLog={activeLog}
+        activeLogId={activeLog?.id}
         activeAchievement={activeAchievement}
         logBegginingsMap={logBegginingsMap}
         openAddLogModal={(e) => {
@@ -214,7 +218,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             px={`${TIMELINE_X_PADDING_PX}px`}
           >
             <Slider
-              onChangeEnd={centerZoomOnThumb}
+              onChangeStart={() => {
+                isDragging.current = true;
+              }}
+              onChangeEnd={(e) => {
+                isDragging.current = false;
+                centerZoomOnThumb(e);
+              }}
               top={`${Math.round(70 / currentScale)}px`}
               step={0.1}
               defaultValue={currentHour}

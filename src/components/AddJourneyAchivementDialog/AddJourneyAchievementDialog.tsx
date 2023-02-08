@@ -129,7 +129,7 @@ export const AddJourneyAchievementDialog: FC<
           <Button mr={3} onClick={() => setOpen(false)}>
             Close
           </Button>
-          <Button variant="ghost" type="submit" disabled={isSubmitting}>
+          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
             Create
           </Button>
         </ModalFooter>

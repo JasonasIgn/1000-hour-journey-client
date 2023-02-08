@@ -91,7 +91,7 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
           <Button mr={3} onClick={handleClose}>
             Close
           </Button>
-          <Button variant="ghost" type="submit" disabled={isSubmitting}>
+          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
             Save
           </Button>
         </ModalFooter>
