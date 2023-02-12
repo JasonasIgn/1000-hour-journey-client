@@ -17,7 +17,7 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
       >
         <Icon
           as={TimerIcon}
-          fill="white"
+          fill="gray.300"
           w="28px"
           h="28px"
           cursor="pointer"

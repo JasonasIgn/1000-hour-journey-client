@@ -1,26 +1,20 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState, FC, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useState, FC, useMemo } from "react";
 import {
   EditLogDialog,
   JourneyTimeLine,
   Showcase,
   JourneyItemsList,
   GeneralJourneyInfo,
-  JourneyNavigation,
 } from "components";
-import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { getJourney } from "store/features/journeys/selectors";
-import { resetJourney } from "store/features/journeys/slice";
 import { Achievement } from "store/features/journeys/types";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
 import { getLogsDictionary } from "./utils";
 import { JOURNEY_VIEW_X_PADDING } from "./constants";
 
 export const JourneyViewContent: FC = () => {
-  const dispatch = useAppDispatch();
-  const params = useParams();
   const journey = useAppSelector(getJourney);
 
   const [activeLogId, setActiveLogId] = useState<number>();
@@ -33,26 +27,12 @@ export const JourneyViewContent: FC = () => {
   );
   const activeLog = activeLogId ? logsDictionary[activeLogId] : undefined;
 
-  useEffect(() => {
-    if (params.journeyId && journey?.id.toString() !== params.journeyId) {
-      dispatch(fetchJourneyEffect({ journeyId: params.journeyId }));
-    }
-
-    return () => {
-      dispatch(resetJourney());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   if (!journey) {
     return <Text>Loading...</Text>;
   }
 
   return (
     <Flex flexDirection="column" flex="1 1 0">
-      <Flex>
-        <JourneyNavigation />
-      </Flex>
       <Flex
         flexDirection="column"
         alignItems="center"

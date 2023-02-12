@@ -7,7 +7,7 @@ export const JourneysView: FC = () => {
   return (
     <>
       <SimpleHeader title="Journeys" />
-      <Flex overflow="auto">
+      <Flex overflow="auto" bg="brand.800">
         <JourneysViewContent />
       </Flex>
     </>

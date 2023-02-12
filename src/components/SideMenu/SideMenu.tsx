@@ -50,7 +50,7 @@ export const SideMenu: FC = () => {
       width="70px"
       minW="70px"
       height="100vh"
-      borderRight="1px solid white"
+      borderColor="gray.500"
       bg="brand.900"
       flexDirection="column"
       alignItems="center"

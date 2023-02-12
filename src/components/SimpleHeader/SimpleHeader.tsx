@@ -17,7 +17,6 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
       py={2.5}
       alignItems="center"
       justifyContent="space-between"
-      borderBottom="1px solid white"
     >
       <Heading
         whiteSpace="nowrap"
@@ -25,7 +24,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
         textAlign="center"
         flex={0}
         size="lg"
-        color="gray.200"
+        color="gray.300"
       >
         {title}
       </Heading>
