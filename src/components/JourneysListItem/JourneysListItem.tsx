@@ -32,7 +32,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
     <Flex
       position="relative"
       height={180}
-      bg="brand.900"
+      bg="brand.700"
+      border="2px solid"
+      borderColor="brand.600"
       borderRadius={20}
       padding={4}
       cursor="pointer"

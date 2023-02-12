@@ -59,7 +59,14 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
 
   return (
     <Flex w="full" direction="column">
-      <Flex direction="column" p={3} bg="brand.900" borderRadius={2}>
+      <Flex
+        direction="column"
+        p={3}
+        bg="brand.900"
+        border="1px solid"
+        borderColor="brand.600"
+        borderRadius={2}
+      >
         <Flex alignItems="center" mb={3}>
           <Heading size="md" color="gray.300">
             Description
@@ -70,7 +77,15 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
         </Flex>
       </Flex>
 
-      <Flex direction="column" mt="2vh" p={3} bg="brand.900" borderRadius={2}>
+      <Flex
+        direction="column"
+        mt="2vh"
+        p={3}
+        bg="brand.900"
+        border="1px solid"
+        borderColor="brand.600"
+        borderRadius={2}
+      >
         <Flex alignItems="center" mb={3}>
           <Heading size="md" color="gray.300">
             Progress
@@ -95,6 +110,8 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
         flexGrow={1}
         p={3}
         bg="brand.900"
+        border="1px solid"
+        borderColor="brand.600"
         borderRadius={2}
       >
         <Flex alignItems="center" mb={3}>

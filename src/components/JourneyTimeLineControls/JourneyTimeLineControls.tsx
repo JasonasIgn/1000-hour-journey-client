@@ -75,6 +75,8 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       maxWidth={SHOWCASE_CARD_WIDTH_PX}
       margin="auto"
       w="full"
+      border="1px solid"
+      borderColor="brand.600"
     >
       <IconButton
         size="lg"

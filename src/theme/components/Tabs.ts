@@ -26,7 +26,7 @@ export const Tabs: ComponentStyleConfig = {
           border: "none",
         },
         _selected: {
-          background: "brand.700",
+          background: "brand.800",
           color: "gray.300",
         },
       },

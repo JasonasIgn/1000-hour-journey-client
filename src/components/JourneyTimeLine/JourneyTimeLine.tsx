@@ -162,7 +162,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   return (
     <Flex width="100%" flexDirection="column">
-      <Box bg="brand.900" borderRadius="2px">
+      <Box
+        bg="brand.900"
+        borderRadius="2px"
+        border="1px solid"
+        borderColor="brand.600"
+      >
         <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;
           {activeLog

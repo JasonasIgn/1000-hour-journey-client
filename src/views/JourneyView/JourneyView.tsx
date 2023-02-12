@@ -29,7 +29,7 @@ export const JourneyView: FC = () => {
       <SimpleHeader title={`Journey '${journey?.title || "Loading..."}'`} />
       <JourneyNavigation journeyId={params.journeyId} />
 
-      <Flex overflow="auto" flexGrow={1} flexDirection="column" bg="brand.700">
+      <Flex overflow="auto" flexGrow={1} flexDirection="column" bg="brand.800">
         <Outlet />
       </Flex>
     </>

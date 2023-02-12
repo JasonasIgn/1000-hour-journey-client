@@ -26,13 +26,13 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
     <Flex
-      border="1px solid"
-      borderColor="brand.900"
       flexDirection="column"
       position="absolute"
       height="95%"
       width="70%"
       bg="brand.900"
+      border="1px solid"
+      borderColor="brand.600"
       borderRadius="2px"
       transition="opacity 0.6s, transform 0.6s"
       maxWidth={SHOWCASE_CARD_WIDTH_PX}
