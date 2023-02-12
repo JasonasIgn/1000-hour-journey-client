@@ -102,7 +102,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
             Time distribution
           </Heading>
         </Flex>
-        <Flex justifyContent="center" flexGrow={1}>
+        <Flex justifyContent="center" flexGrow={1} alignItems="center">
           {isLogsEmpty && (
             <Heading size="md" mt="2vh">
               No time logged

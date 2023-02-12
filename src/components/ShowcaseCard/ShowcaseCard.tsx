@@ -59,7 +59,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
         direction="column"
         flexGrow={1}
         borderTop="1px solid"
-        borderColor="brand.600"
+        borderColor="brand.800"
       >
         {!item && (
           <Flex justifyContent="center" alignItems="center" h="full" mb="4vh">

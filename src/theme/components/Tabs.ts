@@ -20,8 +20,13 @@ export const Tabs: ComponentStyleConfig = {
         _hover: {
           color: "white",
         },
+        _focusVisible: {
+          outline: "none",
+          boxShadow: "none",
+          border: "none",
+        },
         _selected: {
-          background: "brand.800",
+          background: "brand.700",
           color: "gray.300",
         },
       },
