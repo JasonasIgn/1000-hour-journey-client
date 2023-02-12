@@ -59,6 +59,7 @@ export const SideMenu: FC = () => {
         size="lg"
         variant="sideMenuNotReactive"
         mb="10vh"
+        mt="6px"
       >
         <Icon as={BurgerMenuClosedIcon} width="30px" height="30px" />
       </IconButton>
