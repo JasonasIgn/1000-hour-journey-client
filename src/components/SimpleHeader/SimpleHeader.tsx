@@ -12,6 +12,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
     <Flex
       width="100%"
       height={`${HEADER_HEIGHT_PX}px`}
+      minHeight={`${HEADER_HEIGHT_PX}px`}
       padding={2.5}
       alignItems="center"
       justifyContent="space-between"

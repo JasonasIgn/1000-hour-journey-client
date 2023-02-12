@@ -25,7 +25,7 @@ const App = () => {
         minHeight="100vh"
         flexDirection="column"
         flexGrow={1}
-        overflow="auto"
+        overflow="hidden"
       >
         {isLoggedIn && <AuthRoutes />}
         {!isLoggedIn && <GuestRoutes />}
