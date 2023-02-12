@@ -47,6 +47,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
         width="100%"
         justifyContent="center"
         backgroundImage={itemImageSrc}
+        filter="brightness(0.7)"
         backgroundPosition="center"
         backgroundSize="cover"
         onClick={() => {

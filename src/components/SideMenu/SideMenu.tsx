@@ -1,9 +1,16 @@
-import { Divider, Flex, Icon, IconButton, Tooltip } from "@chakra-ui/react";
+import {
+  Divider,
+  Flex,
+  Icon,
+  IconButton,
+  Tooltip,
+  Image,
+} from "@chakra-ui/react";
 import { FC, useEffect, useState, ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { logoutEffect } from "store/features/auth/effects";
 import { useAppDispatch } from "store/hooks";
-import { ReactComponent as BurgerMenuClosedIcon } from "resources/burger-menu-closed.svg";
+import Logo from "resources/logo.png";
 import { ReactComponent as LogOutIcon } from "resources/log-out.svg";
 import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
@@ -55,15 +62,15 @@ export const SideMenu: FC = () => {
       flexDirection="column"
       alignItems="center"
     >
-      <IconButton
-        aria-label="open menu"
-        size="lg"
-        variant="sideMenuNotReactive"
+      <Image
+        src={Logo}
+        width="40px"
+        height="40px"
         mb="50px"
-        mt="6px"
-      >
-        <Icon as={BurgerMenuClosedIcon} width="30px" height="30px" />
-      </IconButton>
+        mt="5px"
+        p="5px"
+        boxSizing="content-box"
+      />
 
       {navigationItems.map((item, index) => (
         <Tooltip

@@ -54,6 +54,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       >
         <Image
           key={journey.updatedAt.toString()}
+          filter="brightness(0.7)"
           src={
             journey?.mediaUrl
               ? `${getImageSrc(
