@@ -32,10 +32,8 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
     <Flex
       position="relative"
       height={180}
-      bg="brand.800"
+      bg="brand.900"
       borderRadius={20}
-      border="2px solid"
-      borderColor="brand.700"
       padding={4}
       cursor="pointer"
       _hover={{
@@ -48,10 +46,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         width={144}
         minWidth={144}
         height="full"
-        border="1px solid"
-        borderColor="brand.300"
         alignItems="center"
         justifyContent="center"
+        bg="black"
       >
         <Image
           key={journey.updatedAt.toString()}
