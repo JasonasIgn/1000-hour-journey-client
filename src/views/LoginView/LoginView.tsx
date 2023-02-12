@@ -9,7 +9,7 @@ export const LoginView: FC = () => {
         flexDirection="column"
         alignItems="center"
         height="calc(100vh - 60px)"
-        pt={5}
+        pt="10vh"
       >
         <LoginForm />
       </Flex>
