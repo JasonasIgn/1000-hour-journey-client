@@ -1,7 +1,5 @@
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
 import { FlexProps, IconButton, Flex, Icon } from "@chakra-ui/react";
-import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
-import { ReactComponent as PageIcon } from "resources/page.svg";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
 import { Achievement, Journey } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
@@ -11,8 +9,6 @@ import { ShiftDirection } from "types";
 interface JourneyTimeLineControlsProps extends FlexProps {
   activeLogId?: number;
   activeAchievement?: Achievement;
-  openAddLogModal: (e: MouseEvent) => void;
-  openAddAchievementModal: (e: MouseEvent) => void;
   logBegginingsMap: IdsHourMap;
   setActiveLogId: (id: number) => void;
   journey: Journey;
@@ -22,8 +18,6 @@ interface JourneyTimeLineControlsProps extends FlexProps {
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   activeLogId,
   activeAchievement,
-  openAddLogModal,
-  openAddAchievementModal,
   logBegginingsMap,
   setActiveLogId,
   journey,
@@ -71,65 +65,36 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   };
 
   return (
-    <Flex
-      {...rest}
-      alignItems="center"
-      width="100%"
-      justifyContent="space-between"
-    >
-      <Flex>
-        <IconButton
-          icon={<Icon as={PageIcon} width={22} height={22} fill="gray.300" />}
-          aria-label="Add log"
-          onClick={openAddLogModal}
-        />
-        <IconButton
-          ml={2}
-          icon={
-            <Icon
-              as={AchievementIcon}
-              width={22}
-              height={22}
-              stroke="gray.300"
-            />
-          }
-          aria-label="Add achievement"
-          onClick={openAddAchievementModal}
-          isDisabled={!activeLogId}
-        />
-      </Flex>
-      <Flex>
-        <IconButton
-          icon={<ArrowLeftIcon />}
-          aria-label="Rewind to beggining"
-          onClick={onRewindClick}
-        />
-        <IconButton
-          ml={2}
-          mr={2}
-          icon={
-            <Icon
-              as={RightArrowIcon}
-              fill="gray.300"
-              transform="rotate(180deg)"
-            />
-          }
-          aria-label="Go to previous log"
-          onClick={onGoToPreviousClick}
-        />
-        <IconButton
-          mr={2}
-          icon={<Icon as={RightArrowIcon} fill="gray.300" />}
-          aria-label="Go to next log"
-          onClick={onGoToNextClick}
-        />
-        <IconButton
-          icon={<ArrowRightIcon />}
-          aria-label="Skip to end"
-          onClick={onSkipClick}
-        />
-      </Flex>
-      <Flex width="88px" />
+    <Flex {...rest} alignItems="center" width="100%" justifyContent="center">
+      <IconButton
+        icon={<ArrowLeftIcon />}
+        aria-label="Rewind to beggining"
+        onClick={onRewindClick}
+      />
+      <IconButton
+        ml={2}
+        mr={2}
+        icon={
+          <Icon
+            as={RightArrowIcon}
+            fill="gray.300"
+            transform="rotate(180deg)"
+          />
+        }
+        aria-label="Go to previous log"
+        onClick={onGoToPreviousClick}
+      />
+      <IconButton
+        mr={2}
+        icon={<Icon as={RightArrowIcon} fill="gray.300" />}
+        aria-label="Go to next log"
+        onClick={onGoToNextClick}
+      />
+      <IconButton
+        icon={<ArrowRightIcon />}
+        aria-label="Skip to end"
+        onClick={onSkipClick}
+      />
     </Flex>
   );
 };

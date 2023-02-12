@@ -1,13 +1,14 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Flex, Heading } from "@chakra-ui/react";
 
 export const HEADER_HEIGHT_PX = 60;
 
 interface SimpleHeaderProps {
   title: string;
+  children?: ReactNode;
 }
 
-export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
+export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
   return (
     <Flex
       width="100%"
@@ -28,6 +29,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
       >
         {title}
       </Heading>
+      {children}
     </Flex>
   );
 };

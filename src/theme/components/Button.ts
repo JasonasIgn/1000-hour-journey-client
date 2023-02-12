@@ -32,7 +32,10 @@ export const Button: ComponentStyleConfig = {
       },
     },
     sideMenuNotReactive: {
-      color: "gray.200",
+      color: "gray.300",
+      _hover: {
+        color: "gray.100",
+      },
     },
   },
   sizes: {

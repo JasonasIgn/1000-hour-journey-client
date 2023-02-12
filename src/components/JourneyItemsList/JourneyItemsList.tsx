@@ -1,5 +1,5 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { Divider, Flex, Heading } from "@chakra-ui/react";
+import { FC, useEffect, useMemo, useRef, useState, MouseEvent } from "react";
+import { Flex, Heading, IconButton, Icon } from "@chakra-ui/react";
 import { Log, Tag } from "store/features/journeys/types";
 import { JourneyItemsListItem } from "./JourneyItemsListItem/JourneyItemsListItem";
 import {
@@ -10,6 +10,8 @@ import {
 } from "chakra-react-select";
 import { getTagOptions } from "components/JourneyLogDialogs/utils";
 import { chakraStyles } from "components/CreatableSelectField/styles";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
+import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Option } from "types";
 import { useAppDispatch } from "store/hooks";
 
@@ -18,6 +20,8 @@ interface JourneyItemsListProps {
   activeLog?: Log;
   setActiveLogId: (id: number) => void;
   tags: Tag[];
+  openAddLogDialog: (e: MouseEvent) => void;
+  openAddAchievementDialog: (e: MouseEvent) => void;
 }
 
 export const JourneyItemsList: FC<JourneyItemsListProps> = ({
@@ -25,6 +29,8 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   activeLog,
   setActiveLogId,
   tags,
+  openAddLogDialog,
+  openAddAchievementDialog,
 }) => {
   const dispatch = useAppDispatch();
   const activeRef = useRef<HTMLDivElement>(null);
@@ -46,13 +52,41 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   const isListEmpty = filteredLogs.length === 0;
 
   return (
-    <Flex direction="column" w="full" mb={2}>
-      <Flex mb={4} justify="center" align="center">
-        <Divider mr={2} borderColor="brand.100" />
-        <Heading size="md" color="brand.100">
+    <Flex
+      direction="column"
+      w="full"
+      mb={2}
+      p={3}
+      bg="brand.900"
+      borderRadius={2}
+    >
+      <Flex mb={3} align="center">
+        <Heading size="md" color="gray.300">
           Logs
         </Heading>
-        <Divider ml={2} borderColor="brand.100" />
+        <Flex ml="auto">
+          <IconButton
+            variant="sideMenuNotRiactive"
+            icon={
+              <Icon
+                as={AchievementIcon}
+                width={22}
+                height={22}
+                stroke="gray.300"
+              />
+            }
+            aria-label="Add log"
+            onClick={openAddAchievementDialog}
+            size="sm"
+          />
+          <IconButton
+            variant="sideMenuNotRiactive"
+            icon={<Icon as={LogIcon} width={22} height={22} fill="gray.300" />}
+            aria-label="Add log"
+            onClick={openAddLogDialog}
+            size="sm"
+          />
+        </Flex>
       </Flex>
       <Flex direction="column" px={2} mb={3}>
         <Select<Option, true, GroupBase<Option>>

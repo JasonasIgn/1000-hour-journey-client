@@ -25,22 +25,24 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
     <Flex
+      border="1px solid"  
+      borderColor="brand.900"
       flexDirection="column"
       position="absolute"
       height="80%"
       width="70%"
-      bg="brand.800"
-      borderRadius="20px"
+      bg="brand.900"
+      borderRadius="2px"
       transition="opacity 0.6s, transform 0.6s"
-      maxWidth={420}
+      maxWidth={440}
       {...rest}
     >
       <Flex
         top={0}
         right={0}
         height="40%"
-        borderTopRightRadius="20px"
-        borderTopLeftRadius="20px"
+        borderTopRightRadius="2px"
+        borderTopLeftRadius="2px"
         width="100%"
         justifyContent="center"
         backgroundImage={itemImageSrc}

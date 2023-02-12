@@ -28,10 +28,9 @@ import {
 } from "views/JourneyView/utils";
 import { getFinalScale, getZoomXPosition } from "./utils";
 import {
+  AddJourneyAchievementDialog,
   JourneyTimeLineControls,
   TimelineRuler,
-  AddLogDialog,
-  AddJourneyAchievementDialog,
 } from "components";
 import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
@@ -48,6 +47,8 @@ interface JourneyTimeLineProps {
   activeLog?: LogExtended;
   setActiveAchievement: (log: Achievement) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
+  addAchievementModalOpen: boolean;
+  setAddAchievementModalOpen: (v: boolean) => void;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
@@ -56,6 +57,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   activeLog,
   setActiveAchievement,
   setShiftDirection,
+  addAchievementModalOpen,
+  setAddAchievementModalOpen,
 }) => {
   const isDragging = useRef(false);
   const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
@@ -65,9 +68,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const [currentHour, setCurrentHour] = useState(
     Math.round((journey.totalHours - 0.1) * 10) / 10
   );
-
-  const [addLogModalOpen, setAddLogModalOpen] = useState(false);
-  const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
   const timelineContainerRef = useRef<HTMLDivElement>(null);
   const pinchZoomRef = useRef<QuickPinchZoom>(null);
@@ -173,25 +173,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         activeLogId={activeLog?.id}
         activeAchievement={activeAchievement}
         logBegginingsMap={logBegginingsMap}
-        openAddLogModal={(e) => {
-          if (e.detail !== 0) {
-            setAddLogModalOpen(true);
-          }
-        }}
-        openAddAchievementModal={(e) => {
-          if (e.detail !== 0) {
-            setAddAchievementModalOpen(true);
-          }
-        }}
         journey={journey}
         setActiveLogId={setActiveLogId}
         setShiftDirection={setShiftDirection}
       />
-      <Box
-        border={`${TIMELINE_BORDER_WIDTH_PX}px solid`}
-        borderColor="brand.700"
-        borderRadius="20px"
-      >
+      <Box bg="brand.900" borderRadius="2px">
         <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;
           {activeLog
@@ -296,12 +282,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
           </Box>
         </QuickPinchZoom>
       </Box>
-      <AddLogDialog
-        open={addLogModalOpen}
-        setOpen={setAddLogModalOpen}
-        journeyId={journey.id}
-        tags={journey.tags}
-      />
       {activeLog && (
         <AddJourneyAchievementDialog
           open={addAchievementModalOpen}

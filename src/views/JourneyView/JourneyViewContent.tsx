@@ -1,11 +1,12 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useState, FC, useMemo } from "react";
+import { useState, FC, useMemo, MouseEvent } from "react";
 import {
   EditLogDialog,
   JourneyTimeLine,
   Showcase,
   JourneyItemsList,
   GeneralJourneyInfo,
+  AddLogDialog,
 } from "components";
 import { getJourney } from "store/features/journeys/selectors";
 import { Achievement } from "store/features/journeys/types";
@@ -20,12 +21,26 @@ export const JourneyViewContent: FC = () => {
   const [activeLogId, setActiveLogId] = useState<number>();
   const [activeAchievement, setActiveAchievement] = useState<Achievement>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
+  const [addLogModalOpen, setAddLogModalOpen] = useState(false);
+  const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
 
   const logsDictionary = useMemo(
     () => getLogsDictionary(journey?.logs || []),
     [journey?.logs]
   );
   const activeLog = activeLogId ? logsDictionary[activeLogId] : undefined;
+
+  const openAddLogDialog = (e: MouseEvent) => {
+    if (e.detail !== 0) {
+      setAddLogModalOpen(true);
+    }
+  };
+
+  const openAddAchievementDialog = (e: MouseEvent) => {
+    if (e.detail !== 0) {
+      setAddAchievementModalOpen(true);
+    }
+  };
 
   if (!journey) {
     return <Text>Loading...</Text>;
@@ -37,7 +52,7 @@ export const JourneyViewContent: FC = () => {
         flexDirection="column"
         alignItems="center"
         height="full"
-        pt={5}
+        py={5}
         px={`${JOURNEY_VIEW_X_PADDING}px`}
       >
         <Flex flex="1 1 0" width="full" minHeight={0}>
@@ -57,6 +72,8 @@ export const JourneyViewContent: FC = () => {
               activeLog={activeLog}
               setActiveLogId={setActiveLogId}
               tags={journey.tags}
+              openAddLogDialog={openAddLogDialog}
+              openAddAchievementDialog={openAddAchievementDialog}
             />
           </Flex>
         </Flex>
@@ -66,6 +83,8 @@ export const JourneyViewContent: FC = () => {
           setActiveLogId={setActiveLogId}
           setActiveAchievement={setActiveAchievement}
           setShiftDirection={setShiftDirection}
+          setAddAchievementModalOpen={setAddAchievementModalOpen}
+          addAchievementModalOpen={addAchievementModalOpen}
         />
       </Flex>
       {activeLog && (
@@ -75,6 +94,12 @@ export const JourneyViewContent: FC = () => {
           tags={journey.tags}
         />
       )}
+      <AddLogDialog
+        open={addLogModalOpen}
+        setOpen={setAddLogModalOpen}
+        journeyId={journey.id}
+        tags={journey.tags}
+      />
     </Flex>
   );
 };

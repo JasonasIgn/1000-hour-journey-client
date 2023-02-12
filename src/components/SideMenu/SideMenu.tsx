@@ -59,7 +59,7 @@ export const SideMenu: FC = () => {
         aria-label="open menu"
         size="lg"
         variant="sideMenuNotReactive"
-        mb="10vh"
+        mb="50px"
         mt="6px"
       >
         <Icon as={BurgerMenuClosedIcon} width="30px" height="30px" />
