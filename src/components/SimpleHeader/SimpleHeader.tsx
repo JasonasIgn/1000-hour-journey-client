@@ -16,8 +16,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
       padding={2.5}
       alignItems="center"
       justifyContent="space-between"
-      border="1px solid white"
-      borderLeft="none"
+      borderBottom="1px solid white"
     >
       <Heading
         whiteSpace="nowrap"
