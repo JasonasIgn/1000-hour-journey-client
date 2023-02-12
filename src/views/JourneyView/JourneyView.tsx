@@ -7,7 +7,7 @@ import {
   Showcase,
   JourneyItemsList,
   GeneralJourneyInfo,
-  JourneyTitle,
+  JourneyNavigation,
 } from "components";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { getJourney } from "store/features/journeys/selectors";
@@ -50,7 +50,9 @@ export const JourneyView: FC = () => {
 
   return (
     <Flex flexDirection="column" flex="1 1 0">
-      <JourneyTitle title={journey.title} />
+      <Flex px={`${JOURNEY_VIEW_X_PADDING}px`}>
+        <JourneyNavigation />
+      </Flex>
       <Flex
         flexDirection="column"
         alignItems="center"

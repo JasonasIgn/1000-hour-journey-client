@@ -14,6 +14,32 @@ export const Button: ComponentStyleConfig = {
         color: "brand.600",
       },
     },
+    sideMenu: {
+      fill: "white",
+      color: "white",
+      stroke: "white",
+      _hover: {
+        stroke: "brand.900",
+        fill: "brand.900",
+        color: "brand.900",
+        bg: "white",
+      },
+      _active: {
+        stroke: "brand.900",
+        fill: "brand.900",
+        color: "brand.900",
+        bg: "white",
+      },
+    },
+    sideMenuNotReactive: {
+      color: "white",
+    },
+  },
+  sizes: {
+    lg: {
+      height: "50px",
+      width: "50px",
+    },
   },
   defaultProps: {
     colorScheme: "brand",
