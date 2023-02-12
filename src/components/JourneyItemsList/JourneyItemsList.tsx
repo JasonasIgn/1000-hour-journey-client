@@ -52,14 +52,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   const isListEmpty = filteredLogs.length === 0;
 
   return (
-    <Flex
-      direction="column"
-      w="full"
-      mb={2}
-      p={3}
-      bg="brand.900"
-      borderRadius={2}
-    >
+    <Flex direction="column" w="full" p={3} bg="brand.900" borderRadius={2}>
       <Flex mb={3} align="center">
         <Heading size="md" color="gray.300">
           Logs

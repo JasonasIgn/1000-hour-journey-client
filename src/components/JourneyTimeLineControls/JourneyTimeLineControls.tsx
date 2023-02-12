@@ -5,6 +5,7 @@ import { Achievement, Journey } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 import { ShiftDirection } from "types";
+import { SHOWCASE_CARD_WIDTH_PX } from "components/ShowcaseCard/constants";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   activeLogId?: number;
@@ -65,32 +66,43 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   };
 
   return (
-    <Flex {...rest} alignItems="center" width="100%" justifyContent="center">
+    <Flex
+      {...rest}
+      alignItems="center"
+      justifyContent="center"
+      bg="brand.900"
+      p={4}
+      maxWidth={SHOWCASE_CARD_WIDTH_PX}
+      margin="auto"
+      w="full"
+    >
       <IconButton
+        size="lg"
+        variant="sideMenu"
         icon={<ArrowLeftIcon />}
         aria-label="Rewind to beggining"
         onClick={onRewindClick}
       />
       <IconButton
+        size="lg"
+        variant="sideMenu"
         ml={2}
         mr={2}
-        icon={
-          <Icon
-            as={RightArrowIcon}
-            fill="gray.300"
-            transform="rotate(180deg)"
-          />
-        }
+        icon={<Icon as={RightArrowIcon} transform="rotate(180deg)" />}
         aria-label="Go to previous log"
         onClick={onGoToPreviousClick}
       />
       <IconButton
+        size="lg"
+        variant="sideMenu"
         mr={2}
-        icon={<Icon as={RightArrowIcon} fill="gray.300" />}
+        icon={<Icon as={RightArrowIcon} />}
         aria-label="Go to next log"
         onClick={onGoToNextClick}
       />
       <IconButton
+        size="lg"
+        variant="sideMenu"
         icon={<ArrowRightIcon />}
         aria-label="Skip to end"
         onClick={onSkipClick}

@@ -5,6 +5,7 @@ import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch } from "store/hooks";
 import { getImageSrc } from "utils/helpers";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
+import { SHOWCASE_CARD_WIDTH_PX } from "./constants";
 import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
 
 interface ShowcaseCardProps extends FlexProps {
@@ -25,16 +26,16 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
     <Flex
-      border="1px solid"  
+      border="1px solid"
       borderColor="brand.900"
       flexDirection="column"
       position="absolute"
-      height="80%"
+      height="95%"
       width="70%"
       bg="brand.900"
       borderRadius="2px"
       transition="opacity 0.6s, transform 0.6s"
-      maxWidth={440}
+      maxWidth={SHOWCASE_CARD_WIDTH_PX}
       {...rest}
     >
       <Flex

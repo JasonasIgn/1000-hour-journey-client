@@ -27,11 +27,7 @@ import {
   getLogBeginningsDictionary,
 } from "views/JourneyView/utils";
 import { getFinalScale, getZoomXPosition } from "./utils";
-import {
-  AddJourneyAchievementDialog,
-  JourneyTimeLineControls,
-  TimelineRuler,
-} from "components";
+import { AddJourneyAchievementDialog, TimelineRuler } from "components";
 import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
 import {
@@ -166,17 +162,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   return (
     <Flex width="100%" flexDirection="column">
-      <JourneyTimeLineControls
-        height="40px"
-        py={2}
-        boxSizing="content-box"
-        activeLogId={activeLog?.id}
-        activeAchievement={activeAchievement}
-        logBegginingsMap={logBegginingsMap}
-        journey={journey}
-        setActiveLogId={setActiveLogId}
-        setShiftDirection={setShiftDirection}
-      />
       <Box bg="brand.900" borderRadius="2px">
         <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;

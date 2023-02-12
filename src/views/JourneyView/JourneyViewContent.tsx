@@ -7,12 +7,13 @@ import {
   JourneyItemsList,
   GeneralJourneyInfo,
   AddLogDialog,
+  JourneyTimeLineControls,
 } from "components";
 import { getJourney } from "store/features/journeys/selectors";
 import { Achievement } from "store/features/journeys/types";
 import { useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
-import { getLogsDictionary } from "./utils";
+import { getLogBeginningsDictionary, getLogsDictionary } from "./utils";
 import { JOURNEY_VIEW_X_PADDING } from "./constants";
 
 export const JourneyViewContent: FC = () => {
@@ -28,6 +29,12 @@ export const JourneyViewContent: FC = () => {
     () => getLogsDictionary(journey?.logs || []),
     [journey?.logs]
   );
+
+  const logBegginingsMap = useMemo(
+    () => getLogBeginningsDictionary(journey?.logs || []),
+    [journey?.logs]
+  );
+
   const activeLog = activeLogId ? logsDictionary[activeLogId] : undefined;
 
   const openAddLogDialog = (e: MouseEvent) => {
@@ -55,15 +62,23 @@ export const JourneyViewContent: FC = () => {
         py={5}
         px={`${JOURNEY_VIEW_X_PADDING}px`}
       >
-        <Flex flex="1 1 0" width="full" minHeight={0}>
+        <Flex flex="1 1 0" width="full" minHeight={0} pb={4}>
           <Flex width="25%">
             <GeneralJourneyInfo journey={journey} />
           </Flex>
-          <Flex width="50%">
+          <Flex width="50%" direction="column" px={4}>
             <Showcase
               item={activeAchievement || activeLog}
               shiftDirection={shiftDirection}
               defaultJourneyImageSrc={journey.mediaUrl}
+            />
+            <JourneyTimeLineControls
+              activeLogId={activeLog?.id}
+              activeAchievement={activeAchievement}
+              logBegginingsMap={logBegginingsMap}
+              journey={journey}
+              setActiveLogId={setActiveLogId}
+              setShiftDirection={setShiftDirection}
             />
           </Flex>
           <Flex width="25%">
