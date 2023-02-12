@@ -41,7 +41,7 @@ export const SideMenu: FC = () => {
 
   useEffect(() => {
     setTabIndex(
-      navigationItems.findIndex((item) => location.pathname.includes(item.path))
+      navigationItems.findIndex((item) => location.pathname === item.path)
     );
   }, [location]);
 

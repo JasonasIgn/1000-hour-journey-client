@@ -13,7 +13,8 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title }) => {
       width="100%"
       height={`${HEADER_HEIGHT_PX}px`}
       minHeight={`${HEADER_HEIGHT_PX}px`}
-      padding={2.5}
+      px={4}
+      py={2.5}
       alignItems="center"
       justifyContent="space-between"
       borderBottom="1px solid white"
