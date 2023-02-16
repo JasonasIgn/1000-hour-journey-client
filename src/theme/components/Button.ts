@@ -22,13 +22,11 @@ export const Button: ComponentStyleConfig = {
         stroke: "text.primary",
         fill: "text.primary",
         color: "text.primary",
-        // bg: "gray.300",
       },
       _active: {
         stroke: "text.primary",
         fill: "text.primary",
         color: "text.primary",
-        // bg: "gray.300",
       },
     },
     sideMenuNotReactive: {

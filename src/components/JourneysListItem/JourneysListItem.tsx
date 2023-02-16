@@ -31,7 +31,6 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
 }) => (
   <Link to={`/journeys/${journey.id}`}>
     <Paper
-      level={1}
       position="relative"
       height={180}
       padding={4}
