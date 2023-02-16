@@ -36,7 +36,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       padding={4}
       cursor="pointer"
       _hover={{
-        boxShadow: 'inset 0px 0px 15px 3px var(--chakra-colors-paper-600)',
+        boxShadow: "inset 0px 0px 15px 3px var(--chakra-colors-paper-600)",
       }}
       transition="box-shadow 0.15s"
       {...rootBoxProps}
@@ -107,14 +107,14 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         </Flex>
       </Flex>
       <IconButton
-        icon={<Icon as={EditIcon} width="22px" height="22px" fill="gray.300" />}
+        icon={<Icon as={EditIcon} width="22px" height="22px" fill="white" />}
         aria-label="edit"
         position="absolute"
-        borderRadius="50%"
         right="-20px"
-        color="brand.700"
+        color="paper.700"
         border="1px solid"
         top="-10px"
+        variant="rounded"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

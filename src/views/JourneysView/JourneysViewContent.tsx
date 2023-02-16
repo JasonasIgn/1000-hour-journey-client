@@ -31,7 +31,7 @@ export const JourneysViewContent: FC = () => {
   }, [dispatch, listLoadingState]);
 
   return (
-    <Container maxW="8xl" pt={5}>
+    <Container maxW="4xl" pt={5}>
       <JourneysList
         journeys={list}
         rootBoxProps={{ mt: 10, pb: 120 }}
