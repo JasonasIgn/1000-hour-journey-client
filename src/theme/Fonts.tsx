@@ -4,7 +4,7 @@ const Fonts = () => (
   <Global
     styles={`
         @font-face {
-            font-family: 'chakra_petchbold';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-bold-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-bold-webfont.woff') format('woff');
             font-weight: 700;
@@ -12,7 +12,7 @@ const Fonts = () => (
         }
       
         @font-face {
-            font-family: 'chakra_petchbold_italic';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-bolditalic-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-bolditalic-webfont.woff') format('woff');
             font-weight: 700;
@@ -20,7 +20,7 @@ const Fonts = () => (
         }
 
         @font-face {
-            font-family: 'chakra_petchsemibold';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-semibold-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-semibold-webfont.woff') format('woff');
             font-weight: 600;
@@ -28,7 +28,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchsemibold_italic';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-semibolditalic-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-semibolditalic-webfont.woff') format('woff');
             font-weight: 600;
@@ -36,7 +36,7 @@ const Fonts = () => (
         }
 
         @font-face {
-            font-family: 'chakra_petchmedium';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-medium-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-medium-webfont.woff') format('woff');
             font-weight: 500;
@@ -44,7 +44,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchmedium_italic';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-mediumitalic-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-mediumitalic-webfont.woff') format('woff');
             font-weight: 500;
@@ -52,7 +52,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchitalic';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-italic-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-italic-webfont.woff') format('woff');
             font-weight: 400;
@@ -60,7 +60,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchregular';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-regular-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-regular-webfont.woff') format('woff');
             font-weight: 400;
@@ -68,7 +68,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchlight';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-light-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-light-webfont.woff') format('woff');
             font-weight: 300;
@@ -76,7 +76,7 @@ const Fonts = () => (
         }
         
         @font-face {
-            font-family: 'chakra_petchlight_italic';
+            font-family: 'chakra_petch';
             src: url('./fonts/chakrapetch-lightitalic-webfont.woff2') format('woff2'),
                 url('./fonts/chakrapetch-lightitalic-webfont.woff') format('woff');
             font-weight: 300;

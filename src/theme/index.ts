@@ -9,8 +9,8 @@ const theme = extendTheme({
     ...components,
   },
   fonts: {
-    heading: `chakra_petchregular, sans-serif`,
-    body: `chakra_petchregular, sans-serif`,
+    heading: `chakra_petch, sans-serif`,
+    body: `chakra_petch, sans-serif`,
   },
   styles,
 });
