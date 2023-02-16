@@ -16,6 +16,7 @@ import Logo from "resources/logo.png";
 import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
+import { Paper } from "components/Paper";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -29,13 +30,10 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   onEditClick,
 }) => (
   <Link to={`/journeys/${journey.id}`}>
-    <Flex
+    <Paper
+      level={1}
       position="relative"
       height={180}
-      bg="brand.700"
-      border="2px solid"
-      borderColor="brand.600"
-      borderRadius={20}
       padding={4}
       cursor="pointer"
       _hover={{
@@ -47,14 +45,19 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       <Flex
         width={144}
         minWidth={144}
+        maxHeight={144}
         height="full"
         alignItems="center"
         justifyContent="center"
         bg="black"
+        border="1px solid"
+        borderRadius="20px"
+        borderColor="border"
+        overflow="hidden"
       >
         <Image
           key={journey.updatedAt.toString()}
-          filter="brightness(0.7)"
+          filter="brightness(0.8)"
           src={
             journey?.mediaUrl
               ? `${getImageSrc(
@@ -66,8 +69,8 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         />
       </Flex>
       <Box ml={5}>
-        <Heading size="lg">{journey.title}</Heading>
-        <Text fontSize="sm">{journey.description}</Text>
+        <Heading size="md">{journey.title}</Heading>
+        <Text fontSize="md">{journey.description}</Text>
       </Box>
       <Flex
         ml="auto"
@@ -113,6 +116,6 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           onEditClick();
         }}
       />
-    </Flex>
+    </Paper>
   </Link>
 );

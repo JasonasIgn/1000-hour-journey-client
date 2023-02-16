@@ -58,7 +58,7 @@ export const SideMenu: FC = () => {
       minW="70px"
       height="100vh"
       borderColor="gray.500"
-      bg="brand.900"
+      bg="brand.700"
       flexDirection="column"
       alignItems="center"
     >

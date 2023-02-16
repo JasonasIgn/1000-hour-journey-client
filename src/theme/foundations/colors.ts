@@ -11,6 +11,24 @@ const colors = {
     800: "#02131a",
     900: "#000a0e",
   },
+  paper: {
+    50: "#ccccce",
+    100: "#b4b4b6",
+    200: "#9c9c9f",
+    300: "#858588",
+    400: "#6e6e73",
+    500: "#58585d",
+    600: "#434349",
+    700: "#303035",
+    800: "#1d1d23",
+    900: "#0A0A0B",
+  },
+  
+  border: "#4F4F62",
+  text: {
+    primary: "white",
+    secondary: "#A4A4C0",
+  },
 };
 
 export default colors;

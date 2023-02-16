@@ -15,20 +15,20 @@ export const Button: ComponentStyleConfig = {
       },
     },
     sideMenu: {
-      fill: "gray.200",
-      color: "gray.200",
-      stroke: "gray.200",
+      fill: "gray.300",
+      color: "gray.300",
+      stroke: "gray.300",
       _hover: {
         stroke: "brand.900",
         fill: "brand.900",
         color: "brand.900",
-        bg: "gray.200",
+        bg: "gray.300",
       },
       _active: {
         stroke: "brand.900",
         fill: "brand.900",
         color: "brand.900",
-        bg: "gray.200",
+        bg: "gray.300",
       },
     },
     sideMenuNotReactive: {
