@@ -1,19 +1,15 @@
 import { useEffect, useState, FC } from "react";
 import { fetchJourneysListEffect } from "store/features/journeys/effects";
-import { Container } from "@chakra-ui/react";
+import { Button, Container, Flex } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import {
   getJourneysList,
   getJourneysListLoadingState,
 } from "store/features/journeys/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import {
-  JourneysList,
-  FabButton,
-  AddJourneyDialog,
-  EditJourneyDialog,
-} from "components";
+import { JourneysList, AddJourneyDialog, EditJourneyDialog } from "components";
 import { JourneyListItem } from "store/features/journeys/types";
+import { Paper } from "components/Paper";
 
 export const JourneysViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -31,20 +27,34 @@ export const JourneysViewContent: FC = () => {
   }, [dispatch, listLoadingState]);
 
   return (
-    <Container maxW="4xl" pt={5}>
-      <JourneysList
-        journeys={list}
-        rootBoxProps={{ mt: 10, pb: 120 }}
-        openEditJourneyDialog={setEditingJourney}
-      />
-      <FabButton onClick={() => setModalOpen(true)}>
-        <AddIcon />
-      </FabButton>
-      <AddJourneyDialog open={modalOpen} setOpen={setModalOpen} />
-      <EditJourneyDialog
-        journey={editingJourney}
-        handleClose={() => setEditingJourney(null)}
-      />
+    <Container maxW="6xl" py={5} display="flex" flexDirection="column">
+      <Paper direction="column" overflow="hidden">
+        <Flex
+          px={10}
+          pt={5}
+          pb={5}
+          borderBottom="1px solid"
+          borderColor="border"
+        >
+          <Button
+            ml="auto"
+            leftIcon={<AddIcon />}
+            onClick={() => setModalOpen(true)}
+          >
+            ADD JOURNEY
+          </Button>
+        </Flex>
+
+        <JourneysList
+          journeys={list}
+          openEditJourneyDialog={setEditingJourney}
+        />
+        <AddJourneyDialog open={modalOpen} setOpen={setModalOpen} />
+        <EditJourneyDialog
+          journey={editingJourney}
+          handleClose={() => setEditingJourney(null)}
+        />
+      </Paper>
     </Container>
   );
 };

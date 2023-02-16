@@ -1,21 +1,19 @@
 import { FC, Dispatch, SetStateAction } from "react";
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { JourneyListItem } from "store/features/journeys/types";
 import { JourneysListItem } from "components";
 
 interface JourneysListProps {
   journeys: JourneyListItem[];
-  rootBoxProps?: BoxProps;
   openEditJourneyDialog: Dispatch<SetStateAction<JourneyListItem | null>>;
 }
 
 export const JourneysList: FC<JourneysListProps> = ({
   journeys,
-  rootBoxProps,
   openEditJourneyDialog,
 }) => {
   return (
-    <Box {...rootBoxProps}>
+    <Flex px={10} py={5} direction="column" overflow="overlay">
       {journeys?.map((item) => (
         <JourneysListItem
           journey={item}
@@ -24,6 +22,6 @@ export const JourneysList: FC<JourneysListProps> = ({
           onEditClick={() => openEditJourneyDialog(item)}
         />
       ))}
-    </Box>
+    </Flex>
   );
 };

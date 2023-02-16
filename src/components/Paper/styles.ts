@@ -11,7 +11,7 @@ const getLevelStyles = (level: PaperProps["level"]): SystemStyleObject => {
     case 2:
       return {
         background: "paper.700",
-        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-paper-600)'
+        // boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-paper-600)'
       };
     case 3:
       return {

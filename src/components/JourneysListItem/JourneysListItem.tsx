@@ -29,17 +29,18 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   rootBoxProps,
   onEditClick,
 }) => (
-  <Link to={`/journeys/${journey.id}`}>
+  <Flex as={Link} to={`/journeys/${journey.id}`} {...rootBoxProps}>
     <Paper
+      w="full"
+      level={2}
       position="relative"
       height={180}
       padding={4}
       cursor="pointer"
       _hover={{
-        boxShadow: "inset 0px 0px 15px 3px var(--chakra-colors-paper-600)",
+        boxShadow: "inset 0px 0px 10px 3px var(--chakra-colors-paper-600)",
       }}
       transition="box-shadow 0.15s"
-      {...rootBoxProps}
     >
       <Flex
         width={144}
@@ -82,9 +83,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           <CircularProgress
             thickness={6}
             value={journey.totalHours / 10}
-            color="red"
+            color="purple"
             size="90px"
-            trackColor="paper.700"
+            trackColor="paper.600"
           >
             <CircularProgressLabel color="white" fontSize="md" mt="2px">
               {Math.round(journey.totalHours * 10) / 100}%
@@ -122,5 +123,5 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         }}
       />
     </Paper>
-  </Link>
+  </Flex>
 );
