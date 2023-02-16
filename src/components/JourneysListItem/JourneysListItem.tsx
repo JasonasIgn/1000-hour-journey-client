@@ -8,8 +8,8 @@ import {
   Heading,
   Text,
   Image,
-  IconButton,
   Icon,
+  IconButton,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
@@ -69,7 +69,22 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         />
       </Flex>
       <Box ml={5}>
-        <Heading size="md">{journey.title}</Heading>
+        <Flex>
+          <Heading size="md">{journey.title}</Heading>
+          <IconButton
+            icon={
+              <Icon as={EditIcon} width="22px" height="22px" fill="white" />
+            }
+            aria-label="edit"
+            color="paper.700"
+            variant="solid"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onEditClick();
+            }}
+          />
+        </Flex>
         <Text fontSize="md">{journey.description}</Text>
       </Box>
       <Flex
@@ -107,21 +122,6 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           </Text>
         </Flex>
       </Flex>
-      <IconButton
-        icon={<Icon as={EditIcon} width="22px" height="22px" fill="white" />}
-        aria-label="edit"
-        position="absolute"
-        right="-20px"
-        color="paper.700"
-        border="1px solid"
-        top="-10px"
-        variant="rounded"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onEditClick();
-        }}
-      />
     </Paper>
   </Flex>
 );

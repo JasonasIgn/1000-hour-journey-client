@@ -1,6 +1,6 @@
 import { useEffect, useState, FC } from "react";
 import { fetchJourneysListEffect } from "store/features/journeys/effects";
-import { Button, Container, Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import {
   getJourneysList,
@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { JourneysList, AddJourneyDialog, EditJourneyDialog } from "components";
 import { JourneyListItem } from "store/features/journeys/types";
 import { Paper } from "components/Paper";
+import { Button } from "components/Button";
 
 export const JourneysViewContent: FC = () => {
   const dispatch = useAppDispatch();
