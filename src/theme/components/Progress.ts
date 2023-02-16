@@ -3,13 +3,13 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const Progress: ComponentStyleConfig = {
   baseStyle: {
     track: {
-      bg: "gray.400",
+      bg: "paper.600",
     },
     filledTrack: {
-      bg: "brand.500",
+      bg: "red",
     },
   },
   defaultProps: {
-    colorScheme: "brand",
+    colorScheme: "paper",
   },
 };

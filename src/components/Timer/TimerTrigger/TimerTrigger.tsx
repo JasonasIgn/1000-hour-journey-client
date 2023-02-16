@@ -17,11 +17,15 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
       >
         <Icon
           as={TimerIcon}
-          fill="gray.300"
+          fill="text.secondary"
           w="28px"
           h="28px"
           cursor="pointer"
           userSelect="none"
+          _hover={{
+            fill: "text.primary",
+          }}
+          transition="fill 0.1s"
           sx={{
             ".timer-arrow": {
               animationPlayState: isRunning ? "running" : "paused",

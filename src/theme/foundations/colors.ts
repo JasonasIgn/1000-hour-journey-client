@@ -23,7 +23,12 @@ const colors = {
     800: "#1d1d23",
     900: "#0A0A0B",
   },
-  
+  yellow: "#EEB74C",
+  pink: "#FF8BF3",
+  red: "#FF7777",
+  blue: "#9CB2FF",
+  green: "#75F4EF",
+  purple: "#695DB6",
   border: "#4F4F62",
   text: {
     primary: "white",

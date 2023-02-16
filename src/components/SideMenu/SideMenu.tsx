@@ -1,11 +1,4 @@
-import {
-  Divider,
-  Flex,
-  Icon,
-  IconButton,
-  Tooltip,
-  Image,
-} from "@chakra-ui/react";
+import { Divider, Icon, IconButton, Tooltip, Image } from "@chakra-ui/react";
 import { FC, useEffect, useState, ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { logoutEffect } from "store/features/auth/effects";
@@ -16,6 +9,7 @@ import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Timer } from "components/Timer";
+import { Paper } from "components/Paper";
 
 interface NavigationItem {
   path: string;
@@ -53,7 +47,7 @@ export const SideMenu: FC = () => {
   }, [location]);
 
   return (
-    <Flex
+    <Paper
       width="70px"
       minW="70px"
       height="100vh"
@@ -61,6 +55,12 @@ export const SideMenu: FC = () => {
       bg="brand.700"
       flexDirection="column"
       alignItems="center"
+      sx={{
+        borderRadius: 0,
+        borderLeft: "none",
+        borderTop: "none",
+        borderBottom: "none",
+      }}
     >
       <Image
         src={Logo}
@@ -108,6 +108,6 @@ export const SideMenu: FC = () => {
       >
         <Icon as={LogOutIcon} width="32px" height="32px" />
       </IconButton>
-    </Flex>
+    </Paper>
   );
 };

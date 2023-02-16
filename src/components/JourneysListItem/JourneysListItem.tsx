@@ -37,9 +37,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       padding={4}
       cursor="pointer"
       _hover={{
-        transform: "scale(1.005)",
+        boxShadow: 'inset 0px 0px 15px 3px var(--chakra-colors-paper-600)',
       }}
-      transition="transform 0.1s"
+      transition="box-shadow 0.15s"
       {...rootBoxProps}
     >
       <Flex
@@ -83,17 +83,23 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           <CircularProgress
             thickness={6}
             value={journey.totalHours / 10}
-            color="brand.300"
+            color="red"
             size="90px"
-            trackColor="gray.400"
+            trackColor="paper.700"
           >
-            <CircularProgressLabel color="white" fontSize="xl">
+            <CircularProgressLabel color="white" fontSize="md" mt="2px">
               {Math.round(journey.totalHours * 10) / 100}%
             </CircularProgressLabel>
           </CircularProgress>
         </Box>
         <Flex flexDirection="column">
-          <Heading size="sm" as="h5" textAlign="center">
+          <Heading
+            size="sm"
+            as="h5"
+            textAlign="center"
+            fontWeight={600}
+            fontSize="15px"
+          >
             Hours spent
           </Heading>
           <Text textAlign="center" fontWeight={600}>

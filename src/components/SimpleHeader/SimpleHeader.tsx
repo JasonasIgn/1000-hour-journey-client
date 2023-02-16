@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
+import { Paper } from "components/Paper";
 
 export const HEADER_HEIGHT_PX = 60;
 
@@ -10,7 +11,7 @@ interface SimpleHeaderProps {
 
 export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
   return (
-    <Flex
+    <Paper
       width="100%"
       height={`${HEADER_HEIGHT_PX}px`}
       minHeight={`${HEADER_HEIGHT_PX}px`}
@@ -19,6 +20,12 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
       alignItems="center"
       justifyContent="space-between"
       bg="brand.700"
+      sx={{
+        borderRadius: 0,
+        borderLeft: "none",
+        borderTop: "none",
+        borderRight: "none",
+      }}
     >
       <Heading
         whiteSpace="nowrap"
@@ -31,6 +38,6 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
         {title}
       </Heading>
       {children}
-    </Flex>
+    </Paper>
   );
 };
