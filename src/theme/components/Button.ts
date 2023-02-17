@@ -60,7 +60,6 @@ export const Button: ComponentStyleConfig = {
         transition: "width 0.07s, height 0.07s",
       },
       _hover: {
-        borderColor: "white",
         bgColor: "paper.500",
       },
       _active: {
@@ -80,6 +79,86 @@ export const Button: ComponentStyleConfig = {
         _before: {
           width: "16px",
           height: "16px",
+        },
+      },
+    },
+    solidSm: {
+      bg: "paper.600",
+      color: "text.primary",
+      transition: "background 0.07s",
+      _before: {
+        position: "absolute",
+        width: "6px",
+        height: "6px",
+        borderColor: "inherit",
+        borderStyle: "solid",
+        content: "''",
+        top: 0,
+        left: 0,
+        borderWidth: "2px 0 0 2px",
+        borderTopLeftRadius: "4px",
+        transition: "width 0.07s, height 0.07s",
+      },
+      _after: {
+        position: "absolute",
+        width: "6px",
+        height: "6px",
+        borderColor: "inherit",
+        borderStyle: "solid",
+        content: "''",
+        top: 0,
+        right: 0,
+        borderWidth: "2px 2px 0 0",
+        borderTopRightRadius: "4px",
+        transition: "width 0.07s, height 0.07s",
+      },
+      ">:first-child:before": {
+        position: "absolute",
+        width: "6px",
+        height: "6px",
+        borderColor: "inherit",
+        borderStyle: "solid",
+        content: "''",
+        bottom: 0,
+        right: 0,
+        borderWidth: "0 2px 2px 0",
+        borderBottomRightRadius: "4px",
+        transition: "width 0.07s, height 0.07s",
+      },
+
+      ">:first-child:after": {
+        position: "absolute",
+        width: "6px",
+        height: "6px",
+        borderColor: "inherit",
+        borderStyle: "solid",
+        content: "''",
+        bottom: 0,
+        left: 0,
+        borderWidth: "0 0 2px 2px",
+        borderBottomLeftRadius: "4px",
+        transition: "width 0.07s, height 0.07s",
+      },
+      _hover: {
+        bgColor: "paper.500",
+      },
+      _active: {
+        bg: "paper.500",
+        ">:first-child:before": {
+          width: "8px",
+          height: "8px",
+        },
+        ">:first-child:after": {
+          width: "8px",
+          height: "8px",
+        },
+        _after: {
+          width: "8px",
+          height: "8px",
+        },
+        _before: {
+          width: "8px",
+          height: "8px",
         },
       },
     },
@@ -131,6 +210,11 @@ export const Button: ComponentStyleConfig = {
     },
     md: {
       fontSize: "15px",
+    },
+    sm: {
+      height: "24px",
+      width: "24px",
+      minWidth: "24px",
     },
   },
   defaultProps: {

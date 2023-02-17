@@ -1,15 +1,12 @@
 import { FC } from "react";
 import {
-  Box,
-  CircularProgress,
-  CircularProgressLabel,
   Flex,
   FlexProps,
   Heading,
   Text,
   Image,
   Icon,
-  IconButton,
+  Progress,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
@@ -17,6 +14,7 @@ import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
 import { Paper } from "components/Paper";
+import { IconButton } from "components/IconButton";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -34,7 +32,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       w="full"
       level={2}
       position="relative"
-      height={180}
+      height={160}
       padding={4}
       cursor="pointer"
       _hover={{
@@ -43,9 +41,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       transition="box-shadow 0.15s"
     >
       <Flex
-        width={144}
-        minWidth={144}
-        maxHeight={144}
+        width={126}
+        minWidth={126}
+        maxHeight={126}
         height="full"
         alignItems="center"
         justifyContent="center"
@@ -68,57 +66,45 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           maxHeight="full"
         />
       </Flex>
-      <Box ml={5}>
-        <Flex>
-          <Heading size="md">{journey.title}</Heading>
-          <IconButton
-            icon={
-              <Icon as={EditIcon} width="22px" height="22px" fill="white" />
-            }
-            aria-label="edit"
-            color="paper.700"
-            variant="solid"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onEditClick();
-            }}
-          />
+      <Flex ml={5} direction="column" flexGrow={1}>
+        <Flex direction="column">
+          <Flex>
+            <Heading size="md">{journey.title}</Heading>
+            <IconButton
+              ml="auto"
+              size="sm"
+              variant="solidSm"
+              borderColor="yellow"
+              color="yellow"
+              icon={
+                <Icon as={EditIcon} width="14px" height="14px" fill="yellow" />
+              }
+              aria-label="edit"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onEditClick();
+              }}
+            />
+          </Flex>
+          <Text fontSize="md">{journey.description}</Text>
         </Flex>
-        <Text fontSize="md">{journey.description}</Text>
-      </Box>
-      <Flex
-        ml="auto"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-        minWidth={92}
-      >
-        <Box height="90px">
-          <CircularProgress
-            thickness={6}
+        <Flex mt="auto" position="relative">
+          <Progress
             value={journey.totalHours / 10}
+            size="lg"
+            width="100%"
             color="purple"
-            size="90px"
-            trackColor="paper.600"
+            hasStripe
+          />
+          <Text
+            position="absolute"
+            left="calc(50% - 20px)"
+            lineHeight="18px"
+            fontSize="11px"
+            color="white"
           >
-            <CircularProgressLabel color="white" fontSize="md" mt="2px">
-              {Math.round(journey.totalHours * 10) / 100}%
-            </CircularProgressLabel>
-          </CircularProgress>
-        </Box>
-        <Flex flexDirection="column">
-          <Heading
-            size="sm"
-            as="h5"
-            textAlign="center"
-            fontWeight={600}
-            fontSize="15px"
-          >
-            Hours spent
-          </Heading>
-          <Text textAlign="center" fontWeight={600}>
-            {journey.totalHours}
+            {Math.round(journey.totalHours * 10) / 100}%
           </Text>
         </Flex>
       </Flex>
