@@ -1,6 +1,5 @@
 import {
   Divider,
-  Flex,
   Icon,
   IconButton,
   Tooltip,
@@ -16,6 +15,7 @@ import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Timer } from "components/Timer";
+import { Paper } from "components/Paper";
 
 interface NavigationItem {
   path: string;
@@ -53,14 +53,18 @@ export const SideMenu: FC = () => {
   }, [location]);
 
   return (
-    <Flex
+    <Paper
       width="70px"
       minW="70px"
       height="100vh"
-      borderColor="gray.500"
-      bg="brand.700"
       flexDirection="column"
       alignItems="center"
+      sx={{
+        borderRadius: 0,
+        borderBottom: "none",
+        borderLeft: "none",
+        borderTop: "none",
+      }}
     >
       <Image
         src={Logo}
@@ -108,6 +112,6 @@ export const SideMenu: FC = () => {
       >
         <Icon as={LogOutIcon} width="32px" height="32px" />
       </IconButton>
-    </Flex>
+    </Paper>
   );
 };

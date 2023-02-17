@@ -5,16 +5,16 @@ const getLevelStyles = (level: PaperProps["level"]): SystemStyleObject => {
   switch (level) {
     case 1:
       return {
-        background: "paper.800",
-        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-paper-700)'
+        background: "brand.800",
+        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-brand-700)'
       };
     case 2:
       return {
-        background: "paper.700",
+        background: "brand.700",
       };
     case 3:
       return {
-        background: "paper.600",
+        background: "brand.600",
       };
     default:
       return {};
@@ -27,7 +27,7 @@ export const getPaperSx = (level: PaperProps["level"]): SystemStyleObject => {
   return {
     ...levelStyles,
     border: "1px solid",
-    borderColor: "border",
+    borderColor: "brand.500",
     borderRadius: "20px",
   };
 };

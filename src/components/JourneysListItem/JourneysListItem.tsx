@@ -37,9 +37,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       padding={4}
       cursor="pointer"
       _hover={{
-        transform: "scale(1.005)",
+        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-brand-600)'
       }}
-      transition="transform 0.1s"
+      transition="box-shadow 0.1s"
       {...rootBoxProps}
     >
       <Flex
@@ -52,7 +52,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         bg="black"
         border="1px solid"
         borderRadius="20px"
-        borderColor="border"
+        borderColor="brand.500"
         overflow="hidden"
       >
         <Image

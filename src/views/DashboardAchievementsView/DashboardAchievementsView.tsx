@@ -7,7 +7,7 @@ export const DashboardAchievementsView: FC = () => {
   return (
     <>
       <SimpleHeader title="Achievements" />
-      <Flex overflow="auto" bg="brand.800">
+      <Flex overflow="auto" bg="brand.900">
         <DashboardAchievementsViewContent />
       </Flex>
     </>

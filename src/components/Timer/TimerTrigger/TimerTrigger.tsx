@@ -17,7 +17,11 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
       >
         <Icon
           as={TimerIcon}
-          fill="gray.300"
+          fill="gray.400"
+          _hover={{
+            fill: "gray.100",
+          }}
+          transition="fill 0.1s"
           w="28px"
           h="28px"
           cursor="pointer"
