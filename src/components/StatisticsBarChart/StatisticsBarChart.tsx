@@ -44,12 +44,12 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
           <Bar
             dataKey="hoursSpent"
             name="Hours Spent"
-            fill="var(--chakra-colors-brand-200)"
+            fill="var(--chakra-colors-purple)"
           />
         </BarChart>
         <Tabs
           orientation="vertical"
-          variant="soft-rounded"
+          variant="line"
           defaultIndex={0}
           onChange={(idx) => setDisplayUnit(displayUnits[idx].unit)}
         >

@@ -15,11 +15,15 @@ export const Tabs: ComponentStyleConfig = {
       },
     },
     line: {
+      tablist: {
+        border: "none",
+      },
       tab: {
-        background: "brand.700",
-        color: "gray.400",
+        background: "paper.800",
+        color: "text.secondary",
+        border: "none",
         _hover: {
-          color: "white",
+          color: "text.primary",
         },
         _focusVisible: {
           outline: "none",
@@ -27,13 +31,13 @@ export const Tabs: ComponentStyleConfig = {
           border: "none",
         },
         _selected: {
-          background: "brand.900",
-          color: "gray.300",
+          background: "paper.700",
+          color: "text.primary",
         },
       },
     },
   },
   defaultProps: {
-    colorScheme: "brand",
+    colorScheme: "paper",
   },
 };

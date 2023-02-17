@@ -1,5 +1,6 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Flex, IconButton, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { IconButton } from "components/IconButton";
 import { FC, SetStateAction, Dispatch } from "react";
 import { DateQuery } from "views/DashboardLogsView/types";
 
@@ -16,8 +17,10 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
     <Flex mb={2}>
       <Flex direction="column">
         <Text textAlign="center">Year</Text>
-        <Flex height={50} alignItems="center">
+        <Flex alignItems="center">
           <IconButton
+            variant="solidSm"
+            size="sm"
             icon={<ArrowBackIcon />}
             aria-label="Back in years"
             onClick={() => {
@@ -30,6 +33,8 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
             </Text>
           </Flex>
           <IconButton
+            variant="solidSm"
+            size="sm"
             icon={<ArrowForwardIcon />}
             aria-label="Forward in years"
             onClick={() => {
@@ -38,10 +43,12 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
           />
         </Flex>
       </Flex>
-      <Flex direction="column" ml={3}>
+      <Flex direction="column" ml={8}>
         <Text textAlign="center">Month</Text>
-        <Flex height={50} alignItems="center">
+        <Flex alignItems="center">
           <IconButton
+            variant="solidSm"
+            size="sm"
             icon={<ArrowBackIcon />}
             aria-label="Back in months"
             onClick={() => {
@@ -56,6 +63,8 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
             <Text color="gray.100">{query.month}</Text>
           </Flex>
           <IconButton
+            variant="solidSm"
+            size="sm"
             icon={<ArrowForwardIcon />}
             aria-label="Forward in months"
             onClick={() => {

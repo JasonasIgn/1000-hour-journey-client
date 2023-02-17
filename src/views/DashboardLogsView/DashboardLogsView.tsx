@@ -7,7 +7,7 @@ export const DashboardLogsView: FC = () => {
   return (
     <>
       <SimpleHeader title="Logs" />
-      <Flex bg="brand.800" height="full">
+      <Flex bg="paper.900" height="full">
         <DashboardLogsViewContent />
       </Flex>
     </>

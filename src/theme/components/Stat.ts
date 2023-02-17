@@ -6,7 +6,8 @@ export const Stat: ComponentStyleConfig = {
       padding: 2,
       borderRadius: 8,
       border: "1px solid",
-      borderColor: "brand.200",
+      borderColor: "border",
+      bg: "paper.800",
     },
   },
 };
