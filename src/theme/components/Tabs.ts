@@ -16,7 +16,7 @@ export const Tabs: ComponentStyleConfig = {
     },
     line: {
       tab: {
-        background: "brand.700",
+        background: "brand.800",
         color: "gray.400",
         _hover: {
           color: "white",
