@@ -3,7 +3,6 @@ import { ReactComponent as UploadIcon } from "resources/upload.svg";
 import {
   Box,
   BoxProps,
-  Button,
   Flex,
   FormControl,
   FormControlProps,
@@ -15,6 +14,7 @@ import {
 import { InputFieldProps } from "components";
 import { UploadFieldImagePreview } from "./UploadFieldImagePreview";
 import { getImageSrc } from "utils/helpers";
+import { Button } from "components/Button";
 
 interface UploadFieldProps extends InputFieldProps {
   value?: string;

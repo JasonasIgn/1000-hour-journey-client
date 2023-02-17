@@ -3,13 +3,13 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const Modal: ComponentStyleConfig = {
   baseStyle: {
     dialog: {
-      bgColor: "brand.900",
+      bgColor: "paper.900",
       border: "2px solid",
-      borderColor: "brand.600",
+      borderColor: "border",
     },
     header: {
-      fontSize: "26px",
-      color: "gray.400",
+      fontSize: "27px",
+      textTransform: "uppercase",
     },
     dialogContainer: {
       alignItems: "center",
@@ -17,12 +17,12 @@ export const Modal: ComponentStyleConfig = {
     closeButton: {
       top: "15px",
       border: "1px solid",
-      borderColor: "brand.400",
-      color: "brand.400",
+      borderColor: "text.secondary",
+      color: "text.secondary",
       _hover: {
-        color: "brand.300",
-        borderColor: "brand.300",
-        bgColor: "brand.800",
+        color: "text.secondary",
+        borderColor: "text.secondary",
+        bgColor: "paper.800",
       },
     },
   },

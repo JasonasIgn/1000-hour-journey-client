@@ -21,7 +21,9 @@ export const TextAreaField: FC<TextAreaFieldProps> = forwardRef(
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
         <Textarea {...rest} ref={ref as any} />
-        {errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
+        {errorMessage && (
+          <FormErrorMessage color="red">{errorMessage}</FormErrorMessage>
+        )}
       </FormControl>
     );
   }

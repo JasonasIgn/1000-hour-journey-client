@@ -3,8 +3,8 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const Input: ComponentStyleConfig = {
   baseStyle: {
     field: {
-      color: "gray.400",
-      borderColor: "gray.400",
+      color: "text.secondary",
+      borderColor: "text.secondary",
       "::-webkit-calendar-picker-indicator": {
         filter: "invert(100%)",
         cursor: "pointer",
@@ -12,6 +12,7 @@ export const Input: ComponentStyleConfig = {
     },
   },
   defaultProps: {
-    focusBorderColor: "brand.400",
+    focusBorderColor: "white",
+    errorBorderColor: "red",
   },
 };

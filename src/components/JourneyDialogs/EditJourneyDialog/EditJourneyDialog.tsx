@@ -1,5 +1,4 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -17,6 +16,7 @@ import { InputField, TextAreaField, UploadField } from "components";
 import { JourneyFormData } from "../types";
 import { journeyFormValidation } from "../validation";
 import { JourneyListItem } from "store/features/journeys/types";
+import { Button } from "components/Button";
 
 interface EditJourneyDialogProps {
   handleClose: () => void;
@@ -91,7 +91,12 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
           <Button mr={3} onClick={handleClose}>
             Close
           </Button>
-          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
+          <Button
+            color="green"
+            variant="ghost"
+            type="submit"
+            isDisabled={isSubmitting}
+          >
             Save
           </Button>
         </ModalFooter>

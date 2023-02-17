@@ -22,7 +22,9 @@ export const InputField: FC<InputFieldProps> = forwardRef(
       <FormControl isInvalid={Boolean(errorMessage)} {...formControlProps}>
         <FormLabel>{label}</FormLabel>
         <Input {...rest} ref={ref as any} />
-        {errorMessage && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
+        {errorMessage && (
+          <FormErrorMessage color="red">{errorMessage}</FormErrorMessage>
+        )}
       </FormControl>
     );
   }

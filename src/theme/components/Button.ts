@@ -3,6 +3,7 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
+      textTransform: "uppercase",
       bg: "paper.600",
       color: "text.primary",
       transition: "background 0.07s",
@@ -83,6 +84,7 @@ export const Button: ComponentStyleConfig = {
       },
     },
     solidSm: {
+      textTransform: "uppercase",
       bg: "paper.600",
       color: "text.primary",
       transition: "background 0.07s",
@@ -176,9 +178,14 @@ export const Button: ComponentStyleConfig = {
       },
     },
     ghost: {
-      color: "brand.100",
+      textTransform: "uppercase",
+      bg: "initial",
       _hover: {
-        color: "brand.600",
+        bg: "initial",
+        filter: "invert(1)",
+      },
+      _active: {
+        bg: "initial",
       },
     },
     sideMenu: {

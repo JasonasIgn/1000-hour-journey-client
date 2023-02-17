@@ -1,5 +1,4 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,6 +15,7 @@ import { useAppDispatch } from "store/hooks";
 import { InputField, TextAreaField, UploadField } from "components";
 import { JourneyFormData } from "../types";
 import { journeyFormValidation } from "../validation";
+import { Button } from "components/Button";
 
 interface AddJourneyDialogProps {
   setOpen: (open: boolean) => void;
@@ -78,7 +78,7 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
           <Button mr={3} onClick={() => setOpen(false)}>
             Close
           </Button>
-          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
+          <Button variant="ghost" color="green" type="submit" isDisabled={isSubmitting}>
             Create
           </Button>
         </ModalFooter>
