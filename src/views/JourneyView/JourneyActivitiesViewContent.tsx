@@ -4,6 +4,7 @@ import {
   Container,
   Flex,
   Heading,
+  Image,
   Table,
   TableContainer,
   Tbody,
@@ -12,16 +13,18 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import Logo from "resources/logo.png";
 import { Paper } from "components/Paper";
 import { getJourney } from "store/features/journeys/selectors";
 import { useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
-import { Tag } from "store/features/journeys/types";
+import { Journey, Tag } from "store/features/journeys/types";
 import { getActivityHoursMap } from "./utils";
+import { getImageSrc } from "utils/helpers";
 
 export const JourneyActivitiesViewContent: FC = () => {
-  const journey = useAppSelector(getJourney);
+  const journey = useAppSelector(getJourney) as Journey;
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Tag>();
   const isEmptyState = journey?.tags.length === 0;
@@ -29,8 +32,6 @@ export const JourneyActivitiesViewContent: FC = () => {
   const activitiesSpentTimeMap = useMemo(() => {
     return getActivityHoursMap(journey?.logs || []);
   }, [journey?.logs]);
-
-  console.log(activitiesSpentTimeMap);
 
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full">
@@ -45,10 +46,11 @@ export const JourneyActivitiesViewContent: FC = () => {
           </Button>
         </Flex>
         <TableContainer w="full">
-          <Table size="md">
+          <Table size="lg">
             <Thead>
               <Tr>
-                <Th>Activity</Th>
+                <Th width="50px" p={0} />
+                <Th pl={5}>Activity</Th>
                 <Th>Description</Th>
                 <Th>Completed</Th>
                 <Th isNumeric>Hours spent</Th>
@@ -64,7 +66,20 @@ export const JourneyActivitiesViewContent: FC = () => {
                     setActivityToEdit(activity);
                   }}
                 >
-                  <Td>{activity.name}</Td>
+                  <Td width="50px" p={0}>
+                    <Image
+                      width="50px"
+                      filter="brightness(0.8)"
+                      src={
+                        activity?.mediaUrl
+                          ? `${getImageSrc(
+                              activity.mediaUrl
+                            )}?${activity.updatedAt.toString()}` // Prevent caching
+                          : Logo
+                      }
+                    />
+                  </Td>
+                  <Td pl={5}>{activity.name}</Td>
                   <Td whiteSpace="normal">{activity.description || ""}</Td>
                   <Td>{activity.completed ? "Yes" : "No"}</Td>
                   <Td isNumeric>

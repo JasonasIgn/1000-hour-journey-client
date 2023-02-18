@@ -61,7 +61,6 @@ export const getActivityHoursMap = (logs: Log[]) => {
     if (log.tags.length === 0) {
       return;
     }
-    console.log(log);
     const timePerTag = log.hoursSpent / log.tags.length;
     log.tags.forEach((tag) => {
       const activityId = tag.id.toString();

@@ -4,10 +4,10 @@ import { FC } from "react";
 import { setViewedImageSrc } from "store/features/app/slice";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch } from "store/hooks";
-import { getImageSrc } from "utils/helpers";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
 import { SHOWCASE_CARD_WIDTH_PX } from "./constants";
 import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
+import { getInitialImageSrc } from "./utils";
 
 interface ShowcaseCardProps extends FlexProps {
   item?: LogExtended | Achievement;
@@ -20,9 +20,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const itemImageSrc = item?.mediaUrl
-    ? `${getImageSrc(item.mediaUrl)}?${item.updatedAt.toString()}`
-    : getImageSrc(defaultJourneyImageSrc);
+  const itemImageSrc = getInitialImageSrc(item, defaultJourneyImageSrc);
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
