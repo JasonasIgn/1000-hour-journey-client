@@ -18,7 +18,6 @@ export const JourneyItemsListItem = forwardRef(
     ref
   ) => (
     <Paper
-      level={2}
       w="full"
       border="1px solid"
       borderColor="brand.200"
@@ -26,7 +25,8 @@ export const JourneyItemsListItem = forwardRef(
       minHeight="40px"
       height="40px"
       mb={2}
-      p={1}
+      px={2}
+      py={1}
       align="center"
       cursor="pointer"
       bg={active ? "brand.700" : "transparent"}

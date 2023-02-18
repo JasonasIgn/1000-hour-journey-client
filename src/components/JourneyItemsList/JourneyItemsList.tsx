@@ -100,6 +100,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
         height="full"
         borderTop="1px solid"
         borderColor="brand.600"
+        pt={2}
       >
         {isListEmpty && (
           <Flex justifyContent="center" my="auto">
