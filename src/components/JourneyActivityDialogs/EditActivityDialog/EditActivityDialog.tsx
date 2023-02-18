@@ -22,6 +22,7 @@ import {
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
 import { Tag } from "store/features/journeys/types";
+import { SwitchField } from "components/SwitchField";
 
 interface EditActivityDialogProps {
   handleClose: () => void;
@@ -76,6 +77,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
       reset({
         name: activity?.name,
         description: activity?.description || undefined,
+        completed: activity?.completed || false,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,6 +108,13 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
                 label="Description"
                 {...register("description")}
                 errorMessage={errors.description?.message}
+              />
+            </GridItem>
+            <GridItem colSpan={2}>
+              <SwitchField
+                label="Completed"
+                {...register("completed")}
+                errorMessage={errors.completed?.message}
               />
             </GridItem>
             <GridItem colSpan={2}>

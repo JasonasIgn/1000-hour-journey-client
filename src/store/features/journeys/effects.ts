@@ -216,7 +216,7 @@ export const updateJourneyActivityEffect = createAsyncThunk(
         apiUrls.updateActivity
           .replace("{journeyId}", journeyId.toString())
           .replace("{activityId}", activityId.toString()),
-        { ...rest, media: media?.[0] },
+        { ...rest, completed: Number(rest.completed), media: media?.[0] },
         {
           withCredentials: true,
           headers: {
