@@ -1,10 +1,10 @@
-import { Tag } from "store/features/journeys/types";
+import { Activity } from "store/features/journeys/types";
 import { Option } from "types";
 
-export const getTagOption = (tag: Tag): Option => ({
-  value: tag.id,
-  label: tag.name,
+export const getActivityOption = (activity: Activity): Option => ({
+  value: activity.id,
+  label: activity.name,
 });
 
-export const getTagOptions = (tags: Tag[]): Option[] =>
-  tags.filter((activity) => !activity.completed).map(getTagOption);
+export const getActivityOptions = (activities: Activity[]): Option[] =>
+  activities.filter((activity) => !activity.completed).map(getActivityOption);

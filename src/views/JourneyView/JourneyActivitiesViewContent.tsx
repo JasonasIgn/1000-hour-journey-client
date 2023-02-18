@@ -19,14 +19,14 @@ import { getJourney } from "store/features/journeys/selectors";
 import { useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
-import { Journey, Tag } from "store/features/journeys/types";
+import { Journey, Activity } from "store/features/journeys/types";
 import { getActivityHoursMap } from "./utils";
 import { getImageSrc } from "utils/helpers";
 
 export const JourneyActivitiesViewContent: FC = () => {
   const journey = useAppSelector(getJourney) as Journey;
   const [addDialogOpen, setAddDialogOpen] = useState(false);
-  const [activityToEdit, setActivityToEdit] = useState<Tag>();
+  const [activityToEdit, setActivityToEdit] = useState<Activity>();
   const isEmptyState = journey?.tags.length === 0;
 
   const activitiesSpentTimeMap = useMemo(() => {

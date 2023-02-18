@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
 import { TextAreaField, InputField, UploadField } from "components";
-import { createJourneyTagEffect } from "store/features/journeys/effects";
+import { createJourneyActivityEffect } from "store/features/journeys/effects";
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
 
@@ -43,7 +43,7 @@ export const AddActivityDialog: FC<AddActivityDialogProps> = ({
 
   const onSubmit = async (data: JourneyActivityFormData) => {
     try {
-      await dispatch(createJourneyTagEffect({ data, journeyId })).unwrap();
+      await dispatch(createJourneyActivityEffect({ data, journeyId })).unwrap();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);

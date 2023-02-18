@@ -21,13 +21,13 @@ import {
 } from "store/features/journeys/effects";
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
-import { Tag } from "store/features/journeys/types";
+import { Activity } from "store/features/journeys/types";
 import { SwitchField } from "components/SwitchField";
 
 interface EditActivityDialogProps {
   handleClose: () => void;
   journeyId: number;
-  activity?: Tag;
+  activity?: Activity;
 }
 
 export const EditActivityDialog: FC<EditActivityDialogProps> = ({

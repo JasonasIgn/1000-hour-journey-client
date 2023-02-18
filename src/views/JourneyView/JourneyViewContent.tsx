@@ -86,7 +86,7 @@ export const JourneyViewContent: FC = () => {
               logs={journey.logs}
               activeLog={activeLog}
               setActiveLogId={setActiveLogId}
-              tags={journey.tags}
+              activities={journey.tags}
               openAddLogDialog={openAddLogDialog}
               openAddAchievementDialog={openAddAchievementDialog}
             />
@@ -106,14 +106,14 @@ export const JourneyViewContent: FC = () => {
         <EditLogDialog
           journeyId={journey.id}
           log={activeLog}
-          tags={journey.tags}
+          activities={journey.tags}
         />
       )}
       <AddLogDialog
         open={addLogModalOpen}
         setOpen={setAddLogModalOpen}
         journeyId={journey.id}
-        tags={journey.tags}
+        activities={journey.tags}
       />
     </Flex>
   );

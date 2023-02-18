@@ -61,15 +61,15 @@ export const getActivityHoursMap = (logs: Log[]) => {
     if (log.tags.length === 0) {
       return;
     }
-    const timePerTag = log.hoursSpent / log.tags.length;
+    const timePerActivity = log.hoursSpent / log.tags.length;
     log.tags.forEach((tag) => {
       const activityId = tag.id.toString();
       if (data[activityId] !== undefined) {
         data[activityId] =
-          Math.round((data[activityId] + timePerTag) * 100) / 100;
+          Math.round((data[activityId] + timePerActivity) * 100) / 100;
         return;
       }
-      data[activityId] = Math.round(timePerTag * 100) / 100;
+      data[activityId] = Math.round(timePerActivity * 100) / 100;
     });
   });
   return data;

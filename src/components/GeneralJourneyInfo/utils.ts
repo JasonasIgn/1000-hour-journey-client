@@ -1,7 +1,7 @@
 import { Log } from "store/features/journeys/types";
 
 interface DataType {
-  [tagName: string]: {
+  [activityName: string]: {
     name: string;
     value: number;
   };
@@ -22,16 +22,16 @@ export const getPieChartData = (logs: Log[]) => {
       }
       return;
     }
-    const timePerTag = log.hoursSpent / log.tags.length;
-    log.tags.forEach((tag) => {
-      if (data[tag.name] !== undefined) {
-        data[tag.name].value =
-          Math.round((data[tag.name].value + timePerTag) * 100) / 100;
+    const timePerActivity = log.hoursSpent / log.tags.length;
+    log.tags.forEach((activity) => {
+      if (data[activity.name] !== undefined) {
+        data[activity.name].value =
+          Math.round((data[activity.name].value + timePerActivity) * 100) / 100;
         return;
       }
-      data[tag.name] = {
-        name: tag.name,
-        value: Math.round(timePerTag * 100) / 100,
+      data[activity.name] = {
+        name: activity.name,
+        value: Math.round(timePerActivity * 100) / 100,
       };
     });
   });
