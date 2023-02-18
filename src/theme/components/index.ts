@@ -11,3 +11,4 @@ export * from "./Textarea";
 export * from "./Stat";
 export * from "./Menu";
 export * from "./Tag";
+export * from "./Table";

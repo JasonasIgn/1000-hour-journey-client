@@ -1,10 +1,10 @@
-import { Flex } from "@chakra-ui/layout";
 import { GlobalImageViewer } from "components/GlobalImageViewer";
 import { FC } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { DashboardLogsView, JourneysView, JourneyView } from "views";
 import { DashboardAchievementsView } from "views/DashboardAchievementsView";
+import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitiesViewContent";
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
 
 interface AuthRoutesProps {}
@@ -16,7 +16,10 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
       <Routes>
         <Route path="/journeys">
           <Route path=":journeyId" element={<JourneyView />}>
-            <Route path="activities" element={<Flex>as </Flex>} />
+            <Route
+              path="activities"
+              element={<JourneyActivitiesViewContent />}
+            />
             <Route index element={<JourneyViewContent />} />
           </Route>
           <Route index element={<JourneysView />} />
