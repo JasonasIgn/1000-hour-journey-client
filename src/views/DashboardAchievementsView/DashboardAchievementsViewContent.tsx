@@ -79,11 +79,11 @@ export const DashboardAchievementsViewContent: FC = () => {
                   key={achievement.id}
                   className="vertical-timeline-element--work"
                   contentStyle={{
-                    background: "var(--chakra-colors-brand-700)",
+                    background: "var(--chakra-colors-brand-600)",
                     color: "#fff",
                   }}
                   contentArrowStyle={{
-                    borderRight: "7px solid var(--chakra-colors-brand-700)",
+                    borderRight: "7px solid var(--chakra-colors-brand-600)",
                   }}
                   date={format(
                     new Date(achievement.loggedOnDate),

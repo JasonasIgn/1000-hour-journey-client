@@ -3,6 +3,7 @@ import { Flex, Heading, Progress, Text } from "@chakra-ui/react";
 import { Journey } from "store/features/journeys/types";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { getPieChartData } from "./utils";
+import { Paper } from "components/Paper";
 
 const COLORS = [
   "#182747",
@@ -59,14 +60,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
 
   return (
     <Flex w="full" direction="column">
-      <Flex
-        direction="column"
-        p={3}
-        bg="brand.900"
-        border="1px solid"
-        borderColor="brand.600"
-        borderRadius={2}
-      >
+      <Paper direction="column" p={3} sx={{ borderRadius: 0 }}>
         <Flex alignItems="center" mb={3}>
           <Heading size="md" color="gray.300">
             Description
@@ -75,17 +69,9 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
         <Flex>
           <Text>{journey.description}</Text>
         </Flex>
-      </Flex>
+      </Paper>
 
-      <Flex
-        direction="column"
-        mt="2vh"
-        p={3}
-        bg="brand.900"
-        border="1px solid"
-        borderColor="brand.600"
-        borderRadius={2}
-      >
+      <Paper direction="column" mt="2vh" p={3} sx={{ borderRadius: 0 }}>
         <Flex alignItems="center" mb={3}>
           <Heading size="md" color="gray.300">
             Progress
@@ -103,16 +89,13 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
           <Progress value={journey.totalHours / 10} size="lg" width="100%" />
           <Text>{Math.round(journey.totalHours * 10) / 100}%</Text>
         </Flex>
-      </Flex>
-      <Flex
+      </Paper>
+      <Paper
         direction="column"
         mt="2vh"
         flexGrow={1}
         p={3}
-        bg="brand.900"
-        border="1px solid"
-        borderColor="brand.600"
-        borderRadius={2}
+        sx={{ borderRadius: 0 }}
       >
         <Flex alignItems="center" mb={3}>
           <Heading size="md" color="gray.300" whiteSpace="nowrap">
@@ -151,7 +134,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
             </ResponsiveContainer>
           )}
         </Flex>
-      </Flex>
+      </Paper>
     </Flex>
   );
 };

@@ -14,6 +14,7 @@ import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Option } from "types";
 import { useAppDispatch } from "store/hooks";
+import { Paper } from "components/Paper";
 
 interface JourneyItemsListProps {
   logs: Log[];
@@ -52,15 +53,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   const isListEmpty = filteredLogs.length === 0;
 
   return (
-    <Flex
-      direction="column"
-      w="full"
-      p={3}
-      bg="brand.900"
-      borderRadius={2}
-      border="1px solid"
-      borderColor="brand.600"
-    >
+    <Paper direction="column" w="full" p={3} sx={{ borderRadius: 0 }}>
       <Flex mb={3} align="center">
         <Heading size="md" color="gray.300">
           Logs
@@ -123,6 +116,6 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           />
         ))}
       </Flex>
-    </Flex>
+    </Paper>
   );
 };

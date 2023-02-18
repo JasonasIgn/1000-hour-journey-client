@@ -36,6 +36,7 @@ import {
   TIMELINE_INNER_WIDTH_PX,
   TIMELINE_X_PADDING_PX,
 } from "./constants";
+import { Paper } from "components/Paper";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -162,12 +163,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
 
   return (
     <Flex width="100%" flexDirection="column">
-      <Box
-        bg="brand.900"
-        borderRadius="2px"
-        border="1px solid"
-        borderColor="brand.600"
-      >
+      <Paper sx={{ borderRadius: 0 }}>
         <Text ml={6} mt={6} position="absolute">
           Date: &nbsp;
           {activeLog
@@ -271,7 +267,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             </Slider>
           </Box>
         </QuickPinchZoom>
-      </Box>
+      </Paper>
       {activeLog && (
         <AddJourneyAchievementDialog
           open={addAchievementModalOpen}

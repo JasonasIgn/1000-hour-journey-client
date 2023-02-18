@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { FlexProps, IconButton, Flex, Icon } from "@chakra-ui/react";
+import { FlexProps, IconButton, Icon } from "@chakra-ui/react";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
 import { Achievement, Journey } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 import { ShiftDirection } from "types";
 import { SHOWCASE_CARD_WIDTH_PX } from "components/ShowcaseCard/constants";
+import { Paper } from "components/Paper";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   activeLogId?: number;
@@ -66,17 +67,15 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   };
 
   return (
-    <Flex
+    <Paper
       {...rest}
       alignItems="center"
       justifyContent="center"
-      bg="brand.900"
       p={4}
       maxWidth={SHOWCASE_CARD_WIDTH_PX}
       margin="auto"
       w="full"
-      border="1px solid"
-      borderColor="brand.600"
+      sx={{ borderRadius: 0 }}
     >
       <IconButton
         size="lg"
@@ -109,6 +108,6 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
         aria-label="Skip to end"
         onClick={onSkipClick}
       />
-    </Flex>
+    </Paper>
   );
 };
