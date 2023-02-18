@@ -13,6 +13,8 @@ export interface Tag {
   journeyId: number;
   name: string;
   updatedAt: Date;
+  description: string | null;
+  completed: boolean;
 }
 
 export interface Log {

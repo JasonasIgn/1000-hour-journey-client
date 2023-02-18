@@ -175,7 +175,7 @@ export const createJourneyTagEffect = createAsyncThunk(
     data,
     journeyId,
   }: {
-    data: { name: string };
+    data: { name: string; description?: string };
     journeyId: number;
   }) => {
     try {
