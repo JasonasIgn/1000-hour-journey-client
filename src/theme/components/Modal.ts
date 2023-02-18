@@ -6,6 +6,7 @@ export const Modal: ComponentStyleConfig = {
       bgColor: "brand.900",
       border: "2px solid",
       borderColor: "brand.600",
+      boxShadow: "inset 0px 0px 20px 10px var(--chakra-colors-brand-800)",
     },
     header: {
       fontSize: "26px",

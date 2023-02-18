@@ -60,22 +60,15 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
         </Heading>
         <Flex ml="auto">
           <IconButton
-            variant="sideMenuNotRiactive"
-            icon={
-              <Icon
-                as={AchievementIcon}
-                width={22}
-                height={22}
-                stroke="gray.300"
-              />
-            }
+            variant="sideMenu"
+            icon={<Icon as={AchievementIcon} width={22} height={22} />}
             aria-label="Add log"
             onClick={openAddAchievementDialog}
             size="sm"
           />
           <IconButton
-            variant="sideMenuNotRiactive"
-            icon={<Icon as={LogIcon} width={22} height={22} fill="gray.300" />}
+            variant="sideMenu"
+            icon={<Icon as={LogIcon} width={22} height={22} />}
             aria-label="Add log"
             onClick={openAddLogDialog}
             size="sm"

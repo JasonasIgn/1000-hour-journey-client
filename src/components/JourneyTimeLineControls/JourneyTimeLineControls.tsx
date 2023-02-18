@@ -71,10 +71,10 @@ export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
       {...rest}
       alignItems="center"
       justifyContent="center"
-      p={4}
+      p={2}
       maxWidth={SHOWCASE_CARD_WIDTH_PX}
       margin="auto"
-      w="full"
+      w="75%"
       sx={{ borderRadius: 0 }}
     >
       <IconButton
