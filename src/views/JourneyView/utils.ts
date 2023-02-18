@@ -50,3 +50,28 @@ export const getAchievementsDictionary = (
   });
   return achievementsDictionary;
 };
+
+interface ActivityHoursMap {
+  [activityId: string]: number;
+}
+
+export const getActivityHoursMap = (logs: Log[]) => {
+  const data: ActivityHoursMap = {};
+  logs.forEach((log) => {
+    if (log.tags.length === 0) {
+      return;
+    }
+    console.log(log);
+    const timePerTag = log.hoursSpent / log.tags.length;
+    log.tags.forEach((tag) => {
+      const activityId = tag.id.toString();
+      if (data[activityId] !== undefined) {
+        data[activityId] =
+          Math.round((data[activityId] + timePerTag) * 100) / 100;
+        return;
+      }
+      data[activityId] = Math.round(timePerTag * 100) / 100;
+    });
+  });
+  return data;
+};

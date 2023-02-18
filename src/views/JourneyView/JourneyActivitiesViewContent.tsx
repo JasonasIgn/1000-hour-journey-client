@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useMemo } from "react";
 import {
   Button,
   Container,
@@ -18,12 +18,20 @@ import { useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
 import { Tag } from "store/features/journeys/types";
+import { getActivityHoursMap } from "./utils";
 
 export const JourneyActivitiesViewContent: FC = () => {
+  const journey = useAppSelector(getJourney);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Tag>();
-  const journey = useAppSelector(getJourney);
   const isEmptyState = journey?.tags.length === 0;
+
+  const activitiesSpentTimeMap = useMemo(() => {
+    return getActivityHoursMap(journey?.logs || []);
+  }, [journey?.logs]);
+
+  console.log(activitiesSpentTimeMap);
+
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full">
       <Paper pt={10} px={10} pb={10} direction="column" h="full">
@@ -59,7 +67,9 @@ export const JourneyActivitiesViewContent: FC = () => {
                   <Td>{activity.name}</Td>
                   <Td whiteSpace="normal">{activity.description || ""}</Td>
                   <Td>{activity.completed ? "Yes" : "No"}</Td>
-                  <Td isNumeric>25.4</Td>
+                  <Td isNumeric>
+                    {`${activitiesSpentTimeMap[activity.id.toString()] || 0}`}
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
