@@ -1,11 +1,13 @@
 import { Flex, FlexProps, Heading } from "@chakra-ui/react";
+import { Paper } from "components/Paper";
 import { FC } from "react";
 import { setViewedImageSrc } from "store/features/app/slice";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch } from "store/hooks";
-import { getImageSrc } from "utils/helpers";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
+import { SHOWCASE_CARD_WIDTH_PX } from "./constants";
 import { LogShowcaseCardContent } from "./LogShowcaseCardContent";
+import { getInitialImageSrc } from "./utils";
 
 interface ShowcaseCardProps extends FlexProps {
   item?: LogExtended | Achievement;
@@ -18,32 +20,28 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const itemImageSrc = item?.mediaUrl
-    ? `${getImageSrc(item.mediaUrl)}?${item.updatedAt.toString()}`
-    : getImageSrc(defaultJourneyImageSrc);
+  const itemImageSrc = getInitialImageSrc(item, defaultJourneyImageSrc);
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
   return (
-    <Flex
+    <Paper
       flexDirection="column"
       position="absolute"
-      height="80%"
-      width="70%"
-      bg="brand.800"
-      borderRadius="20px"
+      height="95%"
+      width="75%"
       transition="opacity 0.6s, transform 0.6s"
-      maxWidth={420}
+      maxWidth={SHOWCASE_CARD_WIDTH_PX}
+      sx={{ borderRadius: 0 }}
       {...rest}
     >
       <Flex
         top={0}
         right={0}
         height="40%"
-        borderTopRightRadius="20px"
-        borderTopLeftRadius="20px"
         width="100%"
         justifyContent="center"
         backgroundImage={itemImageSrc}
+        filter="brightness(0.8)"
         backgroundPosition="center"
         backgroundSize="cover"
         onClick={() => {
@@ -60,7 +58,9 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
       >
         {!item && (
           <Flex justifyContent="center" alignItems="center" h="full" mb="4vh">
-            <Heading size="lg">This could be your first log :)</Heading>
+            <Heading size="lg" textAlign="center">
+              This could be your first log :)
+            </Heading>
           </Flex>
         )}
         {isItemLog && <LogShowcaseCardContent log={item as LogExtended} />}
@@ -68,6 +68,6 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
           <AchievementShowcaseCardContent achievement={item as Achievement} />
         )}
       </Flex>
-    </Flex>
+    </Paper>
   );
 };

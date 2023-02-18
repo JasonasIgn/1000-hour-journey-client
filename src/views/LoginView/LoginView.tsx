@@ -5,12 +5,7 @@ import { LoginForm } from "components";
 export const LoginView: FC = () => {
   return (
     <Container maxW="6xl">
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        height="calc(100vh - 60px)"
-        pt={5}
-      >
+      <Flex flexDirection="column" alignItems="center" pt="10vh">
         <LoginForm />
       </Flex>
     </Container>

@@ -24,27 +24,27 @@ import {
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
 import {
-  createJourneyTagEffect,
+  createJourneyActivityEffect,
   updateJourneyLogEffect,
 } from "store/features/journeys/effects";
 import { useEffect, FC } from "react";
 import { dateFormats } from "utils/constants";
-import { LogExtended, Tag } from "store/features/journeys/types";
+import { LogExtended, Activity } from "store/features/journeys/types";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
 import { getEditLogDialogOpen } from "store/features/journey/selectors";
-import { getTagOption, getTagOptions } from "../utils";
+import { getActivityOption, getActivityOptions } from "../utils";
 import { Option } from "types";
 
 interface EditLogDialogProps {
   journeyId: number;
   log: LogExtended;
-  tags: Tag[];
+  activities: Activity[];
 }
 
 export const EditLogDialog: FC<EditLogDialogProps> = ({
   journeyId,
   log,
-  tags,
+  activities,
 }) => {
   const dispatch = useAppDispatch();
   const open = useAppSelector(getEditLogDialogOpen);
@@ -66,7 +66,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
       hoursSpent: log.hoursSpent,
       description: log.description,
-      tags: getTagOptions(log.tags),
+      tags: getActivityOptions(log.tags),
     },
     resolver: yupResolver(journeyLogFormValidation),
   });
@@ -87,7 +87,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
         hoursSpent: log.hoursSpent,
         description: log.description,
-        tags: getTagOptions(log.tags),
+        tags: getActivityOptions(log.tags),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,15 +96,15 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
   const onCreateOption = async (value: string) => {
     try {
       const currentValue = getValues("tags");
-      const createdTag = await dispatch(
-        createJourneyTagEffect({
+      const createdActivity = await dispatch(
+        createJourneyActivityEffect({
           data: { name: value },
           journeyId,
         })
       ).unwrap();
-      setValue("tags", [...currentValue, getTagOption(createdTag)]);
+      setValue("tags", [...currentValue, getActivityOption(createdActivity)]);
     } catch (e) {
-      console.error("Error creating tag", e);
+      console.error("Error creating activity", e);
     }
   };
 
@@ -151,10 +151,10 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
             </GridItem>
             <GridItem colSpan={2}>
               <CreatableSelectField<Option>
-                options={getTagOptions(tags)}
+                options={getActivityOptions(activities)}
                 control={control as any}
                 name="tags"
-                label="Tags"
+                label="Activities"
                 onCreateOption={onCreateOption}
               />
             </GridItem>

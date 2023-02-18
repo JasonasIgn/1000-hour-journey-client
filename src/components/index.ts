@@ -1,7 +1,7 @@
 export * from "./AddJourneyAchivementDialog";
 export * from "./JourneyDialogs";
 export * from "./FabButton";
-export * from "./Header";
+export * from "./SimpleHeader";
 export * from "./InputField";
 export * from "./JourneyLogDialogs";
 export * from "./JourneyTimeLine";
@@ -24,3 +24,4 @@ export * from "./GeneralJourneyInfo";
 export * from "./JourneyItemsList";
 export * from "./LoginForm";
 export * from "./GlobalImageViewer";
+export * from "./JourneyNavigation";

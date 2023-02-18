@@ -26,28 +26,28 @@ import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
 import {
   createJourneyLogEffect,
-  createJourneyTagEffect,
+  createJourneyActivityEffect,
 } from "store/features/journeys/effects";
 import { getLastJourneyLog } from "store/features/journeys/selectors";
 import { dateFormats } from "utils/constants";
 import { getTimerTime } from "store/features/timer/selectors";
 import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
-import { Tag } from "store/features/journeys/types";
-import { getTagOption, getTagOptions } from "../utils";
+import { Activity } from "store/features/journeys/types";
+import { getActivityOption, getActivityOptions } from "../utils";
 import { Option } from "types";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
   open: boolean;
   journeyId: number;
-  tags: Tag[];
+  activities: Activity[];
 }
 
 export const AddLogDialog: FC<AddLogDialogProps> = ({
   open,
   setOpen,
   journeyId,
-  tags,
+  activities,
 }) => {
   const dispatch = useAppDispatch();
   const lastLog = useAppSelector(getLastJourneyLog);
@@ -105,15 +105,15 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   const onCreateOption = async (value: string) => {
     try {
       const currentValue = getValues("tags");
-      const createdTag = await dispatch(
-        createJourneyTagEffect({
+      const createdActivity = await dispatch(
+        createJourneyActivityEffect({
           data: { name: value },
           journeyId,
         })
       ).unwrap();
-      setValue("tags", [...currentValue, getTagOption(createdTag)]);
+      setValue("tags", [...currentValue, getActivityOption(createdActivity)]);
     } catch (e) {
-      console.error("Error creating tag", e);
+      console.error("Error creating activity", e);
     }
   };
 
@@ -167,10 +167,10 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
             </GridItem>
             <GridItem colSpan={2}>
               <CreatableSelectField<Option>
-                options={getTagOptions(tags)}
+                options={getActivityOptions(activities)}
                 control={control as any}
                 name="tags"
-                label="Tags"
+                label="Activities"
                 onCreateOption={onCreateOption}
               />
             </GridItem>

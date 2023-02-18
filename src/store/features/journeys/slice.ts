@@ -3,10 +3,12 @@ import { LoadingState } from "types";
 import {
   createJourneyEffect,
   createJourneyLogEffect,
-  createJourneyTagEffect,
+  createJourneyActivityEffect,
+  deleteJourneyActivityEffect,
   fetchJourneyEffect,
   fetchJourneysListEffect,
   logJourneyAchievementEffect,
+  updateJourneyActivityEffect,
   updateJourneyEffect,
   updateJourneyLogEffect,
 } from "./effects";
@@ -90,11 +92,36 @@ export const journeysSlice = createSlice({
           state.list[updatedLogIndex] = action.payload;
         }
       })
-      .addCase(createJourneyTagEffect.fulfilled, (state, { payload }) => {
+      .addCase(createJourneyActivityEffect.fulfilled, (state, { payload }) => {
         if (state.journey && payload) {
           state.journey.tags.push(payload);
         }
-      });
+      })
+      .addCase(updateJourneyActivityEffect.fulfilled, (state, { payload }) => {
+        if (state.journey && payload) {
+          const updatedActivityIndex = state.journey.tags.findIndex(
+            (activity) => activity.id === payload?.id
+          );
+          state.journey.tags[updatedActivityIndex] = payload;
+        }
+      })
+      .addCase(
+        deleteJourneyActivityEffect.fulfilled,
+        (state, { meta: { arg } }) => {
+          const { activityId } = arg;
+          if (state.journey) {
+            state.journey.tags = state.journey.tags.filter(
+              (activity) => activity.id !== activityId
+            );
+            state.journey.logs = state.journey.logs.map((log) => {
+              return {
+                ...log,
+                tags: log.tags.filter((activity) => activity.id !== activityId),
+              };
+            });
+          }
+        }
+      );
   },
 });
 

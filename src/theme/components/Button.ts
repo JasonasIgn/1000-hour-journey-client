@@ -8,11 +8,46 @@ export const Button: ComponentStyleConfig = {
         bgColor: "brand.300",
       },
     },
+    warning: {
+      bgColor: "red.700",
+      color: "gray.300",
+      _hover: {
+        bgColor: "red.500",
+      },
+    },
     ghost: {
       color: "brand.100",
       _hover: {
         color: "brand.600",
       },
+    },
+    sideMenu: {
+      transition: "stroke 0.1s, fill 0.1s, color 0.1s",
+      fill: "gray.400",
+      color: "gray.400",
+      stroke: "gray.400",
+      _hover: {
+        stroke: "gray.100",
+        fill: "gray.100",
+        color: "gray.100",
+      },
+      _active: {
+        stroke: "gray.100",
+        fill: "gray.100",
+        color: "gray.100",
+      },
+    },
+    sideMenuNotReactive: {
+      color: "gray.400",
+      _hover: {
+        color: "gray.100",
+      },
+    },
+  },
+  sizes: {
+    lg: {
+      height: "50px",
+      width: "50px",
     },
   },
   defaultProps: {

@@ -8,6 +8,7 @@ import { LoginFormData } from "./types";
 import { loginFormValidation } from "./validation";
 import { loginEffect } from "store/features/auth/effects";
 import { version } from "version";
+import { Paper } from "components/Paper";
 
 interface LoginFormProps {}
 
@@ -36,7 +37,8 @@ export const LoginForm: FC<LoginFormProps> = () => {
   }, [reset]);
 
   return (
-    <Flex
+    <Paper
+      position="relative"
       as="form"
       onSubmit={handleSubmit(onSubmit)}
       p={8}
@@ -64,11 +66,19 @@ export const LoginForm: FC<LoginFormProps> = () => {
         </Box>
       </Box>
       <Flex justifyContent="center" mt={5}>
-        <Button type="submit" isDisabled={isSubmitting} width={40}>
+        <Button
+          type="submit"
+          isDisabled={isSubmitting}
+          width={40}
+          mb={4}
+          mt={2}
+        >
           Login
         </Button>
       </Flex>
-      <Text fontSize="12px">Version: {version}</Text>
-    </Flex>
+      <Text fontSize="12px" position="absolute" bottom="10px" left="14px">
+        Version: {version}
+      </Text>
+    </Paper>
   );
 };

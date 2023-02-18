@@ -1,6 +1,6 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { Divider, Flex, Heading } from "@chakra-ui/react";
-import { Log, Tag } from "store/features/journeys/types";
+import { FC, useEffect, useMemo, useRef, useState, MouseEvent } from "react";
+import { Flex, Heading, IconButton, Icon } from "@chakra-ui/react";
+import { Log, Activity } from "store/features/journeys/types";
 import { JourneyItemsListItem } from "./JourneyItemsListItem/JourneyItemsListItem";
 import {
   ChakraStylesConfig,
@@ -8,27 +8,36 @@ import {
   MultiValue,
   Select,
 } from "chakra-react-select";
-import { getTagOptions } from "components/JourneyLogDialogs/utils";
+import { getActivityOptions } from "components/JourneyLogDialogs/utils";
 import { chakraStyles } from "components/CreatableSelectField/styles";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
+import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Option } from "types";
 import { useAppDispatch } from "store/hooks";
+import { Paper } from "components/Paper";
 
 interface JourneyItemsListProps {
   logs: Log[];
   activeLog?: Log;
   setActiveLogId: (id: number) => void;
-  tags: Tag[];
+  activities: Activity[];
+  openAddLogDialog: (e: MouseEvent) => void;
+  openAddAchievementDialog: (e: MouseEvent) => void;
 }
 
 export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   logs,
   activeLog,
   setActiveLogId,
-  tags,
+  activities,
+  openAddLogDialog,
+  openAddAchievementDialog,
 }) => {
   const dispatch = useAppDispatch();
   const activeRef = useRef<HTMLDivElement>(null);
-  const [filterTags, setFilterTags] = useState<MultiValue<Option>>([]);
+  const [filterActivities, setFilterActivities] = useState<MultiValue<Option>>(
+    []
+  );
 
   useEffect(() => {
     activeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -36,41 +45,65 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
 
   const filteredLogs = useMemo(() => {
     return logs.filter((log) =>
-      filterTags.every(
-        (filterTag) =>
-          log.tags.findIndex((tag) => tag.id === filterTag.value) >= 0
+      filterActivities.every(
+        (filterActivity) =>
+          log.tags.findIndex(
+            (activity) => activity.id === filterActivity.value
+          ) >= 0
       )
     );
-  }, [logs, filterTags]);
+  }, [logs, filterActivities]);
 
   const isListEmpty = filteredLogs.length === 0;
 
   return (
-    <Flex direction="column" w="full" mb={2}>
-      <Flex mb={4} justify="center" align="center">
-        <Divider mr={2} borderColor="brand.100" />
-        <Heading size="md" color="brand.100">
+    <Paper direction="column" w="full" p={3} sx={{ borderRadius: 0 }}>
+      <Flex mb={3} align="center">
+        <Heading size="md" color="gray.300">
           Logs
         </Heading>
-        <Divider ml={2} borderColor="brand.100" />
+        <Flex ml="auto">
+          <IconButton
+            variant="sideMenu"
+            icon={<Icon as={AchievementIcon} width={22} height={22} />}
+            aria-label="Add log"
+            onClick={openAddAchievementDialog}
+            size="sm"
+          />
+          <IconButton
+            variant="sideMenu"
+            icon={<Icon as={LogIcon} width={22} height={22} />}
+            aria-label="Add log"
+            onClick={openAddLogDialog}
+            size="sm"
+          />
+        </Flex>
       </Flex>
       <Flex direction="column" px={2} mb={3}>
         <Select<Option, true, GroupBase<Option>>
           isMulti
           name="tags"
-          options={getTagOptions(tags)}
-          placeholder="Filter by tag..."
+          options={getActivityOptions(activities)}
+          placeholder="Filter by activity..."
           chakraStyles={
             chakraStyles as ChakraStylesConfig<Option, true, GroupBase<Option>>
           }
           onChange={(val) => {
-            setFilterTags(val);
+            setFilterActivities(val);
           }}
         />
       </Flex>
-      <Flex direction="column" overflow="auto" px={1} height="full">
+      <Flex
+        direction="column"
+        overflow="auto"
+        px={1}
+        height="full"
+        borderTop="1px solid"
+        borderColor="brand.600"
+        pt={2}
+      >
         {isListEmpty && (
-          <Flex justifyContent="center" mt="2vh">
+          <Flex justifyContent="center" my="auto">
             <Heading size="md">No logs available</Heading>
           </Flex>
         )}
@@ -88,6 +121,6 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           />
         ))}
       </Flex>
-    </Flex>
+    </Paper>
   );
 };

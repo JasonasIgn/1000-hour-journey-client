@@ -67,11 +67,12 @@ export const Timer = () => {
 
   return (
     <Popover
-      placement="bottom-start"
+      placement="right"
       arrowShadowColor="brand.100"
       closeOnBlur={false}
       arrowSize={10}
       isOpen={isOpen}
+      offset={[0, 10]}
       onClose={() => dispatch(closeTimer())}
       onOpen={() => dispatch(openTimer())}
     >
@@ -90,7 +91,7 @@ export const Timer = () => {
         </PopoverBody>
         <PopoverArrow
           bgColor="brand.700"
-          borderTop="1px solid"
+          borderBottom="1px solid"
           borderLeft="1px solid"
           borderColor="brand.400"
         />

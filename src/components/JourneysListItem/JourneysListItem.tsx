@@ -16,6 +16,7 @@ import Logo from "resources/logo.png";
 import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
+import { Paper } from "components/Paper";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -29,32 +30,34 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   onEditClick,
 }) => (
   <Link to={`/journeys/${journey.id}`}>
-    <Flex
+    <Paper
+      level={1}
       position="relative"
       height={180}
-      bg="brand.800"
-      borderRadius={20}
-      border="2px solid"
-      borderColor="brand.700"
       padding={4}
       cursor="pointer"
       _hover={{
-        transform: "scale(1.005)",
+        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-brand-600)'
       }}
-      transition="transform 0.1s"
+      transition="box-shadow 0.1s"
       {...rootBoxProps}
     >
       <Flex
         width={144}
         minWidth={144}
+        maxHeight={144}
         height="full"
-        border="1px solid"
-        borderColor="brand.300"
         alignItems="center"
         justifyContent="center"
+        bg="black"
+        border="1px solid"
+        borderRadius="20px"
+        borderColor="brand.500"
+        overflow="hidden"
       >
         <Image
           key={journey.updatedAt.toString()}
+          filter="brightness(0.8)"
           src={
             journey?.mediaUrl
               ? `${getImageSrc(
@@ -66,8 +69,8 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         />
       </Flex>
       <Box ml={5}>
-        <Heading size="lg">{journey.title}</Heading>
-        <Text fontSize="sm">{journey.description}</Text>
+        <Heading size="md">{journey.title}</Heading>
+        <Text fontSize="md">{journey.description}</Text>
       </Box>
       <Flex
         ml="auto"
@@ -113,6 +116,6 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           onEditClick();
         }}
       />
-    </Flex>
+    </Paper>
   </Link>
 );

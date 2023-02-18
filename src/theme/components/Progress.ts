@@ -5,6 +5,9 @@ export const Progress: ComponentStyleConfig = {
     track: {
       bg: "gray.400",
     },
+    filledTrack: {
+      bg: "brand.300",
+    },
   },
   defaultProps: {
     colorScheme: "brand",

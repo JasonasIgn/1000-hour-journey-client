@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDialog/types";
+import { JourneyActivityFormData } from "components/JourneyActivityDialogs/types";
 import { JourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
-import { Achievement, Journey, Log, Tag } from "./types";
-import { getTagIdsArray } from "./utils";
+import { Achievement, Journey, Log, Activity } from "./types";
+import { getActivityIdsArray } from "./utils";
 
 export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
@@ -72,7 +73,7 @@ export const createJourneyLogEffect = createAsyncThunk(
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0], tags: getTagIdsArray(tags) },
+        { ...rest, media: media?.[0], tags: getActivityIdsArray(tags) },
         {
           withCredentials: true,
           headers: {
@@ -132,7 +133,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
         apiUrls.updateLog
           .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
-        { ...rest, media: media?.[0], tags: getTagIdsArray(tags) },
+        { ...rest, media: media?.[0], tags: getActivityIdsArray(tags) },
         {
           withCredentials: true,
           headers: {
@@ -169,19 +170,82 @@ export const updateJourneyEffect = createAsyncThunk(
   }
 );
 
-export const createJourneyTagEffect = createAsyncThunk(
-  "journeys/createJourneyTag",
+export const createJourneyActivityEffect = createAsyncThunk(
+  "journeys/createJourneyActivity",
   async ({
     data,
     journeyId,
   }: {
-    data: { name: string };
+    data: JourneyActivityFormData;
     journeyId: number;
   }) => {
+    const { media, ...rest } = data;
     try {
-      const response = await axios.post<Tag>(
-        apiUrls.createTag.replace("{journeyId}", journeyId.toString()),
-        data,
+      const response = await axios.post<Activity>(
+        apiUrls.createActivity.replace("{journeyId}", journeyId.toString()),
+        { ...rest, media: media?.[0] },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
+    }
+  }
+);
+
+export const updateJourneyActivityEffect = createAsyncThunk(
+  "journeys/updateJourneyActivity",
+  async ({
+    data,
+    journeyId,
+    activityId,
+  }: {
+    data: JourneyActivityFormData;
+    journeyId: number;
+    activityId: number;
+  }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.patch<Activity>(
+        apiUrls.updateActivity
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{activityId}", activityId.toString()),
+        { ...rest, completed: Number(rest.completed), media: media?.[0] },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
+    }
+  }
+);
+
+export const deleteJourneyActivityEffect = createAsyncThunk(
+  "journeys/deleteJourneyActivity",
+  async ({
+    journeyId,
+    activityId,
+  }: {
+    journeyId: number;
+    activityId: number;
+  }) => {
+    try {
+      const response = await axios.delete<Activity>(
+        apiUrls.updateActivity
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{activityId}", activityId.toString()),
         {
           withCredentials: true,
         }

@@ -14,6 +14,24 @@ export const Tabs: ComponentStyleConfig = {
         },
       },
     },
+    line: {
+      tab: {
+        background: "brand.800",
+        color: "gray.400",
+        _hover: {
+          color: "white",
+        },
+        _focusVisible: {
+          outline: "none",
+          boxShadow: "none",
+          border: "none",
+        },
+        _selected: {
+          background: "brand.900",
+          color: "gray.200",
+        },
+      },
+    },
   },
   defaultProps: {
     colorScheme: "brand",
