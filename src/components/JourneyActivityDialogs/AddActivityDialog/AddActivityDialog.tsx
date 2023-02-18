@@ -43,14 +43,12 @@ export const AddActivityDialog: FC<AddActivityDialogProps> = ({
 
   const onSubmit = async (data: JourneyActivityFormData) => {
     try {
-      console.log("/");
       await dispatch(createJourneyTagEffect({ data, journeyId })).unwrap();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
     }
   };
-  console.log(errors);
   useEffect(() => {
     if (open) {
       reset();

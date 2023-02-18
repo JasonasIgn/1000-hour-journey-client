@@ -11,7 +11,6 @@ export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const journey = useAppSelector(getJourney);
-  console.log(journey);
 
   useEffect(() => {
     if (params.journeyId && journey?.id.toString() !== params.journeyId) {

@@ -49,6 +49,7 @@ export const JourneyActivitiesViewContent: FC = () => {
             <Tbody>
               {journey?.tags.map((activity) => (
                 <Tr
+                  key={activity.id}
                   _hover={{ bg: "brand.700" }}
                   cursor="pointer"
                   onClick={() => {
@@ -56,8 +57,8 @@ export const JourneyActivitiesViewContent: FC = () => {
                   }}
                 >
                   <Td>{activity.name}</Td>
-                  <Td>{activity.description || ""}</Td>
-                  <Td>25.4</Td>
+                  <Td whiteSpace="normal">{activity.description || ""}</Td>
+                  <Td>{activity.completed ? "Yes" : "No"}</Td>
                   <Td isNumeric>25.4</Td>
                 </Tr>
               ))}

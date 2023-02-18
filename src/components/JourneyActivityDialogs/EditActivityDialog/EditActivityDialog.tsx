@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
 import { TextAreaField, InputField, UploadField } from "components";
-import { createJourneyTagEffect } from "store/features/journeys/effects";
+import { updateJourneyActivityEffect } from "store/features/journeys/effects";
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
 import { Tag } from "store/features/journeys/types";
@@ -41,8 +41,13 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
 
   const onSubmit = async (data: JourneyActivityFormData) => {
     try {
-      console.log("/");
-      await dispatch(createJourneyTagEffect({ data, journeyId })).unwrap();
+      await dispatch(
+        updateJourneyActivityEffect({
+          data,
+          journeyId,
+          activityId: activity?.id as number,
+        })
+      ).unwrap();
       handleClose();
     } catch (e) {
       console.error("Caught error", e);
@@ -91,6 +96,11 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
                 label="Media"
                 {...register("media")}
                 onClear={() => setValue("media", {} as FileList)}
+                initialPreviewSrc={
+                  activity?.mediaUrl
+                    ? `${activity?.mediaUrl}?${activity.updatedAt.toString()}` // prevent caching
+                    : undefined
+                }
               />
             </GridItem>
           </Grid>

@@ -15,6 +15,7 @@ export interface Tag {
   updatedAt: Date;
   description: string | null;
   completed: boolean;
+  mediaUrl?: string;
 }
 
 export interface Log {

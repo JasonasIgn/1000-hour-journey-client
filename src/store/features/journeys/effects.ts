@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDialog/types";
+import { JourneyActivityFormData } from "components/JourneyActivityDialogs/types";
 import { JourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
@@ -175,15 +176,52 @@ export const createJourneyTagEffect = createAsyncThunk(
     data,
     journeyId,
   }: {
-    data: { name: string; description?: string };
+    data: JourneyActivityFormData;
     journeyId: number;
   }) => {
+    const { media, ...rest } = data;
     try {
       const response = await axios.post<Tag>(
         apiUrls.createTag.replace("{journeyId}", journeyId.toString()),
-        data,
+        { ...rest, media: media?.[0] },
         {
           withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
+    }
+  }
+);
+
+export const updateJourneyActivityEffect = createAsyncThunk(
+  "journeys/updateJourneyActivity",
+  async ({
+    data,
+    journeyId,
+    activityId,
+  }: {
+    data: JourneyActivityFormData;
+    journeyId: number;
+    activityId: number;
+  }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.patch<Tag>(
+        apiUrls.updateActivity
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{activityId}", activityId.toString()),
+        { ...rest, media: media?.[0] },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
       return response.data;
