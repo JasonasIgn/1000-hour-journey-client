@@ -25,7 +25,7 @@ export const JourneyActivitiesViewContent: FC = () => {
   const journey = useAppSelector(getJourney);
   const isEmptyState = journey?.tags.length === 0;
   return (
-    <Container maxW="8xl" pt={5} pb={5} h="full">
+    <Container maxW="6xl" pt={5} pb={5} h="full">
       <Paper pt={10} px={10} pb={10} direction="column" h="full">
         <Flex pb={5} justifyContent="flex-end">
           <Button
@@ -43,14 +43,22 @@ export const JourneyActivitiesViewContent: FC = () => {
                 <Th>Activity</Th>
                 <Th>Description</Th>
                 <Th>Completed</Th>
+                <Th isNumeric>Hours spent</Th>
               </Tr>
             </Thead>
             <Tbody>
               {journey?.tags.map((activity) => (
-                <Tr>
+                <Tr
+                  _hover={{ bg: "brand.700" }}
+                  cursor="pointer"
+                  onClick={() => {
+                    setActivityToEdit(activity);
+                  }}
+                >
                   <Td>{activity.name}</Td>
                   <Td>{activity.description || ""}</Td>
                   <Td>25.4</Td>
+                  <Td isNumeric>25.4</Td>
                 </Tr>
               ))}
             </Tbody>
