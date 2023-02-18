@@ -31,9 +31,9 @@ export const JourneyItemsListItem = forwardRef(
       cursor="pointer"
       bg={active ? "brand.700" : "transparent"}
       _hover={{
-        transform: "scale(1.005)",
+        boxShadow: 'inset 0px 0px 10px 0px var(--chakra-colors-brand-500)'
       }}
-      transition="transform 0.1s"
+      transition="box-shdaow 0.1s"
       sx={{ borderRadius: "4px" }}
       ref={ref}
       {...rest}
