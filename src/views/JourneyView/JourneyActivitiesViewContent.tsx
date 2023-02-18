@@ -35,7 +35,14 @@ export const JourneyActivitiesViewContent: FC = () => {
 
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full">
-      <Paper pt={10} px={10} pb={10} direction="column" h="full">
+      <Paper
+        pt={10}
+        px={10}
+        pb={10}
+        direction="column"
+        h="full"
+        sx={{ borderRadius: 0 }}
+      >
         <Flex pb={5} justifyContent="flex-end">
           <Button
             onClick={() => {
