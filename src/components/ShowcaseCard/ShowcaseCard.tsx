@@ -40,8 +40,6 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
         top={0}
         right={0}
         height="40%"
-        borderTopRightRadius="2px"
-        borderTopLeftRadius="2px"
         width="100%"
         justifyContent="center"
         backgroundImage={itemImageSrc}
@@ -58,7 +56,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
         direction="column"
         flexGrow={1}
         borderTop="1px solid"
-        borderColor="brand.800"
+        borderColor="brand.600"
       >
         {!item && (
           <Flex justifyContent="center" alignItems="center" h="full" mb="4vh">

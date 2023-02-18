@@ -96,9 +96,16 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           }}
         />
       </Flex>
-      <Flex direction="column" overflow="auto" px={1} height="full">
+      <Flex
+        direction="column"
+        overflow="auto"
+        px={1}
+        height="full"
+        borderTop="1px solid"
+        borderColor="brand.600"
+      >
         {isListEmpty && (
-          <Flex justifyContent="center" mt="2vh">
+          <Flex justifyContent="center" my="auto">
             <Heading size="md">No logs available</Heading>
           </Flex>
         )}

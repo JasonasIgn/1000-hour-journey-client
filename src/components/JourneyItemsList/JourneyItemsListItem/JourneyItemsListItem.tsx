@@ -1,5 +1,6 @@
 import { EditIcon } from "@chakra-ui/icons";
-import { Flex, FlexProps, forwardRef, Heading, Text } from "@chakra-ui/react";
+import { FlexProps, forwardRef, Heading, Text } from "@chakra-ui/react";
+import { Paper } from "components/Paper";
 import { AppDispatch } from "store";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
 import { Log } from "store/features/journeys/types";
@@ -16,7 +17,8 @@ export const JourneyItemsListItem = forwardRef(
     { log, index, active, dispatch, ...rest }: JourneyItemsListItemProps,
     ref
   ) => (
-    <Flex
+    <Paper
+      level={2}
       w="full"
       border="1px solid"
       borderColor="brand.200"
@@ -32,6 +34,7 @@ export const JourneyItemsListItem = forwardRef(
         transform: "scale(1.005)",
       }}
       transition="transform 0.1s"
+      sx={{ borderRadius: "4px" }}
       ref={ref}
       {...rest}
     >
@@ -55,6 +58,6 @@ export const JourneyItemsListItem = forwardRef(
           }}
         />
       )}
-    </Flex>
+    </Paper>
   )
 );
