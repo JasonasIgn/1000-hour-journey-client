@@ -4,6 +4,7 @@ import {
   createJourneyEffect,
   createJourneyLogEffect,
   createJourneyTagEffect,
+  deleteJourneyActivityEffect,
   fetchJourneyEffect,
   fetchJourneysListEffect,
   logJourneyAchievementEffect,
@@ -103,7 +104,24 @@ export const journeysSlice = createSlice({
           );
           state.journey.tags[updatedActivityIndex] = payload;
         }
-      });
+      })
+      .addCase(
+        deleteJourneyActivityEffect.fulfilled,
+        (state, { meta: { arg } }) => {
+          const { activityId } = arg;
+          if (state.journey) {
+            state.journey.tags = state.journey.tags.filter(
+              (activity) => activity.id !== activityId
+            );
+            state.journey.logs = state.journey.logs.map((log) => {
+              return {
+                ...log,
+                tags: log.tags.filter((activity) => activity.id !== activityId),
+              };
+            });
+          }
+        }
+      );
   },
 });
 

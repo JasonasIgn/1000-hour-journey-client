@@ -15,7 +15,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
 import { TextAreaField, InputField, UploadField } from "components";
-import { updateJourneyActivityEffect } from "store/features/journeys/effects";
+import {
+  deleteJourneyActivityEffect,
+  updateJourneyActivityEffect,
+} from "store/features/journeys/effects";
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
 import { Tag } from "store/features/journeys/types";
@@ -44,6 +47,20 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
       await dispatch(
         updateJourneyActivityEffect({
           data,
+          journeyId,
+          activityId: activity?.id as number,
+        })
+      ).unwrap();
+      handleClose();
+    } catch (e) {
+      console.error("Caught error", e);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(
+        deleteJourneyActivityEffect({
           journeyId,
           activityId: activity?.id as number,
         })
@@ -107,6 +124,9 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
         </ModalBody>
 
         <ModalFooter>
+          <Button mr="auto" onClick={handleDelete}>
+            Delete
+          </Button>
           <Button mr={3} onClick={handleClose}>
             Close
           </Button>
