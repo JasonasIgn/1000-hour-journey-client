@@ -8,6 +8,13 @@ export const Button: ComponentStyleConfig = {
         bgColor: "brand.300",
       },
     },
+    warning: {
+      bgColor: "red.700",
+      color: "gray.300",
+      _hover: {
+        bgColor: "red.500",
+      },
+    },
     ghost: {
       color: "brand.100",
       _hover: {

@@ -133,7 +133,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button mr="auto" onClick={handleDelete}>
+          <Button mr="auto" onClick={handleDelete} variant="warning">
             Delete
           </Button>
           <Button mr={3} onClick={handleClose}>
