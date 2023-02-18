@@ -12,3 +12,4 @@ export * from "./Stat";
 export * from "./Menu";
 export * from "./Tag";
 export * from "./Table";
+export * from "./Switch";
