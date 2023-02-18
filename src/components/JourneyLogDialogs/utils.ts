@@ -6,4 +6,5 @@ export const getTagOption = (tag: Tag): Option => ({
   label: tag.name,
 });
 
-export const getTagOptions = (tags: Tag[]): Option[] => tags.map(getTagOption);
+export const getTagOptions = (tags: Tag[]): Option[] =>
+  tags.filter((activity) => !activity.completed).map(getTagOption);
