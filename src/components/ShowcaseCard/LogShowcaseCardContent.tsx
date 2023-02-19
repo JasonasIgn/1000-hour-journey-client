@@ -53,10 +53,10 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
       <Flex minHeight={0} width="full" height="full">
         <Flex direction="column" width="full">
           <Text whiteSpace="pre-line">{log.description}</Text>
-          {log.tags.length > 0 && (
+          {log.activities.length > 0 && (
             <Flex direction="column" mt="auto">
               <Flex>
-                {log.tags.map((activity) => (
+                {log.activities.map((activity) => (
                   <Tag key={activity.id} variant="subtle" mr={2}>
                     <TagLabel>{activity.name}</TagLabel>
                   </Tag>

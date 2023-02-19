@@ -5,11 +5,11 @@ export const getInitialImageSrc = (
   item?: LogExtended | Achievement,
   defaultJourneyImageSrc?: string
 ) => {
-  if ((item as LogExtended)?.tags?.length > 0) {
-    if ((item as LogExtended).tags[0].mediaUrl) {
-      return `${getImageSrc((item as LogExtended).tags[0].mediaUrl)}?${(
+  if ((item as LogExtended)?.activities?.length > 0) {
+    if ((item as LogExtended).activities[0].mediaUrl) {
+      return `${getImageSrc((item as LogExtended).activities[0].mediaUrl)}?${(
         item as LogExtended
-      ).tags[0].updatedAt.toString()}`;
+      ).activities[0].updatedAt.toString()}`;
     }
   }
 

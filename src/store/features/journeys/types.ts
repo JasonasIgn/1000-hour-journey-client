@@ -27,7 +27,7 @@ export interface Log {
   loggedOn: Date;
   mediaUrl?: string;
   updatedAt: Date;
-  tags: Activity[];
+  activities: Activity[];
 }
 
 export interface LogExtended extends Log {
@@ -48,5 +48,5 @@ export interface Achievement {
 export interface Journey extends JourneyListItem {
   logs: Log[];
   achievements: Achievement[];
-  tags: Activity[];
+  activities: Activity[];
 }

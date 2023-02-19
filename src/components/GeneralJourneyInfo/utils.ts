@@ -10,7 +10,7 @@ interface DataType {
 export const getPieChartData = (logs: Log[]) => {
   const data: DataType = {};
   logs.forEach((log) => {
-    if (log.tags.length === 0) {
+    if (log.activities.length === 0) {
       if (data["Unknown"] === undefined) {
         data["Unknown"] = {
           name: "Unknown",
@@ -22,8 +22,8 @@ export const getPieChartData = (logs: Log[]) => {
       }
       return;
     }
-    const timePerActivity = log.hoursSpent / log.tags.length;
-    log.tags.forEach((activity) => {
+    const timePerActivity = log.hoursSpent / log.activities.length;
+    log.activities.forEach((activity) => {
       if (data[activity.name] !== undefined) {
         data[activity.name].value =
           Math.round((data[activity.name].value + timePerActivity) * 100) / 100;

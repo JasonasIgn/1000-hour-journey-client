@@ -58,12 +58,12 @@ interface ActivityHoursMap {
 export const getActivityHoursMap = (logs: Log[]) => {
   const data: ActivityHoursMap = {};
   logs.forEach((log) => {
-    if (log.tags.length === 0) {
+    if (log.activities.length === 0) {
       return;
     }
-    const timePerActivity = log.hoursSpent / log.tags.length;
-    log.tags.forEach((tag) => {
-      const activityId = tag.id.toString();
+    const timePerActivity = log.hoursSpent / log.activities.length;
+    log.activities.forEach((activity) => {
+      const activityId = activity.id.toString();
       if (data[activityId] !== undefined) {
         data[activityId] =
           Math.round((data[activityId] + timePerActivity) * 100) / 100;
