@@ -68,7 +68,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   } = useForm<JourneyLogFormData>({
     defaultValues: {
       loggedOn: format(new Date(), dateFormats.standart),
-      tags: [],
+      activities: [],
     },
     resolver: yupResolver(journeyLogFormValidation),
   });
@@ -104,14 +104,14 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
 
   const onCreateOption = async (value: string) => {
     try {
-      const currentValue = getValues("tags");
+      const currentValue = getValues("activities");
       const createdActivity = await dispatch(
         createJourneyActivityEffect({
           data: { name: value },
           journeyId,
         })
       ).unwrap();
-      setValue("tags", [...currentValue, getActivityOption(createdActivity)]);
+      setValue("activities", [...currentValue, getActivityOption(createdActivity)]);
     } catch (e) {
       console.error("Error creating activity", e);
     }
@@ -169,7 +169,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
               <CreatableSelectField<Option>
                 options={getActivityOptions(activities)}
                 control={control as any}
-                name="tags"
+                name="activities"
                 label="Activities"
                 onCreateOption={onCreateOption}
               />

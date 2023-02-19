@@ -47,7 +47,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
     return logs.filter((log) =>
       filterActivities.every(
         (filterActivity) =>
-          log.tags.findIndex(
+          log.activities.findIndex(
             (activity) => activity.id === filterActivity.value
           ) >= 0
       )
@@ -82,7 +82,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
       <Flex direction="column" px={2} mb={3}>
         <Select<Option, true, GroupBase<Option>>
           isMulti
-          name="tags"
+          name="activities"
           options={getActivityOptions(activities)}
           placeholder="Filter by activity..."
           chakraStyles={

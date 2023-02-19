@@ -5,5 +5,5 @@ export interface JourneyLogFormData {
   hoursSpent: number;
   loggedOn: string;
   media: FileList;
-  tags: Option[];
+  activities: Option[];
 }

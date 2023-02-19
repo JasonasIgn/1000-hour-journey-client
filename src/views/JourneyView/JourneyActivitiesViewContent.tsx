@@ -27,7 +27,7 @@ export const JourneyActivitiesViewContent: FC = () => {
   const journey = useAppSelector(getJourney) as Journey;
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Activity>();
-  const isEmptyState = journey?.tags.length === 0;
+  const isEmptyState = journey?.activities.length === 0;
 
   const activitiesSpentTimeMap = useMemo(() => {
     return getActivityHoursMap(journey?.logs || []);
@@ -64,7 +64,7 @@ export const JourneyActivitiesViewContent: FC = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {journey?.tags.map((activity) => (
+              {journey?.activities.map((activity) => (
                 <Tr
                   key={activity.id}
                   _hover={{ bg: "brand.700" }}

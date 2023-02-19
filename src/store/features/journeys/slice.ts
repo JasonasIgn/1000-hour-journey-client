@@ -94,15 +94,15 @@ export const journeysSlice = createSlice({
       })
       .addCase(createJourneyActivityEffect.fulfilled, (state, { payload }) => {
         if (state.journey && payload) {
-          state.journey.tags.push(payload);
+          state.journey.activities.push(payload);
         }
       })
       .addCase(updateJourneyActivityEffect.fulfilled, (state, { payload }) => {
         if (state.journey && payload) {
-          const updatedActivityIndex = state.journey.tags.findIndex(
+          const updatedActivityIndex = state.journey.activities.findIndex(
             (activity) => activity.id === payload?.id
           );
-          state.journey.tags[updatedActivityIndex] = payload;
+          state.journey.activities[updatedActivityIndex] = payload;
         }
       })
       .addCase(
@@ -110,13 +110,13 @@ export const journeysSlice = createSlice({
         (state, { meta: { arg } }) => {
           const { activityId } = arg;
           if (state.journey) {
-            state.journey.tags = state.journey.tags.filter(
+            state.journey.activities = state.journey.activities.filter(
               (activity) => activity.id !== activityId
             );
             state.journey.logs = state.journey.logs.map((log) => {
               return {
                 ...log,
-                tags: log.tags.filter((activity) => activity.id !== activityId),
+                activities: log.activities.filter((activity) => activity.id !== activityId),
               };
             });
           }

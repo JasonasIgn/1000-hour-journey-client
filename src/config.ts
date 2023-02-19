@@ -13,8 +13,8 @@ export const apiUrls = {
   isLoggedIn: `${API_BASE}/amILoggedIn`,
   login: `${API_BASE}/login`,
   logout: `${API_BASE}/logout`,
-  createActivity: `${API_BASE}/journey/{journeyId}/tags`,
-  updateActivity: `${API_BASE}/journey/{journeyId}/tags/{activityId}`,
-  deleteActivity: `${API_BASE}/journey/{journeyId}/tags/{activityId}`,
+  createActivity: `${API_BASE}/journey/{journeyId}/activities`,
+  updateActivity: `${API_BASE}/journey/{journeyId}/activities/{activityId}`,
+  deleteActivity: `${API_BASE}/journey/{journeyId}/activities/{activityId}`,
   fetchAchievements: `${API_BASE}/achievements`,
 };

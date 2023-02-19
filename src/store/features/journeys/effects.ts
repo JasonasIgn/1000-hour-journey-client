@@ -69,11 +69,11 @@ export const createJourneyLogEffect = createAsyncThunk(
     data: JourneyLogFormData;
     journeyId: number;
   }) => {
-    const { media, tags, ...rest } = data;
+    const { media, activities, ...rest } = data;
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0], tags: getActivityIdsArray(tags) },
+        { ...rest, media: media?.[0], activities: getActivityIdsArray(activities) },
         {
           withCredentials: true,
           headers: {
@@ -127,13 +127,13 @@ export const updateJourneyLogEffect = createAsyncThunk(
     journeyId: number;
     logId: number;
   }) => {
-    const { media, tags, ...rest } = data;
+    const { media, activities, ...rest } = data;
     try {
       const response = await axios.patch<Log>(
         apiUrls.updateLog
           .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
-        { ...rest, media: media?.[0], tags: getActivityIdsArray(tags) },
+        { ...rest, media: media?.[0], activities: getActivityIdsArray(activities) },
         {
           withCredentials: true,
           headers: {

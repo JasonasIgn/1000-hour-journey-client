@@ -66,7 +66,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
       hoursSpent: log.hoursSpent,
       description: log.description,
-      tags: getActivityOptions(log.tags),
+      activities: getActivityOptions(log.activities),
     },
     resolver: yupResolver(journeyLogFormValidation),
   });
@@ -87,7 +87,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
         hoursSpent: log.hoursSpent,
         description: log.description,
-        tags: getActivityOptions(log.tags),
+        activities: getActivityOptions(log.activities),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,14 +95,14 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
 
   const onCreateOption = async (value: string) => {
     try {
-      const currentValue = getValues("tags");
+      const currentValue = getValues("activities");
       const createdActivity = await dispatch(
         createJourneyActivityEffect({
           data: { name: value },
           journeyId,
         })
       ).unwrap();
-      setValue("tags", [...currentValue, getActivityOption(createdActivity)]);
+      setValue("activities", [...currentValue, getActivityOption(createdActivity)]);
     } catch (e) {
       console.error("Error creating activity", e);
     }
@@ -153,7 +153,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
               <CreatableSelectField<Option>
                 options={getActivityOptions(activities)}
                 control={control as any}
-                name="tags"
+                name="activities"
                 label="Activities"
                 onCreateOption={onCreateOption}
               />
