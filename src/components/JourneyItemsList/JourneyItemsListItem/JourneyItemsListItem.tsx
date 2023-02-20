@@ -1,22 +1,15 @@
-import { EditIcon } from "@chakra-ui/icons";
 import { FlexProps, forwardRef, Heading, Text } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
-import { AppDispatch } from "store";
-import { setEditLogDialogOpen } from "store/features/journey/slice";
 import { Log } from "store/features/journeys/types";
 
 interface JourneyItemsListItemProps extends FlexProps {
   log: Log;
   index: number;
   active: boolean;
-  dispatch: AppDispatch;
 }
 
 export const JourneyItemsListItem = forwardRef(
-  (
-    { log, index, active, dispatch, ...rest }: JourneyItemsListItemProps,
-    ref
-  ) => (
+  ({ log, index, active, ...rest }: JourneyItemsListItemProps, ref) => (
     <Paper
       w="full"
       border="1px solid"
@@ -31,7 +24,7 @@ export const JourneyItemsListItem = forwardRef(
       cursor="pointer"
       bg={active ? "brand.700" : "transparent"}
       _hover={{
-        boxShadow: 'inset 0px 0px 10px 0px var(--chakra-colors-brand-500)'
+        boxShadow: "inset 0px 0px 10px 0px var(--chakra-colors-brand-500)",
       }}
       transition="box-shdaow 0.1s"
       sx={{ borderRadius: "4px" }}
@@ -48,16 +41,6 @@ export const JourneyItemsListItem = forwardRef(
       >
         {log.description}
       </Text>
-      {active && (
-        <EditIcon
-          width="22px"
-          fill="gray.300"
-          ml="auto"
-          onClick={() => {
-            dispatch(setEditLogDialogOpen(true));
-          }}
-        />
-      )}
     </Paper>
   )
 );

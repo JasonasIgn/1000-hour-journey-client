@@ -2,6 +2,7 @@ import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
 import { FC } from "react";
 import { setViewedImageSrc } from "store/features/app/slice";
+import { setEditLogDialogOpen } from "store/features/journey/slice";
 import { Achievement, LogExtended } from "store/features/journeys/types";
 import { useAppDispatch } from "store/hooks";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
@@ -23,6 +24,9 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   const itemImageSrc = getInitialImageSrc(item, defaultJourneyImageSrc);
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
+
+  const onEditLogClick = () => dispatch(setEditLogDialogOpen(true));
+
   return (
     <Paper
       flexDirection="column"
@@ -63,7 +67,12 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
             </Heading>
           </Flex>
         )}
-        {isItemLog && <LogShowcaseCardContent log={item as LogExtended} />}
+        {isItemLog && (
+          <LogShowcaseCardContent
+            log={item as LogExtended}
+            onEditLogClick={onEditLogClick}
+          />
+        )}
         {isItemAchievement && (
           <AchievementShowcaseCardContent achievement={item as Achievement} />
         )}

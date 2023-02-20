@@ -13,7 +13,6 @@ import { chakraStyles } from "components/CreatableSelectField/styles";
 import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { ReactComponent as LogIcon } from "resources/page.svg";
 import { Option } from "types";
-import { useAppDispatch } from "store/hooks";
 import { Paper } from "components/Paper";
 
 interface JourneyItemsListProps {
@@ -33,7 +32,6 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   openAddLogDialog,
   openAddAchievementDialog,
 }) => {
-  const dispatch = useAppDispatch();
   const activeRef = useRef<HTMLDivElement>(null);
   const [filterActivities, setFilterActivities] = useState<MultiValue<Option>>(
     []
@@ -116,7 +114,6 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
             onClick={() => {
               setActiveLogId(log.id);
             }}
-            dispatch={dispatch}
             ref={activeLog?.id === log.id ? activeRef : undefined}
           />
         ))}
