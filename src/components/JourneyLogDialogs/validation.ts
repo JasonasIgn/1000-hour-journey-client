@@ -1,7 +1,10 @@
 import * as yup from "yup";
 
 export const journeyLogFormValidation = yup.object({
-  description: yup.string().required("This field is required"),
+  description: yup
+    .string()
+    .required("This field is required")
+    .max(255, "Max 255 characters"),
   hoursSpent: yup
     .number()
     .typeError("Must be a number")
