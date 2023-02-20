@@ -20,8 +20,6 @@ import {
 } from "store/features/journeys/types";
 import format from "date-fns/format";
 import {
-  getAchievementHoursMap,
-  getAchievementsDictionary,
   getLogHoursMap,
   getLogsDictionary,
   getLogBeginningsDictionary,
@@ -42,10 +40,11 @@ interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLogId: (id: number | undefined) => void;
   activeLog?: LogExtended;
-  setActiveAchievement: (log: Achievement) => void;
+  setActiveAchievement: (achievement?: Achievement) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
   addAchievementModalOpen: boolean;
-  setAddAchievementModalOpen: (v: boolean) => void;
+  setAddAchievementModalOpen: (open: boolean) => void;
+  activeAchievement?: Achievement;
 }
 
 export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
@@ -56,6 +55,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setShiftDirection,
   addAchievementModalOpen,
   setAddAchievementModalOpen,
+  activeAchievement,
 }) => {
   const isDragging = useRef(false);
   const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
@@ -82,22 +82,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     [journey.logs]
   );
 
-  const hoursToAchievementsMap = useMemo(
-    () => getAchievementHoursMap(journey.achievements),
-    [journey.achievements]
+  const setNewCurrentHour = useCallback(
+    (hour: number) => {
+      setCurrentHour(Math.round(hour * 10) / 10);
+      setShiftDirection(hour > currentHour ? "left" : "right");
+    },
+    [currentHour, setShiftDirection]
   );
-  const achievementsDictionary = useMemo(
-    () => getAchievementsDictionary(journey.achievements),
-    [journey.achievements]
-  );
-
-  const activeAchievementId = hoursToAchievementsMap[currentHour];
-  const activeAchievement = achievementsDictionary[activeAchievementId];
-
-  const setNewCurrentHour = (hour: number) => {
-    setCurrentHour(Math.round(hour * 10) / 10);
-    setShiftDirection(hour > currentHour ? "left" : "right");
-  };
 
   const onUpdate = useCallback(({ x, scale }: UpdateAction) => {
     const finalScale = getFinalScale(scale);
@@ -136,6 +127,9 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     if (currentHourLog?.id !== activeLog?.id) {
       setActiveLogId(currentHourLog?.id);
     }
+    if (activeAchievement && currentHour !== activeAchievement.loggedAtHour) {
+      setActiveAchievement(undefined);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHour]);
 
@@ -151,10 +145,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeLog]);
-
-  useEffect(() => {
-    setActiveAchievement(activeAchievement);
-  }, [activeAchievement, setActiveAchievement]);
 
   useEffect(() => {
     setNewCurrentHour(journey.totalHours - 0.1);
@@ -228,6 +218,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                       e.stopPropagation();
                       e.preventDefault();
                       setNewCurrentHour(achievement.loggedAtHour);
+                      setActiveAchievement(achievement);
                     }}
                     onPointerDownCapture={(e) => {
                       e.stopPropagation();
