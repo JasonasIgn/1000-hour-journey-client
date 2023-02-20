@@ -1,15 +1,12 @@
 import { FC } from "react";
 import {
-  Box,
-  CircularProgress,
-  CircularProgressLabel,
   Flex,
   FlexProps,
   Heading,
   Text,
   Image,
-  IconButton,
   Icon,
+  Progress,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
 import Logo from "resources/logo.png";
@@ -37,15 +34,15 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       padding={4}
       cursor="pointer"
       _hover={{
-        boxShadow: 'inset 0px 0px 20px 0px var(--chakra-colors-brand-600)'
+        boxShadow: "inset 0px 0px 20px 0px var(--chakra-colors-brand-600)",
       }}
       transition="box-shadow 0.1s"
       {...rootBoxProps}
     >
       <Flex
-        width={144}
-        minWidth={144}
-        maxHeight={144}
+        width={146}
+        minWidth={146}
+        maxHeight={146}
         height="full"
         alignItems="center"
         justifyContent="center"
@@ -68,48 +65,30 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           maxHeight="full"
         />
       </Flex>
-      <Box ml={5}>
-        <Heading size="md">{journey.title}</Heading>
-        <Text fontSize="md">{journey.description}</Text>
-      </Box>
-      <Flex
-        ml="auto"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-        minWidth={92}
-      >
-        <Box height="90px">
-          <CircularProgress
-            thickness={6}
-            value={journey.totalHours / 10}
-            color="brand.300"
-            size="90px"
-            trackColor="gray.400"
-          >
-            <CircularProgressLabel color="white" fontSize="xl">
-              {Math.round(journey.totalHours * 10) / 100}%
-            </CircularProgressLabel>
-          </CircularProgress>
-        </Box>
-        <Flex flexDirection="column">
-          <Heading size="sm" as="h5" textAlign="center">
-            Hours spent
-          </Heading>
-          <Text textAlign="center" fontWeight={600}>
-            {journey.totalHours}
+      <Flex direction="column" ml={5} w="full" justifyContent="space-between">
+        <Flex direction="column">
+          <Heading size="md">{journey.title}</Heading>
+          <Text fontSize="md">{journey.description}</Text>
+        </Flex>
+        <Flex direction="column">
+          <Text textAlign="center" fontSize="14px">
+            {Math.round(journey.totalHours * 10) / 100}%
           </Text>
+          <Progress value={journey.totalHours / 10} size="lg" width="100%" />
         </Flex>
       </Flex>
-      <IconButton
-        icon={<Icon as={EditIcon} width="22px" height="22px" fill="gray.300" />}
-        aria-label="edit"
+      <Icon
+        as={EditIcon}
         position="absolute"
-        borderRadius="50%"
-        right="-20px"
-        color="brand.700"
-        border="1px solid"
-        top="-10px"
+        right="16px"
+        top="16px"
+        width="22px"
+        height="22px"
+        fill="gray.400"
+        _hover={{
+          color: "gray.100",
+          fill: "gray.100",
+        }}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
