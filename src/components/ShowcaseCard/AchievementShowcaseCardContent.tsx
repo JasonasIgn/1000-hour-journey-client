@@ -37,7 +37,7 @@ export const AchievementShowcaseCardContent: FC<
           colorScheme="brand"
           fontSize="16px"
           px={3}
-          color="gray.400"
+          color="gray.300"
           borderRadius={4}
         >
           {achievement.loggedAtHour} hours into the journey

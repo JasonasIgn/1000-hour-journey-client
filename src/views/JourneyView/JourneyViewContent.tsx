@@ -100,6 +100,7 @@ export const JourneyViewContent: FC = () => {
           setShiftDirection={setShiftDirection}
           setAddAchievementModalOpen={setAddAchievementModalOpen}
           addAchievementModalOpen={addAchievementModalOpen}
+          activeAchievement={activeAchievement}
         />
       </Flex>
       {activeLog && (
