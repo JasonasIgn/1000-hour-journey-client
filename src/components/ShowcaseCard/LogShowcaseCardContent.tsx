@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Flex,
   FlexProps,
@@ -7,6 +8,7 @@ import {
   TagLabel,
   Text,
   Badge,
+  Icon,
 } from "@chakra-ui/react";
 import format from "date-fns/format";
 import { LogExtended } from "store/features/journeys/types";
@@ -14,10 +16,12 @@ import { dateFormats } from "utils/constants";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
+  onEditLogClick: () => void;
 }
 
 export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   log,
+  onEditLogClick,
   ...rest
 }) => {
   return (
@@ -31,14 +35,10 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
         {...rest}
       >
         <Flex alignItems="center" direction="column" position="relative">
-          <Heading>Log #{log.number}</Heading>
-          <Heading size="sm" mt={2}>
-            {format(new Date(log.loggedOn), dateFormats.standart)}
-          </Heading>
           <Badge
             position="absolute"
             top={0}
-            right={0}
+            left={0}
             variant="solid"
             colorScheme="brand"
             fontSize="16px"
@@ -48,6 +48,24 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           >
             {log.hoursSpent} h
           </Badge>
+          <Heading>Log #{log.number}</Heading>
+          <Heading size="sm" mt={2}>
+            {format(new Date(log.loggedOn), dateFormats.standart)}
+          </Heading>
+          <Icon
+            as={EditIcon}
+            position="absolute"
+            top={0}
+            right={0}
+            cursor="pointer"
+            width="22px"
+            height="22px"
+            color="gray.400"
+            _hover={{
+              color: "gray.100",
+            }}
+            onClick={onEditLogClick}
+          />
         </Flex>
       </Flex>
       <Flex minHeight={0} width="full" height="full">
