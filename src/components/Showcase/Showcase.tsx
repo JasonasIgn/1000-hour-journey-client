@@ -10,12 +10,14 @@ interface ShowcaseProps {
   item?: LogExtended | Achievement;
   shiftDirection: ShiftDirection;
   defaultJourneyImageSrc?: string;
+  onEditAchievementClick: () => void;
 }
 
 export const Showcase: FC<ShowcaseProps> = ({
   item,
   shiftDirection,
   defaultJourneyImageSrc,
+  onEditAchievementClick,
 }) => {
   const cards = useAnimatedCards(shiftDirection, item);
 
@@ -36,6 +38,7 @@ export const Showcase: FC<ShowcaseProps> = ({
           transition="opacity 0.6s, transform 0.6s"
           transform={getTransformValue(index)}
           defaultJourneyImageSrc={defaultJourneyImageSrc}
+          onEditAchievementClick={onEditAchievementClick}
         />
       ))}
     </Flex>

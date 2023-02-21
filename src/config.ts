@@ -7,6 +7,8 @@ export const apiUrls = {
   createLog: `${API_BASE}/journey/{journeyId}/logs`,
   updateLog: `${API_BASE}/journey/{journeyId}/logs/{logId}`,
   logAchievement: `${API_BASE}/journey/{journeyId}/achievements`,
+  editAchievement: `${API_BASE}/journey/{journeyId}/achievements/{achievementId}`,
+  deleteAchievement: `${API_BASE}/journey/{journeyId}/achievements/{achievementId}`,
   updateJourney: `${API_BASE}/journeys/{journeyId}`,
   logStatistics: `${API_BASE}/logs/statistics`,
   getLogs: `${API_BASE}/logs`,

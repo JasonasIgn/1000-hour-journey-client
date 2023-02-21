@@ -1,4 +1,4 @@
-export interface AddJourneyAchievementFormData {
+export interface JourneyAchievementFormData {
   description: string;
   loggedOnDate: string;
   loggedAtHour: number;

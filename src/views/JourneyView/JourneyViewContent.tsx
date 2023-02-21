@@ -10,24 +10,35 @@ import {
   JourneyTimeLineControls,
 } from "components";
 import { getJourney } from "store/features/journeys/selectors";
-import { Achievement } from "store/features/journeys/types";
 import { useAppSelector } from "store/hooks";
 import { ShiftDirection } from "types";
-import { getLogBeginningsDictionary, getLogsDictionary } from "./utils";
+import {
+  getLogBeginningsDictionary,
+  getLogsDictionary,
+  getAchievementsDictionary,
+} from "./utils";
 import { JOURNEY_VIEW_X_PADDING } from "./constants";
+import { EditJourneyAchievementDialog } from "components/JourneyAchievementsDialogs";
 
 export const JourneyViewContent: FC = () => {
   const journey = useAppSelector(getJourney);
 
   const [activeLogId, setActiveLogId] = useState<number>();
-  const [activeAchievement, setActiveAchievement] = useState<Achievement>();
+  const [activeAchievementId, setActiveAchievementId] = useState<number>();
   const [shiftDirection, setShiftDirection] = useState<ShiftDirection>("left");
   const [addLogModalOpen, setAddLogModalOpen] = useState(false);
   const [addAchievementModalOpen, setAddAchievementModalOpen] = useState(false);
+  const [editAchievementModalOpen, setEditAchievementModalOpen] =
+    useState(false);
 
   const logsDictionary = useMemo(
     () => getLogsDictionary(journey?.logs || []),
     [journey?.logs]
+  );
+
+  const achievementsDictionary = useMemo(
+    () => getAchievementsDictionary(journey?.achievements || []),
+    [journey?.achievements]
   );
 
   const logBegginingsMap = useMemo(
@@ -36,6 +47,9 @@ export const JourneyViewContent: FC = () => {
   );
 
   const activeLog = activeLogId ? logsDictionary[activeLogId] : undefined;
+  const activeAchievement = activeAchievementId
+    ? achievementsDictionary[activeAchievementId]
+    : undefined;
 
   const openAddLogDialog = (e: MouseEvent) => {
     if (e.detail !== 0) {
@@ -71,6 +85,9 @@ export const JourneyViewContent: FC = () => {
               item={activeAchievement || activeLog}
               shiftDirection={shiftDirection}
               defaultJourneyImageSrc={journey.mediaUrl}
+              onEditAchievementClick={() => {
+                setEditAchievementModalOpen(true);
+              }}
             />
             <JourneyTimeLineControls
               activeLogId={activeLog?.id}
@@ -96,7 +113,7 @@ export const JourneyViewContent: FC = () => {
           journey={journey}
           activeLog={activeLog}
           setActiveLogId={setActiveLogId}
-          setActiveAchievement={setActiveAchievement}
+          setActiveAchievementId={setActiveAchievementId}
           setShiftDirection={setShiftDirection}
           setAddAchievementModalOpen={setAddAchievementModalOpen}
           addAchievementModalOpen={addAchievementModalOpen}
@@ -116,6 +133,14 @@ export const JourneyViewContent: FC = () => {
         journeyId={journey.id}
         activities={journey.activities}
       />
+      {activeAchievement && (
+        <EditJourneyAchievementDialog
+          open={editAchievementModalOpen}
+          setOpen={setEditAchievementModalOpen}
+          journeyId={journey.id}
+          achievement={activeAchievement}
+        />
+      )}
     </Flex>
   );
 };

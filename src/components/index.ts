@@ -1,4 +1,4 @@
-export * from "./AddJourneyAchivementDialog";
+export * from "./JourneyAchievementsDialogs";
 export * from "./JourneyDialogs";
 export * from "./FabButton";
 export * from "./SimpleHeader";
