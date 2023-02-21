@@ -1,16 +1,18 @@
 import { FC } from "react";
-import { Badge, Flex, FlexProps, Heading, Text } from "@chakra-ui/react";
+import { EditIcon } from "@chakra-ui/icons";
+import { Badge, Flex, FlexProps, Heading, Text, Icon } from "@chakra-ui/react";
 import format from "date-fns/format";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;
+  onEditClick: () => void;
 }
 
 export const AchievementShowcaseCardContent: FC<
   AchievementShowcaseCardContentProps
-> = ({ achievement, ...rest }) => {
+> = ({ achievement, onEditClick, ...rest }) => {
   return (
     <Flex w="full" height="full" direction="column">
       <Flex
@@ -26,6 +28,20 @@ export const AchievementShowcaseCardContent: FC<
           <Heading size="sm" mt={2}>
             {format(new Date(achievement.loggedOnDate), dateFormats.standart)}
           </Heading>
+          <Icon
+            as={EditIcon}
+            position="absolute"
+            top={0}
+            right={0}
+            cursor="pointer"
+            width="22px"
+            height="22px"
+            color="gray.400"
+            _hover={{
+              color: "gray.100",
+            }}
+            onClick={onEditClick}
+          />
         </Flex>
       </Flex>
       <Text wordBreak="break-word" whiteSpace="pre-line">

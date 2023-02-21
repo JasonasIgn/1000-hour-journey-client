@@ -13,11 +13,13 @@ import { getInitialImageSrc } from "./utils";
 interface ShowcaseCardProps extends FlexProps {
   item?: LogExtended | Achievement;
   defaultJourneyImageSrc?: string;
+  onEditAchievementClick: () => void;
 }
 
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   item,
   defaultJourneyImageSrc,
+  onEditAchievementClick,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
@@ -74,7 +76,10 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
           />
         )}
         {isItemAchievement && (
-          <AchievementShowcaseCardContent achievement={item as Achievement} />
+          <AchievementShowcaseCardContent
+            achievement={item as Achievement}
+            onEditClick={onEditAchievementClick}
+          />
         )}
       </Flex>
     </Paper>

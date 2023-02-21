@@ -40,7 +40,7 @@ interface JourneyTimeLineProps {
   journey: Journey;
   setActiveLogId: (id: number | undefined) => void;
   activeLog?: LogExtended;
-  setActiveAchievement: (achievement?: Achievement) => void;
+  setActiveAchievementId: (achievementId?: number) => void;
   setShiftDirection: (direction: ShiftDirection) => void;
   addAchievementModalOpen: boolean;
   setAddAchievementModalOpen: (open: boolean) => void;
@@ -51,7 +51,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   journey,
   setActiveLogId,
   activeLog,
-  setActiveAchievement,
+  setActiveAchievementId,
   setShiftDirection,
   addAchievementModalOpen,
   setAddAchievementModalOpen,
@@ -128,7 +128,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
       setActiveLogId(currentHourLog?.id);
     }
     if (activeAchievement && currentHour !== activeAchievement.loggedAtHour) {
-      setActiveAchievement(undefined);
+      setActiveAchievementId(undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentHour]);
@@ -218,7 +218,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                       e.stopPropagation();
                       e.preventDefault();
                       setNewCurrentHour(achievement.loggedAtHour);
-                      setActiveAchievement(achievement);
+                      setActiveAchievementId(achievement.id);
                     }}
                     onPointerDownCapture={(e) => {
                       e.stopPropagation();

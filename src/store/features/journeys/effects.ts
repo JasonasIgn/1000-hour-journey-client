@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AddJourneyAchievementFormData } from "components/AddJourneyAchivementDialog/types";
+import { JourneyAchievementFormData } from "components/JourneyAchievementsDialogs/types";
 import { JourneyActivityFormData } from "components/JourneyActivityDialogs/types";
 import { JourneyFormData } from "components/JourneyDialogs/types";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
@@ -73,7 +73,11 @@ export const createJourneyLogEffect = createAsyncThunk(
     try {
       const response = await axios.post<Log>(
         apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0], activities: getActivityIdsArray(activities) },
+        {
+          ...rest,
+          media: media?.[0],
+          activities: getActivityIdsArray(activities),
+        },
         {
           withCredentials: true,
           headers: {
@@ -94,13 +98,45 @@ export const logJourneyAchievementEffect = createAsyncThunk(
     data,
     journeyId,
   }: {
-    data: AddJourneyAchievementFormData;
+    data: JourneyAchievementFormData;
     journeyId: number;
   }) => {
     const { media, ...rest } = data;
     try {
       const response = await axios.post<Achievement>(
         apiUrls.logAchievement.replace("{journeyId}", journeyId.toString()),
+        { ...rest, media: media[0] },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);
+
+export const editJourneyAchievementEffect = createAsyncThunk(
+  "journeys/editAchievement",
+  async ({
+    data,
+    journeyId,
+    achievementId,
+  }: {
+    data: JourneyAchievementFormData;
+    journeyId: number;
+    achievementId: number;
+  }) => {
+    const { media, ...rest } = data;
+    try {
+      const response = await axios.patch<Achievement>(
+        apiUrls.editAchievement
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{achievementId}", achievementId.toString()),
         { ...rest, media: media[0] },
         {
           withCredentials: true,
@@ -133,7 +169,11 @@ export const updateJourneyLogEffect = createAsyncThunk(
         apiUrls.updateLog
           .replace("{journeyId}", journeyId.toString())
           .replace("{logId}", logId.toString()),
-        { ...rest, media: media?.[0], activities: getActivityIdsArray(activities) },
+        {
+          ...rest,
+          media: media?.[0],
+          activities: getActivityIdsArray(activities),
+        },
         {
           withCredentials: true,
           headers: {

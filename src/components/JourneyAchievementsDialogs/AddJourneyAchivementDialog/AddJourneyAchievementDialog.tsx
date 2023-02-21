@@ -21,8 +21,8 @@ import {
   InputField,
   UploadField,
 } from "components";
-import { AddJourneyAchievementFormData } from "./types";
-import { addJourneyAchievementFormValidation } from "./validation";
+import { JourneyAchievementFormData } from "../types";
+import { addJourneyAchievementFormValidation } from "../validation";
 import { LogExtended } from "store/features/journeys/types";
 import { logJourneyAchievementEffect } from "store/features/journeys/effects";
 import { dateFormats } from "utils/constants";
@@ -40,7 +40,7 @@ export const AddJourneyAchievementDialog: FC<
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState, control, reset, setValue } =
-    useForm<AddJourneyAchievementFormData>({
+    useForm<JourneyAchievementFormData>({
       defaultValues: {
         loggedOnDate: format(
           new Date(activeLog.loggedOn),
@@ -51,7 +51,7 @@ export const AddJourneyAchievementDialog: FC<
       resolver: yupResolver(addJourneyAchievementFormValidation),
     });
   const { isSubmitting, errors } = formState;
-  const onSubmit = async (data: AddJourneyAchievementFormData) => {
+  const onSubmit = async (data: JourneyAchievementFormData) => {
     try {
       await dispatch(logJourneyAchievementEffect({ data, journeyId }));
       setOpen(false);
