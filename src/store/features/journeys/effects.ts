@@ -152,6 +152,31 @@ export const editJourneyAchievementEffect = createAsyncThunk(
   }
 );
 
+export const deleteJourneyAchievementEffect = createAsyncThunk(
+  "journeys/deleteAchievement",
+  async ({
+    journeyId,
+    achievementId,
+  }: {
+    journeyId: number;
+    achievementId: number;
+  }) => {
+    try {
+      const response = await axios.delete<Achievement>(
+        apiUrls.deleteAchievement
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{achievementId}", achievementId.toString()),
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+    }
+  }
+);
+
 export const updateJourneyLogEffect = createAsyncThunk(
   "journeys/updateLog",
   async ({

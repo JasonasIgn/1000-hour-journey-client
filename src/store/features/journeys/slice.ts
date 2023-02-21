@@ -12,6 +12,7 @@ import {
   updateJourneyEffect,
   updateJourneyLogEffect,
   editJourneyAchievementEffect,
+  deleteJourneyAchievementEffect,
 } from "./effects";
 import { Journey, JourneyListItem } from "./types";
 
@@ -85,6 +86,17 @@ export const journeysSlice = createSlice({
           state.journey.achievements[updatedActivityIndex] = payload;
         }
       })
+      .addCase(
+        deleteJourneyAchievementEffect.fulfilled,
+        (state, { meta: { arg } }) => {
+          const { achievementId } = arg;
+          if (state.journey) {
+            state.journey.achievements = state.journey.achievements.filter(
+              (achievement) => achievement.id !== achievementId
+            );
+          }
+        }
+      )
       .addCase(updateJourneyLogEffect.fulfilled, (state, action) => {
         if (state.journey && action.payload) {
           const updatedLogIndex = state.journey.logs.findIndex(

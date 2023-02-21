@@ -24,7 +24,10 @@ import {
 import { JourneyAchievementFormData } from "../types";
 import { addJourneyAchievementFormValidation } from "../validation";
 import { Achievement } from "store/features/journeys/types";
-import { editJourneyAchievementEffect } from "store/features/journeys/effects";
+import {
+  deleteJourneyAchievementEffect,
+  editJourneyAchievementEffect,
+} from "store/features/journeys/effects";
 import { dateFormats } from "utils/constants";
 
 interface EditJourneyAchievementDialogProps {
@@ -57,9 +60,23 @@ export const EditJourneyAchievementDialog: FC<
         editJourneyAchievementEffect({
           data,
           journeyId,
-          achievementId: achievement?.id || 0,
+          achievementId: achievement.id,
         })
       );
+      setOpen(false);
+    } catch (e) {
+      console.error("Caught error", e);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(
+        deleteJourneyAchievementEffect({
+          journeyId,
+          achievementId: achievement.id,
+        })
+      ).unwrap();
       setOpen(false);
     } catch (e) {
       console.error("Caught error", e);
@@ -140,6 +157,9 @@ export const EditJourneyAchievementDialog: FC<
         </ModalBody>
 
         <ModalFooter>
+          <Button mr="auto" onClick={handleDelete} variant="warning">
+            Delete
+          </Button>
           <Button mr={3} onClick={() => setOpen(false)}>
             Close
           </Button>
