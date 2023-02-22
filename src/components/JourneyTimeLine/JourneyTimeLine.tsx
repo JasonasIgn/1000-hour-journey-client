@@ -105,17 +105,20 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
   }, []);
 
-  const centerZoomOnThumb = (hour: number) => {
-    // TODO: fix zooming on lower than < 1000 px screen with
-    const scale = currentScale / zoomUnit;
-    const xPosition = getZoomXPosition(hour, containerOuterWidth);
-    pinchZoomRef.current?.alignCenter({
-      x: xPosition,
-      y: 0,
-      scale,
-      animated: true,
-    });
-  };
+  const centerZoomOnThumb = useCallback(
+    (hour: number) => {
+      // TODO: fix zooming on lower than < 1000 px screen with
+      const scale = currentScale / zoomUnit;
+      const xPosition = getZoomXPosition(hour, containerOuterWidth);
+      pinchZoomRef.current?.alignCenter({
+        x: xPosition,
+        y: 0,
+        scale,
+        animated: true,
+      });
+    },
+    [containerOuterWidth, currentScale, zoomUnit]
+  );
 
   useEffect(() => {
     centerZoomOnThumb(currentHour);
@@ -145,6 +148,14 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeLog]);
+
+  useEffect(() => {
+    if (activeAchievement) {
+      setNewCurrentHour(activeAchievement.loggedAtHour);
+      centerZoomOnThumb(activeAchievement.loggedAtHour);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeAchievement, centerZoomOnThumb]);
 
   useEffect(() => {
     setNewCurrentHour(journey.totalHours - 0.1);
@@ -217,7 +228,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
-                      setNewCurrentHour(achievement.loggedAtHour);
                       setActiveAchievementId(achievement.id);
                     }}
                     onPointerDownCapture={(e) => {

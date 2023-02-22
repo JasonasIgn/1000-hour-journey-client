@@ -106,6 +106,9 @@ export const JourneyViewContent: FC = () => {
               activities={journey.activities}
               openAddLogDialog={openAddLogDialog}
               openAddAchievementDialog={openAddAchievementDialog}
+              achievements={journey.achievements}
+              setActiveAchievementId={setActiveAchievementId}
+              activeAchievement={activeAchievement}
             />
           </Flex>
         </Flex>

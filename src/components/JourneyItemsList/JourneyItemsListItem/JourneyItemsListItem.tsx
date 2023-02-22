@@ -1,16 +1,17 @@
 import { FlexProps, forwardRef, Heading, Text } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
-import { Log } from "store/features/journeys/types";
+import { Achievement, Log } from "store/features/journeys/types";
 
 interface JourneyItemsListItemProps extends FlexProps {
-  log: Log;
+  item: Log | Achievement;
   index: number;
   active: boolean;
 }
 
 export const JourneyItemsListItem = forwardRef(
-  ({ log, index, active, ...rest }: JourneyItemsListItemProps, ref) => (
+  ({ item, index, active, ...rest }: JourneyItemsListItemProps, ref) => (
     <Paper
+      level={active ? 2 : 1}
       w="full"
       border="1px solid"
       borderColor="brand.200"
@@ -22,7 +23,6 @@ export const JourneyItemsListItem = forwardRef(
       py={1}
       align="center"
       cursor="pointer"
-      bg={active ? "brand.700" : "transparent"}
       _hover={{
         boxShadow: "inset 0px 0px 10px 0px var(--chakra-colors-brand-500)",
       }}
@@ -39,7 +39,7 @@ export const JourneyItemsListItem = forwardRef(
         overflow="hidden"
         whiteSpace="nowrap"
       >
-        {log.description}
+        {item.description}
       </Text>
     </Paper>
   )
