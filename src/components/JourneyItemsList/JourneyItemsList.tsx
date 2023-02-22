@@ -71,7 +71,14 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
     );
   }, [logs, filterActivities]);
 
-  const isListEmpty = filteredLogs.length === 0;
+  const sortedAchievements = useMemo(() => {
+    return [...achievements].sort((a1, a2) =>
+      a1.loggedAtHour > a2.loggedAtHour ? 1 : -1
+    );
+  }, [achievements]);
+
+  const isListEmpty =
+    listType === "logs" ? filteredLogs.length === 0 : achievements.length === 0;
 
   return (
     <Paper direction="column" w="full" sx={{ borderRadius: 0 }}>
@@ -86,6 +93,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
           <Tab
             onClick={() => {
               setListType("logs");
+              setFilterActivities([]);
             }}
           >
             Logs
@@ -147,7 +155,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
               </Heading>
             </Flex>
           )}
-          {(listType === "logs" ? filteredLogs : achievements).map(
+          {(listType === "logs" ? filteredLogs : sortedAchievements).map(
             (item, idx) => (
               <JourneyItemsListItem
                 item={item}
