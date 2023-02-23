@@ -30,10 +30,14 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
     month: new Date().getMonth() + 1,
   });
   const [displayUnit, setDisplayUnit] = useState<StatisticsDisplayUnit>("day");
-  const logsChartData = useLogsChartData({ displayUnit, query });
+  const [logsChartData, loading] = useLogsChartData({ displayUnit, query });
   return (
     <Flex direction="column" alignItems="center">
-      <StatisticsDatePicker query={query} setQuery={setQuery} />
+      <StatisticsDatePicker
+        query={query}
+        setQuery={setQuery}
+        loading={loading}
+      />
       <Flex>
         <BarChart width={1010} height={300} data={logsChartData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -55,7 +59,9 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
         >
           <TabList width={100} ml="10px">
             {displayUnits.map((unit) => (
-              <Tab key={unit.unit}>{unit.name}</Tab>
+              <Tab key={unit.unit} isDisabled={loading}>
+                {unit.name}
+              </Tab>
             ))}
           </TabList>
         </Tabs>

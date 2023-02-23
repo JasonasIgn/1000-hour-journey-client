@@ -15,14 +15,17 @@ interface UseLogsChartDataProps {
   query: DateQuery;
 }
 
-export const useLogsChartData = (props: UseLogsChartDataProps) => {
+export const useLogsChartData = (
+  props: UseLogsChartDataProps
+): [ChartLogData[] | undefined, boolean] => {
+  const [loading, setLoading] = useState(false);
   const { displayUnit, query } = props;
 
   const [chartData, setChartData] = useState<ChartLogData[]>();
-  const [rawData, setRawData] = useState<Log[]>();
 
   const fetchLogs = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await axios.get<Log[]>(apiUrls.getLogs, {
         params: {
           ...query,
@@ -30,31 +33,25 @@ export const useLogsChartData = (props: UseLogsChartDataProps) => {
         },
         withCredentials: true,
       });
-      setRawData(response.data);
+      if (displayUnit === "day") {
+        setChartData(transformDataForChartMonthDays(response.data, query));
+      }
+      if (displayUnit === "week") {
+        setChartData(transformDataForChartMonthWeeks(response.data, query));
+      }
+      if (displayUnit === "month") {
+        setChartData(transformDataForChartYearMonths(response.data, query));
+      }
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       console.log("error:", e);
     }
   }, [displayUnit, query]);
 
   useEffect(() => {
-    if (rawData) {
-      if (displayUnit === "day") {
-        setChartData(transformDataForChartMonthDays(rawData, query));
-      }
-      if (displayUnit === "week") {
-        setChartData(transformDataForChartMonthWeeks(rawData, query));
-      }
-      if (displayUnit === "month") {
-        setChartData(transformDataForChartYearMonths(rawData, query));
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [displayUnit, rawData]);
-
-  useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
 
-  return chartData;
+  return [chartData, loading];
 };

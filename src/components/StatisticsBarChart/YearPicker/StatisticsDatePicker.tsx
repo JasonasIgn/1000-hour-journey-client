@@ -6,11 +6,13 @@ import { DateQuery } from "views/DashboardLogsView/types";
 interface StatisticsDatePickerProps {
   query: DateQuery;
   setQuery: Dispatch<SetStateAction<DateQuery>>;
+  loading: boolean;
 }
 
 export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
   query,
   setQuery,
+  loading,
 }) => {
   return (
     <Flex mb={2}>
@@ -18,6 +20,7 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
         <Text textAlign="center">Year</Text>
         <Flex height={50} alignItems="center">
           <IconButton
+            isDisabled={loading}
             icon={<ArrowBackIcon />}
             aria-label="Back in years"
             onClick={() => {
@@ -30,6 +33,7 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
             </Text>
           </Flex>
           <IconButton
+            isDisabled={loading}
             icon={<ArrowForwardIcon />}
             aria-label="Forward in years"
             onClick={() => {
@@ -42,6 +46,7 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
         <Text textAlign="center">Month</Text>
         <Flex height={50} alignItems="center">
           <IconButton
+            isDisabled={loading}
             icon={<ArrowBackIcon />}
             aria-label="Back in months"
             onClick={() => {
@@ -56,6 +61,7 @@ export const StatisticsDatePicker: FC<StatisticsDatePickerProps> = ({
             <Text color="gray.100">{query.month}</Text>
           </Flex>
           <IconButton
+            isDisabled={loading}
             icon={<ArrowForwardIcon />}
             aria-label="Forward in months"
             onClick={() => {
