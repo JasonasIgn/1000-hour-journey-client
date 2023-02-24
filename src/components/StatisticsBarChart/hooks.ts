@@ -1,25 +1,40 @@
 import axios from "axios";
 import { apiUrls } from "config";
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { Log } from "store/features/journeys/types";
 import { ChartLogData, DateQuery } from "views/DashboardLogsView/types";
 import { StatisticsDisplayUnit } from "./types";
-import {
-  transformDataForChartMonthDays,
-  transformDataForChartMonthWeeks,
-  transformDataForChartYearMonths,
-} from "./utils";
+import { getTransformedData } from "./utils";
 
 interface UseLogsChartDataProps {
   displayUnit: StatisticsDisplayUnit;
+}
+
+interface UseLogsChartDataType {
+  data: ChartLogData[] | undefined;
+  loading: boolean;
   query: DateQuery;
+  monthsEnabled: boolean;
+  setQuery: Dispatch<SetStateAction<DateQuery>>;
+  setMonthsEnabled: Dispatch<SetStateAction<boolean>>;
 }
 
 export const useLogsChartData = (
   props: UseLogsChartDataProps
-): [ChartLogData[] | undefined, boolean] => {
+): UseLogsChartDataType => {
+  const [query, setQuery] = useState<DateQuery>({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+  const [monthsEnabled, setMonthsEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
-  const { displayUnit, query } = props;
+  const { displayUnit } = props;
 
   const [chartData, setChartData] = useState<ChartLogData[]>();
 
@@ -29,29 +44,31 @@ export const useLogsChartData = (
       const response = await axios.get<Log[]>(apiUrls.getLogs, {
         params: {
           ...query,
-          month: displayUnit !== "month" ? query.month : undefined,
+          month:
+            displayUnit !== "month" && monthsEnabled ? query.month : undefined,
         },
         withCredentials: true,
       });
-      if (displayUnit === "day") {
-        setChartData(transformDataForChartMonthDays(response.data, query));
-      }
-      if (displayUnit === "week") {
-        setChartData(transformDataForChartMonthWeeks(response.data, query));
-      }
-      if (displayUnit === "month") {
-        setChartData(transformDataForChartYearMonths(response.data, query));
-      }
+      setChartData(
+        getTransformedData(response.data, query, monthsEnabled, displayUnit)
+      );
       setLoading(false);
     } catch (e) {
       setLoading(false);
       console.log("error:", e);
     }
-  }, [displayUnit, query]);
+  }, [displayUnit, monthsEnabled, query]);
 
   useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
 
-  return [chartData, loading];
+  return {
+    data: chartData,
+    loading,
+    query,
+    setQuery,
+    setMonthsEnabled,
+    monthsEnabled,
+  };
 };

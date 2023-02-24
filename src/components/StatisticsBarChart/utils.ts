@@ -1,6 +1,37 @@
 import { Log } from "store/features/journeys/types";
 import format from "date-fns/format";
 import { ChartLogData, DateQuery } from "views/DashboardLogsView/types";
+import { StatisticsDisplayUnit } from "./types";
+
+export const getTransformedData = (
+  data: Log[],
+  query: DateQuery,
+  monthsEnabled: boolean,
+  displayUnit: StatisticsDisplayUnit
+): ChartLogData[] => {
+  if (displayUnit === "month") {
+    return transformDataForChartYearMonths(data, query);
+  }
+  if (monthsEnabled) {
+    if (displayUnit === "day") {
+      return transformDataForChartMonthDays(data, query);
+    }
+    if (displayUnit === "week") {
+      return transformDataForChartMonthWeeks(data, query);
+    }
+  }
+
+  if (!monthsEnabled) {
+    if (displayUnit === "day") {
+      return transformDataForChartYearDays(data, query);
+    }
+    if (displayUnit === "week") {
+      return transformDataForChartYearWeeks(data, query);
+    }
+  }
+
+  return [];
+};
 
 export const transformDataForChartMonthDays = (
   logs: Log[],
@@ -22,6 +53,61 @@ export const transformDataForChartMonthDays = (
         Math.round(
           (result[formattedDateIndex].hoursSpent + log.hoursSpent) * 100
         ) / 100;
+    }
+  });
+  return Object.values(result);
+};
+
+function getDaysIntoYear(date: Date) {
+  return (
+    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
+      Date.UTC(date.getFullYear(), 0, 0)) /
+    24 /
+    60 /
+    60 /
+    1000
+  );
+}
+
+export const transformDataForChartYearDays = (
+  logs: Log[],
+  query: DateQuery
+): ChartLogData[] => {
+  const DAYS_IN_YEAR = 365;
+  const result: { [index: number]: ChartLogData } = {};
+  for (let i = 1; i <= DAYS_IN_YEAR; i++) {
+    result[i] = { name: i.toString(), hoursSpent: 0 };
+  }
+
+  logs.forEach((log) => {
+    const dayIntoYear = getDaysIntoYear(new Date(log.loggedOn));
+    console.log(getDaysIntoYear(new Date(log.loggedOn)));
+    if (result[dayIntoYear]) {
+      result[dayIntoYear].hoursSpent =
+        Math.round((result[dayIntoYear].hoursSpent + log.hoursSpent) * 100) /
+        100;
+    }
+  });
+  return Object.values(result);
+};
+
+export const transformDataForChartYearWeeks = (
+  logs: Log[],
+  query: DateQuery
+): ChartLogData[] => {
+  const WEEKS_IN_YEAR = 53;
+  const result: { [index: number]: ChartLogData } = {};
+  for (let i = 1; i <= WEEKS_IN_YEAR; i++) {
+    result[i] = { name: i.toString(), hoursSpent: 0 };
+  }
+
+  logs.forEach((log) => {
+    const dayIntoYear = getDaysIntoYear(new Date(log.loggedOn));
+    const weekOfTheYear = Math.ceil(dayIntoYear / 7);
+    if (result[weekOfTheYear]) {
+      result[weekOfTheYear].hoursSpent =
+        Math.round((result[weekOfTheYear].hoursSpent + log.hoursSpent) * 100) /
+        100;
     }
   });
   return Object.values(result);
