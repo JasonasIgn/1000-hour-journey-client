@@ -9,7 +9,6 @@ import {
   Legend,
   Bar,
 } from "recharts";
-import { DateQuery } from "views/DashboardLogsView/types";
 import { useLogsChartData } from "./hooks";
 import { StatisticsDisplayUnit } from "./types";
 import { StatisticsDatePicker } from "./YearPicker/StatisticsDatePicker";
@@ -20,26 +19,23 @@ const displayUnits: { name: string; unit: StatisticsDisplayUnit }[] = [
   { name: "Months", unit: "month" },
 ];
 
-interface StatisticsBarChartProps {
-  url?: string;
-}
-
-export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
-  const [query, setQuery] = useState<DateQuery>({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-  });
+export const StatisticsBarChart: FC = () => {
   const [displayUnit, setDisplayUnit] = useState<StatisticsDisplayUnit>("day");
-  const [logsChartData, loading] = useLogsChartData({ displayUnit, query });
+  const { data, loading, query, setQuery, monthsEnabled, setMonthsEnabled } =
+    useLogsChartData({ displayUnit });
+
   return (
     <Flex direction="column" alignItems="center">
       <StatisticsDatePicker
         query={query}
         setQuery={setQuery}
         loading={loading}
+        monthsEnabled={monthsEnabled}
+        setMonthsEnabled={setMonthsEnabled}
+        shouldDisableMonthsCheckbox={displayUnit === "month"}
       />
       <Flex>
-        <BarChart width={1010} height={300} data={logsChartData}>
+        <BarChart width={1010} height={300} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
@@ -55,7 +51,12 @@ export const StatisticsBarChart: FC<StatisticsBarChartProps> = ({ url }) => {
           orientation="vertical"
           variant="soft-rounded"
           defaultIndex={0}
-          onChange={(idx) => setDisplayUnit(displayUnits[idx].unit)}
+          onChange={(idx) => {
+            setDisplayUnit(displayUnits[idx].unit);
+            if (displayUnits[idx].unit === "month") {
+              setMonthsEnabled(false);
+            }
+          }}
         >
           <TabList width={100} ml="10px">
             {displayUnits.map((unit) => (
