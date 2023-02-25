@@ -11,17 +11,19 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import format from "date-fns/format";
-import { LogExtended } from "store/features/journeys/types";
+import { Activity, LogExtended } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
 
 interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
   onEditLogClick: () => void;
+  activitiesDictionary: Record<number, Activity>;
 }
 
 export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   log,
   onEditLogClick,
+  activitiesDictionary,
   ...rest
 }) => {
   return (
@@ -76,7 +78,9 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
               <Flex>
                 {log.activities.map((activity) => (
                   <Tag key={activity.id} variant="subtle" mr={2}>
-                    <TagLabel>{activity.name}</TagLabel>
+                    <TagLabel>
+                      {activitiesDictionary[activity.id].name}
+                    </TagLabel>
                   </Tag>
                 ))}
               </Flex>

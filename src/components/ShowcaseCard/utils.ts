@@ -1,7 +1,12 @@
-import { Achievement, LogExtended } from "store/features/journeys/types";
+import {
+  Achievement,
+  Activity,
+  LogExtended,
+} from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
 
 export const getInitialImageSrc = (
+  activitiesDictionary: Record<number, Activity>,
   item?: LogExtended | Achievement,
   defaultJourneyImageSrc?: string
 ) => {
@@ -10,10 +15,12 @@ export const getInitialImageSrc = (
   }
 
   if ((item as LogExtended)?.activities?.length > 0) {
-    if ((item as LogExtended).activities[0].mediaUrl) {
-      return `${getImageSrc((item as LogExtended).activities[0].mediaUrl)}?${(
-        item as LogExtended
-      ).activities[0].updatedAt.toString()}`;
+    const logActivity =
+      activitiesDictionary[(item as LogExtended).activities[0].id];
+    if (logActivity.mediaUrl) {
+      return `${getImageSrc(
+        logActivity.mediaUrl
+      )}?${logActivity.updatedAt.toString()}`;
     }
   }
 
