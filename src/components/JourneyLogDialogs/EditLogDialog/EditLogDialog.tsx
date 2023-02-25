@@ -33,8 +33,9 @@ import { dateFormats } from "utils/constants";
 import { LogExtended, Activity } from "store/features/journeys/types";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
 import { getEditLogDialogOpen } from "store/features/journey/selectors";
-import { getActivityOption, getActivityOptions } from "../utils";
+import { getActivityOption, getActivityOptionsFromIds } from "../utils";
 import { Option } from "types";
+import { getActivitiesDictionary } from "store/features/journeys/utils";
 
 interface EditLogDialogProps {
   journeyId: number;
@@ -48,6 +49,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
   activities,
 }) => {
   const dispatch = useAppDispatch();
+  const activitiesDictionary = getActivitiesDictionary(activities);
   const open = useAppSelector(getEditLogDialogOpen);
 
   const handleClose = () => {
@@ -67,7 +69,10 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
       hoursSpent: log.hoursSpent,
       description: log.description,
-      activities: getActivityOptions(log.activities),
+      activities: getActivityOptionsFromIds(
+        log.activities,
+        activitiesDictionary
+      ),
     },
     resolver: yupResolver(journeyLogFormValidation),
   });
@@ -88,7 +93,10 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         loggedOn: format(new Date(log.loggedOn), dateFormats.standart),
         hoursSpent: log.hoursSpent,
         description: log.description,
-        activities: getActivityOptions(log.activities),
+        activities: getActivityOptionsFromIds(
+          log.activities,
+          activitiesDictionary
+        ),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -169,7 +177,10 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
             </GridItem>
             <GridItem colSpan={2}>
               <CreatableSelectField<Option>
-                options={getActivityOptions(activities)}
+                options={getActivityOptionsFromIds(
+                  activities,
+                  activitiesDictionary
+                )}
                 control={control as any}
                 name="activities"
                 label="Activities"

@@ -4,6 +4,8 @@ import { Journey } from "store/features/journeys/types";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { getPieChartData } from "./utils";
 import { Paper } from "components/Paper";
+import { getCurrentJourneyActivitiesDictionary } from "store/features/journeys/selectors";
+import { useAppSelector } from "store/hooks";
 
 const COLORS = [
   "#182747",
@@ -52,10 +54,13 @@ interface GeneralJourneyInfoProps {
 export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
   journey,
 }) => {
+  const activitiesDictionary = useAppSelector(
+    getCurrentJourneyActivitiesDictionary
+  );
   const isLogsEmpty = journey.logs.length === 0;
   const pieChartData = useMemo(
-    () => getPieChartData(journey.logs),
-    [journey.logs]
+    () => getPieChartData(journey.logs, activitiesDictionary),
+    [activitiesDictionary, journey.logs]
   );
 
   return (

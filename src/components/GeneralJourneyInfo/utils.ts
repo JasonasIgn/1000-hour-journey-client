@@ -1,4 +1,4 @@
-import { Log } from "store/features/journeys/types";
+import { Activity, Log } from "store/features/journeys/types";
 
 interface DataType {
   [activityName: string]: {
@@ -7,7 +7,10 @@ interface DataType {
   };
 }
 
-export const getPieChartData = (logs: Log[]) => {
+export const getPieChartData = (
+  logs: Log[],
+  activitiesDictionary: Record<number, Activity>
+) => {
   const data: DataType = {};
   logs.forEach((log) => {
     if (log.activities.length === 0) {
@@ -23,7 +26,8 @@ export const getPieChartData = (logs: Log[]) => {
       return;
     }
     const timePerActivity = log.hoursSpent / log.activities.length;
-    log.activities.forEach((activity) => {
+    log.activities.forEach((idObject) => {
+      const activity = activitiesDictionary[idObject.id];
       if (data[activity.name] !== undefined) {
         data[activity.name].value =
           Math.round((data[activity.name].value + timePerActivity) * 100) / 100;

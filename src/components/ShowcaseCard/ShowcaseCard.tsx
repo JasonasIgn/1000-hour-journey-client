@@ -3,7 +3,11 @@ import { Paper } from "components/Paper";
 import { FC } from "react";
 import { setViewedImageSrc } from "store/features/app/slice";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
-import { Achievement, LogExtended } from "store/features/journeys/types";
+import {
+  Achievement,
+  Activity,
+  LogExtended,
+} from "store/features/journeys/types";
 import { useAppDispatch } from "store/hooks";
 import { AchievementShowcaseCardContent } from "./AchievementShowcaseCardContent";
 import { SHOWCASE_CARD_WIDTH_PX } from "./constants";
@@ -14,16 +18,22 @@ interface ShowcaseCardProps extends FlexProps {
   item?: LogExtended | Achievement;
   defaultJourneyImageSrc?: string;
   onEditAchievementClick: () => void;
+  activitiesDictionary: Record<number, Activity>;
 }
 
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   item,
   defaultJourneyImageSrc,
   onEditAchievementClick,
+  activitiesDictionary,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
-  const itemImageSrc = getInitialImageSrc(item, defaultJourneyImageSrc);
+  const itemImageSrc = getInitialImageSrc(
+    activitiesDictionary,
+    item,
+    defaultJourneyImageSrc
+  );
   const isItemLog = Boolean((item as LogExtended)?.hoursSpent);
   const isItemAchievement = Boolean((item as Achievement)?.loggedOnDate);
 
@@ -73,6 +83,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
           <LogShowcaseCardContent
             log={item as LogExtended}
             onEditLogClick={onEditLogClick}
+            activitiesDictionary={activitiesDictionary}
           />
         )}
         {isItemAchievement && (

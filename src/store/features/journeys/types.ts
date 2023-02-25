@@ -18,6 +18,10 @@ export interface Activity {
   mediaUrl?: string;
 }
 
+export interface Id {
+  id: number;
+}
+
 export interface Log {
   id: number;
   journeyId: number;
@@ -27,7 +31,7 @@ export interface Log {
   loggedOn: Date;
   mediaUrl?: string;
   updatedAt: Date;
-  activities: Activity[];
+  activities: Id[];
 }
 
 export interface LogExtended extends Log {

@@ -5,6 +5,8 @@ import { ShiftDirection } from "types";
 import { ShowcaseCard } from "components";
 import { useAnimatedCards } from "./hooks";
 import { getTransformValue } from "./utils";
+import { useAppSelector } from "store/hooks";
+import { getCurrentJourneyActivitiesDictionary } from "store/features/journeys/selectors";
 
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
@@ -20,6 +22,9 @@ export const Showcase: FC<ShowcaseProps> = ({
   onEditAchievementClick,
 }) => {
   const cards = useAnimatedCards(shiftDirection, item);
+  const activitiesDictionary = useAppSelector(
+    getCurrentJourneyActivitiesDictionary
+  );
 
   return (
     <Flex
@@ -39,6 +44,7 @@ export const Showcase: FC<ShowcaseProps> = ({
           transform={getTransformValue(index)}
           defaultJourneyImageSrc={defaultJourneyImageSrc}
           onEditAchievementClick={onEditAchievementClick}
+          activitiesDictionary={activitiesDictionary}
         />
       ))}
     </Flex>
