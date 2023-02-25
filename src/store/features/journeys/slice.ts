@@ -13,6 +13,7 @@ import {
   updateJourneyLogEffect,
   editJourneyAchievementEffect,
   deleteJourneyAchievementEffect,
+  deleteJourneyLogEffect,
 } from "./effects";
 import { Journey, JourneyListItem } from "./types";
 
@@ -98,10 +99,21 @@ export const journeysSlice = createSlice({
         }
       )
       .addCase(updateJourneyLogEffect.fulfilled, (state, action) => {
+        const updatedHoursSpent = action.meta.arg.data?.hoursSpent;
         if (state.journey && action.payload) {
           const updatedLogIndex = state.journey.logs.findIndex(
             (log) => log.id === action.payload?.id
           );
+          const originalHoursSpent =
+            state.journey.logs[updatedLogIndex].hoursSpent;
+          if (originalHoursSpent && updatedHoursSpent) {
+            state.journey.totalHours =
+              Math.round(
+                (state.journey.totalHours +
+                  (updatedHoursSpent - originalHoursSpent)) *
+                  10
+              ) / 10;
+          }
           state.journey.logs[updatedLogIndex] = action.payload;
         }
       })
@@ -144,7 +156,19 @@ export const journeysSlice = createSlice({
             });
           }
         }
-      );
+      )
+      .addCase(deleteJourneyLogEffect.fulfilled, (state, { meta: { arg } }) => {
+        const { logId } = arg;
+        if (state.journey) {
+          const deletedLog = state.journey.logs.find((log) => log.id === logId);
+          state.journey.logs = state.journey.logs.filter(
+            (log) => log.id !== logId
+          );
+          if (deletedLog) {
+            state.journey.totalHours -= deletedLog.hoursSpent;
+          }
+        }
+      });
   },
 });
 

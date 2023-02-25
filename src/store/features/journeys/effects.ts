@@ -322,3 +322,23 @@ export const deleteJourneyActivityEffect = createAsyncThunk(
     }
   }
 );
+
+export const deleteJourneyLogEffect = createAsyncThunk(
+  "journeys/deleteJourneyLog",
+  async ({ journeyId, logId }: { journeyId: number; logId: number }) => {
+    try {
+      const response = await axios.delete<Activity>(
+        apiUrls.deleteLog
+          .replace("{journeyId}", journeyId.toString())
+          .replace("{logId}", logId.toString()),
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
+    }
+  }
+);

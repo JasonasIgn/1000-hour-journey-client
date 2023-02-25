@@ -25,6 +25,7 @@ import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
 import {
   createJourneyActivityEffect,
+  deleteJourneyLogEffect,
   updateJourneyLogEffect,
 } from "store/features/journeys/effects";
 import { useEffect, FC } from "react";
@@ -102,9 +103,26 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
           journeyId,
         })
       ).unwrap();
-      setValue("activities", [...currentValue, getActivityOption(createdActivity)]);
+      setValue("activities", [
+        ...currentValue,
+        getActivityOption(createdActivity),
+      ]);
     } catch (e) {
       console.error("Error creating activity", e);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(
+        deleteJourneyLogEffect({
+          journeyId,
+          logId: log.id,
+        })
+      ).unwrap();
+      handleClose();
+    } catch (e) {
+      console.error("Caught error", e);
     }
   };
 
@@ -174,6 +192,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         </ModalBody>
 
         <ModalFooter>
+          <Button mr="auto" onClick={handleDelete} variant="warning">
+            Delete
+          </Button>
           <Button mr={3} onClick={handleClose}>
             Close
           </Button>

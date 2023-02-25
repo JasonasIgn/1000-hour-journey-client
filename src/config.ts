@@ -12,6 +12,7 @@ export const apiUrls = {
   updateJourney: `${API_BASE}/journeys/{journeyId}`,
   logStatistics: `${API_BASE}/logs/statistics`,
   getLogs: `${API_BASE}/logs`,
+  deleteLog: `${API_BASE}/journey/{journeyId}/logs/{logId}`,
   isLoggedIn: `${API_BASE}/amILoggedIn`,
   login: `${API_BASE}/login`,
   logout: `${API_BASE}/logout`,
