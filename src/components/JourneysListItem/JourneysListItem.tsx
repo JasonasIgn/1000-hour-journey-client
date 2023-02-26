@@ -30,7 +30,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
     <Paper
       level={1}
       position="relative"
-      height={180}
+      height={160}
       padding={4}
       cursor="pointer"
       _hover={{
@@ -40,9 +40,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       {...rootBoxProps}
     >
       <Flex
-        width={146}
-        minWidth={146}
-        maxHeight={146}
+        width={126}
+        minWidth={126}
+        maxHeight={126}
         height="full"
         alignItems="center"
         justifyContent="center"
