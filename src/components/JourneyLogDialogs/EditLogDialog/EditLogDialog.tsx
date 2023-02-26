@@ -20,6 +20,7 @@ import {
   InputField,
   UploadField,
   CreatableSelectField,
+  ConfirmationDialog,
 } from "components";
 import { JourneyLogFormData } from "../types";
 import { journeyLogFormValidation } from "../validation";
@@ -28,7 +29,7 @@ import {
   deleteJourneyLogEffect,
   updateJourneyLogEffect,
 } from "store/features/journeys/effects";
-import { useEffect, FC } from "react";
+import { useEffect, FC, useState } from "react";
 import { dateFormats } from "utils/constants";
 import { LogExtended, Activity } from "store/features/journeys/types";
 import { setEditLogDialogOpen } from "store/features/journey/slice";
@@ -49,6 +50,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
   activities,
 }) => {
   const dispatch = useAppDispatch();
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const activitiesDictionary = getActivitiesDictionary(activities);
   const open = useAppSelector(getEditLogDialogOpen);
 
@@ -135,85 +137,102 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
   };
 
   return (
-    <Modal isOpen={open} onClose={handleClose} size="xl">
-      <ModalOverlay />
-      <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Edit log</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Grid
-            templateRows="repeat(3, auto)"
-            templateColumns="repeat(2, 1fr)"
-            gap={4}
-          >
-            <GridItem colSpan={2}>
-              <TextAreaField
-                label="Description"
-                {...register("description")}
-                errorMessage={errors.description?.message}
-              />
-            </GridItem>
-            <GridItem colSpan={1}>
-              <Controller
-                name="hoursSpent"
-                control={control}
-                render={({ field, fieldState: { error } }) => (
-                  <NumberInputField
-                    label="Hours Spent"
-                    {...field}
-                    errorMessage={error?.message}
-                  />
-                )}
-              />
-            </GridItem>
-            <GridItem colSpan={1}>
-              <InputField
-                type="date"
-                label="Date of log"
-                disabled
-                {...register("loggedOn")}
-                errorMessage={errors.loggedOn?.message}
-              />
-            </GridItem>
-            <GridItem colSpan={2}>
-              <CreatableSelectField<Option>
-                options={getActivityOptionsFromIds(
-                  activities,
-                  activitiesDictionary
-                )}
-                control={control as any}
-                name="activities"
-                label="Activities"
-                onCreateOption={onCreateOption}
-              />
-            </GridItem>
-            <GridItem colSpan={2}>
-              <UploadField
-                label="Media"
-                {...register("media")}
-                onClear={() => setValue("media", {} as FileList)}
-                initialPreviewSrc={
-                  log?.mediaUrl
-                    ? `${log.mediaUrl}?${log.updatedAt.toString()}` // prevents caching
-                    : undefined
-                }
-              />
-            </GridItem>
-          </Grid>
-        </ModalBody>
+    <>
+      <Modal isOpen={open} onClose={handleClose} size="xl">
+        <ModalOverlay />
+        <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader>Edit log</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Grid
+              templateRows="repeat(3, auto)"
+              templateColumns="repeat(2, 1fr)"
+              gap={4}
+            >
+              <GridItem colSpan={2}>
+                <TextAreaField
+                  label="Description"
+                  {...register("description")}
+                  errorMessage={errors.description?.message}
+                />
+              </GridItem>
+              <GridItem colSpan={1}>
+                <Controller
+                  name="hoursSpent"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <NumberInputField
+                      label="Hours Spent"
+                      {...field}
+                      errorMessage={error?.message}
+                    />
+                  )}
+                />
+              </GridItem>
+              <GridItem colSpan={1}>
+                <InputField
+                  type="date"
+                  label="Date of log"
+                  disabled
+                  {...register("loggedOn")}
+                  errorMessage={errors.loggedOn?.message}
+                />
+              </GridItem>
+              <GridItem colSpan={2}>
+                <CreatableSelectField<Option>
+                  options={getActivityOptionsFromIds(
+                    activities,
+                    activitiesDictionary
+                  )}
+                  control={control as any}
+                  name="activities"
+                  label="Activities"
+                  onCreateOption={onCreateOption}
+                />
+              </GridItem>
+              <GridItem colSpan={2}>
+                <UploadField
+                  label="Media"
+                  {...register("media")}
+                  onClear={() => setValue("media", {} as FileList)}
+                  initialPreviewSrc={
+                    log?.mediaUrl
+                      ? `${log.mediaUrl}?${log.updatedAt.toString()}` // prevents caching
+                      : undefined
+                  }
+                />
+              </GridItem>
+            </Grid>
+          </ModalBody>
 
-        <ModalFooter>
-          <Button mr="auto" onClick={handleDelete} variant="warning">
-            Delete
-          </Button>
-          <Button mr={3} onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          <ModalFooter>
+            <Button
+              mr="auto"
+              onClick={() => {
+                setConfirmationDialogOpen(true);
+              }}
+              variant="warning"
+            >
+              Delete
+            </Button>
+            <Button mr={3} onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <ConfirmationDialog
+        actionText="Delete"
+        bodyText="This will delete the log permanently"
+        isOpen={confirmationDialogOpen}
+        onAction={handleDelete}
+        onClose={() => {
+          setConfirmationDialogOpen(false);
+        }}
+      />
+    </>
   );
 };
