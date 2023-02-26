@@ -81,7 +81,6 @@ export const transformDataForChartYearDays = (
 
   logs.forEach((log) => {
     const dayIntoYear = getDaysIntoYear(new Date(log.loggedOn));
-    console.log(getDaysIntoYear(new Date(log.loggedOn)));
     if (result[dayIntoYear]) {
       result[dayIntoYear].hoursSpent =
         Math.round((result[dayIntoYear].hoursSpent + log.hoursSpent) * 100) /

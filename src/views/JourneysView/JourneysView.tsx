@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Flex } from "@chakra-ui/react";
-import { SimpleHeader } from "components";
+import { HEADER_HEIGHT_PX, SimpleHeader } from "components";
 import { JourneysViewContent } from "./JourneysViewContent";
 
 export const JourneysView: FC = () => {
   return (
     <>
       <SimpleHeader title="Journeys" />
-      <Flex overflow="auto" bg="paper.900">
+      <Flex bg="brand.900" height={`calc(100vh - ${HEADER_HEIGHT_PX}px)`}>
         <JourneysViewContent />
       </Flex>
     </>

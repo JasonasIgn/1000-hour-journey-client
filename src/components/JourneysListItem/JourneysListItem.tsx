@@ -30,19 +30,22 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
     <Paper
       level={1}
       position="relative"
-      height={180}
+      height={160}
       padding={4}
       cursor="pointer"
       _hover={{
         boxShadow: "inset 0px 0px 20px 0px var(--chakra-colors-brand-600)",
+        svg: {
+          display: "inline-block",
+        },
       }}
       transition="box-shadow 0.1s"
       {...rootBoxProps}
     >
       <Flex
-        width={146}
-        minWidth={146}
-        maxHeight={146}
+        width={126}
+        minWidth={126}
+        maxHeight={126}
         height="full"
         alignItems="center"
         justifyContent="center"
@@ -78,6 +81,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         </Flex>
       </Flex>
       <Icon
+        display="none"
         as={EditIcon}
         position="absolute"
         right="16px"
