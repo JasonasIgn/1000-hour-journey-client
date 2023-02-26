@@ -35,6 +35,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
       cursor="pointer"
       _hover={{
         boxShadow: "inset 0px 0px 20px 0px var(--chakra-colors-brand-600)",
+        svg: {
+          display: "inline-block",
+        },
       }}
       transition="box-shadow 0.1s"
       {...rootBoxProps}
@@ -78,6 +81,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         </Flex>
       </Flex>
       <Icon
+        display="none"
         as={EditIcon}
         position="absolute"
         right="16px"
