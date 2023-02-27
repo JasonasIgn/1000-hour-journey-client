@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { AuthRoutes, GuestRoutes } from "components";
+import { AuthRoutes, GuestRoutes, Loader } from "components";
 import { useInitialization } from "utils/hooks";
 import { useAppSelector } from "store/hooks";
 import { getIsLoggedIn } from "store/features/auth/selectors";
@@ -11,8 +11,8 @@ const App = () => {
 
   if (isInitializing) {
     return (
-      <Box bgColor="brand.900" minHeight="100vh">
-        Initializing...
+      <Box bgColor="brand.900" minHeight="100vh" height="100vh">
+        <Loader />
       </Box>
     );
   }

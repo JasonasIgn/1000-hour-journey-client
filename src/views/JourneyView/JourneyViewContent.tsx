@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useState, FC, useMemo, MouseEvent } from "react";
 import {
   EditLogDialog,
@@ -8,6 +8,7 @@ import {
   GeneralJourneyInfo,
   AddLogDialog,
   JourneyTimeLineControls,
+  Loader,
 } from "components";
 import { getJourney } from "store/features/journeys/selectors";
 import { useAppSelector } from "store/hooks";
@@ -64,7 +65,7 @@ export const JourneyViewContent: FC = () => {
   };
 
   if (!journey) {
-    return <Text>Loading...</Text>;
+    return <Loader />;
   }
 
   return (
