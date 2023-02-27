@@ -1,7 +1,7 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Checkbox, Flex, IconButton, Text } from "@chakra-ui/react";
 import { FC, SetStateAction, Dispatch } from "react";
-import { DateQuery } from "views/DashboardLogsView/types";
+import { DateQuery } from "views/StatisticsView/types";
 
 interface StatisticsDatePickerProps {
   query: DateQuery;
