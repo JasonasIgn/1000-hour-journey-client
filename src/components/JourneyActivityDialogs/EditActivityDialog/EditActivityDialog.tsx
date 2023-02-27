@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -40,6 +41,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
   journeyId,
   activity,
 }) => {
+  const toast = useToast();
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const isOpen = Boolean(activity);
   const dispatch = useAppDispatch();
@@ -59,6 +61,9 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
         })
       ).unwrap();
       handleClose();
+      toast({
+        description: "Changes saved",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -73,6 +78,9 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
         })
       ).unwrap();
       handleClose();
+      toast({
+        description: "Activity deleted",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -50,6 +51,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   activities,
 }) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const lastLog = useAppSelector(getLastJourneyLog);
   const timerTime = useAppSelector(getTimerTime);
   const [shouldResetTimer, setShouldResetTimer] = useState(true);
@@ -81,6 +83,9 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
         dispatch(closeTimer());
       }
       setOpen(false);
+      toast({
+        description: "Log created",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -111,7 +116,10 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
           journeyId,
         })
       ).unwrap();
-      setValue("activities", [...currentValue, getActivityOption(createdActivity)]);
+      setValue("activities", [
+        ...currentValue,
+        getActivityOption(createdActivity),
+      ]);
     } catch (e) {
       console.error("Error creating activity", e);
     }

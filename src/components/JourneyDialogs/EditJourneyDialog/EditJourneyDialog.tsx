@@ -7,6 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, FC } from "react";
 import { useForm } from "react-hook-form";
@@ -27,6 +28,7 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
   handleClose,
   journey,
 }) => {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const isOpen = Boolean(journey);
   const { register, handleSubmit, formState, reset, setValue } =
@@ -41,6 +43,9 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
       }
       await dispatch(updateJourneyEffect({ data, journeyId: journey.id }));
       handleClose();
+      toast({
+        description: "Changes saved",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

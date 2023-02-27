@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,6 +51,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
   activities,
 }) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const activitiesDictionary = getActivitiesDictionary(activities);
   const open = useAppSelector(getEditLogDialogOpen);
@@ -85,6 +87,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         updateJourneyLogEffect({ data, journeyId, logId: log.id })
       );
       handleClose();
+      toast({
+        description: "Changes saved",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -131,6 +136,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         })
       ).unwrap();
       handleClose();
+      toast({
+        description: "Log deleted",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

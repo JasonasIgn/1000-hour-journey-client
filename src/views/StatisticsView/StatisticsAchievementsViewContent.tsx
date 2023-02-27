@@ -22,7 +22,7 @@ import { useAppDispatch } from "store/hooks";
 import { setViewedImageSrc } from "store/features/app/slice";
 import { Loader } from "components";
 
-export const DashboardAchievementsViewContent: FC = () => {
+export const StatisticsAchievementsViewContent: FC = () => {
   const dispatch = useAppDispatch();
   const currentYear = new Date().getFullYear();
   const [query, setQuery] = useState<AchievementsDateQuery>({

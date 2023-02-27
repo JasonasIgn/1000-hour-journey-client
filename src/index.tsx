@@ -17,7 +17,18 @@ createAxiosInterceptor(store);
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider
+        theme={theme}
+        toastOptions={{
+          defaultOptions: {
+            containerStyle: { ml: "86px" },
+            position: "bottom-left",
+            duration: 4000,
+            variant: "solid",
+            status: "success",
+          },
+        }}
+      >
         <App />
       </ChakraProvider>
     </BrowserRouter>

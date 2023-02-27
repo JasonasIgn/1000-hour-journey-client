@@ -7,6 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, FC } from "react";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,7 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   open,
   setOpen,
 }) => {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState, reset, setValue } =
     useForm<JourneyFormData>({
@@ -36,6 +38,9 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
     try {
       await dispatch(createJourneyEffect(data));
       setOpen(false);
+      toast({
+        description: "Journey created",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

@@ -3,7 +3,7 @@ import { FC } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { JourneysView, JourneyView, StatisticsView } from "views";
-import { DashboardAchievementsViewContent } from "views/StatisticsView/StatisticsAchievementsViewContent";
+import { StatisticsAchievementsViewContent } from "views/StatisticsView/StatisticsAchievementsViewContent";
 import { StatisticsLogsViewContent } from "views/StatisticsView/StatisticsLogsViewContent";
 import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitiesViewContent";
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
@@ -33,7 +33,7 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
           />
           <Route
             path="/statistics/achievements"
-            element={<DashboardAchievementsViewContent />}
+            element={<StatisticsAchievementsViewContent />}
           />
           <Route
             index
