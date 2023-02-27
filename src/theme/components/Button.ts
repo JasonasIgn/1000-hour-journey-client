@@ -5,7 +5,7 @@ export const Button: ComponentStyleConfig = {
     solid: {
       color: "gray.300",
       _hover: {
-        bgColor: "brand.300",
+        bgColor: "brand.400",
       },
     },
     warning: {

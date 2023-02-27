@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,6 +39,7 @@ interface AddJourneyAchievementDialogProps {
 export const AddJourneyAchievementDialog: FC<
   AddJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, activeLog, currentHour }) => {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState, control, reset, setValue } =
     useForm<JourneyAchievementFormData>({
@@ -55,6 +57,9 @@ export const AddJourneyAchievementDialog: FC<
     try {
       await dispatch(logJourneyAchievementEffect({ data, journeyId }));
       setOpen(false);
+      toast({
+        description: "Achievement created",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

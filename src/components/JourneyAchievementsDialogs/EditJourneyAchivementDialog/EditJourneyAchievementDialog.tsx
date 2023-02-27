@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -41,6 +42,7 @@ interface EditJourneyAchievementDialogProps {
 export const EditJourneyAchievementDialog: FC<
   EditJourneyAchievementDialogProps
 > = ({ open, setOpen, journeyId, achievement }) => {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const { register, handleSubmit, formState, control, reset, setValue } =
@@ -66,6 +68,9 @@ export const EditJourneyAchievementDialog: FC<
         })
       );
       setOpen(false);
+      toast({
+        description: "Changes saved",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -80,6 +85,9 @@ export const EditJourneyAchievementDialog: FC<
         })
       ).unwrap();
       setOpen(false);
+      toast({
+        description: "Achievement deleted",
+      });
     } catch (e) {
       console.error("Caught error", e);
     }

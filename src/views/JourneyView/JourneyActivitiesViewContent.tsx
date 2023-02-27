@@ -16,6 +16,7 @@ import {
 import Logo from "resources/logo.png";
 import { Paper } from "components/Paper";
 import { getJourney } from "store/features/journeys/selectors";
+import { AddIcon } from "@chakra-ui/icons";
 import { useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
@@ -48,8 +49,9 @@ export const JourneyActivitiesViewContent: FC = () => {
             onClick={() => {
               setAddDialogOpen(true);
             }}
+            leftIcon={<AddIcon />}
           >
-            Create
+            Add activity
           </Button>
         </Flex>
         <TableContainer w="full">

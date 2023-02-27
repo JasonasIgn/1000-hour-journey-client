@@ -14,3 +14,4 @@ export * from "./Tag";
 export * from "./Table";
 export * from "./Switch";
 export * from "./Checkbox";
+export * from "./Alert";
