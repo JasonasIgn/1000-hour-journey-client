@@ -20,6 +20,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { getImageSrc } from "utils/helpers";
 import { useAppDispatch } from "store/hooks";
 import { setViewedImageSrc } from "store/features/app/slice";
+import { Loader } from "components";
 
 export const DashboardAchievementsViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ export const DashboardAchievementsViewContent: FC = () => {
   const loading = !achievements;
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <Loader />;
   }
 
   return (

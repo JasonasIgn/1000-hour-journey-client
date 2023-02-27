@@ -1,15 +1,14 @@
 import { FC } from "react";
 import { Container, Flex } from "@chakra-ui/react";
 import { useStatistics } from "./hooks";
-import { LogStatCard, StatisticsBarChart } from "components";
-import { StatisticsLogsViewContentLoader } from "./StatisticsLogsViewContentLoader";
+import { Loader, LogStatCard, StatisticsBarChart } from "components";
 
 export const StatisticsLogsViewContent: FC = () => {
   const statistics = useStatistics();
   const loading = !statistics;
 
   if (loading) {
-    return <StatisticsLogsViewContentLoader />;
+    return <Loader />;
   }
 
   return (
