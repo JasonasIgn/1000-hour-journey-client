@@ -2,8 +2,9 @@ import { GlobalImageViewer } from "components/GlobalImageViewer";
 import { FC } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { DashboardLogsView, JourneysView, JourneyView } from "views";
-import { DashboardAchievementsView } from "views/DashboardAchievementsView";
+import { JourneysView, JourneyView, StatisticsView } from "views";
+import { DashboardAchievementsViewContent } from "views/StatisticsView/StatisticsAchievementsViewContent";
+import { DashboardLogsViewContent } from "views/StatisticsView/StatisticsLogsViewContent";
 import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitiesViewContent";
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
 
@@ -24,17 +25,22 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
           </Route>
           <Route index element={<JourneysView />} />
         </Route>
-        <Route path="/dashboard">
-          <Route path="/dashboard/logs" element={<DashboardLogsView />} />
+
+        <Route path="/statistics" element={<StatisticsView />}>
           <Route
-            path="/dashboard/achievements"
-            element={<DashboardAchievementsView />}
+            path="/statistics/logs"
+            element={<DashboardLogsViewContent />}
+          />
+          <Route
+            path="/statistics/achievements"
+            element={<DashboardAchievementsViewContent />}
           />
           <Route
             index
-            element={<Navigate to="/dashboard/logs" replace={true} />}
+            element={<Navigate to="/statistics/logs" replace={true} />}
           />
         </Route>
+
         <Route path="*" element={<Navigate to="/journeys" replace={true} />} />
       </Routes>
     </>

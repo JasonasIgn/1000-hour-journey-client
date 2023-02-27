@@ -1,10 +1,4 @@
-import {
-  Divider,
-  Icon,
-  IconButton,
-  Tooltip,
-  Image,
-} from "@chakra-ui/react";
+import { Divider, Icon, IconButton, Tooltip, Image } from "@chakra-ui/react";
 import { FC, useEffect, useState, ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { logoutEffect } from "store/features/auth/effects";
@@ -12,8 +6,7 @@ import { useAppDispatch } from "store/hooks";
 import Logo from "resources/logo.png";
 import { ReactComponent as LogOutIcon } from "resources/log-out.svg";
 import { ReactComponent as HomeIcon } from "resources/home.svg";
-import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
-import { ReactComponent as LogIcon } from "resources/page.svg";
+import { ReactComponent as GraphIcon } from "resources/graph.svg";
 import { Timer } from "components/Timer";
 import { Paper } from "components/Paper";
 
@@ -30,14 +23,9 @@ const navigationItems: NavigationItem[] = [
     icon: <Icon as={HomeIcon} width="30px" height="30px" />,
   },
   {
-    path: "/dashboard/logs",
+    path: "/statistics",
     name: "Logs",
-    icon: <Icon as={LogIcon} width="24px" height="24px" />,
-  },
-  {
-    path: "/dashboard/achievements",
-    name: "Achievements",
-    icon: <Icon as={AchievementIcon} width="24px" height="24px" />,
+    icon: <Icon as={GraphIcon} width="24px" height="24px" />,
   },
 ];
 
@@ -48,7 +36,7 @@ export const SideMenu: FC = () => {
 
   useEffect(() => {
     setTabIndex(
-      navigationItems.findIndex((item) => location.pathname === item.path)
+      navigationItems.findIndex((item) => location.pathname.includes(item.path))
     );
   }, [location]);
 

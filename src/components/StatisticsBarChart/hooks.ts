@@ -8,7 +8,7 @@ import {
   SetStateAction,
 } from "react";
 import { Log } from "store/features/journeys/types";
-import { ChartLogData, DateQuery } from "views/DashboardLogsView/types";
+import { ChartLogData, DateQuery } from "views/StatisticsView/types";
 import { StatisticsDisplayUnit } from "./types";
 import { getTransformedData } from "./utils";
 

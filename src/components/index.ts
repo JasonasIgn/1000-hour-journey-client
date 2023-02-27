@@ -28,3 +28,4 @@ export * from "./JourneyNavigation";
 export * from "./SelectField";
 export * from "./Select";
 export * from "./ConfirmationDialog";
+export * from "./StatisticsNavigation";

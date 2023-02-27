@@ -1,3 +1,7 @@
+export interface AchievementsDateQuery {
+  year: number;
+}
+
 export interface LogTimerFrameStatistics {
   logsCount: number;
   totalHours: number | null;
