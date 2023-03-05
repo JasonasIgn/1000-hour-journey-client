@@ -1,6 +1,7 @@
 import { AnyAction, combineReducers, Reducer } from "@reduxjs/toolkit";
 import journeysReducer from "./features/journeys/slice";
 import journeyReducer from "./features/journey/slice";
+import dailyGoalReducer from "./features/dailyGoal/slice";
 import timerReducer from "./features/timer/slice";
 import authReducer from "./features/auth/slice";
 import appReducer from "./features/app/slice";
@@ -9,6 +10,7 @@ import { logoutEffect } from "./features/auth/effects";
 export const rootReducers = {
   journeys: journeysReducer,
   journey: journeyReducer,
+  dailyGoal: dailyGoalReducer,
   timer: timerReducer,
   auth: authReducer,
   app: appReducer,

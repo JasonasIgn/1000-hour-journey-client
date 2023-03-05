@@ -1,15 +1,18 @@
 import { FC, ReactNode } from "react";
 import { Heading } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
+import { DailyGoal } from "components/DailyGoal";
+import { useAppSelector } from "store/hooks";
+import { getHeaderTitle } from "store/features/journey/selectors";
 
 export const HEADER_HEIGHT_PX = 60;
 
 interface SimpleHeaderProps {
-  title: string;
   children?: ReactNode;
 }
 
-export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
+export const SimpleHeader: FC<SimpleHeaderProps> = ({ children }) => {
+  const title = useAppSelector(getHeaderTitle);
   return (
     <Paper
       width="100%"
@@ -36,6 +39,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ title, children }) => {
         {title}
       </Heading>
       {children}
+      <DailyGoal />
     </Paper>
   );
 };

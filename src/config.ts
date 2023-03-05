@@ -20,4 +20,5 @@ export const apiUrls = {
   updateActivity: `${API_BASE}/journey/{journeyId}/activities/{activityId}`,
   deleteActivity: `${API_BASE}/journey/{journeyId}/activities/{activityId}`,
   fetchAchievements: `${API_BASE}/achievements`,
+  fetchDailyGoal: `${API_BASE}/dailygoal`,
 };
