@@ -4,7 +4,6 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverFooter,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -43,7 +42,10 @@ export const DailyGoal = () => {
             Daily goal
           </Text>
           {(dailyGoal?.journeyTasks || []).map((journeyTask) => (
-            <JourneyTask journeyTask={journeyTask} />
+            <JourneyTask
+              journeyTask={journeyTask}
+              key={`journey-task-${journeyTask.id}`}
+            />
           ))}
         </PopoverBody>
         <PopoverArrow
@@ -52,13 +54,6 @@ export const DailyGoal = () => {
           borderLeft="1px solid"
           borderColor="brand.400"
         />
-        <PopoverFooter
-          border="0"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          pb={4}
-        ></PopoverFooter>
       </PopoverContent>
     </Popover>
   );

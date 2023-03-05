@@ -15,7 +15,10 @@ const colors = {
     100: "#ebab2d",
     200: "#d29114",
   },
-  green: "#77FFF7",
+  green: {
+    100: "#77FFF7",
+    200: "#57beb7",
+  },
   border: "#4F4F62",
 };
 
