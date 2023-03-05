@@ -1,11 +1,12 @@
 import { Flex } from "@chakra-ui/react";
 import { FC, useEffect } from "react";
-import { JourneyNavigation, SimpleHeader } from "components";
+import { JourneyNavigation } from "components";
 import { getJourney } from "store/features/journeys/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { Outlet, useParams } from "react-router";
 import { fetchJourneyEffect } from "store/features/journeys/effects";
 import { resetJourney } from "store/features/journeys/slice";
+import { setHeaderTitle } from "store/features/journey/slice";
 
 export const JourneyView: FC = () => {
   const dispatch = useAppDispatch();
@@ -23,9 +24,12 @@ export const JourneyView: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    dispatch(setHeaderTitle(`Journey '${journey?.title || "Loading..."}'`));
+  }, [dispatch, journey?.title]);
+
   return (
     <>
-      <SimpleHeader title={`Journey '${journey?.title || "Loading..."}'`} />
       <JourneyNavigation journeyId={params.journeyId} />
 
       <Flex overflow="auto" flexGrow={1} flexDirection="column" bg="brand.900">

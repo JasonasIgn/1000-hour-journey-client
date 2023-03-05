@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { AuthRoutes, GuestRoutes, Loader } from "components";
+import { AuthRoutes, GuestRoutes, Loader, SimpleHeader } from "components";
 import { useInitialization } from "utils/hooks";
 import { useAppSelector } from "store/hooks";
 import { getIsLoggedIn } from "store/features/auth/selectors";
@@ -27,6 +27,7 @@ const App = () => {
         flexGrow={1}
         overflow="hidden"
       >
+        <SimpleHeader />
         {isLoggedIn && <AuthRoutes />}
         {!isLoggedIn && <GuestRoutes />}
       </Flex>
