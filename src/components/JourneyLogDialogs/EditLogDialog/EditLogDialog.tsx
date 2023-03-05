@@ -38,6 +38,7 @@ import { getEditLogDialogOpen } from "store/features/journey/selectors";
 import { getActivityOption, getActivityOptionsFromIds } from "../utils";
 import { Option } from "types";
 import { getActivitiesDictionary } from "store/features/journeys/utils";
+import { fetchDailyGoalEffect } from "store/features/dailyGoal/effects";
 
 interface EditLogDialogProps {
   journeyId: number;
@@ -90,6 +91,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       toast({
         description: "Changes saved",
       });
+      setTimeout(() => {
+        dispatch(fetchDailyGoalEffect());
+      }, 1000);
     } catch (e) {
       console.error("Caught error", e);
     }
@@ -139,6 +143,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       toast({
         description: "Log deleted",
       });
+      setTimeout(() => {
+        dispatch(fetchDailyGoalEffect());
+      }, 1000);
     } catch (e) {
       console.error("Caught error", e);
     }

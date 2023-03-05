@@ -36,6 +36,7 @@ import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
 import { Activity } from "store/features/journeys/types";
 import { getActivityOption, getActivityOptions } from "../utils";
 import { Option } from "types";
+import { fetchDailyGoalEffect } from "store/features/dailyGoal/effects";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -86,6 +87,10 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
       toast({
         description: "Log created",
       });
+
+      setTimeout(() => {
+        dispatch(fetchDailyGoalEffect());
+      }, 1000);
     } catch (e) {
       console.error("Caught error", e);
     }

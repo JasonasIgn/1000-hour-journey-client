@@ -16,8 +16,6 @@ export const DailyGoal = () => {
   const dailyGoal = useAppSelector(getDailyGoal);
   const [open, setOpen] = useState(false);
 
-  console.log(dailyGoal);
-
   return (
     <Popover
       placement="bottom"
