@@ -12,4 +12,12 @@ export const chakraStyles: ChakraStylesConfig = {
     ...provided,
     borderColor: state.isFocused ? "brand.400" : "gray.400",
   }),
+  option: (provided, state) => {
+    return {
+      ...provided,
+      ...((state.data as any)?.color
+        ? { color: (state.data as any).color }
+        : {}),
+    };
+  },
 };

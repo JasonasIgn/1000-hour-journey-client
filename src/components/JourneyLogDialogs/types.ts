@@ -7,3 +7,7 @@ export interface JourneyLogFormData {
   media: FileList;
   activities: Option[];
 }
+
+export interface OptionWithColor extends Option {
+  color?: string;
+}

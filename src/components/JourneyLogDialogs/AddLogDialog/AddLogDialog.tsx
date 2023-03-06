@@ -11,7 +11,7 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, FC, useState } from "react";
+import { useEffect, FC, useState, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import format from "date-fns/format";
@@ -23,7 +23,7 @@ import {
   UploadField,
   CreatableSelectField,
 } from "components";
-import { JourneyLogFormData } from "../types";
+import { JourneyLogFormData, OptionWithColor } from "../types";
 import { journeyLogFormValidation } from "../validation";
 import {
   createJourneyLogEffect,
@@ -34,9 +34,13 @@ import { dateFormats } from "utils/constants";
 import { getTimerTime } from "store/features/timer/selectors";
 import { closeTimer, pauseTimer, resetTimer } from "store/features/timer/slice";
 import { Activity } from "store/features/journeys/types";
-import { getActivityOption, getActivityOptions } from "../utils";
-import { Option } from "types";
+import {
+  getActivityOption,
+  getActivityOptionsForDailyGoal,
+  getDailyGoalActivityIds,
+} from "../utils";
 import { fetchDailyGoalEffect } from "store/features/dailyGoal/effects";
+import { getDailyGoal } from "store/features/dailyGoal/selectors";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -52,6 +56,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   activities,
 }) => {
   const dispatch = useAppDispatch();
+  const dailyGoal = useAppSelector(getDailyGoal);
   const toast = useToast();
   const lastLog = useAppSelector(getLastJourneyLog);
   const timerTime = useAppSelector(getTimerTime);
@@ -59,6 +64,11 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   const lastLogDate = lastLog
     ? format(new Date(lastLog?.loggedOn), dateFormats.standart)
     : undefined;
+
+  const activityTaskIds = useMemo(
+    () => getDailyGoalActivityIds(dailyGoal),
+    [dailyGoal]
+  );
 
   const {
     register,
@@ -179,8 +189,11 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
               />
             </GridItem>
             <GridItem colSpan={2}>
-              <CreatableSelectField<Option>
-                options={getActivityOptions(activities)}
+              <CreatableSelectField<OptionWithColor>
+                options={getActivityOptionsForDailyGoal(
+                  activities,
+                  activityTaskIds
+                )}
                 control={control as any}
                 name="activities"
                 label="Activities"
