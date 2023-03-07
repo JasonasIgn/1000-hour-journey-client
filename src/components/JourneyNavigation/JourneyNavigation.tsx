@@ -9,6 +9,7 @@ interface JourneyNavigationProps {
 const getTabs = (id: string) => [
   { path: `/journeys/${id}` },
   { path: `/journeys/${id}/activities` },
+  { path: `/journeys/${id}/settings` },
 ];
 
 export const JourneyNavigation: FC<JourneyNavigationProps> = ({
@@ -30,6 +31,9 @@ export const JourneyNavigation: FC<JourneyNavigationProps> = ({
         </Tab>
         <Tab as={RouterLink} to={`/journeys/${journeyId}/activities`}>
           Activities
+        </Tab>
+        <Tab as={RouterLink} to={`/journeys/${journeyId}/settings`}>
+          Settings
         </Tab>
       </TabList>
     </Tabs>

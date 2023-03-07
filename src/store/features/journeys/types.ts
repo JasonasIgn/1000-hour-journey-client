@@ -6,6 +6,7 @@ export interface JourneyListItem {
   createdAt: Date;
   updatedAt: Date;
   mediaUrl?: string;
+  includeInDailyGoal: boolean;
 }
 
 export interface Activity {
@@ -53,4 +54,12 @@ export interface Journey extends JourneyListItem {
   logs: Log[];
   achievements: Achievement[];
   activities: Activity[];
+}
+
+export interface UpdateJourneyEffectData {
+  title?: string;
+  description?: string;
+  media?: FileList;
+  finished?: boolean;
+  includeInDailyGoal?: 0 | 1;
 }

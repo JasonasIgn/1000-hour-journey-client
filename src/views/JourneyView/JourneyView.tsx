@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import { FC, useEffect } from "react";
-import { JourneyNavigation } from "components";
+import { JourneyNavigation, Loader } from "components";
 import { getJourney } from "store/features/journeys/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { Outlet, useParams } from "react-router";
@@ -33,7 +33,7 @@ export const JourneyView: FC = () => {
       <JourneyNavigation journeyId={params.journeyId} />
 
       <Flex overflow="auto" flexGrow={1} flexDirection="column" bg="brand.900">
-        <Outlet />
+        {journey ? <Outlet /> : <Loader />}
       </Flex>
     </>
   );
