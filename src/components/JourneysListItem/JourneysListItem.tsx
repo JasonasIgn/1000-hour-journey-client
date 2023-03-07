@@ -19,22 +19,27 @@ interface JourneysListItemProps {
   journey: JourneyListItem;
   rootBoxProps?: FlexProps;
   onEditClick: () => void;
+  isGoalHighlight?: boolean;
 }
 
 export const JourneysListItem: FC<JourneysListItemProps> = ({
   journey,
   rootBoxProps,
   onEditClick,
+  isGoalHighlight,
 }) => (
   <Link to={`/journeys/${journey.id}`}>
     <Paper
+      variant={isGoalHighlight ? "dailyGoal" : "brand"}
       level={1}
       position="relative"
       height={160}
       padding={4}
       cursor="pointer"
       _hover={{
-        boxShadow: "inset 0px 0px 20px 0px var(--chakra-colors-brand-600)",
+        boxShadow: `inset 0px 0px 20px 0px var(--chakra-colors-${
+          isGoalHighlight ? "yellow" : "brand"
+        }-600)`,
         svg: {
           display: "inline-block",
         },

@@ -6,15 +6,17 @@ import {
   PopoverContent,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { getDailyGoal } from "store/features/dailyGoal/selectors";
-import { useAppSelector } from "store/hooks";
+import { getDailyGoalOpen } from "store/features/journey/selectors";
+import { setDailyGoalOpen } from "store/features/journey/slice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { DailyGoalTrigger } from "./DailyGoalTrigger/DailyGoalTrigger";
 import { JourneyTask } from "./JourneyTask";
 
 export const DailyGoal = () => {
+  const dispatch = useAppDispatch();
   const dailyGoal = useAppSelector(getDailyGoal);
-  const [open, setOpen] = useState(false);
+  const dailyGoalOpen = useAppSelector(getDailyGoalOpen);
 
   return (
     <Popover
@@ -22,10 +24,10 @@ export const DailyGoal = () => {
       arrowShadowColor="brand.100"
       closeOnBlur={false}
       arrowSize={10}
-      isOpen={open}
+      isOpen={dailyGoalOpen}
       offset={[0, 10]}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
+      onClose={() => dispatch(setDailyGoalOpen(false))}
+      onOpen={() => dispatch(setDailyGoalOpen(true))}
     >
       <DailyGoalTrigger completed={dailyGoal?.completed} />
       <PopoverContent bg="brand.700" borderColor="brand.400">

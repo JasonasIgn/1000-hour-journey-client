@@ -1,6 +1,7 @@
 import { Text, Flex, Divider } from "@chakra-ui/react";
 import { FC } from "react";
 import { JourneyTask as JourneyTaskType } from "store/features/dailyGoal/types";
+import { Link as RouterLink } from "react-router-dom";
 
 interface JourneyTaskProps {
   journeyTask: JourneyTaskType;
@@ -13,10 +14,15 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
       <Flex alignItems="center">
         <Text
           fontSize="2xl"
-          color="gray.100"
+          color="gray.200"
           overflow="hidden"
           whiteSpace="nowrap"
           textOverflow="ellipsis"
+          as={RouterLink}
+          to={`/journeys/${journeyTask.journey.id}`}
+          _hover={{
+            color: "gray.100",
+          }}
         >
           {journeyTask.journey.title}
         </Text>

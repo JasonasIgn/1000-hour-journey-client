@@ -23,9 +23,9 @@ export const DailyGoalTrigger: FC<DailyGoalTriggerProps> = forwardRef(
           borderRadius="50%"
           p={1}
           as={completed ? CompletedIcon : QuestIcon}
-          color={completed ? "green.200" : "yellow.200"}
+          color={completed ? "green.200" : "yellow.600"}
           _hover={{
-            color: completed ? "green.100" : "yellow.100",
+            color: completed ? "green.100" : "yellow.500",
           }}
           transition="color 0.1s"
           w="32px"

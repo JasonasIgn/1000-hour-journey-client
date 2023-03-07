@@ -22,7 +22,7 @@ export const JourneyView: FC = () => {
       dispatch(resetJourney());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params.journeyId]);
 
   useEffect(() => {
     dispatch(setHeaderTitle(`Journey '${journey?.title || "Loading..."}'`));
