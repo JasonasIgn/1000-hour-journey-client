@@ -14,18 +14,18 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
     ) === -1;
   return (
     <Flex justifyContent="center" direction="column">
-      <Divider mt={1} />
+      <Divider mt={1} borderColor="gray.400" />
       <Flex alignItems="center">
         <Text
           fontSize="2xl"
-          color={isJourneyTaskCompleted ? "green.400" : "yellow.500"}
+          color={isJourneyTaskCompleted ? "green.400" : "yellow.600"}
           overflow="hidden"
           whiteSpace="nowrap"
           textOverflow="ellipsis"
           as={RouterLink}
           to={`/journeys/${journeyTask.journey.id}`}
           _hover={{
-            color: isJourneyTaskCompleted ? "green.300" : "yellow.400",
+            color: isJourneyTaskCompleted ? "green.300" : "yellow.500",
           }}
         >
           {journeyTask.journey.title}
@@ -33,7 +33,7 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
         <Text
           ml="auto"
           pl={4}
-          color={isJourneyTaskCompleted ? "green.400" : "yellow.500"}
+          color={isJourneyTaskCompleted ? "green.400" : "yellow.600"}
           fontSize="xl"
         >
           {journeyTask.hoursSpent}/{journeyTask.hoursToLog}h
@@ -52,7 +52,7 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
             textOverflow="ellipsis"
             color={
               activityTask.hoursSpent < activityTask.hoursToLog
-                ? "yellow.600"
+                ? "yellow.700"
                 : "green.500"
             }
           >
@@ -63,7 +63,7 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
             pl={2}
             color={
               activityTask.hoursSpent < activityTask.hoursToLog
-                ? "yellow.600"
+                ? "yellow.700"
                 : "green.500"
             }
           >
