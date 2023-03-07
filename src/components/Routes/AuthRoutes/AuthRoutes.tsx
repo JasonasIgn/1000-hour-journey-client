@@ -7,6 +7,7 @@ import { StatisticsAchievementsViewContent } from "views/StatisticsView/Statisti
 import { StatisticsLogsViewContent } from "views/StatisticsView/StatisticsLogsViewContent";
 import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitiesViewContent";
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
+import { JourneySettingsViewContent } from "views/JourneyView/JourneySettingsViewContent";
 
 interface AuthRoutesProps {}
 
@@ -21,6 +22,7 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
               path="activities"
               element={<JourneyActivitiesViewContent />}
             />
+            <Route path="settings" element={<JourneySettingsViewContent />} />
             <Route index element={<JourneyViewContent />} />
           </Route>
           <Route index element={<JourneysView />} />
