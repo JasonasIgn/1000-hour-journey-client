@@ -8,25 +8,34 @@ interface JourneyTaskProps {
 }
 
 export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
+  const isJourneyTaskCompleted =
+    journeyTask.activityTasks.findIndex(
+      (task) => task.hoursSpent < task.hoursToLog
+    ) === -1;
   return (
     <Flex justifyContent="center" direction="column">
       <Divider mt={1} />
       <Flex alignItems="center">
         <Text
           fontSize="2xl"
-          color="gray.200"
+          color={isJourneyTaskCompleted ? "green.400" : "yellow.500"}
           overflow="hidden"
           whiteSpace="nowrap"
           textOverflow="ellipsis"
           as={RouterLink}
           to={`/journeys/${journeyTask.journey.id}`}
           _hover={{
-            color: "gray.100",
+            color: isJourneyTaskCompleted ? "green.300" : "yellow.400",
           }}
         >
           {journeyTask.journey.title}
         </Text>
-        <Text ml="auto" pl={4} color="gray.300" fontSize="xl">
+        <Text
+          ml="auto"
+          pl={4}
+          color={isJourneyTaskCompleted ? "green.400" : "yellow.500"}
+          fontSize="xl"
+        >
           {journeyTask.hoursSpent}/{journeyTask.hoursToLog}h
         </Text>
       </Flex>
@@ -38,14 +47,26 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
         >
           <Text
             fontSize="lg"
-            color="gray.300"
             overflow="hidden"
             whiteSpace="nowrap"
             textOverflow="ellipsis"
+            color={
+              activityTask.hoursSpent < activityTask.hoursToLog
+                ? "yellow.600"
+                : "green.500"
+            }
           >
             - {activityTask.activity.name}
           </Text>
-          <Text ml="auto" pl={2}>
+          <Text
+            ml="auto"
+            pl={2}
+            color={
+              activityTask.hoursSpent < activityTask.hoursToLog
+                ? "yellow.600"
+                : "green.500"
+            }
+          >
             {activityTask.hoursSpent}/{activityTask.hoursToLog}h
           </Text>
         </Flex>
