@@ -25,12 +25,16 @@ export const DailyGoal = () => {
       closeOnBlur={false}
       arrowSize={10}
       isOpen={dailyGoalOpen}
-      offset={[0, 12]}
+      offset={[0, 10]}
       onClose={() => dispatch(setDailyGoalOpen(false))}
       onOpen={() => dispatch(setDailyGoalOpen(true))}
     >
       <DailyGoalTrigger completed={dailyGoal?.completed} />
-      <PopoverContent bg="brand.800" borderColor="brand.600">
+      <PopoverContent
+        bg="brand.800"
+        boxShadow="inset 0px 0px 15px 0px var(--chakra-colors-brand-700)"
+        borderColor="brand.600"
+      >
         <PopoverCloseButton />
         <PopoverBody>
           <Text
