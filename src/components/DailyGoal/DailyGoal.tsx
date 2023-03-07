@@ -30,13 +30,17 @@ export const DailyGoal = () => {
       onOpen={() => dispatch(setDailyGoalOpen(true))}
     >
       <DailyGoalTrigger completed={dailyGoal?.completed} />
-      <PopoverContent bg="brand.700" borderColor="brand.400">
+      <PopoverContent
+        bg="brand.800"
+        boxShadow="inset 0px 0px 15px 0px var(--chakra-colors-brand-700)"
+        borderColor="brand.600"
+      >
         <PopoverCloseButton />
         <PopoverBody>
           <Text
             fontSize="2xl"
             textAlign="center"
-            color="gray.200"
+            color="gray.300"
             userSelect="none"
           >
             Daily goal
@@ -49,10 +53,10 @@ export const DailyGoal = () => {
           ))}
         </PopoverBody>
         <PopoverArrow
-          bgColor="brand.700"
+          bgColor="brand.800"
           borderTop="1px solid"
           borderLeft="1px solid"
-          borderColor="brand.400"
+          borderColor="brand.600"
         />
       </PopoverContent>
     </Popover>

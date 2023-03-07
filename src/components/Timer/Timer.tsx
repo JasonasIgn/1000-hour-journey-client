@@ -77,7 +77,11 @@ export const Timer = () => {
       onOpen={() => dispatch(openTimer())}
     >
       <TimerTrigger isRunning={isRunning} />
-      <PopoverContent bg="brand.700" borderColor="brand.400">
+      <PopoverContent
+        bg="brand.800"
+        borderColor="brand.600"
+        boxShadow="inset 0px 0px 15px 0px var(--chakra-colors-brand-700)"
+      >
         <PopoverCloseButton />
         <PopoverBody>
           <Text
@@ -90,7 +94,7 @@ export const Timer = () => {
           </Text>
         </PopoverBody>
         <PopoverArrow
-          bgColor="brand.700"
+          bgColor="brand.800"
           borderBottom="1px solid"
           borderLeft="1px solid"
           borderColor="brand.400"
