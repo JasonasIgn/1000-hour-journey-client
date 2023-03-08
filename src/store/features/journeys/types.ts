@@ -17,6 +17,7 @@ export interface Activity {
   description: string | null;
   completed: boolean;
   mediaUrl?: string;
+  includeInDailyGoal: boolean;
 }
 
 export interface Id {

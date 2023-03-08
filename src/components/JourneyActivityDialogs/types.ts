@@ -1,7 +1,8 @@
 
 export interface JourneyActivityFormData {
-  name: string;
+  name?: string;
   description?: string;
   completed?: boolean;
   media?: FileList;
+  includeInDailyGoal?: boolean;
 }

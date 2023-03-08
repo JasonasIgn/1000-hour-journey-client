@@ -51,7 +51,7 @@ export const getAchievementsDictionary = (
   return achievementsDictionary;
 };
 
-interface ActivityHoursMap {
+export interface ActivityHoursMap {
   [activityId: string]: number;
 }
 

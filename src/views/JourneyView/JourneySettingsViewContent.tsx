@@ -10,7 +10,7 @@ import { updateJourneyEffect } from "store/features/journeys/effects";
 export const JourneySettingsViewContent: FC = () => {
   const dispatch = useAppDispatch();
   const journey = useAppSelector(getJourney) as Journey;
-  console.log(journey);
+
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full" centerContent>
       <Paper

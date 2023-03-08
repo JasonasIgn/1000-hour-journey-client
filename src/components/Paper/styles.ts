@@ -36,8 +36,8 @@ const getLevelStylesForGoal = (
     case 1:
       return {
         background: "brand.800",
-        boxShadow: "inset 0px 0px 20px 0px var(--chakra-colors-yellow-700)",
-        borderColor: "yellow.500",
+        boxShadow: "inset 0px 0px 15px 0px var(--chakra-colors-yellow-700)",
+        borderColor: "yellow.700",
       };
     case 2:
       return {
