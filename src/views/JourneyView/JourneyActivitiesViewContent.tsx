@@ -4,27 +4,25 @@ import {
   Container,
   Flex,
   Heading,
-  Image,
   Table,
   TableContainer,
   Tbody,
-  Td,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import Logo from "resources/logo.png";
 import { Paper } from "components/Paper";
 import { getJourney } from "store/features/journeys/selectors";
 import { AddIcon } from "@chakra-ui/icons";
-import { useAppSelector } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
 import { Journey, Activity } from "store/features/journeys/types";
 import { getActivityHoursMap } from "./utils";
-import { getImageSrc } from "utils/helpers";
+import { ActivitiesListItem } from "components/ActivitiesListItem";
 
 export const JourneyActivitiesViewContent: FC = () => {
+  const dispatch = useAppDispatch();
   const journey = useAppSelector(getJourney) as Journey;
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Activity>();
@@ -62,39 +60,19 @@ export const JourneyActivitiesViewContent: FC = () => {
                 <Th pl={5}>Activity</Th>
                 <Th>Description</Th>
                 <Th>Completed</Th>
+                <Th>Include in daily goal</Th>
                 <Th isNumeric>Hours spent</Th>
               </Tr>
             </Thead>
             <Tbody>
               {journey?.activities.map((activity) => (
-                <Tr
+                <ActivitiesListItem
                   key={activity.id}
-                  _hover={{ bg: "brand.700" }}
-                  cursor="pointer"
-                  onClick={() => {
-                    setActivityToEdit(activity);
-                  }}
-                >
-                  <Td width="50px" p={0}>
-                    <Image
-                      width="50px"
-                      filter="brightness(0.8)"
-                      src={
-                        activity?.mediaUrl
-                          ? `${getImageSrc(
-                              activity.mediaUrl
-                            )}?${activity.updatedAt.toString()}` // Prevent caching
-                          : Logo
-                      }
-                    />
-                  </Td>
-                  <Td pl={5}>{activity.name}</Td>
-                  <Td whiteSpace="normal">{activity.description || ""}</Td>
-                  <Td>{activity.completed ? "Yes" : "No"}</Td>
-                  <Td isNumeric>
-                    {`${activitiesSpentTimeMap[activity.id.toString()] || 0}`}
-                  </Td>
-                </Tr>
+                  dispatch={dispatch}
+                  activitiesSpentTimeMap={activitiesSpentTimeMap}
+                  activity={activity}
+                  setActivityToEdit={setActivityToEdit}
+                />
               ))}
             </Tbody>
           </Table>
