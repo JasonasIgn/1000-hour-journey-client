@@ -27,7 +27,7 @@ const App = () => {
         flexGrow={1}
         overflow="hidden"
       >
-        <SimpleHeader />
+        {isLoggedIn && <SimpleHeader />}
         {isLoggedIn && <AuthRoutes />}
         {!isLoggedIn && <GuestRoutes />}
       </Flex>
