@@ -47,6 +47,8 @@ interface AddLogDialogProps {
   open: boolean;
   journeyId: number;
   activities: Activity[];
+  prefilledActivityId?: number | null;
+  clearQueryParams: () => void;
 }
 
 export const AddLogDialog: FC<AddLogDialogProps> = ({
@@ -54,6 +56,8 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   setOpen,
   journeyId,
   activities,
+  prefilledActivityId,
+  clearQueryParams,
 }) => {
   const dispatch = useAppDispatch();
   const dailyGoal = useAppSelector(getDailyGoal);
@@ -107,9 +111,19 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   };
   useEffect(() => {
     if (open) {
+      const prefilledActivity = activities.find(
+        (activity) => activity.id === prefilledActivityId
+      );
+      if (prefilledActivity) {
+        clearQueryParams();
+      }
       dispatch(pauseTimer());
       setShouldResetTimer(true);
-      reset();
+      reset({
+        activities: prefilledActivity
+          ? [getActivityOption(prefilledActivity)]
+          : [],
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, reset]);
