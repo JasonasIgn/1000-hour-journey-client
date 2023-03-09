@@ -34,15 +34,8 @@ export const JourneyActivitiesViewContent: FC = () => {
 
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full">
-      <Paper
-        pt={10}
-        px={10}
-        pb={10}
-        direction="column"
-        h="full"
-        sx={{ borderRadius: 0 }}
-      >
-        <Flex pb={5} justifyContent="flex-end">
+      <Paper pt={10} direction="column" h="full" sx={{ borderRadius: 0 }}>
+        <Flex pb={5} justifyContent="flex-end" px={10}>
           <Button
             onClick={() => {
               setAddDialogOpen(true);
@@ -52,13 +45,12 @@ export const JourneyActivitiesViewContent: FC = () => {
             Add activity
           </Button>
         </Flex>
-        <TableContainer w="full">
+        <TableContainer w="full" sx={{ overflow: "overlay", px: 10, pb: 10 }}>
           <Table size="lg">
-            <Thead>
+            <Thead position="sticky" top={0} bg="brand.800" zIndex={100}>
               <Tr>
                 <Th width="50px" p={0} />
                 <Th pl={5}>Activity</Th>
-                <Th>Description</Th>
                 <Th>Completed</Th>
                 <Th>Include in daily goal</Th>
                 <Th isNumeric>Hours spent</Th>
