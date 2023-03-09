@@ -57,7 +57,6 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
         />
       </Td>
       <Td pl={5}>{activity.name}</Td>
-      <Td whiteSpace="normal">{activity.description || ""}</Td>
       <Td>{activity.completed ? "Yes" : "No"}</Td>
       <Td>
         <Switch
