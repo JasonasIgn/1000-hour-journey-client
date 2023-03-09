@@ -8,13 +8,6 @@ export const getActivityOption = (activity: Activity): Option => ({
   label: activity.name,
 });
 
-export const getActivityOptionWithColor = (
-  activity: Activity
-): OptionWithColor => ({
-  value: activity.id,
-  label: activity.name,
-});
-
 export const getActivityOptionsFromIds = (
   activities: Id[],
   activitiesDictionary: Record<number, Activity>

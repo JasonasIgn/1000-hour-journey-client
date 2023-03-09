@@ -47,7 +47,7 @@ export const JourneyActivitiesViewContent: FC = () => {
         </Flex>
         <TableContainer w="full" sx={{ overflow: "overlay", px: 10, pb: 10 }}>
           <Table size="lg">
-            <Thead position="sticky" top={0} bg="brand.800" zIndex={100}>
+            <Thead position="sticky" top={0} bg="brand.800" zIndex={1}>
               <Tr>
                 <Th width="50px" p={0} />
                 <Th pl={5}>Activity</Th>

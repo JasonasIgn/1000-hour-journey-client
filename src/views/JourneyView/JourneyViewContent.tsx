@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { useState, FC, useMemo, MouseEvent } from "react";
+import { useState, FC, useMemo, MouseEvent, useEffect } from "react";
 import {
   EditLogDialog,
   JourneyTimeLine,
@@ -20,9 +20,12 @@ import {
 } from "./utils";
 import { JOURNEY_VIEW_X_PADDING } from "./constants";
 import { EditJourneyAchievementDialog } from "components/JourneyAchievementsDialogs";
+import { useSearchParams } from "react-router-dom";
 
 export const JourneyViewContent: FC = () => {
+  const [query, setQuery] = useSearchParams();
   const journey = useAppSelector(getJourney);
+  const prefilledActivityId = query.get("prefillActivityId");
 
   const [activeLogId, setActiveLogId] = useState<number>();
   const [activeAchievementId, setActiveAchievementId] = useState<number>();
@@ -63,6 +66,16 @@ export const JourneyViewContent: FC = () => {
       setAddAchievementModalOpen(true);
     }
   };
+
+  const clearQueryParams = () => {
+    setQuery();
+  };
+
+  useEffect(() => {
+    if (prefilledActivityId) {
+      setAddLogModalOpen(true);
+    }
+  }, [journey, prefilledActivityId]);
 
   if (!journey) {
     return <Loader />;
@@ -136,6 +149,10 @@ export const JourneyViewContent: FC = () => {
         setOpen={setAddLogModalOpen}
         journeyId={journey.id}
         activities={journey.activities}
+        prefilledActivityId={
+          prefilledActivityId ? Number(prefilledActivityId) : undefined
+        }
+        clearQueryParams={clearQueryParams}
       />
       {activeAchievement && (
         <EditJourneyAchievementDialog
