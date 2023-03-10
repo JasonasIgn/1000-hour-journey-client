@@ -86,7 +86,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
     try {
       await dispatch(
         updateJourneyLogEffect({ data, journeyId, logId: log.id })
-      );
+      ).unwrap();
       handleClose();
       toast({
         description: "Changes saved",
@@ -95,7 +95,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         dispatch(fetchDailyGoalEffect());
       }, 1000);
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to update the log",
+      });
     }
   };
   useEffect(() => {
@@ -147,7 +149,9 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
         dispatch(fetchDailyGoalEffect());
       }, 1000);
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to delete the log",
+      });
     }
   };
 

@@ -47,7 +47,7 @@ export const createJourneyEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -96,7 +96,7 @@ export const createJourneyLogEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -124,7 +124,7 @@ export const logJourneyAchievementEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -156,7 +156,7 @@ export const editJourneyAchievementEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -181,7 +181,7 @@ export const deleteJourneyAchievementEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -217,7 +217,7 @@ export const updateJourneyLogEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -245,7 +245,7 @@ export const updateJourneyEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
+      throw e;
     }
   }
 );
@@ -273,7 +273,6 @@ export const createJourneyActivityEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
       throw e;
     }
   }
@@ -313,7 +312,6 @@ export const updateJourneyActivityEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
       throw e;
     }
   }
@@ -339,7 +337,6 @@ export const deleteJourneyActivityEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
       throw e;
     }
   }
@@ -359,7 +356,6 @@ export const deleteJourneyLogEffect = createAsyncThunk(
       );
       return response.data;
     } catch (e) {
-      console.log("error:", e);
       throw e;
     }
   }

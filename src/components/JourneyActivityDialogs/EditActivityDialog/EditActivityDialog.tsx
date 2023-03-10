@@ -82,7 +82,9 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
         description: "Activity deleted",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to delete the activity",
+      });
     }
   };
 

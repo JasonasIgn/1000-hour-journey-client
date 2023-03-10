@@ -92,7 +92,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: JourneyLogFormData) => {
     try {
-      await dispatch(createJourneyLogEffect({ data, journeyId }));
+      await dispatch(createJourneyLogEffect({ data, journeyId })).unwrap();
       if (shouldResetTimer) {
         dispatch(resetTimer());
         dispatch(closeTimer());
@@ -106,7 +106,9 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
         dispatch(fetchDailyGoalEffect());
       }, 1000);
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to create a log",
+      });
     }
   };
   useEffect(() => {

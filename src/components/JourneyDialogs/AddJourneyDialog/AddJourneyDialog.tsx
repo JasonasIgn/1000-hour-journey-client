@@ -36,13 +36,15 @@ export const AddJourneyDialog: FC<AddJourneyDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: any) => {
     try {
-      await dispatch(createJourneyEffect(data));
+      await dispatch(createJourneyEffect(data)).unwrap();
       setOpen(false);
       toast({
         description: "Journey created",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to create journey",
+      });
     }
   };
 
