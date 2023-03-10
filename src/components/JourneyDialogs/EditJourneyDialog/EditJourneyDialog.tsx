@@ -41,13 +41,17 @@ export const EditJourneyDialog: FC<EditJourneyDialogProps> = ({
       if (!journey) {
         throw new Error("No journey selected");
       }
-      await dispatch(updateJourneyEffect({ data, journeyId: journey.id }));
+      await dispatch(
+        updateJourneyEffect({ data, journeyId: journey.id })
+      ).unwrap();
       handleClose();
       toast({
         description: "Changes saved",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to update the journey",
+      });
     }
   };
 

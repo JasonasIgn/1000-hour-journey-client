@@ -66,13 +66,15 @@ export const EditJourneyAchievementDialog: FC<
           journeyId,
           achievementId: achievement.id,
         })
-      );
+      ).unwrap();
       setOpen(false);
       toast({
         description: "Changes saved",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to update the achievement",
+      });
     }
   };
 
@@ -89,7 +91,9 @@ export const EditJourneyAchievementDialog: FC<
         description: "Achievement deleted",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to delete the achievement",
+      });
     }
   };
 

@@ -55,13 +55,15 @@ export const AddJourneyAchievementDialog: FC<
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: JourneyAchievementFormData) => {
     try {
-      await dispatch(logJourneyAchievementEffect({ data, journeyId }));
+      await dispatch(logJourneyAchievementEffect({ data, journeyId })).unwrap();
       setOpen(false);
       toast({
         description: "Achievement created",
       });
     } catch (e) {
-      console.error("Caught error", e);
+      toast({
+        description: "Failed to create the achievement",
+      });
     }
   };
 
