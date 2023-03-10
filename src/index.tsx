@@ -21,7 +21,7 @@ root.render(
         theme={theme}
         toastOptions={{
           defaultOptions: {
-            containerStyle: { ml: "86px" },
+            containerStyle: { ml: "94px" },
             position: "bottom-left",
             duration: 4000,
             variant: "solid",
