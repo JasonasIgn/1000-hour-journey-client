@@ -10,4 +10,5 @@ export const journeyLogFormValidation = yup.object({
     .typeError("Must be a number")
     .required("This field is required")
     .min(0.1, "At least 6 minutes (0.1 hours) has to be spent doing session"),
+  loggedOn: yup.date().typeError("This field is required"),
 });
