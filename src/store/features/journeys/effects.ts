@@ -3,6 +3,7 @@ import axios from "axios";
 import { JourneyAchievementFormData } from "components/JourneyAchievementsDialogs/types";
 import { JourneyActivityFormData } from "components/JourneyActivityDialogs/types";
 import { JourneyFormData } from "components/JourneyDialogs/types";
+import format from "date-fns/format";
 import { JourneyLogFormData } from "components/JourneyLogDialogs/types";
 import { apiUrls } from "config";
 import {
@@ -13,6 +14,7 @@ import {
   UpdateJourneyEffectData,
 } from "./types";
 import { getActivityIdsArray } from "./utils";
+import { dateFormats } from "utils/constants";
 
 export const fetchJourneysListEffect = createAsyncThunk(
   "journeys/fetchList",
@@ -82,6 +84,7 @@ export const createJourneyLogEffect = createAsyncThunk(
         {
           ...rest,
           media: media?.[0],
+          loggedOn: format(new Date(rest.loggedOn), dateFormats.standart),
           activities: getActivityIdsArray(activities),
         },
         {
