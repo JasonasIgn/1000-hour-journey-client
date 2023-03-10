@@ -120,6 +120,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
       dispatch(pauseTimer());
       setShouldResetTimer(true);
       reset({
+        loggedOn: format(new Date(), dateFormats.standart),
         activities: prefilledActivity
           ? [getActivityOption(prefilledActivity)]
           : [],
