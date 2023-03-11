@@ -24,6 +24,7 @@ export const JourneyNavigation: FC<JourneyNavigationProps> = ({
       width="full"
       defaultIndex={tabs.findIndex((item) => location.pathname === item.path)}
       bg="brand.800"
+      index={tabs.findIndex((item) => location.pathname === item.path)}
     >
       <TabList>
         <Tab as={RouterLink} to={`/journeys/${journeyId}`}>
