@@ -22,3 +22,14 @@ export const apiUrls = {
   fetchAchievements: `${API_BASE}/achievements`,
   fetchDailyGoal: `${API_BASE}/dailygoal`,
 };
+
+export const routes = {
+  login: "/login",
+  journeys: "/journeys",
+  journey: "/journeys/:journeyId",
+  journeyActivities: "/journeys/:journeyId/activities",
+  journeySettings: "/journeys/:journeyId/settings",
+  statistics: "/statistics",
+  statisticsLogs: "/statistics/logs",
+  statisticsAchievements: "/statistics/achievements",
+};
