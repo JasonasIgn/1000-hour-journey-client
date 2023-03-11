@@ -1,6 +1,6 @@
 {
   "name": "1000-hour-journey-client",
-  "version": "0.10.14",
+  "version": "0.10.15",
   "private": true,
   "scripts": {
     "prestart": "genversion --es6 --semi src/version.ts",
