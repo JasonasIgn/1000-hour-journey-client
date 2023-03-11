@@ -9,6 +9,7 @@ import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as GraphIcon } from "resources/graph.svg";
 import { Timer } from "components/Timer";
 import { Paper } from "components/Paper";
+import { routes } from "config";
 
 interface NavigationItem {
   path: string;
@@ -18,12 +19,12 @@ interface NavigationItem {
 
 const navigationItems: NavigationItem[] = [
   {
-    path: "/journeys",
+    path: routes.journeys,
     name: "Journeys",
     icon: <Icon as={HomeIcon} width="30px" height="30px" />,
   },
   {
-    path: "/statistics",
+    path: routes.statistics,
     name: "Logs",
     icon: <Icon as={GraphIcon} width="24px" height="24px" />,
   },

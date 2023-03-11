@@ -2,6 +2,7 @@ import { Text, Flex, Divider } from "@chakra-ui/react";
 import { FC } from "react";
 import { JourneyTask as JourneyTaskType } from "store/features/dailyGoal/types";
 import { Link as RouterLink } from "react-router-dom";
+import { routes } from "config";
 
 interface JourneyTaskProps {
   journeyTask: JourneyTaskType;
@@ -25,7 +26,10 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
           whiteSpace="nowrap"
           textOverflow="ellipsis"
           as={RouterLink}
-          to={`/journeys/${journeyTask.journey.id}`}
+          to={routes.journey.replace(
+            ":journeyId",
+            journeyTask.journey.id.toString()
+          )}
           transition="transform 100ms"
           _hover={{
             color: isJourneyTaskCompleted ? "green.300" : "yellow.500",
@@ -59,7 +63,9 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
               textOverflow="ellipsis"
               transition="transform 100ms"
               as={RouterLink}
-              to={`/journeys/${journeyTask.journey.id}?prefillActivityId=${activityTask.activityId}`}
+              to={routes.journey
+                .replace(":journeyId", journeyTask.journey.id.toString())
+                .concat(`?prefillActivityId=${activityTask.activityId}`)}
               color={isActivityTaskCompleted ? "green.500" : "yellow.700"}
               _hover={{
                 color: isActivityTaskCompleted ? "green.400" : "yellow.600",

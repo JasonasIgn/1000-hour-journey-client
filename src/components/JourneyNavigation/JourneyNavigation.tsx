@@ -1,22 +1,26 @@
 import { FC, useMemo } from "react";
 import { Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { routes } from "config";
 
 interface JourneyNavigationProps {
   journeyId?: string;
 }
 
 const getTabs = (id: string) => [
-  { path: `/journeys/${id}` },
-  { path: `/journeys/${id}/activities` },
-  { path: `/journeys/${id}/settings` },
+  { path: routes.journey.replace(":journeyId", id), name: "Main" },
+  {
+    path: routes.journeyActivities.replace(":journeyId", id),
+    name: "Activities",
+  },
+  { path: routes.journeySettings.replace(":journeyId", id), name: "Settings" },
 ];
 
 export const JourneyNavigation: FC<JourneyNavigationProps> = ({
-  journeyId,
+  journeyId = "",
 }) => {
   const location = useLocation();
-  const tabs = useMemo(() => getTabs(journeyId || ""), [journeyId]);
+  const tabs = useMemo(() => getTabs(journeyId), [journeyId]);
 
   return (
     <Tabs
@@ -27,15 +31,11 @@ export const JourneyNavigation: FC<JourneyNavigationProps> = ({
       index={tabs.findIndex((item) => location.pathname === item.path)}
     >
       <TabList>
-        <Tab as={RouterLink} to={`/journeys/${journeyId}`}>
-          Main
-        </Tab>
-        <Tab as={RouterLink} to={`/journeys/${journeyId}/activities`}>
-          Activities
-        </Tab>
-        <Tab as={RouterLink} to={`/journeys/${journeyId}/settings`}>
-          Settings
-        </Tab>
+        {tabs.map((tab) => (
+          <Tab as={RouterLink} to={tab.path}>
+            {tab.name}
+          </Tab>
+        ))}
       </TabList>
     </Tabs>
   );

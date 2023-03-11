@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { routes } from "config";
 
 const tabs = [
-  { path: `/statistics/logs` },
-  { path: `/statistics/achievements` },
+  { path: routes.statisticsLogs, name: "Logs" },
+  { path: routes.statisticsAchievements, name: "Achievements" },
 ];
 
 export const StatisticsNavigation: FC = () => {
@@ -19,12 +20,11 @@ export const StatisticsNavigation: FC = () => {
       bg="brand.800"
     >
       <TabList>
-        <Tab as={RouterLink} to={`/statistics/logs`}>
-          Logs
-        </Tab>
-        <Tab as={RouterLink} to={`/statistics/achievements`}>
-          Achievements
-        </Tab>
+        {tabs.map((tab) => (
+          <Tab as={RouterLink} to={tab.path} key={tab.path}>
+            {tab.name}
+          </Tab>
+        ))}
       </TabList>
     </Tabs>
   );

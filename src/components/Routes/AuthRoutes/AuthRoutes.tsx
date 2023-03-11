@@ -8,6 +8,7 @@ import { StatisticsLogsViewContent } from "views/StatisticsView/StatisticsLogsVi
 import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitiesViewContent";
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
 import { JourneySettingsViewContent } from "views/JourneyView/JourneySettingsViewContent";
+import { routes } from "config";
 
 interface AuthRoutesProps {}
 
@@ -16,34 +17,40 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
     <>
       <GlobalImageViewer />
       <Routes>
-        <Route path="/journeys">
-          <Route path=":journeyId" element={<JourneyView />}>
+        <Route path={routes.journeys}>
+          <Route path={routes.journey} element={<JourneyView />}>
             <Route
-              path="activities"
+              path={routes.journeyActivities}
               element={<JourneyActivitiesViewContent />}
             />
-            <Route path="settings" element={<JourneySettingsViewContent />} />
+            <Route
+              path={routes.journeySettings}
+              element={<JourneySettingsViewContent />}
+            />
             <Route index element={<JourneyViewContent />} />
           </Route>
           <Route index element={<JourneysView />} />
         </Route>
 
-        <Route path="/statistics" element={<StatisticsView />}>
+        <Route path={routes.statistics} element={<StatisticsView />}>
           <Route
-            path="/statistics/logs"
+            path={routes.statisticsLogs}
             element={<StatisticsLogsViewContent />}
           />
           <Route
-            path="/statistics/achievements"
+            path={routes.statisticsAchievements}
             element={<StatisticsAchievementsViewContent />}
           />
           <Route
             index
-            element={<Navigate to="/statistics/logs" replace={true} />}
+            element={<Navigate to={routes.statisticsLogs} replace={true} />}
           />
         </Route>
 
-        <Route path="*" element={<Navigate to="/journeys" replace={true} />} />
+        <Route
+          path="*"
+          element={<Navigate to={routes.journeys} replace={true} />}
+        />
       </Routes>
     </>
   );

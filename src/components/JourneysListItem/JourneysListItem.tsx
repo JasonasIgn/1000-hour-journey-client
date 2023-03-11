@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
 import { Paper } from "components/Paper";
+import { routes } from "config";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -28,7 +29,7 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
   onEditClick,
   isGoalHighlight,
 }) => (
-  <Link to={`/journeys/${journey.id}`}>
+  <Link to={routes.journey.replace(":journeyId", journey.id.toString())}>
     <Paper
       variant={isGoalHighlight ? "dailyGoal" : "brand"}
       level={1}

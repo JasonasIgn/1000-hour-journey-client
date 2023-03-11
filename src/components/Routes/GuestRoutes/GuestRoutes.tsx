@@ -1,14 +1,13 @@
+import { routes } from "config";
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginView } from "views";
 
-interface GuestRoutesProps {}
-
-export const GuestRoutes: FC<GuestRoutesProps> = (props) => {
+export const GuestRoutes: FC = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginView />} />
-      <Route path="*" element={<Navigate to="/login" replace={true} />} />
+      <Route path={routes.login} element={<LoginView />} />
+      <Route path="*" element={<Navigate to={routes.login} replace={true} />} />
     </Routes>
   );
 };
