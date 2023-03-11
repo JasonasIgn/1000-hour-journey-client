@@ -9,6 +9,7 @@ interface JourneyTaskProps {
 
 export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
   const isJourneyTaskCompleted =
+    journeyTask.hoursSpent >= journeyTask.hoursToLog &&
     journeyTask.activityTasks.findIndex(
       (task) => task.hoursSpent < task.hoursToLog
     ) === -1;
