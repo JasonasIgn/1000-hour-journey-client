@@ -165,7 +165,10 @@ export const journeysSlice = createSlice({
             (log) => log.id !== logId
           );
           if (deletedLog) {
-            state.journey.totalHours -= deletedLog.hoursSpent;
+            state.journey.totalHours =
+              Math.round(
+                (state.journey.totalHours - deletedLog.hoursSpent) * 10
+              ) / 10;
           }
         }
       });

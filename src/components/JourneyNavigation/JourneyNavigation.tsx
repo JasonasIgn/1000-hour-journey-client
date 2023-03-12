@@ -32,7 +32,7 @@ export const JourneyNavigation: FC<JourneyNavigationProps> = ({
     >
       <TabList>
         {tabs.map((tab) => (
-          <Tab as={RouterLink} to={tab.path}>
+          <Tab as={RouterLink} to={tab.path} key={tab.path}>
             {tab.name}
           </Tab>
         ))}
