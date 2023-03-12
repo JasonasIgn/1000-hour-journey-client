@@ -10,27 +10,41 @@ import {
   Th,
   Thead,
   Tr,
+  Icon,
 } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
 import { getJourney } from "store/features/journeys/selectors";
 import { AddIcon } from "@chakra-ui/icons";
+import { ReactComponent as ArrowUp } from "resources/arrow-up.svg";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AddActivityDialog } from "components/JourneyActivityDialogs/AddActivityDialog";
 import { EditActivityDialog } from "components/JourneyActivityDialogs/EditActivityDialog";
 import { Journey, Activity } from "store/features/journeys/types";
-import { getActivityHoursMap } from "./utils";
+import { getActivityHoursMap, getNewSortParamsOnClick } from "./utils";
 import { ActivitiesListItem } from "components/ActivitiesListItem";
+import { SortParams, useActivitiesSorting } from "./hooks";
 
 export const JourneyActivitiesViewContent: FC = () => {
   const dispatch = useAppDispatch();
   const journey = useAppSelector(getJourney) as Journey;
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Activity>();
+  const [sortParams, setSortParams] = useState<SortParams | undefined>({
+    direction: "desc",
+    sortParam: "completed",
+  });
   const isEmptyState = journey?.activities.length === 0;
 
   const activitiesSpentTimeMap = useMemo(() => {
     return getActivityHoursMap(journey?.logs || []);
   }, [journey?.logs]);
+
+  console.log(journey.activities);
+  const sortedActivities = useActivitiesSorting(
+    journey.activities,
+    activitiesSpentTimeMap,
+    sortParams
+  );
 
   return (
     <Container maxW="6xl" pt={5} pb={5} h="full">
@@ -51,13 +65,50 @@ export const JourneyActivitiesViewContent: FC = () => {
               <Tr>
                 <Th width="50px" p={0} />
                 <Th pl={5}>Activity</Th>
-                <Th>Completed</Th>
+                <Th
+                  userSelect="none"
+                  cursor="pointer"
+                  onClick={() => {
+                    setSortParams(
+                      getNewSortParamsOnClick("completed", sortParams)
+                    );
+                  }}
+                >
+                  Completed&nbsp;
+                  {sortParams?.sortParam === "completed" && (
+                    <Icon
+                      as={ArrowUp}
+                      transform={`rotate(${
+                        sortParams?.direction === "asc" ? 0 : 180
+                      }deg)`}
+                    />
+                  )}
+                </Th>
                 <Th>Include in daily goal</Th>
-                <Th isNumeric>Hours spent</Th>
+                <Th
+                  isNumeric
+                  userSelect="none"
+                  cursor="pointer"
+                  onClick={() => {
+                    setSortParams(
+                      getNewSortParamsOnClick("hoursSpent", sortParams)
+                    );
+                  }}
+                >
+                  Hours spent&nbsp;
+                  {sortParams?.sortParam === "hoursSpent" && (
+                    <Icon
+                      as={ArrowUp}
+                      transform={`rotate(${
+                        sortParams?.direction === "asc" ? 0 : 180
+                      }deg)`}
+                    />
+                  )}
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {journey?.activities.map((activity) => (
+              {sortedActivities.map((activity) => (
                 <ActivitiesListItem
                   key={activity.id}
                   dispatch={dispatch}
