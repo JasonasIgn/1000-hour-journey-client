@@ -1,4 +1,5 @@
 import { Achievement, Log } from "store/features/journeys/types";
+import { SortParams } from "./hooks";
 import { LogsDictionary, IdsHourMap, AchievementsDictionary } from "./types";
 
 export const getLogHoursMap = (logs: Log[]): IdsHourMap => {
@@ -73,4 +74,21 @@ export const getActivityHoursMap = (logs: Log[]) => {
     });
   });
   return data;
+};
+
+export const getNewSortParamsOnClick = (
+  clickedParam: SortParams["sortParam"],
+  currentSortParams?: SortParams
+): SortParams | undefined => {
+  if (!currentSortParams || currentSortParams.sortParam !== clickedParam) {
+    return { sortParam: clickedParam, direction: "asc" };
+  }
+
+  if (currentSortParams.sortParam === clickedParam) {
+    if (currentSortParams.direction === "asc") {
+      return { ...currentSortParams, direction: "desc" };
+    }
+    return undefined;
+  }
+  return undefined;
 };
