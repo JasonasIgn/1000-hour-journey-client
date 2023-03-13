@@ -9,12 +9,14 @@ import {
   Progress,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
+import format from "date-fns/format";
 import Logo from "resources/logo.png";
 import { Link } from "react-router-dom";
 import { JourneyListItem } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
 import { Paper } from "components/Paper";
 import { routes } from "config";
+import { dateFormats } from "utils/constants";
 
 interface JourneysListItemProps {
   journey: JourneyListItem;
@@ -78,6 +80,9 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         <Flex direction="column">
           <Heading size="md">{journey.title}</Heading>
           <Text fontSize="md">{journey.description}</Text>
+          <Text fontSize="sm" color="gray.500" mt={1}>
+            {format(new Date(journey.createdAt), dateFormats.standart)}
+          </Text>
         </Flex>
         <Flex direction="column">
           <Text textAlign="center" fontSize="14px">
