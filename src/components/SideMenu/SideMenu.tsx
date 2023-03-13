@@ -70,10 +70,8 @@ export const SideMenu: FC = () => {
           key={item.name}
           label={item.name}
           placement="right"
-          bg="white"
-          color="black"
           openDelay={500}
-          offset={[0, 10]}
+          offset={[0, 9]}
         >
           <IconButton
             aria-label={item.name}

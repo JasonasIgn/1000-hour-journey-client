@@ -1,4 +1,4 @@
-import { Text, Flex, Divider } from "@chakra-ui/react";
+import { Text, Flex, Divider, Tooltip } from "@chakra-ui/react";
 import { FC } from "react";
 import { JourneyTask as JourneyTaskType } from "store/features/dailyGoal/types";
 import { Link as RouterLink } from "react-router-dom";
@@ -19,25 +19,31 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
     <Flex justifyContent="center" direction="column">
       <Divider mt={1} borderColor="gray.400" />
       <Flex alignItems="center">
-        <Text
-          fontSize="2xl"
-          color={isJourneyTaskCompleted ? "green.400" : "yellow.600"}
-          overflow="hidden"
-          whiteSpace="nowrap"
-          textOverflow="ellipsis"
-          as={RouterLink}
-          to={routes.journey.replace(
-            ":journeyId",
-            journeyTask.journey.id.toString()
-          )}
-          transition="transform 100ms"
-          _hover={{
-            color: isJourneyTaskCompleted ? "green.300" : "yellow.500",
-            transform: "scale(1.01)",
-          }}
+        <Tooltip
+          label={journeyTask.journey.title}
+          openDelay={500}
+          placement="left"
         >
-          {journeyTask.journey.title}
-        </Text>
+          <Text
+            fontSize="2xl"
+            color={isJourneyTaskCompleted ? "green.400" : "yellow.600"}
+            overflow="hidden"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            as={RouterLink}
+            to={routes.journey.replace(
+              ":journeyId",
+              journeyTask.journey.id.toString()
+            )}
+            transition="transform 100ms"
+            _hover={{
+              color: isJourneyTaskCompleted ? "green.300" : "yellow.500",
+              transform: "scale(1.01)",
+            }}
+          >
+            {journeyTask.journey.title}
+          </Text>
+        </Tooltip>
         <Text
           ml="auto"
           pl={4}
@@ -56,24 +62,30 @@ export const JourneyTask: FC<JourneyTaskProps> = ({ journeyTask }) => {
             key={`activity-task-${activityTask.id}`}
             ml={2}
           >
-            <Text
-              fontSize="lg"
-              overflow="hidden"
-              whiteSpace="nowrap"
-              textOverflow="ellipsis"
-              transition="transform 100ms"
-              as={RouterLink}
-              to={routes.journey
-                .replace(":journeyId", journeyTask.journey.id.toString())
-                .concat(`?prefillActivityId=${activityTask.activityId}`)}
-              color={isActivityTaskCompleted ? "green.500" : "yellow.700"}
-              _hover={{
-                color: isActivityTaskCompleted ? "green.400" : "yellow.600",
-                transform: "scale(1.01)",
-              }}
+            <Tooltip
+              label={activityTask.activity.name}
+              openDelay={500}
+              placement="left"
             >
-              - {activityTask.activity.name}
-            </Text>
+              <Text
+                fontSize="lg"
+                overflow="hidden"
+                whiteSpace="nowrap"
+                textOverflow="ellipsis"
+                transition="transform 100ms"
+                as={RouterLink}
+                to={routes.journey
+                  .replace(":journeyId", journeyTask.journey.id.toString())
+                  .concat(`?prefillActivityId=${activityTask.activityId}`)}
+                color={isActivityTaskCompleted ? "green.500" : "yellow.700"}
+                _hover={{
+                  color: isActivityTaskCompleted ? "green.400" : "yellow.600",
+                  transform: "scale(1.01)",
+                }}
+              >
+                - {activityTask.activity.name}
+              </Text>
+            </Tooltip>
             <Text
               ml="auto"
               pl={2}
