@@ -74,15 +74,16 @@ export const JourneyActivitiesViewContent: FC = () => {
                     );
                   }}
                 >
-                  Completed&nbsp;
-                  {sortParams?.sortParam === "completed" && (
+                  <Flex alignItems="center">
+                    Completed&nbsp;
                     <Icon
+                      opacity={sortParams?.sortParam === "completed" ? 1 : 0}
                       as={ArrowUp}
                       transform={`rotate(${
                         sortParams?.direction === "asc" ? 0 : 180
                       }deg)`}
                     />
-                  )}
+                  </Flex>
                 </Th>
                 <Th>Include in daily goal</Th>
                 <Th
@@ -95,15 +96,17 @@ export const JourneyActivitiesViewContent: FC = () => {
                     );
                   }}
                 >
-                  Hours spent&nbsp;
-                  {sortParams?.sortParam === "hoursSpent" && (
+                  <Flex justifyContent="flex-end" alignItems="center">
+                    Hours spent&nbsp;
                     <Icon
+                      mr="-19px"
                       as={ArrowUp}
+                      opacity={sortParams?.sortParam === "hoursSpent" ? 1 : 0}
                       transform={`rotate(${
                         sortParams?.direction === "asc" ? 0 : 180
                       }deg)`}
                     />
-                  )}
+                  </Flex>
                 </Th>
               </Tr>
             </Thead>
