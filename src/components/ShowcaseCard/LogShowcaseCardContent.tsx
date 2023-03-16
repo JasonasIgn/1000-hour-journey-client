@@ -8,7 +8,7 @@ import {
   TagLabel,
   Text,
   Badge,
-  Icon,
+  IconButton,
 } from "@chakra-ui/react";
 import format from "date-fns/format";
 import { Activity, LogExtended } from "store/features/journeys/types";
@@ -18,12 +18,14 @@ interface LogShowcaseCardContentProps extends FlexProps {
   log: LogExtended;
   onEditLogClick: () => void;
   activitiesDictionary: Record<number, Activity>;
+  isJourneyFinished: boolean;
 }
 
 export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
   log,
   onEditLogClick,
   activitiesDictionary,
+  isJourneyFinished,
   ...rest
 }) => {
   return (
@@ -54,19 +56,18 @@ export const LogShowcaseCardContent: FC<LogShowcaseCardContentProps> = ({
           <Heading size="sm" mt={2}>
             {format(new Date(log.loggedOn), dateFormats.standart)}
           </Heading>
-          <Icon
-            as={EditIcon}
-            position="absolute"
+          <IconButton
+            isDisabled={isJourneyFinished}
             top={0}
             right={0}
-            cursor="pointer"
+            position="absolute"
             width="22px"
             height="22px"
-            color="gray.400"
-            _hover={{
-              color: "gray.100",
-            }}
+            minWidth="22px"
             onClick={onEditLogClick}
+            aria-label="edit log"
+            variant="sideMenu"
+            icon={<EditIcon width="22px" height="22px" />}
           />
         </Flex>
       </Flex>

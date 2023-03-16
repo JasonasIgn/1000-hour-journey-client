@@ -13,12 +13,18 @@ export const Button: ComponentStyleConfig = {
       color: "gray.300",
       _hover: {
         bgColor: "red.500",
+        _disabled: {
+          bgColor: "red.700",
+        },
       },
     },
     ghost: {
       color: "brand.100",
       _hover: {
         color: "brand.600",
+        _disabled: {
+          color: "brand.100",
+        },
       },
     },
     sideMenu: {
@@ -30,6 +36,11 @@ export const Button: ComponentStyleConfig = {
         stroke: "gray.100",
         fill: "gray.100",
         color: "gray.100",
+        _disabled: {
+          fill: "gray.400",
+          color: "gray.400",
+          stroke: "gray.400",
+        },
       },
       _active: {
         stroke: "gray.100",

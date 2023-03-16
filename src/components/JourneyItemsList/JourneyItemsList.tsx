@@ -32,6 +32,7 @@ interface JourneyItemsListProps {
   activities: Activity[];
   openAddLogDialog: (e: MouseEvent) => void;
   openAddAchievementDialog: (e: MouseEvent) => void;
+  isJourneyFinished: boolean;
 }
 
 export const JourneyItemsList: FC<JourneyItemsListProps> = ({
@@ -44,6 +45,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
   achievements,
   setActiveAchievementId,
   activeAchievement,
+  isJourneyFinished,
 }) => {
   const [listType, setListType] = useState<"logs" | "achievements">("logs");
   const activeRef = useRef<HTMLDivElement>(null);
@@ -106,6 +108,7 @@ export const JourneyItemsList: FC<JourneyItemsListProps> = ({
             Achievements
           </Tab>
           <IconButton
+            isDisabled={isJourneyFinished}
             ml="auto"
             mr={2}
             variant="sideMenu"

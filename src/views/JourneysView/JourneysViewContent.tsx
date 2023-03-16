@@ -2,6 +2,7 @@ import { useEffect, useState, FC } from "react";
 import { fetchJourneysListEffect } from "store/features/journeys/effects";
 import {
   Button,
+  Checkbox,
   Container,
   Flex,
   Radio,
@@ -23,7 +24,8 @@ import {
 import { JourneyListItem } from "store/features/journeys/types";
 import { Paper } from "components/Paper";
 import { Option } from "types";
-import { OrderOption, SortOption, sortOptions } from "./constants";
+import { sortOptions } from "./constants";
+import { OrderOption, SortOption } from "./types";
 import { useListSorting } from "./hooks";
 
 export const JourneysViewContent: FC = () => {
@@ -63,12 +65,14 @@ export const JourneysViewContent: FC = () => {
           </Flex>
           <Flex
             direction="column"
-            width="160px"
+            width="140px"
             ml={6}
             justifyContent="space-between"
           >
             <Text>Order</Text>
             <RadioGroup
+              display="flex"
+              flexDirection="column"
               defaultValue="desc"
               onChange={(value: OrderOption) =>
                 setParams({ ...params, orderBy: value })
@@ -77,6 +81,50 @@ export const JourneysViewContent: FC = () => {
               <Radio value="desc">Descending</Radio>
               <Radio value="asc">Ascending</Radio>
             </RadioGroup>
+          </Flex>
+          <Flex
+            direction="column"
+            width="160px"
+            ml={6}
+            justifyContent="space-between"
+          >
+            <Text>Show</Text>
+
+            <Flex direction="column">
+              <Checkbox
+                value="unfinished"
+                defaultChecked
+                isChecked={["unfinished", "all"].includes(params.show)}
+                onChange={() => {
+                  if (params.show === "all" || params.show === "unfinished") {
+                    setParams({ ...params, show: "finished" });
+                    return;
+                  }
+                  if (params.show === "finished") {
+                    setParams({ ...params, show: "all" });
+                    return;
+                  }
+                }}
+              >
+                Unfinished
+              </Checkbox>
+              <Checkbox
+                value="finished"
+                isChecked={["finished", "all"].includes(params.show)}
+                onChange={() => {
+                  if (params.show === "all" || params.show === "finished") {
+                    setParams({ ...params, show: "unfinished" });
+                    return;
+                  }
+                  if (params.show === "unfinished") {
+                    setParams({ ...params, show: "all" });
+                    return;
+                  }
+                }}
+              >
+                Finished
+              </Checkbox>
+            </Flex>
           </Flex>
           <Button
             onClick={() => setModalOpen(true)}

@@ -27,18 +27,18 @@ import {
 } from "store/features/journeys/effects";
 import { JourneyActivityFormData } from "../types";
 import { journeyActivityFormValidation } from "../validation";
-import { Activity } from "store/features/journeys/types";
+import { Activity, Journey } from "store/features/journeys/types";
 import { SwitchField } from "components/SwitchField";
 
 interface EditActivityDialogProps {
   handleClose: () => void;
-  journeyId: number;
+  journey: Journey;
   activity?: Activity;
 }
 
 export const EditActivityDialog: FC<EditActivityDialogProps> = ({
   handleClose,
-  journeyId,
+  journey,
   activity,
 }) => {
   const toast = useToast();
@@ -56,7 +56,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
       await dispatch(
         updateJourneyActivityEffect({
           data,
-          journeyId,
+          journeyId: journey.id,
           activityId: activity?.id as number,
         })
       ).unwrap();
@@ -73,7 +73,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
     try {
       await dispatch(
         deleteJourneyActivityEffect({
-          journeyId,
+          journeyId: journey.id,
           activityId: activity?.id as number,
         })
       ).unwrap();
@@ -151,6 +151,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
 
           <ModalFooter>
             <Button
+              isDisabled={journey.finished}
               mr="auto"
               onClick={() => {
                 setConfirmationDialogOpen(true);
@@ -165,7 +166,7 @@ export const EditActivityDialog: FC<EditActivityDialogProps> = ({
             <Button
               variant="ghost"
               type="submit"
-              isDisabled={isSubmitting || !isValid}
+              isDisabled={isSubmitting || !isValid || journey.finished}
             >
               Update
             </Button>

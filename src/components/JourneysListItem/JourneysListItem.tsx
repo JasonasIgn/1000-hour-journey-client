@@ -5,8 +5,8 @@ import {
   Heading,
   Text,
   Image,
-  Icon,
   Progress,
+  IconButton,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
 import format from "date-fns/format";
@@ -43,8 +43,8 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
         boxShadow: `inset 0px 0px 20px 0px var(--chakra-colors-${
           isGoalHighlight ? "yellow" : "brand"
         }-600)`,
-        svg: {
-          display: "inline-block",
+        button: {
+          display: journey.finished ? "none" : "inline-block",
         },
       }}
       transition="box-shadow 0.1s"
@@ -91,19 +91,18 @@ export const JourneysListItem: FC<JourneysListItemProps> = ({
           <Progress value={journey.totalHours / 10} size="lg" width="100%" />
         </Flex>
       </Flex>
-      <Icon
-        display="none"
-        as={EditIcon}
+      <IconButton
+        isDisabled={journey.finished}
+        aria-label="edit journey"
+        icon={<EditIcon width="22px" height="22px" />}
         position="absolute"
         right="16px"
         top="16px"
         width="22px"
         height="22px"
-        fill="gray.400"
-        _hover={{
-          color: "gray.100",
-          fill: "gray.100",
-        }}
+        minWidth="22px"
+        display="none"
+        variant="sideMenu"
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

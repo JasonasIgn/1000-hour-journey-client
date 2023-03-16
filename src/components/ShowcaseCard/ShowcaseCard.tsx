@@ -19,6 +19,7 @@ interface ShowcaseCardProps extends FlexProps {
   defaultJourneyImageSrc?: string;
   onEditAchievementClick: () => void;
   activitiesDictionary: Record<number, Activity>;
+  isJourneyFinished: boolean;
 }
 
 export const ShowcaseCard: FC<ShowcaseCardProps> = ({
@@ -26,6 +27,7 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
   defaultJourneyImageSrc,
   onEditAchievementClick,
   activitiesDictionary,
+  isJourneyFinished,
   ...rest
 }) => {
   const dispatch = useAppDispatch();
@@ -84,12 +86,14 @@ export const ShowcaseCard: FC<ShowcaseCardProps> = ({
             log={item as LogExtended}
             onEditLogClick={onEditLogClick}
             activitiesDictionary={activitiesDictionary}
+            isJourneyFinished={isJourneyFinished}
           />
         )}
         {isItemAchievement && (
           <AchievementShowcaseCardContent
             achievement={item as Achievement}
             onEditClick={onEditAchievementClick}
+            isJourneyFinished={isJourneyFinished}
           />
         )}
       </Flex>

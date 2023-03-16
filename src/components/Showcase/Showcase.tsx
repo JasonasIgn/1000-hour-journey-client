@@ -13,6 +13,7 @@ interface ShowcaseProps {
   shiftDirection: ShiftDirection;
   defaultJourneyImageSrc?: string;
   onEditAchievementClick: () => void;
+  isJourneyFinished: boolean;
 }
 
 export const Showcase: FC<ShowcaseProps> = ({
@@ -20,6 +21,7 @@ export const Showcase: FC<ShowcaseProps> = ({
   shiftDirection,
   defaultJourneyImageSrc,
   onEditAchievementClick,
+  isJourneyFinished,
 }) => {
   const cards = useAnimatedCards(shiftDirection, item);
   const activitiesDictionary = useAppSelector(
@@ -45,6 +47,7 @@ export const Showcase: FC<ShowcaseProps> = ({
           defaultJourneyImageSrc={defaultJourneyImageSrc}
           onEditAchievementClick={onEditAchievementClick}
           activitiesDictionary={activitiesDictionary}
+          isJourneyFinished={isJourneyFinished}
         />
       ))}
     </Flex>

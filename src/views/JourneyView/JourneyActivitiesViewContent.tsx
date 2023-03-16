@@ -51,6 +51,7 @@ export const JourneyActivitiesViewContent: FC = () => {
       <Paper pt={10} direction="column" h="full" sx={{ borderRadius: 0 }}>
         <Flex pb={5} justifyContent="flex-end" px={10}>
           <Button
+            isDisabled={journey.finished}
             onClick={() => {
               setAddDialogOpen(true);
             }}
@@ -118,6 +119,7 @@ export const JourneyActivitiesViewContent: FC = () => {
                   activitiesSpentTimeMap={activitiesSpentTimeMap}
                   activity={activity}
                   setActivityToEdit={setActivityToEdit}
+                  isJourneyFinished={journey.finished}
                 />
               ))}
             </Tbody>
@@ -142,7 +144,7 @@ export const JourneyActivitiesViewContent: FC = () => {
       <EditActivityDialog
         activity={activityToEdit}
         handleClose={() => setActivityToEdit(undefined)}
-        journeyId={journey?.id as number}
+        journey={journey as Journey}
       />
     </Container>
   );

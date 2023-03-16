@@ -124,6 +124,9 @@ export const journeysSlice = createSlice({
           );
           state.list[updatedLogIndex] = action.payload;
         }
+        if (state.journey?.id === action.meta.arg.journeyId) {
+          state.journey = { ...state.journey, ...action.payload };
+        }
       })
       .addCase(createJourneyActivityEffect.fulfilled, (state, { payload }) => {
         if (state.journey && payload) {

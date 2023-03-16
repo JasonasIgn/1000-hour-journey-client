@@ -235,7 +235,11 @@ export const updateJourneyEffect = createAsyncThunk(
     try {
       const response = await axios.patch<Journey>(
         apiUrls.updateJourney.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0] },
+        {
+          ...rest,
+          media: media?.[0],
+          ...(rest.finished ? { finished: Number(rest.finished) } : {}),
+        },
         {
           withCredentials: true,
           headers: {
