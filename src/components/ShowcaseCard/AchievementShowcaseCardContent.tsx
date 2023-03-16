@@ -1,6 +1,13 @@
 import { FC } from "react";
 import { EditIcon } from "@chakra-ui/icons";
-import { Badge, Flex, FlexProps, Heading, Text, Icon } from "@chakra-ui/react";
+import {
+  Badge,
+  Flex,
+  FlexProps,
+  Heading,
+  Text,
+  IconButton,
+} from "@chakra-ui/react";
 import format from "date-fns/format";
 import { Achievement } from "store/features/journeys/types";
 import { dateFormats } from "utils/constants";
@@ -8,11 +15,12 @@ import { dateFormats } from "utils/constants";
 interface AchievementShowcaseCardContentProps extends FlexProps {
   achievement: Achievement;
   onEditClick: () => void;
+  isJourneyFinished: boolean;
 }
 
 export const AchievementShowcaseCardContent: FC<
   AchievementShowcaseCardContentProps
-> = ({ achievement, onEditClick, ...rest }) => {
+> = ({ achievement, onEditClick, isJourneyFinished, ...rest }) => {
   return (
     <Flex w="full" height="full" direction="column">
       <Flex
@@ -28,19 +36,18 @@ export const AchievementShowcaseCardContent: FC<
           <Heading size="sm" mt={2}>
             {format(new Date(achievement.loggedOnDate), dateFormats.standart)}
           </Heading>
-          <Icon
-            as={EditIcon}
-            position="absolute"
+          <IconButton
+            isDisabled={isJourneyFinished}
             top={0}
             right={0}
-            cursor="pointer"
+            position="absolute"
             width="22px"
             height="22px"
-            color="gray.400"
-            _hover={{
-              color: "gray.100",
-            }}
+            minWidth="22px"
             onClick={onEditClick}
+            aria-label="edit log"
+            variant="sideMenu"
+            icon={<EditIcon width="22px" height="22px" />}
           />
         </Flex>
       </Flex>

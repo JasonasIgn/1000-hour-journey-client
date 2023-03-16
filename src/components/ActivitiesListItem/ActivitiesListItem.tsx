@@ -12,6 +12,7 @@ interface ActivitiesListItemProps {
   activity: Activity;
   setActivityToEdit: (activity: Activity) => void;
   activitiesSpentTimeMap: ActivityHoursMap;
+  isJourneyFinished: boolean;
 }
 
 export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
@@ -19,6 +20,7 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
   activity,
   setActivityToEdit,
   activitiesSpentTimeMap,
+  isJourneyFinished,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -60,10 +62,13 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
       <Td>{activity.completed ? "Yes" : "No"}</Td>
       <Td>
         <Switch
-          isDisabled={loading}
+          isDisabled={loading || isJourneyFinished}
           size="lg"
           onClickCapture={async (e) => {
             e.stopPropagation();
+            if (isJourneyFinished) {
+              return;
+            }
             await handleOnSwitchChange(!activity.includeInDailyGoal);
           }}
           isChecked={activity.includeInDailyGoal}

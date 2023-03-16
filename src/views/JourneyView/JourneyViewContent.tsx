@@ -102,6 +102,7 @@ export const JourneyViewContent: FC = () => {
               onEditAchievementClick={() => {
                 setEditAchievementModalOpen(true);
               }}
+              isJourneyFinished={journey.finished}
             />
             <JourneyTimeLineControls
               activeLogId={activeLog?.id}
@@ -123,6 +124,7 @@ export const JourneyViewContent: FC = () => {
               achievements={journey.achievements}
               setActiveAchievementId={setActiveAchievementId}
               activeAchievement={activeAchievement}
+              isJourneyFinished={journey.finished}
             />
           </Flex>
         </Flex>

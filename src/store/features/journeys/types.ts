@@ -7,6 +7,7 @@ export interface JourneyListItem {
   updatedAt: Date;
   mediaUrl?: string;
   includeInDailyGoal: boolean;
+  finished: boolean;
 }
 
 export interface Activity {
