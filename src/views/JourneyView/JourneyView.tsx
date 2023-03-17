@@ -31,7 +31,6 @@ export const JourneyView: FC = () => {
   return (
     <>
       <JourneyNavigation journeyId={params.journeyId} />
-
       <Flex overflow="auto" flexGrow={1} flexDirection="column" bg="brand.900">
         {journey ? <Outlet /> : <Loader />}
       </Flex>
