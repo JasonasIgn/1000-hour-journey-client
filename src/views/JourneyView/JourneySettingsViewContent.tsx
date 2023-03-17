@@ -17,6 +17,7 @@ import { Journey } from "store/features/journeys/types";
 import { SwitchField } from "components/SwitchField";
 import { updateJourneyEffect } from "store/features/journeys/effects";
 import { ConfirmationDialog } from "components";
+import { JOURNEY_MAX_HOURS } from "components/JourneyTimeLine/constants";
 
 export const JourneySettingsViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -78,13 +79,15 @@ export const JourneySettingsViewContent: FC = () => {
             }}
             width="50%"
             size="lg"
-            isDisabled={journey.finished || journey.totalHours < 1000}
+            isDisabled={
+              journey.finished || journey.totalHours < JOURNEY_MAX_HOURS
+            }
           >
             {journey.finished ? "Journey is finished" : "Finish journey"}
           </Button>
           {!journey.finished && (
             <Tooltip
-              label="To finish a journey, you must log at least 1000 hours"
+              label={`To finish a journey, you must log at least ${JOURNEY_MAX_HOURS} hours`}
               placement="top"
               offset={[0, 18]}
             >

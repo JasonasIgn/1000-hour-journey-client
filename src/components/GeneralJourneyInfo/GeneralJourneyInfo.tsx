@@ -6,6 +6,7 @@ import { getPieChartData } from "./utils";
 import { Paper } from "components/Paper";
 import { getCurrentJourneyActivitiesDictionary } from "store/features/journeys/selectors";
 import { useAppSelector } from "store/hooks";
+import { JOURNEY_MAX_HOURS } from "components/JourneyTimeLine/constants";
 
 const COLORS = [
   "#182747",
@@ -88,7 +89,7 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
               {journey.totalHours} h
             </Text>
             <Text fontSize="sm" fontWeight={500}>
-              {Math.round((1000 - journey.totalHours) * 10) / 10} h
+              {Math.round((JOURNEY_MAX_HOURS - journey.totalHours) * 10) / 10} h
             </Text>
           </Flex>
           <Progress value={journey.totalHours / 10} size="lg" width="100%" />

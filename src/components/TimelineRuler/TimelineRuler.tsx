@@ -1,36 +1,41 @@
 import { Box, SliderMark, Text } from "@chakra-ui/react";
-import {
-  MAX_HOURS,
-  TIMELINE_X_PADDING_PX,
-  WIDTH_BETWEEN_MARKS_PX,
-} from "components/JourneyTimeLine/constants";
+import { TIMELINE_X_PADDING_PX } from "components/JourneyTimeLine/constants";
 import { FC, memo } from "react";
 
 interface TimelineRulerProps {
   currentViewX: number;
   scale: number;
   containerOuterWidth: number;
+  maxHours: number;
+  widthBetweenMarksPx: number;
 }
 
 const additionalMarks = 4;
 
 export const TimelineRuler: FC<TimelineRulerProps> = memo(
-  ({ currentViewX, scale, containerOuterWidth }) => {
+  ({
+    currentViewX,
+    scale,
+    containerOuterWidth,
+    maxHours,
+    widthBetweenMarksPx,
+  }) => {
     const maxMarksInViewport =
-      Math.round(containerOuterWidth / WIDTH_BETWEEN_MARKS_PX / scale) +
+      Math.round(containerOuterWidth / widthBetweenMarksPx / scale) +
       additionalMarks;
     const offsetTillMiddlePosition = containerOuterWidth / scale / 2;
     const middleViewX =
       Math.abs(currentViewX) + offsetTillMiddlePosition - TIMELINE_X_PADDING_PX;
     const middleMarkValueToDisplay = Math.round(
-      middleViewX / WIDTH_BETWEEN_MARKS_PX
+      middleViewX / widthBetweenMarksPx
     );
+
     return (
       <>
         {Array.from(Array(maxMarksInViewport).keys()).map((_, idx) => {
           const offset = Math.round(maxMarksInViewport / 2) * -1 + idx;
           const sliderValue = middleMarkValueToDisplay - offset;
-          if (sliderValue < 0 || sliderValue > MAX_HOURS) {
+          if (sliderValue < 0 || sliderValue > maxHours) {
             return undefined;
           }
           const shouldDisplayNumber = sliderValue % 10 === 0;

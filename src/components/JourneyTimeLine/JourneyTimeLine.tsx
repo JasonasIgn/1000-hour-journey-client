@@ -29,9 +29,9 @@ import { AddJourneyAchievementDialog, TimelineRuler } from "components";
 import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
 import {
-  MAX_HOURS,
+  JOURNEY_MAX_HOURS,
   TIMELINE_BORDER_WIDTH_PX,
-  TIMELINE_INNER_WIDTH_PX,
+  TIMELINE_INNER_WIDTH_PER_HOUR_PX,
   TIMELINE_X_PADDING_PX,
 } from "./constants";
 import { Paper } from "components/Paper";
@@ -57,9 +57,15 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setAddAchievementModalOpen,
   activeAchievement,
 }) => {
+  const maxHours =
+    journey.totalHours > JOURNEY_MAX_HOURS ? Math.round(journey.totalHours) : JOURNEY_MAX_HOURS;
+  const timelineInnerWidthPx = maxHours * TIMELINE_INNER_WIDTH_PER_HOUR_PX;
+  const widthBetweenMarksPx =
+    (timelineInnerWidthPx - TIMELINE_X_PADDING_PX * 2) / maxHours;
+
   const isDragging = useRef(false);
   const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
-  const zoomUnit = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
+  const zoomUnit = containerOuterWidth / timelineInnerWidthPx;
   const [currentScale, setCurrentScale] = useState(2);
   const [currentViewX, setCurrentViewX] = useState(0);
   const [currentHour, setCurrentHour] = useState(
@@ -109,7 +115,12 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     (hour: number) => {
       // TODO: fix zooming on lower than < 1000 px screen with
       const scale = currentScale / zoomUnit;
-      const xPosition = getZoomXPosition(hour, containerOuterWidth);
+      const xPosition = getZoomXPosition(
+        hour,
+        containerOuterWidth,
+        widthBetweenMarksPx,
+        timelineInnerWidthPx
+      );
       pinchZoomRef.current?.alignCenter({
         x: xPosition,
         y: 0,
@@ -117,7 +128,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
         animated: true,
       });
     },
-    [containerOuterWidth, currentScale, zoomUnit]
+    [
+      containerOuterWidth,
+      currentScale,
+      timelineInnerWidthPx,
+      widthBetweenMarksPx,
+      zoomUnit,
+    ]
   );
 
   useEffect(() => {
@@ -187,7 +204,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
             ref={timelineContainerRef}
             height="20vh"
             maxHeight="180px"
-            width={`${TIMELINE_INNER_WIDTH_PX}px`}
+            width={`${timelineInnerWidthPx}px`}
             px={`${TIMELINE_X_PADDING_PX}px`}
           >
             <Slider
@@ -202,7 +219,7 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               step={0.1}
               defaultValue={currentHour}
               min={0}
-              max={MAX_HOURS}
+              max={maxHours}
               value={currentHour}
               focusThumbOnChange={false}
               onChange={setNewCurrentHour}
@@ -258,6 +275,8 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
                 currentViewX={currentViewX}
                 scale={currentScale}
                 containerOuterWidth={containerOuterWidth}
+                maxHours={maxHours}
+                widthBetweenMarksPx={widthBetweenMarksPx}
               />
               <SliderThumb
                 width="6px"

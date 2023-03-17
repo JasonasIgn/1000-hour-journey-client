@@ -1,14 +1,14 @@
-import {
-  TIMELINE_INNER_WIDTH_PX,
-  TIMELINE_X_PADDING_PX,
-  WIDTH_BETWEEN_MARKS_PX,
-} from "./constants";
+import { TIMELINE_X_PADDING_PX } from "./constants";
 
-export const getZoomXPosition = (hour: number, containerOuterWidth: number) => {
-  const scaleRatioPerPixel = containerOuterWidth / TIMELINE_INNER_WIDTH_PX;
+export const getZoomXPosition = (
+  hour: number,
+  containerOuterWidth: number,
+  widthBetweenMarksPx: number,
+  timelineInnerWidthPx: number
+) => {
+  const scaleRatioPerPixel = containerOuterWidth / timelineInnerWidthPx;
   const xPosition =
-    (TIMELINE_X_PADDING_PX + hour * WIDTH_BETWEEN_MARKS_PX) *
-    scaleRatioPerPixel;
+    (TIMELINE_X_PADDING_PX + hour * widthBetweenMarksPx) * scaleRatioPerPixel;
   return xPosition;
 };
 
