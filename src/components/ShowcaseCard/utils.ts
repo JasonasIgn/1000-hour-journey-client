@@ -25,9 +25,8 @@ export const getInitialImageSrc = (
     }
   }
 
-  if (!defaultJourneyImageSrc)
-  {
-    return Logo
+  if (!defaultJourneyImageSrc) {
+    return Logo;
   }
 
   return getImageSrc(defaultJourneyImageSrc);
