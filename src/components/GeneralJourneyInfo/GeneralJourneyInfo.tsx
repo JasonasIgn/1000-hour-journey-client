@@ -1,12 +1,14 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Flex, Heading, Progress, Text } from "@chakra-ui/react";
 import { Journey } from "store/features/journeys/types";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { getPieChartData } from "./utils";
 import { Paper } from "components/Paper";
-import { getCurrentJourneyActivitiesDictionary } from "store/features/journeys/selectors";
-import { useAppSelector } from "store/hooks";
+import { getCurrentJourneyActivities } from "store/features/journeys/selectors";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { JOURNEY_MAX_HOURS } from "components/JourneyTimeLine/constants";
+import { setHoveringOverActivityId } from "store/features/journey/slice";
+import { getActivitiesDictionary } from "store/features/journeys/utils";
 
 const COLORS = [
   "#182747",
@@ -55,15 +57,17 @@ interface GeneralJourneyInfoProps {
 export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
   journey,
 }) => {
-  const activitiesDictionary = useAppSelector(
-    getCurrentJourneyActivitiesDictionary
-  );
+  const dispatch = useAppDispatch();
+  const activities = useAppSelector(getCurrentJourneyActivities);
+  const activitiesDictionary = getActivitiesDictionary(activities);
   const isLogsEmpty = journey.logs.length === 0;
   const pieChartData = useMemo(
     () => getPieChartData(journey.logs, activitiesDictionary),
     [activitiesDictionary, journey.logs]
   );
-
+  useEffect(() => {
+    console.log("render");
+  }, [activities]);
   return (
     <Flex w="full" direction="column">
       <Paper direction="column" p={3} sx={{ borderRadius: 0 }}>
@@ -128,10 +132,16 @@ export const GeneralJourneyInfo: FC<GeneralJourneyInfoProps> = ({
                   dataKey="value"
                   stroke="var(--chakra-colors-chakra-border-color)"
                 >
-                  {pieChartData.map((_, index) => (
+                  {pieChartData.map((item, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={COLORS[index % COLORS.length]}
+                      onMouseOver={() => {
+                        dispatch(setHoveringOverActivityId(item.id));
+                      }}
+                      onMouseLeave={() => {
+                        dispatch(setHoveringOverActivityId(undefined));
+                      }}
                     />
                   ))}
                 </Pie>

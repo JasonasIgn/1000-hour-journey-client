@@ -4,6 +4,7 @@ interface DataType {
   [activityName: string]: {
     name: string;
     value: number;
+    id?: number;
   };
 }
 
@@ -36,6 +37,7 @@ export const getPieChartData = (
       data[activity.name] = {
         name: activity.name,
         value: Math.round(timePerActivity * 100) / 100,
+        id: activity.id,
       };
     });
   });
