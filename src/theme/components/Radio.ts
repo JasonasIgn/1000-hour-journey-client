@@ -1,6 +1,6 @@
 import { ComponentStyleConfig } from "@chakra-ui/react";
 
-export const Checkbox: ComponentStyleConfig = {
+export const Radio: ComponentStyleConfig = {
   baseStyle: {
     control: {
       borderColor: "gray.400",

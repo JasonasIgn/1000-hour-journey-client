@@ -3,9 +3,19 @@ import { ComponentStyleConfig } from "@chakra-ui/react";
 export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
-      color: "gray.300",
+      color: "gray.200",
+      bgColor: "brand.400",
+      _active: {
+        bgColor: "brand.500",
+        _disabled: {
+          bgColor: "brand.400",
+        },
+      },
       _hover: {
-        bgColor: "brand.400",
+        bgColor: "brand.300",
+        _disabled: {
+          bgColor: "brand.400",
+        },
       },
     },
     warning: {
