@@ -134,10 +134,11 @@ export const JourneysViewContent: FC = () => {
             Add journey
           </Button>
         </Flex>
-        <Flex direction="column" px={5} overflow="auto">
+        <Flex direction="column" px={5} overflow="auto" flexGrow={1}>
           <JourneysList
             journeys={sortedList}
             openEditJourneyDialog={setEditingJourney}
+            isLoading={["pristine", "loading"].includes(listLoadingState)}
           />
         </Flex>
       </Paper>
