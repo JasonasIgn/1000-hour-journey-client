@@ -4,17 +4,17 @@ export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
       color: "gray.200",
-      bgColor: "brand.400",
+      bgColor: "brand.500",
       _active: {
-        bgColor: "brand.500",
+        bgColor: "brand.600",
         _disabled: {
-          bgColor: "brand.400",
+          bgColor: "brand.500",
         },
       },
       _hover: {
-        bgColor: "brand.300",
+        bgColor: "brand.400",
         _disabled: {
-          bgColor: "brand.400",
+          bgColor: "brand.500",
         },
       },
     },
