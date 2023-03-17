@@ -6,7 +6,8 @@ import { ShowcaseCard } from "components";
 import { useAnimatedCards } from "./hooks";
 import { getTransformValue } from "./utils";
 import { useAppSelector } from "store/hooks";
-import { getCurrentJourneyActivitiesDictionary } from "store/features/journeys/selectors";
+import { getCurrentJourneyActivities } from "store/features/journeys/selectors";
+import { getActivitiesDictionary } from "store/features/journeys/utils";
 
 interface ShowcaseProps {
   item?: LogExtended | Achievement;
@@ -24,9 +25,8 @@ export const Showcase: FC<ShowcaseProps> = ({
   isJourneyFinished,
 }) => {
   const cards = useAnimatedCards(shiftDirection, item);
-  const activitiesDictionary = useAppSelector(
-    getCurrentJourneyActivitiesDictionary
-  );
+  const activities = useAppSelector(getCurrentJourneyActivities);
+  const activitiesDictionary = getActivitiesDictionary(activities);
 
   return (
     <Flex

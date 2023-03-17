@@ -4,6 +4,7 @@ export interface JourneyState {
   editLogDialogOpen: boolean;
   headerTitle: string;
   dailyGoalOpen: boolean;
+  hoveringOverActivityId?: number;
 }
 
 const initialState: JourneyState = {
@@ -25,10 +26,17 @@ export const journeySlice = createSlice({
     setDailyGoalOpen: (state, action) => {
       state.dailyGoalOpen = action.payload;
     },
+    setHoveringOverActivityId: (state, action) => {
+      state.hoveringOverActivityId = action.payload;
+    },
   },
 });
 
-export const { setEditLogDialogOpen, setHeaderTitle, setDailyGoalOpen } =
-  journeySlice.actions;
+export const {
+  setEditLogDialogOpen,
+  setHeaderTitle,
+  setDailyGoalOpen,
+  setHoveringOverActivityId,
+} = journeySlice.actions;
 
 export default journeySlice.reducer;

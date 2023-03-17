@@ -35,6 +35,8 @@ import {
   TIMELINE_X_PADDING_PX,
 } from "./constants";
 import { Paper } from "components/Paper";
+import { useAppSelector } from "store/hooks";
+import { getCurrentHoveredActivityId } from "store/features/journey/selectors";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -57,8 +59,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   setAddAchievementModalOpen,
   activeAchievement,
 }) => {
+  const hoveredActivityId = useAppSelector(getCurrentHoveredActivityId);
   const maxHours =
-    journey.totalHours > JOURNEY_MAX_HOURS ? Math.round(journey.totalHours) : JOURNEY_MAX_HOURS;
+    journey.totalHours > JOURNEY_MAX_HOURS
+      ? Math.round(journey.totalHours)
+      : JOURNEY_MAX_HOURS;
   const timelineInnerWidthPx = maxHours * TIMELINE_INNER_WIDTH_PER_HOUR_PX;
   const widthBetweenMarksPx =
     (timelineInnerWidthPx - TIMELINE_X_PADDING_PX * 2) / maxHours;
@@ -259,10 +264,19 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
               <SliderTrack display="flex">
                 {journey.logs.map((log, idx) => {
                   const widthPercentage = log.hoursSpent / 10;
+                  const activityIds = (log?.activities || []).map(
+                    (activity) => activity.id
+                  );
                   return (
                     <Box
                       key={log.id}
-                      bg={log.id === activeLog?.id ? "brand.300" : "brand.600"}
+                      bg={
+                        log.id === activeLog?.id ||
+                        (hoveredActivityId &&
+                          activityIds.includes(hoveredActivityId))
+                          ? "brand.300"
+                          : "brand.600"
+                      }
                       width={`${widthPercentage}%`}
                       borderLeft={idx === 0 ? "none" : "1px solid"}
                       borderColor="gray.400"
