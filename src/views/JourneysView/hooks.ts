@@ -9,7 +9,7 @@ interface JourneysListParams {
 }
 
 export const useListSorting = (
-  journeys?: JourneyListItem[]
+  journeys: JourneyListItem[] = []
 ): [
   JourneyListItem[],
   JourneysListParams,
@@ -20,10 +20,10 @@ export const useListSorting = (
     orderBy: "desc",
     show: "unfinished",
   });
-  let sortedList: JourneyListItem[] = [];
+  let sortedList: JourneyListItem[] = [...journeys];
 
   if (journeys && params.sortBy === "progress") {
-    sortedList = [...journeys].sort((j1, j2) => {
+    sortedList = [...sortedList].sort((j1, j2) => {
       if (params.orderBy === "asc") {
         return j1.totalHours > j2.totalHours ? 1 : -1;
       }
@@ -32,7 +32,7 @@ export const useListSorting = (
   }
 
   if (journeys && params.sortBy === "createdAt") {
-    sortedList = [...journeys].sort((j1, j2) => {
+    sortedList = [...sortedList].sort((j1, j2) => {
       if (params.orderBy === "asc") {
         return j1.createdAt > j2.createdAt ? 1 : -1;
       }
@@ -41,11 +41,11 @@ export const useListSorting = (
   }
 
   if (journeys && params.show === "finished") {
-    sortedList = [...journeys].filter((j) => j.finished);
+    sortedList = [...sortedList].filter((j) => j.finished);
   }
 
   if (journeys && params.show === "unfinished") {
-    sortedList = [...journeys].filter((j) => !j.finished);
+    sortedList = [...sortedList].filter((j) => !j.finished);
   }
 
   return [sortedList, params, setParams];
