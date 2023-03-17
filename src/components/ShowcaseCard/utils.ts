@@ -3,6 +3,7 @@ import {
   Activity,
   LogExtended,
 } from "store/features/journeys/types";
+import Logo from "resources/logo.png";
 import { getImageSrc } from "utils/helpers";
 
 export const getInitialImageSrc = (
@@ -22,6 +23,11 @@ export const getInitialImageSrc = (
         logActivity.mediaUrl
       )}?${logActivity.updatedAt.toString()}`;
     }
+  }
+
+  if (!defaultJourneyImageSrc)
+  {
+    return Logo
   }
 
   return getImageSrc(defaultJourneyImageSrc);
