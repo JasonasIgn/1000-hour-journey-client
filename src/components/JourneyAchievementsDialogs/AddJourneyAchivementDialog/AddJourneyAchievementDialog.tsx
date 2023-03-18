@@ -27,6 +27,7 @@ import { addJourneyAchievementFormValidation } from "../validation";
 import { LogExtended } from "store/features/journeys/types";
 import { logJourneyAchievementEffect } from "store/features/journeys/effects";
 import { dateFormats } from "utils/constants";
+import { fetchPointsEffect } from "store/features/user/effects";
 
 interface AddJourneyAchievementDialogProps {
   setOpen: (open: boolean) => void;
@@ -60,6 +61,9 @@ export const AddJourneyAchievementDialog: FC<
       toast({
         description: "Achievement created",
       });
+      setTimeout(() => {
+        dispatch(fetchPointsEffect());
+      }, 1000);
     } catch (e) {
       toast({
         description: "Failed to create the achievement",
