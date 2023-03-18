@@ -55,14 +55,16 @@ export const DailyGoal = () => {
               key={`journey-task-${journeyTask.id}`}
             />
           ))}
-          <Divider />
-          <Flex direction="column" alignItems="center" w="full" mt={2}>
-            <Text fontSize="lg" fontWeight={500}>
+          <Divider mt={1} borderColor="gray.400" />
+          <Flex w="full" mt={2}>
+            <Text fontSize="xl" fontWeight={500} color="gray.300">
               Reward
             </Text>
-            <Flex alignItems="center">
-              {dailyGoal?.rewardPoints}
-              <Icon as={CoinIcon} ml={2} />
+            <Flex alignItems="center" ml="auto">
+              <Text fontSize="xl" fontWeight={500}>
+                {dailyGoal?.rewardPoints}
+              </Text>
+              <Icon as={CoinIcon} ml={2} width="24px" height="24px" />
             </Flex>
           </Flex>
         </PopoverBody>

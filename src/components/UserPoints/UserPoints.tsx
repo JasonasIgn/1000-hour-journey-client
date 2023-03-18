@@ -127,7 +127,7 @@ export const UserPoints: FC = () => {
               )}
             </PopoverHeader>
             <PopoverBody textAlign="center">
-              <Button onClick={() => {}} size="sm">
+              <Button isDisabled onClick={() => {}} size="sm">
                 Go to shop
               </Button>
             </PopoverBody>
