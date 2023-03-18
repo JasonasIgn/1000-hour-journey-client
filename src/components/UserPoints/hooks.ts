@@ -9,17 +9,20 @@ export const usePointsNotifications = () => {
   const [currentPoints, setCurrentPoints] = useState(points);
 
   useEffect(() => {
-    if (points !== undefined && currentPoints === undefined) {
-      setCurrentPoints(points);
-      return;
-    }
-
-    if (points && currentPoints) {
-      const earnedPoints = points - currentPoints;
-      if (earnedPoints > 0) {
-        toast({
-          description: `Earned ${earnedPoints} points`,
-        });
+    console.log(points, currentPoints);
+    if (points !== undefined) {
+      if (currentPoints === undefined) {
+        setCurrentPoints(points);
+        return;
+      }
+      if (currentPoints) {
+        const earnedPoints = points - currentPoints;
+        if (earnedPoints > 0) {
+          toast({
+            description: `Earned ${earnedPoints} points`,
+          });
+        }
+        setCurrentPoints(points);
       }
     }
   }, [currentPoints, points, toast]);
