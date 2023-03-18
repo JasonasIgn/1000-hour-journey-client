@@ -13,6 +13,7 @@ import {
   CircularProgress,
   CircularProgressLabel,
   Divider,
+  Tooltip,
 } from "@chakra-ui/react";
 import { ReactComponent as CoinIcon } from "resources/coin.svg";
 import { ReactComponent as TimeIcon } from "resources/time.svg";
@@ -25,10 +26,9 @@ export const UserPoints: FC = () => {
   const points = useAppSelector(getUserPoints);
   const reward = useAppSelector(getUserReward);
   const rewardProgress = Math.round(
-    ((reward?.hoursLoggedForReward || 1) / (reward?.hoursToLogForReward || 1)) *
+    ((reward?.hoursLoggedForReward || 0) / (reward?.hoursToLogForReward || 1)) *
       100
   );
-
   return (
     <Popover
       arrowShadowColor="brand.100"
@@ -82,9 +82,20 @@ export const UserPoints: FC = () => {
                   <Flex mt={2} justifyContent="center">
                     <Flex>
                       <CircularProgress value={rewardProgress} size="80px">
-                        <CircularProgressLabel>
-                          {rewardProgress}%
-                        </CircularProgressLabel>
+                        <Tooltip
+                          placement="left"
+                          label={`${
+                            Math.round(
+                              (reward.hoursToLogForReward -
+                                reward.hoursLoggedForReward) *
+                                10
+                            ) / 10
+                          }h left to log`}
+                        >
+                          <CircularProgressLabel>
+                            {rewardProgress}%
+                          </CircularProgressLabel>
+                        </Tooltip>
                       </CircularProgress>
                     </Flex>
                     <Flex direction="column" ml={2} justifyContent="center">
