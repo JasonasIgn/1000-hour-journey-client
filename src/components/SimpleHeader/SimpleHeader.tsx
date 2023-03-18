@@ -1,9 +1,10 @@
 import { FC, ReactNode } from "react";
-import { Heading } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
 import { DailyGoal } from "components/DailyGoal";
 import { useAppSelector } from "store/hooks";
 import { getHeaderTitle } from "store/features/journey/selectors";
+import { UserPoints } from "components/UserPoints";
 
 export const HEADER_HEIGHT_PX = 60;
 
@@ -39,7 +40,10 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ children }) => {
         {title}
       </Heading>
       {children}
-      <DailyGoal />
+      <Flex>
+        <UserPoints />
+        <DailyGoal />
+      </Flex>
     </Paper>
   );
 };

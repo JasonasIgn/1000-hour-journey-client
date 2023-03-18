@@ -39,6 +39,7 @@ import { getActivityOption, getActivityOptionsFromIds } from "../utils";
 import { Option } from "types";
 import { getActivitiesDictionary } from "store/features/journeys/utils";
 import { fetchDailyGoalEffect } from "store/features/dailyGoal/effects";
+import { fetchPointsEffect } from "store/features/user/effects";
 
 interface EditLogDialogProps {
   journeyId: number;
@@ -93,6 +94,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       });
       setTimeout(() => {
         dispatch(fetchDailyGoalEffect());
+        dispatch(fetchPointsEffect());
       }, 1000);
     } catch (e) {
       toast({
@@ -147,6 +149,7 @@ export const EditLogDialog: FC<EditLogDialogProps> = ({
       });
       setTimeout(() => {
         dispatch(fetchDailyGoalEffect());
+        dispatch(fetchPointsEffect());
       }, 1000);
     } catch (e) {
       toast({

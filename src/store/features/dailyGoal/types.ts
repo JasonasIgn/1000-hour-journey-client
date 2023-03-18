@@ -7,6 +7,9 @@ export interface DailyGoal {
   updatedAt: Date;
   createdAt: Date;
   journeyTasks: JourneyTask[];
+  rewardPoints: number;
+  isRewardGained: boolean;
+
 }
 
 export interface JourneyTask {
