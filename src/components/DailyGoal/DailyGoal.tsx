@@ -1,13 +1,17 @@
 import {
+  Divider,
   Popover,
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
   Text,
+  Flex,
+  Icon,
 } from "@chakra-ui/react";
 import { getDailyGoal } from "store/features/dailyGoal/selectors";
 import { getDailyGoalOpen } from "store/features/journey/selectors";
+import { ReactComponent as CoinIcon } from "resources/coin.svg";
 import { setDailyGoalOpen } from "store/features/journey/slice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { DailyGoalTrigger } from "./DailyGoalTrigger/DailyGoalTrigger";
@@ -51,6 +55,16 @@ export const DailyGoal = () => {
               key={`journey-task-${journeyTask.id}`}
             />
           ))}
+          <Divider />
+          <Flex direction="column" alignItems="center" w="full" mt={2}>
+            <Text fontSize="lg" fontWeight={500}>
+              Reward
+            </Text>
+            <Flex alignItems="center">
+              {dailyGoal?.rewardPoints}
+              <Icon as={CoinIcon} ml={2} />
+            </Flex>
+          </Flex>
         </PopoverBody>
         <PopoverArrow
           bgColor="brand.800"

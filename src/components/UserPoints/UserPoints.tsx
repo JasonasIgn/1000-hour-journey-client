@@ -112,7 +112,7 @@ export const UserPoints: FC = () => {
                       <Flex alignItems="center" mt={1} height="24px">
                         <Icon
                           as={CoinIcon}
-                          mr={1}
+                          mr="6px"
                           ml="2px"
                           height="24px"
                           width="20px"
