@@ -18,6 +18,7 @@ import { SwitchField } from "components/SwitchField";
 import { updateJourneyEffect } from "store/features/journeys/effects";
 import { ConfirmationDialog } from "components";
 import { JOURNEY_MAX_HOURS } from "components/JourneyTimeLine/constants";
+import { fetchPointsEffect } from "store/features/user/effects";
 
 export const JourneySettingsViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -34,6 +35,9 @@ export const JourneySettingsViewContent: FC = () => {
       toast({
         description: "Journey has been finished!",
       });
+      setTimeout(() => {
+        dispatch(fetchPointsEffect());
+      }, 1000);
     } catch (e) {
       toast({
         description: "Failed to mark journey as finished",
