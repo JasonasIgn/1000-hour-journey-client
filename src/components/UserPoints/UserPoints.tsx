@@ -21,6 +21,7 @@ import { getUserPoints, getUserReward } from "store/features/user/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { setDailyGoalOpen } from "store/features/journey/slice";
 import { usePointsNotifications } from "./hooks";
+import { AnimatedPointsText } from "./AnimatedPointsText";
 
 export const UserPoints: FC = () => {
   const dispatch = useAppDispatch();
@@ -59,9 +60,7 @@ export const UserPoints: FC = () => {
                 bg: "brand.600",
               }}
             >
-              <Text fontWeight={500} color="gray.300">
-                {points === undefined ? "-" : points}
-              </Text>
+              <AnimatedPointsText points={points} />
               <Icon as={CoinIcon} ml={3} />
             </Flex>
           </PopoverTrigger>
