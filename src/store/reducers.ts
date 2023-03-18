@@ -5,6 +5,7 @@ import dailyGoalReducer from "./features/dailyGoal/slice";
 import timerReducer from "./features/timer/slice";
 import authReducer from "./features/auth/slice";
 import appReducer from "./features/app/slice";
+import userReducer from "./features/user/slice";
 import { logoutEffect } from "./features/auth/effects";
 
 export const rootReducers = {
@@ -14,6 +15,7 @@ export const rootReducers = {
   timer: timerReducer,
   auth: authReducer,
   app: appReducer,
+  user: userReducer,
 };
 
 export const createRootReducer = (): Reducer => {

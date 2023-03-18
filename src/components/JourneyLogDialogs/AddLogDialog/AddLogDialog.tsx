@@ -41,6 +41,7 @@ import {
 } from "../utils";
 import { fetchDailyGoalEffect } from "store/features/dailyGoal/effects";
 import { getDailyGoal } from "store/features/dailyGoal/selectors";
+import { fetchPointsEffect } from "store/features/user/effects";
 
 interface AddLogDialogProps {
   setOpen: (open: boolean) => void;
@@ -104,6 +105,7 @@ export const AddLogDialog: FC<AddLogDialogProps> = ({
 
       setTimeout(() => {
         dispatch(fetchDailyGoalEffect());
+        dispatch(fetchPointsEffect());
       }, 1000);
     } catch (e) {
       toast({
