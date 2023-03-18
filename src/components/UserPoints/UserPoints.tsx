@@ -20,6 +20,7 @@ import { ReactComponent as TimeIcon } from "resources/time.svg";
 import { getUserPoints, getUserReward } from "store/features/user/selectors";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { setDailyGoalOpen } from "store/features/journey/slice";
+import { usePointsNotifications } from "./hooks";
 
 export const UserPoints: FC = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,9 @@ export const UserPoints: FC = () => {
     ((reward?.hoursLoggedForReward || 0) / (reward?.hoursToLogForReward || 1)) *
       100
   );
+
+  usePointsNotifications();
+
   return (
     <Popover
       arrowShadowColor="brand.100"
