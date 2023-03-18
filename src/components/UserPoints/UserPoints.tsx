@@ -17,9 +17,11 @@ import {
 import { ReactComponent as CoinIcon } from "resources/coin.svg";
 import { ReactComponent as TimeIcon } from "resources/time.svg";
 import { getUserPoints, getUserReward } from "store/features/user/selectors";
-import { useAppSelector } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { setDailyGoalOpen } from "store/features/journey/slice";
 
 export const UserPoints: FC = () => {
+  const dispatch = useAppDispatch();
   const points = useAppSelector(getUserPoints);
   const reward = useAppSelector(getUserReward);
   const rewardProgress = Math.round(
@@ -28,7 +30,12 @@ export const UserPoints: FC = () => {
   );
 
   return (
-    <Popover arrowShadowColor="brand.100" placement="bottom-end" size="sm">
+    <Popover
+      arrowShadowColor="brand.100"
+      placement="bottom-end"
+      size="sm"
+      onOpen={() => dispatch(setDailyGoalOpen(false))}
+    >
       {({ isOpen }) => (
         <>
           <PopoverTrigger>
