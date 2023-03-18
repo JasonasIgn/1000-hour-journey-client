@@ -9,7 +9,6 @@ export const usePointsNotifications = () => {
   const [currentPoints, setCurrentPoints] = useState(points);
 
   useEffect(() => {
-    console.log(points, currentPoints);
     if (points !== undefined) {
       if (currentPoints === undefined) {
         setCurrentPoints(points);
