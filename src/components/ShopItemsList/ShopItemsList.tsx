@@ -2,6 +2,7 @@ import { FC, Dispatch, SetStateAction } from "react";
 import { Box, Center, Heading } from "@chakra-ui/react";
 import { Loader } from "components";
 import { ShopItem } from "store/features/shop/types";
+import { ShopListItem } from "components/ShopListItem";
 
 interface ShopItemsListProps {
   items: ShopItem[];
@@ -29,7 +30,11 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
   return (
     <Box mt={5}>
       {items.map((item) => (
-        <Box> item</Box>
+        <ShopListItem
+          item={item}
+          key={item.id}
+          onEditClick={() => openEditItemDialog(item)}
+        />
       ))}
     </Box>
   );
