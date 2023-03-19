@@ -7,6 +7,7 @@ import Logo from "resources/logo.png";
 import { ReactComponent as LogOutIcon } from "resources/log-out.svg";
 import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as GraphIcon } from "resources/graph.svg";
+import { ReactComponent as ShopIcon } from "resources/shop.svg";
 import { Timer } from "components/Timer";
 import { Paper } from "components/Paper";
 import { routes } from "config";
@@ -27,6 +28,11 @@ const navigationItems: NavigationItem[] = [
     path: routes.statistics,
     name: "Logs",
     icon: <Icon as={GraphIcon} width="24px" height="24px" />,
+  },
+  {
+    path: routes.shop,
+    name: "Shop",
+    icon: <Icon as={ShopIcon} width="24px" height="24px" />,
   },
 ];
 

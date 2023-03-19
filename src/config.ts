@@ -33,4 +33,5 @@ export const routes = {
   statistics: "/statistics",
   statisticsLogs: "/statistics/logs",
   statisticsAchievements: "/statistics/achievements",
+  shop: "/shop",
 };
