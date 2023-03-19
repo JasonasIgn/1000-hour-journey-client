@@ -19,12 +19,14 @@ interface ShopListItemProps {
   item: ShopItem;
   rootBoxProps?: FlexProps;
   onEditClick: () => void;
+  onPurchaseClick: () => void;
 }
 
 export const ShopListItem: FC<ShopListItemProps> = ({
   item,
   rootBoxProps,
   onEditClick,
+  onPurchaseClick,
 }) => (
   <Paper
     level={1}
@@ -34,8 +36,12 @@ export const ShopListItem: FC<ShopListItemProps> = ({
     cursor="pointer"
     _hover={{
       boxShadow: `inset 0px 0px 20px 0px var(--chakra-colors-brand-600)`,
+      button: {
+        display: "inline-block",
+      },
     }}
     transition="box-shadow 0.1s"
+    onClick={onPurchaseClick}
     {...rootBoxProps}
   >
     <Flex

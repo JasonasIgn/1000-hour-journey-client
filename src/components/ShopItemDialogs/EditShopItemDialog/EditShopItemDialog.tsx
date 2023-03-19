@@ -10,14 +10,19 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, FC } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { updateJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
-import { InputField, TextAreaField, UploadField } from "components";
+import {
+  InputField,
+  NumberInputField,
+  TextAreaField,
+  UploadField,
+} from "components";
 import { ShopItemFormData } from "../types";
 import { shopItemFormValidation } from "../validation";
 import { ShopItem } from "store/features/shop/types";
+import { updateShopItemEffect } from "store/features/shop/effects";
 
 interface EditShopItemDialogProps {
   handleClose: () => void;
@@ -31,7 +36,7 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
   const toast = useToast();
   const dispatch = useAppDispatch();
   const isOpen = Boolean(item);
-  const { register, handleSubmit, formState, reset, setValue } =
+  const { register, handleSubmit, formState, reset, setValue, control } =
     useForm<ShopItemFormData>({
       resolver: yupResolver(shopItemFormValidation),
     });
@@ -42,7 +47,7 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
         throw new Error("No item selected");
       }
       await dispatch(
-        updateJourneyEffect({ data, journeyId: item.id })
+        updateShopItemEffect({ data, shopItemId: item.id })
       ).unwrap();
       handleClose();
       toast({
@@ -70,7 +75,7 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
     <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Edit journey</ModalHeader>
+        <ModalHeader>Edit item</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <InputField
@@ -84,6 +89,25 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
             {...register("description")}
             errorMessage={errors.description?.message}
             formControlProps={{ mb: 3 }}
+          />
+          <Controller
+            name="cost"
+            control={control}
+            render={({
+              field: { onChange, ...rest },
+              fieldState: { error },
+            }) => (
+              <NumberInputField
+                label="Cost"
+                step={1}
+                errorMessage={error?.message}
+                formControlProps={{ mb: 3 }}
+                onChange={(val) => {
+                  onChange(val);
+                }}
+                {...rest}
+              />
+            )}
           />
           <UploadField
             label="Media"

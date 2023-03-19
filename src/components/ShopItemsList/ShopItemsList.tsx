@@ -34,6 +34,7 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
           item={item}
           key={item.id}
           onEditClick={() => openEditItemDialog(item)}
+          onPurchaseClick={() => {}}
         />
       ))}
     </Box>
