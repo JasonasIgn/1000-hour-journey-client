@@ -9,11 +9,12 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, FC } from "react";
+import { useEffect, FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
 import {
+  ConfirmationDialog,
   InputField,
   NumberInputField,
   TextAreaField,
@@ -22,7 +23,10 @@ import {
 import { ShopItemFormData } from "../types";
 import { shopItemFormValidation } from "../validation";
 import { ShopItem } from "store/features/shop/types";
-import { updateShopItemEffect } from "store/features/shop/effects";
+import {
+  deleteShopItemEffect,
+  updateShopItemEffect,
+} from "store/features/shop/effects";
 
 interface EditShopItemDialogProps {
   handleClose: () => void;
@@ -35,6 +39,7 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
 }) => {
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const isOpen = Boolean(item);
   const { register, handleSubmit, formState, reset, setValue, control } =
     useForm<ShopItemFormData>({
@@ -60,6 +65,24 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await dispatch(
+        deleteShopItemEffect({
+          shopItemId: item?.id || 0,
+        })
+      ).unwrap();
+      handleClose();
+      toast({
+        description: "Item deleted",
+      });
+    } catch (e) {
+      toast({
+        description: "Failed to delete the item",
+      });
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       reset({
@@ -72,64 +95,84 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
   }, [isOpen, reset]);
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
-      <ModalOverlay />
-      <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Edit item</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <InputField
-            label="Title"
-            {...register("title")}
-            errorMessage={errors.title?.message}
-            formControlProps={{ mb: 3 }}
-          />
-          <TextAreaField
-            label="Description"
-            {...register("description")}
-            errorMessage={errors.description?.message}
-            formControlProps={{ mb: 3 }}
-          />
-          <Controller
-            name="cost"
-            control={control}
-            render={({
-              field: { onChange, ...rest },
-              fieldState: { error },
-            }) => (
-              <NumberInputField
-                label="Cost"
-                step={1}
-                errorMessage={error?.message}
-                formControlProps={{ mb: 3 }}
-                onChange={(val) => {
-                  onChange(val);
-                }}
-                {...rest}
-              />
-            )}
-          />
-          <UploadField
-            label="Media"
-            {...register("media")}
-            onClear={() => setValue("media", {} as FileList)}
-            initialPreviewSrc={
-              item?.mediaUrl
-                ? `${item?.mediaUrl}?${item.updatedAt.toString()}` // prevent caching
-                : undefined
-            }
-          />
-        </ModalBody>
+    <>
+      <Modal isOpen={isOpen} onClose={handleClose} size="xl">
+        <ModalOverlay />
+        <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader>Edit item</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <InputField
+              label="Title"
+              {...register("title")}
+              errorMessage={errors.title?.message}
+              formControlProps={{ mb: 3 }}
+            />
+            <TextAreaField
+              label="Description"
+              {...register("description")}
+              errorMessage={errors.description?.message}
+              formControlProps={{ mb: 3 }}
+            />
+            <Controller
+              name="cost"
+              control={control}
+              render={({
+                field: { onChange, ...rest },
+                fieldState: { error },
+              }) => (
+                <NumberInputField
+                  label="Cost"
+                  step={1}
+                  errorMessage={error?.message}
+                  formControlProps={{ mb: 3 }}
+                  onChange={(val) => {
+                    onChange(val);
+                  }}
+                  {...rest}
+                />
+              )}
+            />
+            <UploadField
+              label="Media"
+              {...register("media")}
+              onClear={() => setValue("media", {} as FileList)}
+              initialPreviewSrc={
+                item?.mediaUrl
+                  ? `${item?.mediaUrl}?${item.updatedAt.toString()}` // prevent caching
+                  : undefined
+              }
+            />
+          </ModalBody>
 
-        <ModalFooter>
-          <Button mr={3} onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          <ModalFooter>
+            <Button
+              mr="auto"
+              onClick={() => {
+                setConfirmationDialogOpen(true);
+              }}
+              variant="warning"
+            >
+              Delete
+            </Button>
+            <Button mr={3} onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="ghost" type="submit" isDisabled={isSubmitting}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <ConfirmationDialog
+        actionText="Delete"
+        bodyText="This will delete the item permanently"
+        isOpen={confirmationDialogOpen}
+        onAction={handleDelete}
+        onClose={() => {
+          setConfirmationDialogOpen(false);
+        }}
+      />
+    </>
   );
 };
