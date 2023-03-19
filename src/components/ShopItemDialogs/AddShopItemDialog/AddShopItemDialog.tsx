@@ -10,13 +10,18 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useEffect, FC } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createJourneyEffect } from "store/features/journeys/effects";
 import { useAppDispatch } from "store/hooks";
-import { InputField, TextAreaField, UploadField } from "components";
+import {
+  InputField,
+  NumberInputField,
+  TextAreaField,
+  UploadField,
+} from "components";
 import { ShopItemFormData } from "../types";
 import { shopItemFormValidation } from "../validation";
+import { createShopItemEffect } from "store/features/shop/effects";
 
 interface AddShopItemDialogProps {
   setOpen: (open: boolean) => void;
@@ -29,7 +34,7 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
 }) => {
   const toast = useToast();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, reset, setValue } =
+  const { register, handleSubmit, formState, reset, setValue, control } =
     useForm<ShopItemFormData>({
       defaultValues: {
         cost: 0,
@@ -39,7 +44,7 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
   const { isSubmitting, errors } = formState;
   const onSubmit = async (data: any) => {
     try {
-      await dispatch(createJourneyEffect(data)).unwrap();
+      await dispatch(createShopItemEffect(data)).unwrap();
       setOpen(false);
       toast({
         description: "Item added",
@@ -76,6 +81,25 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
             {...register("description")}
             errorMessage={errors.description?.message}
             formControlProps={{ mb: 3 }}
+          />
+          <Controller
+            name="cost"
+            control={control}
+            render={({
+              field: { onChange, ...rest },
+              fieldState: { error },
+            }) => (
+              <NumberInputField
+                label="Cost"
+                step={1}
+                errorMessage={error?.message}
+                formControlProps={{ mb: 3 }}
+                onChange={(val) => {
+                  onChange(val);
+                }}
+                {...rest}
+              />
+            )}
           />
           <UploadField
             label="Media"
