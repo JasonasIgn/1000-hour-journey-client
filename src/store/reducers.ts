@@ -6,6 +6,7 @@ import timerReducer from "./features/timer/slice";
 import authReducer from "./features/auth/slice";
 import appReducer from "./features/app/slice";
 import userReducer from "./features/user/slice";
+import shopReducer from "./features/shop/slice";
 import { logoutEffect } from "./features/auth/effects";
 
 export const rootReducers = {
@@ -16,6 +17,7 @@ export const rootReducers = {
   auth: authReducer,
   app: appReducer,
   user: userReducer,
+  shop: shopReducer,
 };
 
 export const createRootReducer = (): Reducer => {
