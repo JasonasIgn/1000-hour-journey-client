@@ -10,6 +10,8 @@ import {
   getShopItemsListLoadingState,
 } from "store/features/shop/selectors";
 import { fetchShopItemsListEffect } from "store/features/shop/effects";
+import { AddShopItemDialog } from "components/ShopItemDialogs/AddShopItemDialog";
+import { EditShopItemDialog } from "components/ShopItemDialogs/EditShopItemDialog";
 
 export const ShopViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +46,11 @@ export const ShopViewContent: FC = () => {
           />
         </Flex>
       </Paper>
+      <AddShopItemDialog open={addModalOpen} setOpen={setAddModalOpen} />
+      <EditShopItemDialog
+        item={editingItem}
+        handleClose={() => setEditingItem(null)}
+      />
     </Container>
   );
 };
