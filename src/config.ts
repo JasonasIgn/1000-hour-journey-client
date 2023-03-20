@@ -26,6 +26,7 @@ export const apiUrls = {
   createShopItem: `${API_BASE}/shopItems`,
   updateShopItem: `${API_BASE}/shopItems/{shopItemId}`,
   deleteShopItem: `${API_BASE}/shopItems/{shopItemId}`,
+  buyShopItem: `${API_BASE}/shopItems/{shopItemId}/buy`,
 };
 
 export const routes = {

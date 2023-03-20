@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "types";
 import {
+  buyShopItemEffect,
   createShopItemEffect,
   deleteShopItemEffect,
   fetchShopItemsListEffect,
@@ -47,6 +48,15 @@ export const shopSlice = createSlice({
             (item) => item.id === action.payload?.id
           );
           state.list[updatedItemIndex] = action.payload;
+        }
+      })
+      .addCase(buyShopItemEffect.fulfilled, (state, { meta: { arg } }) => {
+        const { id } = arg;
+        if (state.list.length > 0) {
+          const updatedItemIndex = state.list.findIndex(
+            (item) => item.id === id
+          );
+          state.list[updatedItemIndex].timesPurchased += 1;
         }
       });
   },

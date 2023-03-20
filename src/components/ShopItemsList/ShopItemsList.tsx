@@ -1,8 +1,10 @@
-import { FC, Dispatch, SetStateAction } from "react";
-import { Center, Heading, SimpleGrid } from "@chakra-ui/react";
+import { FC, Dispatch, SetStateAction, useCallback } from "react";
+import { Center, Heading, SimpleGrid, useToast } from "@chakra-ui/react";
 import { Loader } from "components";
 import { ShopItem } from "store/features/shop/types";
 import { ShopListItem } from "components/ShopListItem";
+import { useAppDispatch } from "store/hooks";
+import { buyShopItemEffect } from "store/features/shop/effects";
 
 interface ShopItemsListProps {
   items: ShopItem[];
@@ -15,6 +17,25 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
   openEditItemDialog,
   isLoading,
 }) => {
+  const toast = useToast();
+  const dispatch = useAppDispatch();
+
+  const onBuyClick = useCallback(
+    async (shopItem: ShopItem) => {
+      try {
+        await dispatch(buyShopItemEffect(shopItem)).unwrap();
+        toast({
+          description: "Item purchased!",
+        });
+      } catch (e) {
+        toast({
+          description: "Failed to buy the item",
+        });
+      }
+    },
+    [dispatch, toast]
+  );
+
   if (isLoading) {
     return <Loader />;
   }
@@ -34,7 +55,7 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
           key={item.id}
           item={item}
           onEditClick={() => openEditItemDialog(item)}
-          onPurchaseClick={() => {}}
+          onBuyClick={onBuyClick}
         />
       ))}
     </SimpleGrid>

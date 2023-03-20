@@ -80,3 +80,20 @@ export const updateShopItemEffect = createAsyncThunk(
     }
   }
 );
+
+export const buyShopItemEffect = createAsyncThunk(
+  "shop/buyItem",
+  async (shopItem: ShopItem) => {
+    try {
+      const response = await axios.get<ShopItem>(
+        apiUrls.buyShopItem.replace("{shopItemId}", shopItem.id.toString()),
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      throw e;
+    }
+  }
+);
