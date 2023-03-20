@@ -1,5 +1,5 @@
 import { FC, Dispatch, SetStateAction } from "react";
-import { Box, Center, Heading } from "@chakra-ui/react";
+import { Center, Heading, SimpleGrid } from "@chakra-ui/react";
 import { Loader } from "components";
 import { ShopItem } from "store/features/shop/types";
 import { ShopListItem } from "components/ShopListItem";
@@ -28,15 +28,15 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
   }
 
   return (
-    <Box mt={5}>
+    <SimpleGrid minChildWidth="420px" spacing="20px" mt={5}>
       {items.map((item) => (
         <ShopListItem
-          item={item}
           key={item.id}
+          item={item}
           onEditClick={() => openEditItemDialog(item)}
           onPurchaseClick={() => {}}
         />
       ))}
-    </Box>
+    </SimpleGrid>
   );
 };

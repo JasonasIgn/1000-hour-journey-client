@@ -6,13 +6,15 @@ import {
   Text,
   Image,
   IconButton,
+  Icon,
+  Button,
+  Tooltip,
 } from "@chakra-ui/react";
 import { ReactComponent as EditIcon } from "resources/edit.svg";
-import format from "date-fns/format";
 import Logo from "resources/logo.png";
 import { getImageSrc } from "utils/helpers";
 import { Paper } from "components/Paper";
-import { dateFormats } from "utils/constants";
+import { ReactComponent as CoinIcon } from "resources/coin.svg";
 import { ShopItem } from "store/features/shop/types";
 
 interface ShopListItemProps {
@@ -31,11 +33,10 @@ export const ShopListItem: FC<ShopListItemProps> = ({
   <Paper
     level={1}
     position="relative"
-    height={160}
-    padding={4}
+    height={128}
     cursor="pointer"
     _hover={{
-      boxShadow: `inset 0px 0px 20px 0px var(--chakra-colors-brand-600)`,
+      cursor: "initial",
       button: {
         display: "inline-block",
       },
@@ -52,10 +53,11 @@ export const ShopListItem: FC<ShopListItemProps> = ({
       alignItems="center"
       justifyContent="center"
       bg="black"
-      border="1px solid"
-      borderRadius="20px"
-      borderColor="brand.500"
       overflow="hidden"
+      borderTopLeftRadius="20px"
+      borderBottomLeftRadius="20px"
+      borderRight="1px solid"
+      borderColor="brand.600"
     >
       <Image
         key={item.updatedAt.toString()}
@@ -68,18 +70,32 @@ export const ShopListItem: FC<ShopListItemProps> = ({
         maxHeight="full"
       />
     </Flex>
-    <Flex direction="column" ml={5} w="full" justifyContent="space-between">
-      <Flex direction="column">
-        <Heading size="md">{item.title}</Heading>
-        <Text fontSize="md">{item.description}</Text>
-        <Text fontSize="sm" color="gray.500" mt={1}>
-          {format(new Date(item.createdAt), dateFormats.standart)}
-        </Text>
-      </Flex>
-      <Flex direction="column">
-        <Text textAlign="center" fontSize="14px">
-          {item.cost}
-        </Text>
+    <Flex direction="column" w="full" justifyContent="space-between" p={3}>
+      <Tooltip label={item.description} placement="right">
+        <Heading size="md" width="fit-content">
+          {item.title}
+        </Heading>
+      </Tooltip>
+      <Text fontSize="sm" color="gray.500" mt="auto">
+        Times purchased: {item.timesPurchased}
+      </Text>
+      <Flex alignItems="flex-end">
+        <Flex
+          border="1px solid"
+          alignItems="center"
+          px={2}
+          borderColor="brand.300"
+          borderRadius={4}
+          height="32px"
+        >
+          <Text textAlign="center" fontSize="14px" fontWeight={500}>
+            {item.cost}
+          </Text>
+          <Icon as={CoinIcon} ml={2} width="24px" height="24px" />
+        </Flex>
+        <Button ml="auto" px={8} size="md">
+          Buy
+        </Button>
       </Flex>
     </Flex>
     <IconButton
