@@ -24,7 +24,7 @@ export const DailyGoal = () => {
 
   return (
     <Popover
-      placement="bottom"
+      placement="bottom-end"
       arrowShadowColor="brand.100"
       closeOnBlur={false}
       arrowSize={10}
