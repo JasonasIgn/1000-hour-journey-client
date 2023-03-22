@@ -7,9 +7,15 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Slider,
+  SliderFilledTrack,
+  SliderMark,
+  SliderThumb,
+  SliderTrack,
+  Tooltip,
   useToast,
 } from "@chakra-ui/react";
-import { useEffect, FC } from "react";
+import { useEffect, FC, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "store/hooks";
@@ -22,6 +28,7 @@ import {
 import { ShopItemFormData } from "../types";
 import { shopItemFormValidation } from "../validation";
 import { createShopItemEffect } from "store/features/shop/effects";
+import { getSliderTrackBgColor } from "./utils";
 
 interface AddShopItemDialogProps {
   setOpen: (open: boolean) => void;
@@ -33,8 +40,10 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
   setOpen,
 }) => {
   const toast = useToast();
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, formState, reset, setValue, control } =
+  const { register, handleSubmit, formState, reset, setValue, control, watch } =
     useForm<ShopItemFormData>({
       defaultValues: {
         cost: 0,
@@ -55,7 +64,7 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
       });
     }
   };
-
+  const costValue = watch("cost");
   useEffect(() => {
     if (open) {
       reset();
@@ -101,6 +110,35 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
               />
             )}
           />
+          <Slider
+            onChange={(val) => {
+              setIsDragging(true);
+              setValue("cost", val);
+            }}
+            value={costValue}
+            mt={8}
+            mb={2}
+            max={102}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onChangeEnd={(e) => {
+              setIsDragging(false);
+            }}
+          >
+            <SliderMark value={20}>Cheap</SliderMark>
+            <SliderMark value={45}>Medium</SliderMark>
+            <SliderMark value={75}>Expensive</SliderMark>
+            <SliderTrack>
+              <SliderFilledTrack bg={getSliderTrackBgColor(costValue)} />
+            </SliderTrack>
+            <Tooltip
+              placement="top"
+              isOpen={showTooltip || isDragging}
+              label={`~${Number(costValue / 17).toFixed(2)}h`}
+            >
+              <SliderThumb />
+            </Tooltip>
+          </Slider>
           <UploadField
             label="Media"
             {...register("media")}
