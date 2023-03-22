@@ -9,6 +9,7 @@ import { JourneyActivitiesViewContent } from "views/JourneyView/JourneyActivitie
 import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
 import { JourneySettingsViewContent } from "views/JourneyView/JourneySettingsViewContent";
 import { routes } from "config";
+import { ShopView } from "views/ShopView";
 
 interface AuthRoutesProps {}
 
@@ -46,6 +47,8 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
             element={<Navigate to={routes.statisticsLogs} replace={true} />}
           />
         </Route>
+
+        <Route path={routes.shop} index element={<ShopView />} />
 
         <Route
           path="*"

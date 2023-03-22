@@ -7,9 +7,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverArrow,
-  PopoverHeader,
   PopoverBody,
-  Button,
   CircularProgress,
   CircularProgressLabel,
   Divider,
@@ -61,7 +59,7 @@ export const UserPoints: FC = () => {
               }}
             >
               <AnimatedPointsText points={points} />
-              <Icon as={CoinIcon} ml={3} />
+              <Icon as={CoinIcon} ml={2} />
             </Flex>
           </PopoverTrigger>
           <PopoverContent
@@ -75,7 +73,7 @@ export const UserPoints: FC = () => {
               borderLeft="1px solid"
               borderColor="brand.600"
             />
-            <PopoverHeader borderColor="gray.400">
+            <PopoverBody textAlign="center">
               {reward && (
                 <Flex direction="column">
                   <Text textAlign="center" color="gray.300">
@@ -124,11 +122,6 @@ export const UserPoints: FC = () => {
                   </Flex>
                 </Flex>
               )}
-            </PopoverHeader>
-            <PopoverBody textAlign="center">
-              <Button isDisabled onClick={() => {}} size="sm">
-                Go to shop
-              </Button>
             </PopoverBody>
           </PopoverContent>
         </>

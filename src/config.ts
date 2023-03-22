@@ -22,6 +22,11 @@ export const apiUrls = {
   fetchAchievements: `${API_BASE}/achievements`,
   fetchDailyGoal: `${API_BASE}/dailygoal`,
   fetchPoints: `${API_BASE}/points`,
+  fetchShopItems: `${API_BASE}/shopItems`,
+  createShopItem: `${API_BASE}/shopItems`,
+  updateShopItem: `${API_BASE}/shopItems/{shopItemId}`,
+  deleteShopItem: `${API_BASE}/shopItems/{shopItemId}`,
+  buyShopItem: `${API_BASE}/shopItems/{shopItemId}/buy`,
 };
 
 export const routes = {
@@ -33,4 +38,5 @@ export const routes = {
   statistics: "/statistics",
   statisticsLogs: "/statistics/logs",
   statisticsAchievements: "/statistics/achievements",
+  shop: "/shop",
 };
