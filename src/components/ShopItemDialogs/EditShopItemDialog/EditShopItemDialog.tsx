@@ -154,9 +154,8 @@ export const EditShopItemDialog: FC<EditShopItemDialogProps> = ({
               max={102}
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
-              onChangeEnd={(e) => {
-                setIsDragging(false);
-              }}
+              onChangeEnd={() => setIsDragging(false)}
+              focusThumbOnChange={false}
             >
               <SliderMark value={20}>Cheap</SliderMark>
               <SliderMark value={45}>Medium</SliderMark>
