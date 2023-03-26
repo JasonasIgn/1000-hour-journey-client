@@ -23,9 +23,8 @@ export const AnimatedPointsText: FC<AnimatedPointsTextProps> = ({ points }) => {
           setDisplayedPoints(displayedPoints + increasePerTick);
 
           if (increasePerTick === 0) {
-            const pointsPerTick = Math.round(
-              (points - displayedPoints) / TICKS_TO_COMPLETE_ANIMATION
-            );
+            const pointsPerTick =
+              (points - displayedPoints) / TICKS_TO_COMPLETE_ANIMATION;
             setIncreasePerTick(pointsPerTick);
           }
         }
@@ -36,7 +35,7 @@ export const AnimatedPointsText: FC<AnimatedPointsTextProps> = ({ points }) => {
 
   return (
     <Text fontWeight={500} color="gray.300">
-      {points === undefined ? "-" : displayedPoints}
+      {points === undefined ? "-" : displayedPoints.toFixed(2)}
     </Text>
   );
 };
