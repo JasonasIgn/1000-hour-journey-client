@@ -33,7 +33,10 @@ export const DailyGoal = () => {
       onClose={() => dispatch(setDailyGoalOpen(false))}
       onOpen={() => dispatch(setDailyGoalOpen(true))}
     >
-      <DailyGoalTrigger completed={dailyGoal?.completed} />
+      <DailyGoalTrigger
+        completed={dailyGoal?.completed}
+        isOpen={dailyGoalOpen}
+      />
       <PopoverContent
         bg="brand.800"
         boxShadow="inset 0px 0px 15px 0px var(--chakra-colors-brand-700)"
