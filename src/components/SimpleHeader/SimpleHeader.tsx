@@ -40,7 +40,7 @@ export const SimpleHeader: FC<SimpleHeaderProps> = ({ children }) => {
         {title}
       </Heading>
       {children}
-      <Flex>
+      <Flex alignItems="center">
         <UserPoints />
         <DailyGoal />
       </Flex>

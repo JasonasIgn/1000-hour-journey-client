@@ -14,9 +14,9 @@ export const DailyGoalTrigger: FC<DailyGoalTriggerProps> = forwardRef(
         aria-label="daily goal"
         variant="sideMenuNotRiactive"
         size="lg"
-        width="32px"
-        height="32px"
-        minWidth="32px"
+        width="28px"
+        height="28px"
+        minWidth="28px"
       >
         <Icon
           border="1px solid"
@@ -28,8 +28,8 @@ export const DailyGoalTrigger: FC<DailyGoalTriggerProps> = forwardRef(
             color: completed ? "green.100" : "yellow.500",
           }}
           transition="color 0.1s"
-          w="32px"
-          h="32px"
+          w="28px"
+          h="28px"
           cursor="pointer"
           userSelect="none"
         />
