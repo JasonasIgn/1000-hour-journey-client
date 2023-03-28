@@ -7,6 +7,7 @@ import authReducer from "./features/auth/slice";
 import appReducer from "./features/app/slice";
 import userReducer from "./features/user/slice";
 import shopReducer from "./features/shop/slice";
+import myAchievementsReducer from "./features/myAchievements/slice";
 import { logoutEffect } from "./features/auth/effects";
 
 export const rootReducers = {
@@ -18,6 +19,7 @@ export const rootReducers = {
   app: appReducer,
   user: userReducer,
   shop: shopReducer,
+  myAchievements: myAchievementsReducer,
 };
 
 export const createRootReducer = (): Reducer => {

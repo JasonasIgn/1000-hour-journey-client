@@ -8,6 +8,7 @@ import { ReactComponent as LogOutIcon } from "resources/log-out.svg";
 import { ReactComponent as HomeIcon } from "resources/home.svg";
 import { ReactComponent as GraphIcon } from "resources/graph.svg";
 import { ReactComponent as ShopIcon } from "resources/shop.svg";
+import { ReactComponent as AchievementIcon } from "resources/achievement.svg";
 import { Timer } from "components/Timer";
 import { Paper } from "components/Paper";
 import { routes } from "config";
@@ -33,6 +34,11 @@ const navigationItems: NavigationItem[] = [
     path: routes.shop,
     name: "Shop",
     icon: <Icon as={ShopIcon} width="24px" height="24px" />,
+  },
+  {
+    path: routes.myAchievements,
+    name: "My Achievements",
+    icon: <Icon as={AchievementIcon} width="24px" height="24px" />,
   },
 ];
 
