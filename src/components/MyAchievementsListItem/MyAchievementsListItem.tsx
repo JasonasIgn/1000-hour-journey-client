@@ -37,6 +37,9 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
   const shouldOpenPopover =
     currentLevel.progress.completed && !currentLevel.progress.rewardClaimed;
 
+  const isAchievementFullyCompleted =
+    currentLevel.progress.completed && currentLevel.progress.rewardClaimed;
+
   const handleOnClaimClick = async () => {
     setLoading(true);
     await onClaimReward(currentLevel.progress.id);
@@ -63,8 +66,6 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
           variant="dark"
           direction="column"
           alignItems="center"
-          border="1px solid"
-          borderColor="brand.300"
           width="20%"
           py={2}
           px={4}
@@ -102,7 +103,12 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
             }
           />
           <Flex direction="column" alignItems="center" w="full">
-            <Heading size="lg" lineHeight={1} mb={1}>
+            <Heading
+              size="lg"
+              lineHeight={1}
+              mb={1}
+              color={isAchievementFullyCompleted ? "brand.50" : "gray.300"}
+            >
               {achievement.title}
             </Heading>
             <Text
