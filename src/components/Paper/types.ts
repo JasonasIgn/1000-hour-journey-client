@@ -1,1 +1,1 @@
-export type PaperVariant = "brand" | "dailyGoal";
+export type PaperVariant = "brand" | "dailyGoal" | "dark";

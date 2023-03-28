@@ -14,6 +14,8 @@ export interface UserAchievement {
   id: number;
   title: string;
   mediaUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface UserAchievementLevelProgress {
