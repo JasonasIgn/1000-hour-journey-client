@@ -20,3 +20,25 @@ export const fetchMyAchievementsEffect = createAsyncThunk(
     }
   }
 );
+
+export const claimMyAchievementLevelReward = createAsyncThunk(
+  "ahievements/claimAchievementLevelReward",
+  async (data: { levelId: number }) => {
+    const { levelId } = data;
+    try {
+      const response = await axios.get(
+        apiUrls.claimAchievementLevelReward.replace(
+          "{achievementLevelProgressId}",
+          levelId.toString()
+        ),
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (e) {
+      console.log("error:", e);
+      throw e;
+    }
+  }
+);

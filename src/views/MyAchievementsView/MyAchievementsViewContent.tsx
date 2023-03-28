@@ -2,10 +2,15 @@ import { FC, useCallback, useEffect, useState } from "react";
 import { Container, Flex } from "@chakra-ui/react";
 import { Paper } from "components/Paper";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { fetchMyAchievementsEffect } from "store/features/myAchievements/effects";
+import {
+  claimMyAchievementLevelReward,
+  fetchMyAchievementsEffect,
+} from "store/features/myAchievements/effects";
 import { getMyAchievements } from "store/features/myAchievements/selectors";
 import { Loader } from "components";
 import { MyAchievementsListItem } from "components/MyAchievementsListItem";
+import { fetchPointsEffect } from "store/features/user/effects";
+import delay from "delay";
 
 export const MyAchievementsViewContent: FC = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +23,16 @@ export const MyAchievementsViewContent: FC = () => {
     await dispatch(fetchMyAchievementsEffect());
     setLoading(false);
   }, [dispatch]);
+
+  const onAwardClaim = useCallback(
+    async (levelId: number) => {
+      await dispatch(claimMyAchievementLevelReward({ levelId }));
+      await delay(1000);
+      await dispatch(fetchPointsEffect());
+      await dispatch(fetchMyAchievementsEffect());
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     loadDependencies();
@@ -34,7 +49,7 @@ export const MyAchievementsViewContent: FC = () => {
           {myAchievements.map((achievementProgress) => (
             <MyAchievementsListItem
               key={achievementProgress.achievement.id}
-              onClaimReward={async () => {}}
+              onClaimReward={onAwardClaim}
               userAchievementProgress={achievementProgress}
             />
           ))}

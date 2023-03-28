@@ -28,6 +28,7 @@ export const apiUrls = {
   deleteShopItem: `${API_BASE}/shopItems/{shopItemId}`,
   buyShopItem: `${API_BASE}/shopItems/{shopItemId}/buy`,
   fetchMyAchievements: `${API_BASE}/myAchievements`,
+  claimAchievementLevelReward: `${API_BASE}/myAchievements/{achievementLevelProgressId}/claim`,
 };
 
 export const routes = {

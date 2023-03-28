@@ -22,7 +22,7 @@ import { UserAchievementProgress } from "store/features/myAchievements/types";
 import { Paper } from "components/Paper";
 
 interface MyAchievementsListItemProps {
-  onClaimReward: () => Promise<void>;
+  onClaimReward: (levelId: number) => Promise<void>;
   userAchievementProgress: UserAchievementProgress;
 }
 
@@ -39,7 +39,7 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
 
   const handleOnClaimClick = async () => {
     setLoading(true);
-    await onClaimReward();
+    await onClaimReward(currentLevel.progress.id);
     setLoading(false);
   };
 
@@ -52,7 +52,7 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
   return (
     <Popover
       placement="right"
-      isOpen={showPopover}
+      isOpen={showPopover && shouldOpenPopover}
       onOpen={handleOnOpen}
       onClose={() => setShowPopover(false)}
       arrowShadowColor="brand.100"
