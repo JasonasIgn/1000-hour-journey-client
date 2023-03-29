@@ -53,7 +53,7 @@ export const MyAchievementsViewContent: FC = () => {
           flexWrap="wrap"
           alignItems="flex-start"
           alignContent="baseline"
-          justifyContent="space-between"
+          justifyContent="flex-start"
         >
           {myAchievements.map((achievementProgress) => (
             <MyAchievementsListItem
