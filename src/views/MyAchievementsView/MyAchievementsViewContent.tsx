@@ -16,7 +16,6 @@ export const MyAchievementsViewContent: FC = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const myAchievements = useAppSelector(getMyAchievements);
-  console.log(myAchievements);
 
   const loadDependencies = useCallback(async () => {
     setLoading(true);
