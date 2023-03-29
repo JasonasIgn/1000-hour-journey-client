@@ -78,17 +78,14 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
           sx={{
             "@keyframes pulse-animation": {
               "0%": {
-                boxShadow: "0 0 1px 1px var(--chakra-colors-brand-600)",
-              },
-              "50%": {
-                boxShadow: "0 0 5px 5px var(--chakra-colors-brand-400)",
+                boxShadow: "0 0 1px 1px rgb(0, 86, 122, 0.9)",
               },
               "100%": {
-                boxShadow: "0 0 1px 1px var(--chakra-colors-brand-600)",
+                boxShadow: "0 0 10px 10px rgb(0, 86, 122, 0)",
               },
             },
             animation: shouldOpenPopover
-              ? "pulse-animation 2s infinite"
+              ? "pulse-animation 1.5s infinite"
               : "none",
           }}
         >
