@@ -10,6 +10,7 @@ import { JourneyViewContent } from "views/JourneyView/JourneyViewContent";
 import { JourneySettingsViewContent } from "views/JourneyView/JourneySettingsViewContent";
 import { routes } from "config";
 import { ShopView } from "views/ShopView";
+import { MyAchievementsView } from "views/MyAchievementsView";
 
 interface AuthRoutesProps {}
 
@@ -49,6 +50,12 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
         </Route>
 
         <Route path={routes.shop} index element={<ShopView />} />
+
+        <Route
+          path={routes.myAchievements}
+          index
+          element={<MyAchievementsView />}
+        />
 
         <Route
           path="*"

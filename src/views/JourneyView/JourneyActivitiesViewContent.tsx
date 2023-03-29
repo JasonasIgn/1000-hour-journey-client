@@ -39,7 +39,6 @@ export const JourneyActivitiesViewContent: FC = () => {
     return getActivityHoursMap(journey?.logs || []);
   }, [journey?.logs]);
 
-  console.log(journey.activities);
   const sortedActivities = useActivitiesSorting(
     journey.activities,
     activitiesSpentTimeMap,

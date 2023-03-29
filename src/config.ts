@@ -27,6 +27,8 @@ export const apiUrls = {
   updateShopItem: `${API_BASE}/shopItems/{shopItemId}`,
   deleteShopItem: `${API_BASE}/shopItems/{shopItemId}`,
   buyShopItem: `${API_BASE}/shopItems/{shopItemId}/buy`,
+  fetchMyAchievements: `${API_BASE}/myAchievements`,
+  claimAchievementLevelReward: `${API_BASE}/myAchievements/{achievementLevelProgressId}/claim`,
 };
 
 export const routes = {
@@ -39,4 +41,5 @@ export const routes = {
   statisticsLogs: "/statistics/logs",
   statisticsAchievements: "/statistics/achievements",
   shop: "/shop",
+  myAchievements: "/myAchievements",
 };
