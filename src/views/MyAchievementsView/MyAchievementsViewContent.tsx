@@ -45,7 +45,7 @@ export const MyAchievementsViewContent: FC = () => {
   return (
     <Container maxW="6xl" py={5} flexGrow={1}>
       <Paper flexDirection="column" height="100%" sx={{ borderRadius: 0 }}>
-        <Flex direction="column" px={5} overflow="auto" flexGrow={1} pt={5}>
+        <Flex direction="row" px={5} overflow="auto" flexGrow={1} pt={5}>
           {myAchievements.map((achievementProgress) => (
             <MyAchievementsListItem
               key={achievementProgress.achievement.id}

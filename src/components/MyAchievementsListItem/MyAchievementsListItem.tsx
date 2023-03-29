@@ -69,6 +69,8 @@ export const MyAchievementsListItem: FC<MyAchievementsListItemProps> = ({
           width="20%"
           py={2}
           px={4}
+          m={2}
+          minWidth="215px"
           transition="background 0.1s"
           _hover={{
             cursor: shouldOpenPopover ? "pointer" : "default",
