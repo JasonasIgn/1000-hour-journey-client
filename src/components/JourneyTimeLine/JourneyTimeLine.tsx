@@ -30,6 +30,7 @@ import { ShiftDirection } from "types";
 import { dateFormats } from "utils/constants";
 import {
   JOURNEY_MAX_HOURS,
+  PAGE_PADDING_X,
   TIMELINE_BORDER_WIDTH_PX,
   TIMELINE_INNER_WIDTH_PER_HOUR_PX,
   TIMELINE_X_PADDING_PX,
@@ -37,6 +38,7 @@ import {
 import { Paper } from "components/Paper";
 import { useAppSelector } from "store/hooks";
 import { getCurrentHoveredActivityId } from "store/features/journey/selectors";
+import { SIDEMENU_WIDTH_PX } from "components/SideMenu";
 
 interface JourneyTimeLineProps {
   journey: Journey;
@@ -69,7 +71,11 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
     (timelineInnerWidthPx - TIMELINE_X_PADDING_PX * 2) / maxHours;
 
   const isDragging = useRef(false);
-  const containerOuterWidth = window.innerWidth - TIMELINE_BORDER_WIDTH_PX * 2;
+  const containerOuterWidth =
+    window.innerWidth -
+    TIMELINE_BORDER_WIDTH_PX * 2 -
+    PAGE_PADDING_X * 2 -
+    SIDEMENU_WIDTH_PX;
   const zoomUnit = containerOuterWidth / timelineInnerWidthPx;
   const [currentScale, setCurrentScale] = useState(2);
   const [currentViewX, setCurrentViewX] = useState(0);
@@ -115,10 +121,10 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
       current.style.setProperty("transform", value);
     }
   }, []);
-
   const centerZoomOnThumb = useCallback(
     (hour: number) => {
       // TODO: fix zooming on lower than < 1000 px screen with
+      console.log(timelineInnerWidthPx, containerOuterWidth);
       const scale = currentScale / zoomUnit;
       const xPosition = getZoomXPosition(
         hour,

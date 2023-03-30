@@ -19,6 +19,8 @@ interface NavigationItem {
   icon: ReactNode;
 }
 
+export const SIDEMENU_WIDTH_PX = 70;
+
 const navigationItems: NavigationItem[] = [
   {
     path: routes.journeys,
@@ -55,8 +57,8 @@ export const SideMenu: FC = () => {
 
   return (
     <Paper
-      width="70px"
-      minW="70px"
+      width={`${SIDEMENU_WIDTH_PX}px`}
+      minWidth={`${SIDEMENU_WIDTH_PX}px`}
       height="100vh"
       flexDirection="column"
       alignItems="center"
