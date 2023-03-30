@@ -193,13 +193,13 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   return (
     <Flex width="100%" flexDirection="column">
       <Paper sx={{ borderRadius: 0 }}>
-        <Text ml={6} mt={6} position="absolute">
+        <Text ml={4} mt={4} position="absolute">
           Date: &nbsp;
           {activeLog
             ? format(new Date(activeLog.loggedOn), dateFormats.standart)
             : "-"}
         </Text>
-        <Text ml={6} mt={12} position="absolute">
+        <Text ml={4} mt={10} position="absolute">
           Hour: &nbsp;{currentHour < 0 ? 0 : currentHour}
         </Text>
         <QuickPinchZoom
