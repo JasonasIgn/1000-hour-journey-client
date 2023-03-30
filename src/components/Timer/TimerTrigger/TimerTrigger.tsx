@@ -4,10 +4,11 @@ import { ReactComponent as TimerIcon } from "resources/timer.svg";
 
 interface TimerTriggerProps {
   isRunning: boolean;
+  isOpen: boolean;
 }
 
 export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
-  ({ isRunning }, ref) => (
+  ({ isRunning, isOpen }, ref) => (
     <PopoverTrigger>
       <IconButton
         aria-label="timer"
@@ -17,7 +18,7 @@ export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
       >
         <Icon
           as={TimerIcon}
-          fill="gray.400"
+          fill={isOpen ? "gray.100" : "gray.400"}
           _hover={{
             fill: "gray.100",
           }}
