@@ -50,6 +50,7 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
       <Td width="50px" p={0}>
         <Image
           width="50px"
+          maxH="69px"
           filter="brightness(0.8)"
           src={
             activity?.mediaUrl
