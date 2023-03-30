@@ -4,7 +4,6 @@ import {
   Popover,
   PopoverArrow,
   PopoverBody,
-  PopoverCloseButton,
   PopoverContent,
   PopoverFooter,
   Text,
@@ -67,6 +66,7 @@ export const Timer = () => {
 
   return (
     <Popover
+      size="sm"
       placement="right"
       arrowShadowColor="brand.100"
       closeOnBlur={false}
@@ -76,14 +76,13 @@ export const Timer = () => {
       onClose={() => dispatch(closeTimer())}
       onOpen={() => dispatch(openTimer())}
     >
-      <TimerTrigger isRunning={isRunning} />
+      <TimerTrigger isRunning={isRunning} isOpen={isOpen} />
       <PopoverContent
         bg="brand.800"
         borderColor="brand.600"
         boxShadow="inset 0px 0px 15px 0px var(--chakra-colors-brand-700)"
       >
-        <PopoverCloseButton />
-        <PopoverBody>
+        <PopoverBody pb={0}>
           <Text
             fontSize="4xl"
             textAlign="center"

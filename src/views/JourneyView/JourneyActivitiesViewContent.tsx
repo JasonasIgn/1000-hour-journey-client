@@ -30,7 +30,7 @@ export const JourneyActivitiesViewContent: FC = () => {
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [activityToEdit, setActivityToEdit] = useState<Activity>();
   const [sortParams, setSortParams] = useState<SortParams | undefined>({
-    direction: "desc",
+    direction: "asc",
     sortParam: "completed",
   });
   const isEmptyState = journey?.activities.length === 0;
@@ -74,7 +74,7 @@ export const JourneyActivitiesViewContent: FC = () => {
                     );
                   }}
                 >
-                  <Flex alignItems="center">
+                  <Flex alignItems="center" justifyContent="center">
                     Completed&nbsp;
                     <Icon
                       opacity={sortParams?.sortParam === "completed" ? 1 : 0}

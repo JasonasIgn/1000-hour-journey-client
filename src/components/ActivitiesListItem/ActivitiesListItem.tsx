@@ -1,9 +1,11 @@
 import { FC, useState } from "react";
-import { Image, Switch, Td, Tr } from "@chakra-ui/react";
+import { Image, Switch, Td, Tr, Icon, Flex } from "@chakra-ui/react";
 import Logo from "resources/logo.png";
 import { Activity } from "store/features/journeys/types";
 import { getImageSrc } from "utils/helpers";
 import { ActivityHoursMap } from "views/JourneyView/utils";
+import { ReactComponent as CompletedIcon } from "resources/checkmark.svg";
+import { ReactComponent as CloseIcon } from "resources/close.svg";
 import { AppDispatch } from "store";
 import { updateJourneyActivityEffect } from "store/features/journeys/effects";
 
@@ -48,6 +50,7 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
       <Td width="50px" p={0}>
         <Image
           width="50px"
+          maxH="69px"
           filter="brightness(0.8)"
           src={
             activity?.mediaUrl
@@ -59,7 +62,16 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
         />
       </Td>
       <Td pl={5}>{activity.name}</Td>
-      <Td>{activity.completed ? "Yes" : "No"}</Td>
+      <Td>
+        <Flex justifyContent="center">
+          <Icon
+            width="24px"
+            height="24px"
+            as={activity.completed ? CompletedIcon : CloseIcon}
+            color={activity.completed ? "green" : "red.600"}
+          />
+        </Flex>
+      </Td>
       <Td>
         <Switch
           isDisabled={loading || isJourneyFinished}
