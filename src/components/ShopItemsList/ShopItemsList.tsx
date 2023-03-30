@@ -5,6 +5,7 @@ import { ShopItem } from "store/features/shop/types";
 import { ShopListItem } from "components/ShopListItem";
 import { useAppDispatch } from "store/hooks";
 import { buyShopItemEffect } from "store/features/shop/effects";
+import { useShopItemsSorting } from "./hooks";
 
 interface ShopItemsListProps {
   items: ShopItem[];
@@ -36,6 +37,8 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
     [dispatch, toast]
   );
 
+  const sortedItems = useShopItemsSorting(items);
+
   if (isLoading) {
     return <Loader />;
   }
@@ -50,7 +53,7 @@ export const ShopItemsList: FC<ShopItemsListProps> = ({
 
   return (
     <SimpleGrid minChildWidth="420px" spacing="20px" mt={5}>
-      {items.map((item) => (
+      {sortedItems.map((item) => (
         <ShopListItem
           key={item.id}
           item={item}
