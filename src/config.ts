@@ -35,6 +35,7 @@ export const routes = {
   login: "/login",
   journeys: "/journeys",
   journey: "/journeys/:journeyId",
+  journeyVisualizer: "/journeys/:journeyId/visualizer",
   journeyActivities: "/journeys/:journeyId/activities",
   journeySettings: "/journeys/:journeyId/settings",
   statistics: "/statistics",

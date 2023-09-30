@@ -11,6 +11,7 @@ import { JourneySettingsViewContent } from "views/JourneyView/JourneySettingsVie
 import { routes } from "config";
 import { ShopView } from "views/ShopView";
 import { MyAchievementsView } from "views/MyAchievementsView";
+import { JourneyVisualizerViewContent } from "views/JourneyView/JourneyVisualizerViewContent";
 
 interface AuthRoutesProps {}
 
@@ -24,6 +25,10 @@ export const AuthRoutes: FC<AuthRoutesProps> = () => {
             <Route
               path={routes.journeyActivities}
               element={<JourneyActivitiesViewContent />}
+            />
+            <Route
+              path={routes.journeyVisualizer}
+              element={<JourneyVisualizerViewContent />}
             />
             <Route
               path={routes.journeySettings}

@@ -10,6 +10,10 @@ interface JourneyNavigationProps {
 const getTabs = (id: string) => [
   { path: routes.journey.replace(":journeyId", id), name: "Main" },
   {
+    path: routes.journeyVisualizer.replace(":journeyId", id),
+    name: "Visualizer",
+  },
+  {
     path: routes.journeyActivities.replace(":journeyId", id),
     name: "Activities",
   },
