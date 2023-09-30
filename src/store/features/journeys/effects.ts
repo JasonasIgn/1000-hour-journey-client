@@ -34,21 +34,17 @@ export const createJourneyEffect = createAsyncThunk(
   "journeys/create",
   async (data: JourneyFormData) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.post(
-        apiUrls.createJourney,
-        { ...rest, media: media?.[0] },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.post(
+      apiUrls.createJourney,
+      { ...rest, media: media?.[0] },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
   }
 );
 
@@ -78,26 +74,22 @@ export const createJourneyLogEffect = createAsyncThunk(
     journeyId: number;
   }) => {
     const { media, activities, ...rest } = data;
-    try {
-      const response = await axios.post<Log>(
-        apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
-        {
-          ...rest,
-          media: media?.[0],
-          loggedOn: format(new Date(rest.loggedOn), dateFormats.standart),
-          activities: getActivityIdsArray(activities),
+    const response = await axios.post<Log>(
+      apiUrls.createLog.replace("{journeyId}", journeyId.toString()),
+      {
+        ...rest,
+        media: media?.[0],
+        loggedOn: format(new Date(rest.loggedOn), dateFormats.standart),
+        activities: getActivityIdsArray(activities),
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+      }
+    );
+    return response.data;
   }
 );
 
@@ -111,21 +103,17 @@ export const logJourneyAchievementEffect = createAsyncThunk(
     journeyId: number;
   }) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.post<Achievement>(
-        apiUrls.logAchievement.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media[0] },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.post<Achievement>(
+      apiUrls.logAchievement.replace("{journeyId}", journeyId.toString()),
+      { ...rest, media: media[0] },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
   }
 );
 
@@ -141,23 +129,19 @@ export const editJourneyAchievementEffect = createAsyncThunk(
     achievementId: number;
   }) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.patch<Achievement>(
-        apiUrls.editAchievement
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{achievementId}", achievementId.toString()),
-        { ...rest, media: media[0] },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.patch<Achievement>(
+      apiUrls.editAchievement
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{achievementId}", achievementId.toString()),
+      { ...rest, media: media[0] },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
   }
 );
 
@@ -170,19 +154,15 @@ export const deleteJourneyAchievementEffect = createAsyncThunk(
     journeyId: number;
     achievementId: number;
   }) => {
-    try {
-      const response = await axios.delete<Achievement>(
-        apiUrls.deleteAchievement
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{achievementId}", achievementId.toString()),
-        {
-          withCredentials: true,
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.delete<Achievement>(
+      apiUrls.deleteAchievement
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{achievementId}", achievementId.toString()),
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
   }
 );
 
@@ -198,27 +178,23 @@ export const updateJourneyLogEffect = createAsyncThunk(
     logId: number;
   }) => {
     const { media, activities, ...rest } = data;
-    try {
-      const response = await axios.patch<Log>(
-        apiUrls.updateLog
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{logId}", logId.toString()),
-        {
-          ...rest,
-          media: media?.[0],
-          activities: getActivityIdsArray(activities),
+    const response = await axios.patch<Log>(
+      apiUrls.updateLog
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{logId}", logId.toString()),
+      {
+        ...rest,
+        media: media?.[0],
+        activities: getActivityIdsArray(activities),
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+      }
+    );
+    return response.data;
   }
 );
 
@@ -232,25 +208,21 @@ export const updateJourneyEffect = createAsyncThunk(
     journeyId: number;
   }) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.patch<Journey>(
-        apiUrls.updateJourney.replace("{journeyId}", journeyId.toString()),
-        {
-          ...rest,
-          media: media?.[0],
-          ...(rest.finished ? { finished: Number(rest.finished) } : {}),
+    const response = await axios.patch<Journey>(
+      apiUrls.updateJourney.replace("{journeyId}", journeyId.toString()),
+      {
+        ...rest,
+        media: media?.[0],
+        ...(rest.finished ? { finished: Number(rest.finished) } : {}),
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+      }
+    );
+    return response.data;
   }
 );
 
@@ -264,21 +236,17 @@ export const createJourneyActivityEffect = createAsyncThunk(
     journeyId: number;
   }) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.post<Activity>(
-        apiUrls.createActivity.replace("{journeyId}", journeyId.toString()),
-        { ...rest, media: media?.[0] },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.post<Activity>(
+      apiUrls.createActivity.replace("{journeyId}", journeyId.toString()),
+      { ...rest, media: media?.[0] },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
   }
 );
 
@@ -294,30 +262,26 @@ export const updateJourneyActivityEffect = createAsyncThunk(
     activityId: number;
   }) => {
     const { media, ...rest } = data;
-    try {
-      const response = await axios.patch<Activity>(
-        apiUrls.updateActivity
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{activityId}", activityId.toString()),
-        {
-          ...rest,
-          ...(rest.includeInDailyGoal
-            ? { includeInDailyGoal: Number(rest.includeInDailyGoal) }
-            : {}),
-          ...(rest.completed ? { completed: Number(rest.completed) } : {}),
-          media: media?.[0],
+    const response = await axios.patch<Activity>(
+      apiUrls.updateActivity
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{activityId}", activityId.toString()),
+      {
+        ...rest,
+        ...(rest.includeInDailyGoal
+          ? { includeInDailyGoal: Number(rest.includeInDailyGoal) }
+          : {}),
+        ...(rest.completed ? { completed: Number(rest.completed) } : {}),
+        media: media?.[0],
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+      }
+    );
+    return response.data;
   }
 );
 
@@ -330,37 +294,29 @@ export const deleteJourneyActivityEffect = createAsyncThunk(
     journeyId: number;
     activityId: number;
   }) => {
-    try {
-      const response = await axios.delete<Activity>(
-        apiUrls.updateActivity
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{activityId}", activityId.toString()),
-        {
-          withCredentials: true,
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.delete<Activity>(
+      apiUrls.updateActivity
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{activityId}", activityId.toString()),
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
   }
 );
 
 export const deleteJourneyLogEffect = createAsyncThunk(
   "journeys/deleteJourneyLog",
   async ({ journeyId, logId }: { journeyId: number; logId: number }) => {
-    try {
-      const response = await axios.delete<Activity>(
-        apiUrls.deleteLog
-          .replace("{journeyId}", journeyId.toString())
-          .replace("{logId}", logId.toString()),
-        {
-          withCredentials: true,
-        }
-      );
-      return response.data;
-    } catch (e) {
-      throw e;
-    }
+    const response = await axios.delete<Activity>(
+      apiUrls.deleteLog
+        .replace("{journeyId}", journeyId.toString())
+        .replace("{logId}", logId.toString()),
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
   }
 );

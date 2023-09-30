@@ -46,7 +46,7 @@ export const getAchievementsDictionary = (
   achievements: Achievement[]
 ): AchievementsDictionary => {
   const achievementsDictionary: AchievementsDictionary = {};
-  achievements.forEach((achievement, index) => {
+  achievements.forEach((achievement) => {
     achievementsDictionary[achievement.id] = achievement;
   });
   return achievementsDictionary;

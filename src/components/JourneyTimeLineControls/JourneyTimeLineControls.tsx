@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FlexProps, IconButton, Icon } from "@chakra-ui/react";
 import { ReactComponent as RightArrowIcon } from "resources/right-arrow.svg";
-import { Achievement, Journey } from "store/features/journeys/types";
+import { Journey } from "store/features/journeys/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { IdsHourMap } from "views/JourneyView/types";
 import { ShiftDirection } from "types";
@@ -10,7 +10,6 @@ import { Paper } from "components/Paper";
 
 interface JourneyTimeLineControlsProps extends FlexProps {
   activeLogId?: number;
-  activeAchievement?: Achievement;
   logBegginingsMap: IdsHourMap;
   setActiveLogId: (id: number) => void;
   journey: Journey;
@@ -19,7 +18,6 @@ interface JourneyTimeLineControlsProps extends FlexProps {
 
 export const JourneyTimeLineControls: FC<JourneyTimeLineControlsProps> = ({
   activeLogId,
-  activeAchievement,
   logBegginingsMap,
   setActiveLogId,
   journey,

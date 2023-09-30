@@ -10,7 +10,7 @@ export interface DailyGoalTriggerProps {
 }
 
 export const DailyGoalTrigger: FC<DailyGoalTriggerProps> = forwardRef(
-  ({ completed, isOpen }, ref) => (
+  ({ completed, isOpen }) => (
     <PopoverTrigger>
       <IconButton
         aria-label="daily goal"

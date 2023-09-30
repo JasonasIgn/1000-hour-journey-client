@@ -22,7 +22,7 @@ export const useAnimatedCards = (
   useEffect(() => {
     if (item) {
       const isNewItemAlreadyDisplaying = item.id === cards[1].data?.id;
-      let tempCards = [...cards];
+      const tempCards = [...cards];
       if (skipAnimation || isNewItemAlreadyDisplaying) {
         setSkipAnimation(false);
         tempCards[1] = { ...tempCards[1], data: item };

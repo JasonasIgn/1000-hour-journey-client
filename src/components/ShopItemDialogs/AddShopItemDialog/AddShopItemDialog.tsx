@@ -121,7 +121,7 @@ export const AddShopItemDialog: FC<AddShopItemDialogProps> = ({
             max={102}
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
-            onChangeEnd={(e) => {
+            onChangeEnd={() => {
               setIsDragging(false);
             }}
           >

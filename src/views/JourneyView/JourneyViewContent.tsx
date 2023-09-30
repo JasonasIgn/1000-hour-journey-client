@@ -106,7 +106,6 @@ export const JourneyViewContent: FC = () => {
             />
             <JourneyTimeLineControls
               activeLogId={activeLog?.id}
-              activeAchievement={activeAchievement}
               logBegginingsMap={logBegginingsMap}
               journey={journey}
               setActiveLogId={setActiveLogId}

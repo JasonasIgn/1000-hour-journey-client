@@ -43,7 +43,7 @@ export const ActivitiesListItem: FC<ActivitiesListItemProps> = ({
       key={activity.id}
       _hover={{ bg: "brand.700" }}
       cursor="pointer"
-      onClick={(e) => {
+      onClick={() => {
         setActivityToEdit(activity);
       }}
     >

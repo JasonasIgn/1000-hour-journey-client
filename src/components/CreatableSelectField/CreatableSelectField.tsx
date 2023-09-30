@@ -2,7 +2,6 @@ import {
   CreatableSelect,
   CreatableProps,
   OnChangeValue,
-  ActionMeta,
   GroupBase,
   ChakraStylesConfig,
 } from "chakra-react-select";
@@ -50,10 +49,7 @@ export const CreatableSelectField = <Option extends {}>({
             ref={ref as any}
             options={options}
             value={value}
-            onChange={(
-              newValue: OnChangeValue<Option, true>,
-              actionMeta: ActionMeta<Option>
-            ) => {
+            onChange={(newValue: OnChangeValue<Option, true>) => {
               onChange(newValue);
             }}
             {...rest}

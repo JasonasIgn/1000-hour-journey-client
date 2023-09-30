@@ -9,6 +9,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "yarn gen:theme-typings",
+    "lint": "eslint .",
     "gen:theme-typings": "chakra-cli tokens src/theme/index.ts"
   },
   "dependencies": {

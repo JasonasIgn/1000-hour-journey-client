@@ -10,7 +10,7 @@ export const getTransformedData = (
   displayUnit: StatisticsDisplayUnit
 ): ChartLogData[] => {
   if (displayUnit === "month") {
-    return transformDataForChartYearMonths(data, query);
+    return transformDataForChartYearMonths(data);
   }
   if (monthsEnabled) {
     if (displayUnit === "day") {
@@ -23,10 +23,10 @@ export const getTransformedData = (
 
   if (!monthsEnabled) {
     if (displayUnit === "day") {
-      return transformDataForChartYearDays(data, query);
+      return transformDataForChartYearDays(data);
     }
     if (displayUnit === "week") {
-      return transformDataForChartYearWeeks(data, query);
+      return transformDataForChartYearWeeks(data);
     }
   }
 
@@ -69,10 +69,7 @@ function getDaysIntoYear(date: Date) {
   );
 }
 
-export const transformDataForChartYearDays = (
-  logs: Log[],
-  query: DateQuery
-): ChartLogData[] => {
+export const transformDataForChartYearDays = (logs: Log[]): ChartLogData[] => {
   const DAYS_IN_YEAR = 365;
   const result: { [index: number]: ChartLogData } = {};
   for (let i = 1; i <= DAYS_IN_YEAR; i++) {
@@ -90,10 +87,7 @@ export const transformDataForChartYearDays = (
   return Object.values(result);
 };
 
-export const transformDataForChartYearWeeks = (
-  logs: Log[],
-  query: DateQuery
-): ChartLogData[] => {
+export const transformDataForChartYearWeeks = (logs: Log[]): ChartLogData[] => {
   const WEEKS_IN_YEAR = 53;
   const result: { [index: number]: ChartLogData } = {};
   for (let i = 1; i <= WEEKS_IN_YEAR; i++) {
@@ -134,8 +128,7 @@ export const transformDataForChartMonthWeeks = (
 };
 
 export const transformDataForChartYearMonths = (
-  logs: Log[],
-  query: DateQuery
+  logs: Log[]
 ): ChartLogData[] => {
   const monthsCount = 12;
   const result: { [index: string]: ChartLogData } = {};

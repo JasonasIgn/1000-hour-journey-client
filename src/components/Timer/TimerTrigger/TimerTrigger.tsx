@@ -8,7 +8,7 @@ interface TimerTriggerProps {
 }
 
 export const TimerTrigger: FC<TimerTriggerProps> = forwardRef(
-  ({ isRunning, isOpen }, ref) => (
+  ({ isRunning, isOpen }) => (
     <PopoverTrigger>
       <IconButton
         aria-label="timer"
