@@ -124,7 +124,6 @@ export const JourneyTimeLine: FC<JourneyTimeLineProps> = ({
   const centerZoomOnThumb = useCallback(
     (hour: number) => {
       // TODO: fix zooming on lower than < 1000 px screen with
-      console.log(timelineInnerWidthPx, containerOuterWidth);
       const scale = currentScale / zoomUnit;
       const xPosition = getZoomXPosition(
         hour,
